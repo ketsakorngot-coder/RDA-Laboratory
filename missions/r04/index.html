@@ -1,0 +1,1051 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RDA — R-04 PREDICT • The Decaying Cargo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+ --bg:#031008;--panel:rgba(5,30,18,.82);--panel2:rgba(11,48,28,.9);
+ --line:#2b7748;--green:#49dc80;--orange:#ff9f1c;--yellow:#ffd23f;
+ --red:#ff5d5d;--cyan:#4dd8ff;--white:#f4fff7;--muted:#a9cbb4;--shadow:0 25px 80px rgba(0,0,0,.55)
+}
+*{box-sizing:border-box}
+html{background:#020805;scroll-behavior:smooth}
+body{margin:0;font-family:'Kanit',system-ui,sans-serif;color:var(--white);min-height:100vh;background:#020805;overflow-x:hidden}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+.btn{border:0;border-radius:12px;padding:11px 16px;font-weight:800}
+.btn-primary{background:linear-gradient(90deg,var(--orange),#ffd66b);color:#151008;box-shadow:0 0 25px rgba(255,159,28,.24)}
+.btn-secondary{background:#123b25;color:#fff;border:1px solid #2c7650}
+.btn-ghost{background:transparent;color:#d9f0df;border:1px solid var(--line)}
+.btn:disabled{opacity:.42;cursor:not-allowed}
+.card{background:linear-gradient(160deg,rgba(17,61,36,.86),rgba(4,22,13,.93));border:1px solid var(--line);border-radius:20px;padding:19px;box-shadow:var(--shadow);backdrop-filter:blur(16px) saturate(125%)}
+.pill{display:inline-flex;padding:7px 11px;border-radius:999px;background:#113521;border:1px solid var(--line);font-size:12px}
+.muted{color:var(--muted)}
+.notice{padding:13px 15px;border-radius:13px;background:rgba(255,210,63,.09);border-left:4px solid var(--yellow)}
+.success{border-left-color:var(--green);background:rgba(73,220,128,.09)}
+.danger{border-left-color:var(--red);background:rgba(255,93,93,.09)}
+.world{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.world-bg{position:absolute;inset:-4%;background:linear-gradient(180deg,rgba(0,7,3,.08),rgba(0,7,3,.48) 45%,rgba(0,7,3,.88)),url('assets/r04-food-factory-bg.jpg') center/cover no-repeat;transform:scale(1.05);transition:.25s}
+.grid{position:absolute;inset:0;opacity:.08;background:linear-gradient(rgba(73,220,128,.18) 1px,transparent 1px),linear-gradient(90deg,rgba(73,220,128,.18) 1px,transparent 1px);background-size:52px 52px;animation:gridmove 18s linear infinite}
+@keyframes gridmove{to{background-position:52px 52px,52px 52px}}
+.scan{position:absolute;left:0;right:0;top:-25%;height:25%;background:linear-gradient(transparent,rgba(73,220,128,.18),transparent);animation:scan 6s linear infinite}
+@keyframes scan{to{top:110%}}
+.steam{position:absolute;bottom:-100px;width:110px;height:220px;border-radius:50%;background:radial-gradient(ellipse,rgba(255,255,255,.14),transparent 70%);filter:blur(15px);animation:steamUp 9s linear infinite}
+.s1{left:16%}.s2{left:45%;animation-delay:-4s}.s3{right:12%;animation-delay:-7s}
+@keyframes steamUp{to{transform:translateY(-120vh) scale(1.8);opacity:0}}
+.forklift{position:absolute;bottom:55px;left:-180px;font-size:70px;opacity:.2;animation:forklift 22s linear infinite}
+@keyframes forklift{to{transform:translateX(calc(100vw + 350px))}}
+.truck{position:absolute;bottom:110px;right:-220px;font-size:88px;opacity:.17;animation:truck 31s linear infinite}
+@keyframes truck{to{transform:translateX(calc(-100vw - 500px))}}
+.vignette{position:absolute;inset:0;background:radial-gradient(circle at 53% 42%,transparent 23%,rgba(0,0,0,.48) 72%,rgba(0,0,0,.86) 100%)}
+.app{display:grid;grid-template-columns:250px minmax(0,1fr);min-height:100vh;position:relative;z-index:2}
+.sidebar{position:sticky;top:0;height:100vh;max-height:100vh;overflow:hidden;overflow-y:hidden;overflow-x:hidden;padding:14px 14px;background:rgba(2,18,10,.94);border-right:1px solid rgba(73,220,128,.18);backdrop-filter:blur(18px);box-sizing:border-box}
+.brand{display:flex;gap:10px;align-items:center;padding-bottom:11px;border-bottom:1px solid rgba(73,220,128,.14)}
+.brand-logo{width:50px;height:50px;border-radius:50%;display:grid;place-items:center;font-size:30px;background:radial-gradient(circle,#1a5b32,#06180d);border:2px solid var(--yellow);box-shadow:0 0 25px rgba(255,210,63,.2)}
+.brand h1{font-size:15px;line-height:1.18;margin:0}.brand small{display:block;color:var(--yellow);margin-top:4px;font-size:10px;line-height:1.3}
+.nav{display:grid;gap:5px;margin-top:10px}.nav button{width:100%;min-height:42px;border:0;border-radius:12px;background:transparent;color:#b8d1bf;display:flex;align-items:center;gap:9px;text-align:left;padding:8px 10px;transition:.2s;font-size:12px;line-height:1.25}.nav button:hover,.nav button.active{color:#fff;background:linear-gradient(90deg,rgba(29,102,59,.95),rgba(42,63,18,.7));transform:translateX(3px)}
+.section-title{padding:8px 10px 4px;color:#b5cdbb;font-weight:700;font-size:11px}.current small{margin-left:auto;color:var(--yellow)}
+.side-card{margin-top:10px;padding:10px;border-radius:14px;background:rgba(255,255,255,.025);border:1px solid rgba(73,220,128,.15)}
+.xpbar{height:9px;background:#123722;border-radius:999px;overflow:hidden;margin:8px 0}.xpbar span{display:block;height:100%;background:linear-gradient(90deg,var(--green),var(--yellow));transition:.4s}
+.main{padding:16px 22px 48px;max-width:1700px;width:100%;margin:auto;min-width:0;box-sizing:border-box}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:12px 15px;margin-bottom:14px;border-radius:16px;background:rgba(4,25,14,.76);border:1px solid rgba(73,220,128,.18);backdrop-filter:blur(14px)}
+.topbar h2{margin:0;font-size:24px;line-height:1.2}.status{display:flex;gap:8px;flex-wrap:wrap}
+.page{display:none}.page.active{display:block;animation:fade .4s ease}@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.hero{min-height:510px;display:grid;grid-template-columns:1.2fr .8fr;align-items:center;gap:22px;border:1px solid rgba(73,220,128,.32);border-radius:28px;padding:42px;background:linear-gradient(90deg,rgba(1,12,6,.95),rgba(1,12,6,.72),rgba(1,12,6,.15)),url('assets/r04-food-factory-bg.jpg') center/cover no-repeat;box-shadow:0 30px 90px rgba(0,0,0,.55);position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 25%,rgba(255,255,255,.06) 48%,transparent 70%);transform:translateX(-130%);animation:sweep 5s linear infinite}@keyframes sweep{to{transform:translateX(130%)}}
+.hero-copy{position:relative;z-index:2}.hero h1{font-size:clamp(48px,7vw,92px);line-height:.9;margin:18px 0}.hero h1 span{display:block;font-size:.52em;color:var(--orange)}.hero p{max-width:720px;font-size:18px;line-height:1.7;color:#daf0e1}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap}.hero-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:26px}.hero-steps div{display:flex;gap:11px;align-items:center;padding:13px;border-radius:14px;background:rgba(4,24,14,.75);border:1px solid rgba(73,220,128,.2)}.hero-steps b{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--orange);color:#171006;font-size:20px}
+.case-file{width:min(390px,90%);aspect-ratio:1.3;justify-self:center;border-radius:24px;border:1px solid rgba(255,210,63,.55);background:linear-gradient(155deg,#4d3d0d,#14200e 70%);box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 35px rgba(255,210,63,.18);padding:24px;transform:rotate(3deg);display:grid;place-items:center;text-align:center;position:relative;animation:float 3s ease-in-out infinite}@keyframes float{50%{transform:rotate(1deg) translateY(-10px)}}.case-file .code{position:absolute;right:18px;top:14px;color:#ffe178;font-weight:800}.case-file .icon{font-size:86px}.case-file .title{font-size:26px;font-weight:800}
+.operations{margin-top:16px}.ops-head{display:flex;justify-content:space-between;align-items:flex-end;gap:15px}.ops-stats{display:flex;gap:10px;flex-wrap:wrap}.ops-stats div{padding:10px 14px;border-radius:12px;background:#0a2d19;border:1px solid var(--line)}.ops-grid{display:grid;grid-template-columns:repeat(6,minmax(155px,1fr));gap:12px;margin-top:16px;overflow-x:auto;padding-bottom:10px}.op{min-height:270px;padding:16px;border-radius:18px;background:linear-gradient(160deg,rgba(17,63,37,.9),rgba(4,22,13,.95));border:1px solid var(--line);text-align:center;position:relative}.op.completed{border-color:rgba(73,220,128,.6)}.op.current{border-color:var(--yellow);box-shadow:0 0 25px rgba(255,210,63,.15)}.op.locked{opacity:.48;filter:grayscale(.8)}.op .tag{position:absolute;left:10px;top:10px;padding:5px 9px;border-radius:999px;font-size:9px}.tag.done{color:#7cffad;border:1px solid rgba(73,220,128,.5)}.tag.now{color:#ffe275;border:1px solid rgba(255,210,63,.6)}.tag.lock{color:#9db0a3;border:1px solid rgba(157,176,163,.25)}.op .code{font-size:28px;font-weight:800;margin-top:26px}.op .icon{font-size:55px;margin:12px 0}.op h3{font-size:16px}.op p{font-size:12px;color:var(--muted)}
+.bottom-grid{display:grid;grid-template-columns:1.1fr .9fr 1fr;gap:14px;margin-top:16px}.feed{display:grid;gap:8px}.feed div{display:grid;grid-template-columns:34px 1fr auto;gap:8px;align-items:center;padding:10px;border-radius:11px;background:#092a17}.feed p{margin:0}.feed small{color:var(--yellow)}
+.radial-wrap{display:grid;grid-template-columns:150px 1fr;gap:15px;align-items:center}.radial{width:145px;height:145px;border-radius:50%;display:grid;place-items:center;position:relative;background:conic-gradient(var(--green) 0 0%,#123722 0)}.radial::before{content:"";position:absolute;width:105px;height:105px;border-radius:50%;background:#06170d}.radial div{position:relative;text-align:center}.radial b{font-size:30px;display:block}.legend p{margin:7px 0}.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px}.done-dot{background:var(--green)}.now-dot{background:var(--yellow)}.lock-dot{background:#64786a}
+.tip h3{font-size:23px;line-height:1.45}.tip-tags{display:flex;flex-wrap:wrap;gap:7px}.tip-tags span{padding:6px 9px;border-radius:999px;border:1px solid rgba(255,210,63,.35);color:#ffe177;font-size:10px}
+.mission-shell{display:grid;gap:14px}.roadmap{display:grid;grid-template-columns:repeat(8,1fr);gap:8px}.road{padding:11px;border-radius:12px;text-align:center;background:#0b301b;border:1px solid var(--line);color:var(--muted)}.road.active{border-color:var(--yellow);color:#fff}.road.done{border-color:var(--green);color:#caffda}
+.mission-layout{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:16px}.stage{min-height:620px}.side{position:sticky;top:18px}.stage-head{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid rgba(73,220,128,.15);padding-bottom:13px;margin-bottom:16px}.stage-head h3{margin:0;font-size:22px;line-height:1.3}.stage-footer{display:flex;justify-content:space-between;margin-top:18px;padding-top:14px;border-top:1px solid rgba(73,220,128,.15)}
+.field{display:grid;gap:7px;margin-top:13px}.field textarea,.field input,.field select{width:100%;padding:12px 13px;border-radius:11px;border:1px solid #2b7048;background:#061b0f;color:#fff;font-size:14px;line-height:1.5;box-sizing:border-box}
+.evidence-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.evidence{min-height:170px;padding:15px;border-radius:15px;background:#092a17;border:1px solid var(--line);cursor:pointer}.evidence.locked{opacity:.45}.evidence.open{border-color:var(--green)}.evidence .icon{font-size:42px}.evidence b{display:block;color:var(--yellow);margin-top:8px}
+.animation-stage{min-height:430px;border-radius:20px;border:1px solid rgba(73,220,128,.35);background:linear-gradient(rgba(1,12,6,.45),rgba(1,12,6,.83)),url('assets/r04-food-factory-bg.jpg') center/cover no-repeat;display:grid;place-items:center;text-align:center;padding:30px;overflow:hidden;position:relative}.anim-icon{font-size:110px;animation:pulse 2.3s ease-in-out infinite}@keyframes pulse{50%{transform:scale(1.08)}}
+.chamber{width:300px;height:250px;border:16px solid #507760;border-bottom-width:36px;border-radius:40px;position:relative;margin:auto;box-shadow:0 0 40px rgba(77,216,255,.28)}.chamber::after{content:"";position:absolute;left:50%;top:12%;width:5px;height:170px;background:linear-gradient(var(--cyan),transparent);box-shadow:0 0 20px var(--cyan);animation:beam 1.8s ease-in-out infinite alternate}@keyframes beam{from{transform:translateX(-50%) rotate(-30deg)}to{transform:translateX(-50%) rotate(30deg)}}
+.sim-grid{display:grid;grid-template-columns:280px 1fr;gap:16px}.toolbox{display:grid;gap:10px}.tool{padding:11px;border-radius:12px;background:#123b25;border:1px solid #2b7048}.tool.active{border-color:var(--yellow)}.sim-arena{min-height:510px;position:relative;border-radius:22px;overflow:hidden;border:1px solid rgba(73,220,128,.35);background:linear-gradient(rgba(1,12,6,.35),rgba(1,12,6,.85)),url('assets/r04-food-factory-bg.jpg') center/cover no-repeat}.food-line{position:absolute;left:6%;right:6%;bottom:120px;display:grid;grid-template-columns:repeat(8,1fr);gap:12px}.food{height:100px;border-radius:16px;background:linear-gradient(#315b35,#16321c);border:2px solid #6eb37d;display:grid;place-items:center;font-size:52px;cursor:pointer}.food.selected{outline:3px solid var(--yellow);box-shadow:0 0 25px rgba(255,210,63,.3)}.sim-chamber{position:absolute;left:50%;top:35px;translate:-50% 0;width:210px;height:220px;border:13px solid #557766;border-radius:35px;box-shadow:0 0 35px rgba(77,216,255,.25)}.sim-chamber::after{content:"";position:absolute;left:50%;top:10%;width:5px;height:155px;background:linear-gradient(var(--cyan),transparent);box-shadow:0 0 18px var(--cyan);animation:beam 1.5s ease-in-out infinite alternate}.metrics{position:absolute;right:20px;top:20px;width:250px;padding:13px;border-radius:15px;background:rgba(3,22,12,.88);border:1px solid var(--line)}.metric{margin:9px 0}.track{height:10px;background:#123722;border-radius:999px;overflow:hidden}.fill{height:100%;transition:.5s}.bact{background:linear-gradient(90deg,var(--red),var(--orange))}.quality{background:linear-gradient(90deg,var(--green),var(--yellow))}
+.fact-board{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}.fact-zone{min-height:150px;border-radius:16px;border:2px dashed var(--line);display:grid;place-items:center;text-align:center}.fact-zone.true{border-color:var(--green)}.fact-zone.mis{border-color:var(--yellow)}.fact-zone.fake{border-color:var(--red)}
+.polya{max-width:900px;margin:auto}.polya-track{display:flex;gap:8px;margin:16px 0}.polya-track i{flex:1;height:9px;border-radius:999px;background:#153c23}.polya-track i.done{background:var(--green)}.polya-track i.active{background:var(--yellow)}
+.ai-chat{display:grid;grid-template-columns:100px 1fr;gap:14px}.ai-avatar{width:90px;height:100px;border-radius:22px;display:grid;place-items:center;font-size:52px;background:#123b25;border:1px solid #2b7048}
+.final-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.choice-grid{display:grid;gap:9px}.choice{padding:13px;border-radius:12px;background:#0b301b;color:#fff;border:1px solid var(--line);text-align:left}.choice.active{border-color:var(--yellow)}
+.complete{text-align:center}.score-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.score{padding:15px;border-radius:14px;background:#071c10;border:1px solid var(--line);text-align:center}.score strong{display:block;font-size:30px;color:var(--yellow)}.final-score{font-size:72px;color:var(--yellow);font-weight:800}.feedback{display:grid;gap:8px;text-align:left;margin:16px 0}.feedback div{padding:10px 12px;border-radius:10px;background:#092a17;border-left:4px solid var(--green)}.feedback .no{border-left-color:var(--red)}
+.toast{position:fixed;right:20px;bottom:20px;z-index:7000;padding:12px 15px;border-radius:12px;background:#10321e;border:1px solid var(--green)}
+@media(max-width:1150px){.hero,.mission-layout,.sim-grid,.final-grid{grid-template-columns:1fr}.case-file{display:none}.bottom-grid{grid-template-columns:1fr}.evidence-grid{grid-template-columns:1fr 1fr}.roadmap{grid-template-columns:1fr}.side{position:static}}
+@media(max-width:820px){.app{grid-template-columns:1fr}.sidebar{display:none}.main{padding:12px}.hero-steps,.score-grid{grid-template-columns:1fr}.ops-grid{grid-template-columns:repeat(6,160px)}.food-line{grid-template-columns:repeat(2,1fr);position:static;padding:270px 20px 20px}.sim-arena{min-height:auto}.evidence-grid{grid-template-columns:1fr}.fact-board{grid-template-columns:1fr}}
+
+/* ===== EVIDENCE LOCKER V2 ===== */
+.evidence-locker{
+  position:relative;
+  padding:20px;
+  border-radius:22px;
+  border:1px solid rgba(73,220,128,.35);
+  background:
+    linear-gradient(145deg,rgba(3,23,13,.94),rgba(12,55,31,.88)),
+    url('assets/r04-food-factory-bg.jpg') center/cover no-repeat;
+  background-blend-mode:normal,soft-light;
+  overflow:hidden;
+}
+.evidence-locker::before{
+  content:"RDA DIGITAL EVIDENCE LOCKER";
+  position:absolute;left:18px;top:13px;
+  color:#a9e9bd;font-size:10px;letter-spacing:.14em;
+}
+.evidence-locker::after{
+  content:"";
+  position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.05) 50%,transparent 65%);
+  transform:translateX(-120%);
+  animation:lockerSweep 5s linear infinite;
+}
+@keyframes lockerSweep{to{transform:translateX(120%)}}
+.evidence-vault{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  margin-top:18px;
+  position:relative;
+  z-index:1;
+}
+.evidence-case{
+  min-height:225px;
+  border-radius:18px;
+  padding:16px;
+  border:1px solid rgba(73,220,128,.28);
+  background:linear-gradient(160deg,rgba(14,62,35,.94),rgba(3,22,13,.97));
+  position:relative;
+  overflow:hidden;
+  transition:.28s ease;
+  cursor:pointer;
+}
+.evidence-case:hover:not(.locked){
+  transform:translateY(-7px) scale(1.015);
+  border-color:var(--yellow);
+  box-shadow:0 18px 45px rgba(0,0,0,.35),0 0 25px rgba(255,210,63,.12);
+}
+.evidence-case.locked{
+  opacity:.48;
+  filter:grayscale(.8);
+  cursor:not-allowed;
+}
+.evidence-case.open{
+  border-color:var(--green);
+  box-shadow:0 0 28px rgba(73,220,128,.18);
+}
+.evidence-case .case-number{
+  position:absolute;right:13px;top:12px;
+  font-size:12px;font-weight:800;color:#d8f6e2;
+  padding:5px 8px;border-radius:999px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);
+}
+.evidence-case .case-icon{
+  width:74px;height:74px;border-radius:20px;
+  display:grid;place-items:center;
+  font-size:42px;margin:22px auto 10px;
+  background:radial-gradient(circle,rgba(73,220,128,.2),rgba(4,27,15,.95));
+  border:1px solid rgba(73,220,128,.3);
+  transition:.3s;
+}
+.evidence-case.open .case-icon{
+  transform:rotateY(360deg);
+  box-shadow:0 0 24px rgba(73,220,128,.25);
+}
+.evidence-case h4{margin:5px 0;text-align:center;color:#fff}
+.evidence-case p{font-size:12px;line-height:1.55;color:var(--muted);text-align:center}
+.evidence-case .case-state{
+  display:flex;justify-content:center;align-items:center;gap:6px;
+  margin-top:12px;font-size:11px;color:#a9cbb4;
+}
+.evidence-case.open .case-state{color:#80ffb2}
+.evidence-case.locked .case-state{color:#829287}
+.evidence-detail{
+  margin-top:16px;
+  min-height:190px;
+  padding:18px;
+  border-radius:18px;
+  border:1px solid rgba(255,210,63,.28);
+  background:linear-gradient(145deg,rgba(55,42,5,.34),rgba(5,27,15,.92));
+  position:relative;z-index:1;
+}
+.evidence-detail.empty{
+  display:grid;place-items:center;text-align:center;color:var(--muted)
+}
+.detail-head{
+  display:flex;justify-content:space-between;gap:12px;align-items:center;
+  margin-bottom:12px;padding-bottom:11px;border-bottom:1px solid rgba(255,210,63,.18)
+}
+.detail-badge{
+  padding:5px 9px;border-radius:999px;
+  background:rgba(255,210,63,.1);
+  border:1px solid rgba(255,210,63,.35);
+  color:#ffe476;font-size:10px
+}
+.detail-content{
+  display:grid;grid-template-columns:86px 1fr;gap:15px;align-items:center
+}
+.detail-icon{
+  width:82px;height:82px;border-radius:22px;
+  display:grid;place-items:center;font-size:46px;
+  background:#0b321c;border:1px solid rgba(73,220,128,.3)
+}
+.detail-content h3{margin:0 0 7px}
+.detail-content p{margin:0;color:#d8e9de;line-height:1.65}
+.unlock-line{
+  height:7px;border-radius:999px;background:#123722;overflow:hidden;margin-top:13px
+}
+.unlock-line span{
+  display:block;height:100%;background:linear-gradient(90deg,var(--green),var(--yellow));
+  transition:.45s ease
+}
+@media(max-width:1000px){.evidence-vault{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){
+  .evidence-vault{grid-template-columns:1fr}
+  .detail-content{grid-template-columns:1fr;text-align:center}
+  .detail-icon{margin:auto}
+}
+
+
+/* ===== REAL Radiation Detective Agency LOGO ===== */
+.brand-logo{
+  width:66px;
+  height:66px;
+  min-width:66px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  padding:4px;
+  overflow:hidden;
+  position:relative;
+  background:radial-gradient(circle at center,rgba(73,220,128,.18),rgba(3,20,11,.95));
+  border:2px solid var(--yellow);
+  box-shadow:0 0 18px rgba(255,210,63,.25),inset 0 0 16px rgba(73,220,128,.12);
+  animation:brandPulse 3.2s ease-in-out infinite;
+}
+.brand-logo::after{
+  content:"";
+  position:absolute;
+  inset:-35%;
+  background:linear-gradient(115deg,transparent 36%,rgba(255,255,255,.55) 49%,transparent 62%);
+  transform:translateX(-120%) rotate(8deg);
+  animation:logoShine 4.5s ease-in-out infinite;
+  pointer-events:none;
+}
+.brand-logo img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  filter:drop-shadow(0 0 8px rgba(73,220,128,.32)) drop-shadow(0 0 10px rgba(255,210,63,.18));
+  transition:.3s ease;
+  animation:logoFloat 4s ease-in-out infinite;
+}
+.brand:hover .brand-logo img{transform:scale(1.08) rotate(2deg)}
+@keyframes brandPulse{
+  50%{box-shadow:0 0 28px rgba(255,210,63,.42),0 0 42px rgba(73,220,128,.14),inset 0 0 18px rgba(73,220,128,.2)}
+}
+@keyframes logoShine{
+  0%,62%{transform:translateX(-130%) rotate(8deg)}
+  78%,100%{transform:translateX(130%) rotate(8deg)}
+}
+@keyframes logoFloat{50%{transform:translateY(-2px)}}
+
+</style>
+<script src="../../shared/rda-rubric-v2.js"></script>
+
+<style id="rdaResetUiFix">
+/* ===== V2.8.1 RESET CONTROL UI FIX ===== */
+.topbar{
+  min-height:64px;
+  align-items:center!important;
+  gap:12px!important;
+}
+.topbar>.status,
+.status{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-end!important;
+  gap:7px!important;
+  flex-wrap:wrap!important;
+  min-width:0;
+}
+.rda-reset-control{
+  position:static!important;
+  inset:auto!important;
+  transform:none!important;
+  margin:0!important;
+  min-width:0!important;
+  width:auto!important;
+  max-width:100%!important;
+  min-height:34px!important;
+  padding:7px 11px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  border-radius:10px!important;
+  line-height:1!important;
+  font-size:10px!important;
+  font-weight:700!important;
+  z-index:auto!important;
+}
+@media(max-width:780px){
+  .topbar{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) auto!important;
+    align-items:start!important;
+    padding:10px 12px!important;
+  }
+  .topbar>div:first-child{min-width:0}
+  .topbar h2{
+    margin:0!important;
+    font-size:clamp(15px,4vw,20px)!important;
+    line-height:1.15!important;
+  }
+  .topbar>.status,.status{
+    max-width:46vw!important;
+    gap:5px!important;
+  }
+  .topbar .pill{
+    padding:5px 7px!important;
+    font-size:7px!important;
+    white-space:nowrap!important;
+  }
+  .rda-reset-control{
+    min-height:30px!important;
+    padding:6px 8px!important;
+    font-size:8px!important;
+  }
+}
+@media(max-width:520px){
+  .topbar{
+    grid-template-columns:1fr!important;
+    gap:7px!important;
+  }
+  .topbar>.status,.status{
+    max-width:none!important;
+    width:100%!important;
+    justify-content:flex-start!important;
+  }
+  .rda-reset-control{
+    margin-left:auto!important;
+  }
+}
+</style>
+<style id="nativeMissionLearningSpine">
+.native-learning-spine{max-width:1280px;margin:12px auto 18px;padding:14px 16px;border:1px solid rgba(45,226,230,.22);border-radius:16px;background:linear-gradient(135deg,rgba(6,35,46,.94),rgba(4,20,29,.96));box-shadow:0 16px 45px rgba(0,0,0,.18)}
+.native-spine-head{display:grid;grid-template-columns:minmax(260px,.8fr) 1.2fr;gap:18px;align-items:center}.native-spine-head small{display:block;color:#2de2e6;font-size:8px;font-weight:900;letter-spacing:.14em}.native-spine-head strong{display:block;margin-top:3px;color:#fff;font-size:16px}.native-spine-head p{margin:0;color:#b9d4dc;font-size:12px}
+.native-spine-flow{display:flex;gap:6px;overflow:auto;margin-top:11px;padding-bottom:2px}.native-spine-flow span{flex:1;min-width:110px;padding:8px 9px;border:1px solid rgba(255,255,255,.07);border-radius:10px;color:#f4c430;font-size:9px;font-weight:900;background:rgba(255,255,255,.025)}.native-spine-flow b{display:block;margin-top:2px;color:#dffcff;font-size:8px;letter-spacing:.03em}
+@media(max-width:760px){.native-spine-head{grid-template-columns:1fr}.native-spine-flow span{min-width:125px}}
+</style>
+
+<style id="r04PredictPhase1V460">
+/* Global mission UX */
+.sidebar{position:sticky!important;top:0!important;height:100vh!important;max-height:100vh!important;overflow:hidden!important}.sidebar::-webkit-scrollbar{display:none!important}
+.r04-mission-head{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:16px!important}.r04-mission-head h2{margin:5px 0 0!important}.roadmap{display:flex!important;flex-wrap:nowrap!important;gap:4px!important;overflow:hidden!important}.road{white-space:nowrap!important;font-size:8px!important;padding:7px 9px!important}
+.mission-layout{grid-template-columns:minmax(0,1fr) 250px!important}.stage{min-width:0!important;overflow:visible!important}
+/* TRACE */
+.r04-hold-alert{display:grid;grid-template-columns:58px 1fr;gap:14px;align-items:center;padding:18px;border-radius:17px;border:1px solid rgba(255,93,93,.45);background:linear-gradient(100deg,rgba(114,26,26,.45),rgba(7,30,18,.94))}.r04-hold-alert>div{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:#ff5d5d;color:#fff;font-size:30px;font-weight:900;animation:r04pulse 1.4s infinite}.r04-hold-alert small{color:#ff9a9a;font-weight:900}.r04-hold-alert h2{margin:4px 0;color:#fff}.r04-hold-alert p{margin:0;color:#cee1d4}@keyframes r04pulse{60%{box-shadow:0 0 0 16px rgba(255,93,93,0)}}
+.r04-trace-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:14px 0}.r04-trace{min-height:160px;padding:14px;text-align:left;border-radius:14px;border:1px solid #245c3b;background:#071e12;color:#dff5e5}.r04-trace.open{border-color:#49dc80;background:linear-gradient(160deg,#103822,#071e12)}.r04-trace>span{font-size:28px}.r04-trace small,.r04-trace b,.r04-trace p{display:block}.r04-trace small{color:#70d993;font-size:8px;margin-top:7px}.r04-trace b{color:#fff;margin:3px 0}.r04-trace p{font-size:10px;color:#a9cbb4;line-height:1.4}
+/* MODEL */
+.r04-model-question{padding:16px;border-radius:14px;background:#092718;border:1px solid #2c7549}.r04-model-question small{color:#ffd23f;font-weight:900}.r04-model-question h2{margin:5px 0;color:#fff}.r04-trend-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:14px 0}.r04-trend-grid button{padding:14px;border-radius:12px;border:1px solid #2b7748;background:#0b2c1b;color:#fff}.r04-trend-grid button.active{border-color:#ffd23f;background:rgba(255,210,63,.10);box-shadow:0 0 18px rgba(255,210,63,.08)}.r04-predict-form{display:grid;grid-template-columns:260px 1fr;gap:12px}.r04-predict-form label{color:#cfe5d5;font-size:11px}.r04-predict-form input,.r04-predict-form textarea{display:block;width:100%;box-sizing:border-box;margin-top:6px;padding:12px;border-radius:11px;border:1px solid #2b7748;background:#06170e;color:#fff}
+/* TIME SHIFT */
+.r04-time-dashboard{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);gap:12px}.r04-time-left{padding:14px;border-radius:14px;background:#06170e;border:1px solid #245d3b}.r04-nuclei{display:grid;grid-template-columns:repeat(12,1fr);gap:6px;min-height:130px;align-content:center}.r04-nuclei i{width:12px;height:12px;border-radius:50%;background:#49dc80;box-shadow:0 0 9px rgba(73,220,128,.55);transition:.25s}.r04-nuclei i.decayed{background:#193a28;box-shadow:none;opacity:.25}.r04-time-left small{display:block;margin-top:10px;color:#a5c5ad;font-size:10px;line-height:1.45}.r04-time-metrics{display:grid;grid-template-columns:1fr 1fr;gap:9px}.r04-time-metrics>div{padding:13px;border-radius:13px;background:#0a2818;border:1px solid #245d3b}.r04-time-metrics small,.r04-time-metrics b{display:block}.r04-time-metrics small{font-size:10px;color:#a1c1a9;line-height:1.35}.r04-time-metrics b{font-size:25px;color:#fff;margin-top:5px;line-height:1.15}.r04-graph{width:100%;height:250px;margin:12px 0;border-radius:14px;background:#06170e;border:1px solid #245d3b}.r04-graph line{stroke:#315b40;stroke-width:1}.r04-graph polyline{fill:none;stroke:#49dc80;stroke-width:4}.r04-graph circle{fill:#ffd23f}.r04-graph text{fill:#a4c2aa;font-size:14px}.r04-timeline{padding:14px;border-radius:14px;background:#0a2818;border:1px solid #245d3b}.r04-timeline input{width:100%}.r04-timeline>div{display:grid;grid-template-columns:repeat(4,1fr);margin-top:10px;text-align:center;color:#d0e2d4;font-size:11px;line-height:1.4}.r04-capture-row{display:flex;justify-content:space-between;align-items:center;margin:10px 0}.r04-capture-row span{color:#c6ddcb;font-size:10px}.r04-trial-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}.r04-trial-strip>div{padding:9px;border-radius:10px;background:#071e12;border:1px solid #245d3b;text-align:center}.r04-trial-strip small,.r04-trial-strip b,.r04-trial-strip span{display:block}.r04-trial-strip b{color:#fff}.r04-trial-strip span{color:#49dc80;font-size:9px}.r04-equation-reveal{margin-top:12px;padding:13px;border-radius:12px;border:1px dashed #4a654f;background:#06170e;text-align:center;opacity:.45}.r04-equation-reveal.show{opacity:1;border-style:solid;border-color:#ffd23f}.r04-equation-reveal small,.r04-equation-reveal b,.r04-equation-reveal span{display:block}.r04-equation-reveal b{font-size:23px;color:#ffd23f;margin:4px}.r04-equation-reveal span{color:#a9cbb4;font-size:10px}
+/* PROCESS */
+.r04-process-principle{display:flex;justify-content:center;gap:12px;align-items:center;padding:12px;border-radius:12px;background:#092718;border:1px solid #2b7748;color:#e8f8ec}.r04-process-principle i{color:#ffd23f}.r04-chamber-grid{display:grid;grid-template-columns:230px minmax(0,1fr) 220px;gap:12px;margin-top:12px}.r04-controls,.r04-process-result{padding:14px;border-radius:14px;background:#071e12;border:1px solid #245d3b}.r04-controls label{display:block;margin-bottom:12px;font-size:10px}.r04-controls select,.r04-controls input{width:100%;margin-top:6px}.r04-source-card{margin-top:12px;padding:10px;border-radius:10px;background:#0b2c1b;text-align:center}.r04-source-card small,.r04-source-card b,.r04-source-card span{display:block}.r04-source-card b{font-size:24px;color:#ffd23f}.r04-source-card span{font-size:8px;color:#8caf96}.r04-chamber{min-height:330px;padding:20px;border-radius:14px;background:radial-gradient(circle at 50% 40%,rgba(255,210,63,.10),transparent 40%),#06170e;border:1px solid #245d3b;display:grid;align-content:center}.r04-door{margin:auto;width:220px;height:180px;border-radius:18px;display:grid;place-items:center;text-align:center;background:#183524;border:5px solid #355b41;box-shadow:inset 0 0 50px #020}.r04-door.open{border-color:#49dc80;box-shadow:0 0 30px rgba(73,220,128,.15)}.r04-door span{font-size:58px;color:#ffd23f}.r04-door b,.r04-door small{display:block}.r04-conveyor{display:flex;align-items:center;justify-content:space-around;margin-top:20px;font-size:32px}.r04-conveyor i{height:6px;flex:1;background:repeating-linear-gradient(90deg,#496353 0 20px,#243c2d 20px 40px);margin:0 12px}.r04-process-result{display:grid;gap:8px}.r04-process-result>div{padding:10px;border-radius:10px;background:#0b2c1b}.r04-process-result small,.r04-process-result b{display:block}.r04-process-result small{font-size:8px;color:#81a58d}.r04-process-result b{font-size:18px;color:#fff}.r04-before-after-detector{display:grid;grid-template-columns:repeat(3,1fr) minmax(210px,1.3fr);gap:8px;margin:12px 0}.r04-before-after-detector>div,.r04-before-after-detector>strong{padding:11px;border-radius:11px;background:#071e12;border:1px solid #245d3b;text-align:center}.r04-before-after-detector small,.r04-before-after-detector b{display:block}.r04-before-after-detector b{font-size:20px}.r04-before-after-detector strong{display:grid;place-items:center;color:#ffd23f}
+/* Evidence/Crisis/Explain/Release */
+.r04-evidence-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.r04-evidence-grid>div{padding:14px;border-radius:13px;background:#071e12;border:1px solid #245d3b}.r04-evidence-grid small,.r04-evidence-grid b{display:block}.r04-evidence-grid small{font-size:8px;color:#73a17f}.r04-evidence-grid b{font-size:18px;color:#fff;margin-top:5px}.r04-evidence-decision{margin-top:14px;padding:15px;border-radius:14px;background:#092718;border:1px solid #2b7748}.r04-evidence-decision>div{display:flex;gap:9px}.r04-evidence-decision button{flex:1;padding:12px;border-radius:10px;border:1px solid #2b7748;background:#071e12;color:#fff}.r04-evidence-decision button.active{border-color:#ffd23f;background:rgba(255,210,63,.08)}.r04-evidence-decision textarea{width:100%;box-sizing:border-box;margin-top:10px;padding:12px;border-radius:10px;border:1px solid #2b7748;background:#06170e;color:#fff}.r04-crisis{display:grid;grid-template-columns:52px 1fr 170px;gap:14px;align-items:center;padding:18px;border-radius:17px;background:linear-gradient(100deg,rgba(131,41,18,.5),rgba(15,25,15,.96));border:1px solid #ff9f1c}.r04-crisis .alarm{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:#ff9f1c;color:#111;font-size:27px;font-weight:900}.r04-crisis small{color:#ffbd67;font-weight:900}.r04-crisis h2{margin:4px 0}.r04-crisis p{margin:0;color:#dae8dd}.r04-crisis .clock{text-align:center;padding:10px;border-radius:11px;background:#1b160b}.r04-crisis .clock small,.r04-crisis .clock b,.r04-crisis .clock span{display:block}.r04-crisis .clock b{font-size:28px;color:#ffd23f}.r04-crisis-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:12px 0}.r04-crisis-metrics>div{padding:13px;border-radius:12px;background:#071e12;border:1px solid #245d3b;text-align:center}.r04-crisis-metrics small,.r04-crisis-metrics b{display:block}.r04-crisis-metrics b{font-size:21px;color:#fff}.r04-crisis-question{padding:14px;border-radius:13px;background:#092718;border:1px solid #2b7748}.r04-crisis-question input{width:180px;padding:10px;border-radius:9px;border:1px solid #2b7748;background:#06170e;color:#fff}.r04-crisis-question small{display:block;margin-top:7px;color:#9bb5a2}.r04-explain-context{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.r04-explain-context>div{padding:12px;border-radius:11px;background:#071e12;border:1px solid #245d3b}.r04-explain-context small,.r04-explain-context b{display:block}.r04-explain-context small{font-size:8px;color:#79a687}.r04-explain-context b{margin-top:5px}.r04-dark-field{display:block;margin-top:11px;color:#dff1e4;font-size:10px;font-weight:700}.r04-dark-field textarea{display:block;width:100%;box-sizing:border-box;margin-top:6px;padding:11px;border-radius:10px;border:1px solid #2b7748;background:#06170e;color:#fff}.r04-release-head{display:flex;justify-content:space-between;gap:14px;padding:16px;border-radius:15px;background:#092718;border:1px solid #2b7748}.r04-release-head small{color:#49dc80;font-weight:900}.r04-release-head h2{margin:4px 0}.r04-release-head p{margin:0;color:#aec6b4}.r04-release-head>div:last-child{text-align:center;padding:8px 14px;border-radius:10px;background:#071e12}.r04-release-head>div:last-child small,.r04-release-head>div:last-child b,.r04-release-head>div:last-child span{display:block}.r04-release-head>div:last-child b{font-size:25px;color:#ffd23f}.r04-before-model-after{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:9px;align-items:center;margin:12px 0}.r04-before-model-after>div{padding:12px;border-radius:12px;background:#071e12;border:1px solid #245d3b;text-align:center}.r04-before-model-after small,.r04-before-model-after b,.r04-before-model-after span{display:block}.r04-before-model-after b{font-size:19px}.r04-before-model-after span{font-size:9px;color:#8eac96}.r04-before-model-after i{color:#ffd23f;font-size:20px}.r04-release-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.r04-select-evidence{display:grid;gap:7px}.r04-select-evidence button{padding:10px;text-align:left;border-radius:9px;border:1px solid #245d3b;background:#071e12;color:#dff1e4}.r04-select-evidence button.active{border-color:#49dc80;background:rgba(73,220,128,.09)}.r04-select-evidence span{margin-right:7px;color:#49dc80}.r04-final-choices{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.r04-final-choices button{min-height:90px;padding:12px;border-radius:11px;border:1px solid #2b7748;background:#071e12;color:#fff;font-weight:900}.r04-final-choices button small{display:block;margin-top:4px;color:#8eac96;font-size:8px}.r04-final-choices button.active{border-color:#ffd23f;background:rgba(255,210,63,.08)}.r04-board-note{margin-top:10px;padding:10px;border-radius:10px;background:#092718}.r04-board-note b,.r04-board-note span{display:block}.r04-board-note b{color:#ffd23f}.r04-board-note span{font-size:9px;color:#a8c0ae}.r04-complete-hero{padding:20px;border-radius:16px;background:radial-gradient(circle at 50% 0,rgba(73,220,128,.15),transparent 45%),#071e12;border:1px solid #2b7748}.r04-complete-hero small{color:#49dc80;font-weight:900}.r04-complete-hero h1{margin:6px 0}.r04-complete-hero p{margin:0;color:#b7cdbd}.r04-stamp{max-width:430px;margin:16px auto;padding:14px;border-radius:13px;border:1px solid #ffd23f;color:#ffd23f;letter-spacing:.08em}.r04-stamp b{color:#fff}
+/* Compact fields / responsive */
+.stage-footer{margin-top:16px!important}.stage textarea{resize:vertical}.page{min-width:0!important}.main{min-width:0!important}
+@media(max-width:1180px){.mission-layout{grid-template-columns:1fr!important}.mission-layout>.side{display:none!important}.r04-trace-grid,.r04-trend-grid{grid-template-columns:repeat(2,1fr)}.r04-chamber-grid,.r04-release-grid{grid-template-columns:1fr}.r04-time-dashboard{grid-template-columns:1fr}.r04-before-after-detector{grid-template-columns:repeat(2,1fr)}}
+</style>
+
+
+
+
+
+<style id="r04V462DeepReadability">
+html,body{overflow-x:hidden}
+.sidebar::-webkit-scrollbar{display:none}
+.native-learning-spine{position:relative!important;top:auto!important;left:auto!important;right:auto!important;margin:0 0 12px!important;z-index:20!important}
+.native-spine-head p{font-size:12px!important;line-height:1.55!important;color:#c9dfcf!important}
+.native-spine-flow span{font-size:10px!important;line-height:1.3!important}
+.native-spine-flow b{font-size:10px!important}
+.r04-trace p,.r04-trace b,.r04-trace small,
+.r04-evidence-grid div,.r04-evidence-grid small,.r04-evidence-grid b,
+.r04-source-card small,.r04-source-card span,
+.r04-process-result small,.r04-before-after-detector small{
+  line-height:1.45!important
+}
+.r04-evidence-grid small{font-size:10px!important;color:#a9c9b0!important}
+.r04-evidence-grid b{font-size:18px!important}
+.r04-source-card small,.r04-source-card span,.r04-process-result small,.r04-before-after-detector small{font-size:10px!important;color:#a8c7af!important}
+.r04-predict-form label,.r04-controls label{font-size:12px!important;line-height:1.45!important}
+.r04-predict-form input,.r04-predict-form textarea,.r04-evidence-decision textarea{font-size:14px!important;line-height:1.55!important}
+.notice{font-size:13px!important;line-height:1.6!important}
+.btn{font-size:12px!important}
+</style>
+
+
+<style id="r04V462HalfLifeHero">
+.r04-half-life-console-v462{padding:16px!important;border:1px solid rgba(255,210,63,.32)!important;background:linear-gradient(90deg,rgba(8,42,23,.98),rgba(15,52,24,.92))!important;box-shadow:0 0 26px rgba(255,210,63,.06)!important}
+.r04-decay-intro{display:flex;align-items:center;gap:13px}
+.r04-decay-intro p{margin:4px 0 0;color:#c7ddcd;font-size:11px;line-height:1.5}
+.r04-decay-orbit{width:52px;height:52px;flex:0 0 52px;border-radius:50%;display:grid;place-items:center;font-size:28px;background:radial-gradient(circle,#315f24,#07180c);border:1px solid #ffd23f;box-shadow:0 0 22px rgba(255,210,63,.22);animation:r04OrbitPulse 1.4s ease-in-out infinite}
+@keyframes r04OrbitPulse{50%{transform:scale(1.08) rotate(12deg);box-shadow:0 0 34px rgba(255,210,63,.4)}}
+.r04-nuclei i.alive:nth-child(3n){animation-delay:.15s!important}.r04-nuclei i.alive:nth-child(4n){animation-delay:.32s!important}.r04-nuclei i.alive:nth-child(5n){animation-delay:.48s!important}
+.r04-time-dashboard{grid-template-columns:minmax(0,1.35fr) minmax(300px,.65fr)!important}
+.r04-time-left{min-height:190px!important}
+.r04-nuclei{min-height:160px!important;grid-template-columns:repeat(12,1fr)!important;gap:8px!important}
+.r04-nuclei i{width:14px!important;height:14px!important}
+.r04-graph{height:285px!important}
+.r04-half-marker div{padding:11px 8px!important}
+.r04-half-marker small{font-size:10px!important}.r04-half-marker b{font-size:16px!important}
+</style>
+
+
+
+
+
+
+
+
+<style id="r04V465MasterSidebarShell">
+.app{
+  display:grid!important;
+  grid-template-columns:250px minmax(0,1fr)!important;
+  min-height:100vh!important;
+}
+.r04-master-sidebar{
+  position:sticky!important;
+  top:0!important;
+  height:100vh!important;
+  max-height:100vh!important;
+  padding:16px 14px!important;
+  overflow:hidden!important;
+  overflow-y:hidden!important;
+  overflow-x:hidden!important;
+  box-sizing:border-box!important;
+  background:rgba(2,17,22,.95)!important;
+  border-right:1px solid rgba(54,198,214,.18)!important;
+  backdrop-filter:blur(16px) saturate(125%)!important;
+  z-index:500!important;
+}
+.r04-master-sidebar::-webkit-scrollbar{display:none!important}
+
+.r04-master-sidebar .rda-brand{
+  display:flex!important;
+  gap:12px!important;
+  align-items:center!important;
+  padding:0 4px 15px!important;
+  border-bottom:1px solid rgba(68,203,218,.14)!important;
+}
+.r04-master-sidebar .rda-brand img{
+  width:56px!important;
+  height:56px!important;
+  object-fit:contain!important;
+  flex:0 0 56px!important;
+}
+.r04-master-sidebar .rda-brand h1{
+  margin:0!important;
+  color:#f5fbfd!important;
+  font-size:16px!important;
+  line-height:1.08!important;
+}
+.r04-master-sidebar .rda-brand small{
+  display:block!important;
+  margin-top:6px!important;
+  color:#ffc62d!important;
+  font-size:10px!important;
+  font-weight:800!important;
+}
+
+.r04-master-sidebar .rda-nav{
+  display:grid!important;
+  gap:6px!important;
+  margin-top:12px!important;
+}
+.r04-master-sidebar .rda-nav-item,
+.r04-master-sidebar .rda-mission-item{
+  width:100%!important;
+  min-height:44px!important;
+  padding:9px 11px!important;
+  border:0!important;
+  border-radius:11px!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:9px!important;
+  box-sizing:border-box!important;
+  background:transparent!important;
+  color:#b9d0d6!important;
+  text-align:left!important;
+  font-size:12px!important;
+}
+.r04-master-sidebar .rda-nav-item.active{
+  color:#fff!important;
+  background:rgba(32,84,98,.46)!important;
+  border-left:4px solid #44cfee!important;
+}
+.r04-master-sidebar .rda-section-title{
+  display:flex!important;
+  align-items:center!important;
+  gap:7px!important;
+  padding:9px 9px 4px!important;
+  color:#d8e7eb!important;
+  font-size:13px!important;
+  font-weight:900!important;
+}
+.r04-master-sidebar .rda-mission-item.current{
+  color:#e4f2f5!important;
+  background:rgba(4,34,43,.76)!important;
+  border:1px solid rgba(55,207,221,.24)!important;
+}
+.r04-master-sidebar .rda-mission-item small{
+  margin-left:auto!important;
+  color:#ffc62d!important;
+  font-size:7px!important;
+  font-weight:900!important;
+}
+
+/* master-injected grid/tools are the ONLY operation grid shown */
+.r04-master-sidebar #rdaMasterOpNav{
+  margin-top:0!important;
+}
+.r04-master-sidebar #rdaCompactTools{
+  margin-top:2px!important;
+}
+
+.r04-master-sidebar>.side-card{
+  margin-top:12px!important;
+  padding:11px!important;
+  border-radius:13px!important;
+  background:rgba(5,29,34,.82)!important;
+  border:1px solid rgba(59,200,214,.18)!important;
+}
+.r04-master-sidebar>.side-card b{
+  color:#f7fbff!important;
+  font-size:14px!important;
+}
+.r04-master-sidebar>.side-card .muted{
+  margin:3px 0 7px!important;
+  color:#a8c2c9!important;
+  font-size:10px!important;
+}
+.r04-master-sidebar>.side-card small{
+  color:#d5e7eb!important;
+  font-size:9px!important;
+}
+</style>
+
+
+
+
+
+<style id="r04V467TrueManualOnly">
+.r04-half-life-console .controls button[onclick*="toggleHalfLifeAnimation"]{display:none!important}
+</style>
+
+
+<style id="r04V468FinalRefine">
+.r04-manual-timeshift{padding:16px;border-radius:17px;background:linear-gradient(145deg,#061e13,#04150e);border:1px solid rgba(73,220,128,.27)}
+.r04-manual-controls{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:13px}
+.r04-manual-controls button{min-height:62px;border-radius:12px;border:1px solid #2a6742;background:#082819;color:#d7eddd;cursor:pointer}
+.r04-manual-controls button small,.r04-manual-controls button b{display:block}.r04-manual-controls button small{font-size:9px}.r04-manual-controls button b{font-size:18px;margin-top:3px}
+.r04-manual-controls button.active{background:#ffd23f;color:#102217;border-color:#ffe886;box-shadow:0 0 0 3px rgba(255,210,63,.10)}
+.r04-manual-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);gap:12px}
+.r04-manual-visual{padding:14px;border-radius:14px;background:#06170e;border:1px solid #245d3b}.r04-manual-caption{margin-top:8px}.r04-manual-caption b,.r04-manual-caption span{display:block}.r04-manual-caption b{color:#64ec99;font-size:11px}.r04-manual-caption span{color:#9fbea7;font-size:10px;margin-top:3px}
+.r04-manual-readout{display:grid;grid-template-columns:1fr 1fr;gap:9px}.r04-manual-readout>div{padding:13px;border-radius:12px;background:#0a2818;border:1px solid #245d3b}.r04-manual-readout small,.r04-manual-readout b,.r04-manual-readout span{display:block}.r04-manual-readout small{font-size:9px;color:#89ab93}.r04-manual-readout b{font-size:22px;color:#fff;margin:4px 0}.r04-manual-readout span{font-size:9px;color:#aec8b4}
+.r04-interactive-graph{margin:13px 0!important}.r04-graph-mark{cursor:pointer}.r04-graph-mark circle{fill:#759984;stroke:#173b28;stroke-width:3}.r04-graph-mark text{font-size:11px;fill:#b9d2c0}.r04-graph-mark.active circle{fill:#ffd23f;stroke:#fff0a4}.r04-graph-mark.captured circle{stroke:#57ec98;stroke-width:5}
+.r04-manual-actions{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:10px}.r04-manual-actions span{color:#a9c9b2;font-size:11px}
+.r04-manual-evidence-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:10px}.r04-manual-evidence-strip>div{padding:10px;border-radius:10px;background:#0a2a19;border:1px solid rgba(84,226,132,.18);text-align:center}.r04-manual-evidence-strip small,.r04-manual-evidence-strip b,.r04-manual-evidence-strip span{display:block}.r04-manual-evidence-strip small{font-size:8px;color:#84aa90}.r04-manual-evidence-strip b{color:#fff;font-size:15px;margin:3px 0}.r04-manual-evidence-strip span{color:#9fbea7;font-size:8px}
+
+.r04-student-evidence-board{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:12px 0}.r04-student-evidence-board>div{min-height:105px;padding:13px;border-radius:13px;background:#082819;border:1px solid rgba(73,220,128,.22)}.r04-student-evidence-board>div.process{border-color:rgba(255,210,63,.30);background:rgba(72,57,9,.18)}.r04-student-evidence-board small,.r04-student-evidence-board b,.r04-student-evidence-board span,.r04-student-evidence-board em{display:block}.r04-student-evidence-board small{font-size:8px;color:#8faf98}.r04-student-evidence-board b{font-size:20px;color:#fff;margin:5px 0}.r04-student-evidence-board span{font-size:10px;color:#59e78f}.r04-student-evidence-board em{font-size:8px;color:#aac8b1;font-style:normal;margin-top:4px}
+.r04-prediction-actual{display:grid;grid-template-columns:1fr auto 1fr auto 1.25fr;gap:9px;align-items:center;margin:13px 0}.r04-prediction-actual>div{padding:12px;border-radius:12px;background:#071f13;border:1px solid rgba(73,220,128,.18)}.r04-prediction-actual small,.r04-prediction-actual b,.r04-prediction-actual span{display:block}.r04-prediction-actual small{font-size:8px;color:#8fac97}.r04-prediction-actual b{font-size:18px;color:#fff;margin:4px 0}.r04-prediction-actual i{color:#ffd23f;font-size:20px}.r04-prediction-actual textarea{width:100%;box-sizing:border-box;margin-top:5px;padding:9px;border-radius:9px;border:1px solid #2b7048;background:#061b0f;color:#fff;font-family:inherit}
+
+.r04-crisis-v468{display:grid;gap:12px}.r04-crisis-alert{display:grid;grid-template-columns:50px 1fr auto;gap:13px;align-items:center;padding:16px;border-radius:16px;background:linear-gradient(90deg,rgba(104,31,15,.65),rgba(23,25,12,.95));border:1px solid rgba(255,132,62,.44)}.r04-crisis-alert>span{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:#ff7b36;color:#fff;font-size:27px;font-weight:900}.r04-crisis-alert h2{margin:3px 0;color:#fff}.r04-crisis-alert p{margin:0;color:#e4ddd4}.r04-crisis-alert strong{color:#ffd23f;font-size:10px}
+.r04-crisis-model{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.r04-crisis-model>div{padding:14px;border-radius:13px;background:#082819;border:1px solid rgba(73,220,128,.22)}.r04-crisis-model small,.r04-crisis-model b,.r04-crisis-model span{display:block}.r04-crisis-model small{font-size:8px;color:#8caf96}.r04-crisis-model b{font-size:24px;color:#fff;margin:4px 0}.r04-crisis-model span{font-size:10px;color:#a6c5ae}
+.r04-crisis-task{padding:15px;border-radius:14px;background:#061b10;border:1px solid #2b7048}.r04-crisis-task small{color:#5ee894;font-weight:900}.r04-crisis-task h3{margin:5px 0 12px}.r04-crisis-task label{display:block;font-size:11px;color:#cfe2d3}.r04-crisis-task input{display:block;width:100%;box-sizing:border-box;margin-top:6px;padding:11px;border-radius:10px;border:1px solid #2b7048;background:#04150d;color:#fff;font-size:14px}
+
+.r04-complete-hero-v468{padding:20px;border-radius:18px;background:radial-gradient(circle at 50% 0,rgba(80,234,135,.14),transparent 48%),#061b10;border:1px solid rgba(79,226,129,.27)}.r04-complete-hero-v468 small{color:#65e99a;font-weight:900}.r04-complete-hero-v468 h1{margin:5px 0;color:#fff}.r04-complete-hero-v468 p{margin:0;color:#c7ddcd}
+.r04-learning-chain{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;gap:8px;align-items:center;margin:16px 0}.r04-learning-chain>div{padding:13px;border-radius:13px;background:#082819;border:1px solid rgba(73,220,128,.20);text-align:center}.r04-learning-chain span{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;margin:0 auto 5px;background:#ffd23f;color:#102017;font-weight:900}.r04-learning-chain small,.r04-learning-chain b,.r04-learning-chain em{display:block}.r04-learning-chain small{font-size:8px;color:#8eaf98}.r04-learning-chain b{font-size:18px;color:#fff;margin:3px}.r04-learning-chain em{font-size:8px;color:#5fe895;font-style:normal}.r04-learning-chain i{color:#ffd23f;font-size:20px}
+.r04-stamp-v468{max-width:450px;margin:16px auto;padding:15px;border-radius:13px;border:1px solid rgba(255,210,63,.33);text-align:center}.r04-stamp-v468 small,.r04-stamp-v468 strong,.r04-stamp-v468 b{display:block}.r04-stamp-v468 small{color:#9fbea8;font-size:8px}.r04-stamp-v468 strong{color:#ffd23f;font-size:18px;margin:3px}.r04-stamp-v468 b{color:#fff;font-size:12px}
+
+@media(max-width:1100px){
+ .r04-manual-grid,.r04-crisis-model{grid-template-columns:1fr!important}
+ .r04-student-evidence-board{grid-template-columns:repeat(2,1fr)!important}
+ .r04-prediction-actual,.r04-learning-chain{grid-template-columns:1fr!important}
+ .r04-prediction-actual i,.r04-learning-chain i{transform:rotate(90deg)}
+}
+</style>
+
+
+<style id="r04V469ClickInteractionFix">
+.stage,.r04-manual-timeshift,.r04-manual-controls,.r04-manual-actions,.r04-interactive-graph{
+  position:relative!important;
+  z-index:30!important;
+  pointer-events:auto!important;
+}
+.r04-manual-controls button,.r04-manual-actions button,.r04-graph-mark{
+  pointer-events:auto!important;
+  touch-action:manipulation;
+}
+.r04-manual-controls button{cursor:pointer!important}
+</style>
+
+</head>
+<body><div class="world"><div id="worldBg" class="world-bg"></div><div class="grid"></div><div class="scan"></div><i class="steam s1"></i><i class="steam s2"></i><i class="steam s3"></i><div class="forklift">🚜</div><div class="truck">🚚</div><div class="vignette"></div></div>
+<div class="app">
+<aside class="sidebar r04-master-sidebar">
+  <div class="brand rda-brand">
+    <img src="../../assets/logo.png" alt="Radiation Detective Agency Logo">
+    <div>
+      <h1>Radiation Detective Agency</h1>
+      <small>RDA</small>
+    </div>
+  </div>
+
+  <nav class="rda-nav">
+    <button data-page="dashboard" class="rda-nav-item active">
+      <span class="nav-icon">🏢</span><span>Headquarters</span>
+    </button>
+
+    <div class="rda-section-title">
+      <span class="nav-icon">📁</span><span>Operations</span>
+    </div>
+
+    <button data-page="mission" class="rda-mission-item current">
+      <span class="mission-dot current-dot">●</span>
+      <span>R-04 Mission</span>
+      <small>CURRENT</small>
+    </button>
+
+    <button data-page="passport" class="rda-nav-item">
+      <span class="nav-icon">📘</span><span>Research Passport</span>
+    </button>
+
+    <button data-page="teacher" class="rda-nav-item">
+      <span class="nav-icon">📊</span><span>Teacher Center</span>
+    </button>
+  </nav>
+
+  <div class="side-card">
+    <b>Agent Ethan</b>
+    <div class="muted">Advanced Detective</div>
+    <div class="xpbar"><span id="sideXp"></span></div>
+    <small id="sideXpText">1000 / 1000 XP</small>
+  </div>
+</aside>
+<main class="main">
+<div class="topbar"><div><h2 id="pageTitle">R-04 • PREDICT Headquarters</h2><div class="muted">Korat Food Export Facility • Irradiation Control Center</div></div><div class="status"><span class="pill">⭐⭐⭐⭐ Advanced</span><span class="pill">50 นาที</span><button class="btn btn-ghost rda-reset-control" onclick="resetGame()" aria-label="รีเซ็ตภารกิจ" title="รีเซ็ตภารกิจ">↻ รีเซ็ต</button></div></div>
+
+<section id="dashboard" class="page active">
+ <div class="hero">
+  <div class="hero-copy"><span class="pill">RDA • CURRENT MISSION</span><h1>R-04<span>PREDICT</span></h1><p>EXPORT BATCH F-04 ถูก HOLD หลังข้อมูลอายุของแหล่งกำเนิดรังสีไม่ตรงกัน คุณต้องใช้ Half-life Model ทำนาย Activity ปรับกระบวนการฉายรังสี และตัดสินว่า PROCESS • ADJUST • HOLD โดยยังคงตรวจสอบว่าอาหารฉายรังสีไม่ได้กลายเป็นสารกัมมันตรังสี</p><div class="hero-actions"><button class="btn btn-primary" onclick="acceptMission()">▶ รับภารกิจ</button><button class="btn btn-secondary" onclick="toastMsg('เส้นทาง: Brief → Evidence → Animation → Simulation → Fact Check → Polya → AI → Report')">ดูรายละเอียดภารกิจ</button></div><div class="hero-steps"><div><b>1</b><span>ตรวจข่าว<br><small>วิเคราะห์ Claim และแหล่งข้อมูล</small></span></div><div><b>2</b><span>ทดลอง<br><small>เลือกอาหารและปริมาณรังสี</small></span></div><div><b>3</b><span>สื่อสาร<br><small>อธิบายข้อเท็จจริงต่อประชาชน</small></span></div></div></div>
+  <div class="case-file"><div class="code">R-04</div><div class="icon">🍎</div><div class="title">THE DECAYING<br>CARGO</div></div>
+ </div>
+
+ <div class="operations card">
+  <div class="ops-head"><div><span class="pill">OPERATIONS</span><h2>เลือกภารกิจของคุณ</h2></div><div class="ops-stats"><div><small>Completed</small><b>3 / 6</b></div><div><small>Total XP</small><b id="totalXp">500 / 750</b></div><div><small>Rank</small><b>Advanced Detective</b></div></div></div>
+  <div class="ops-grid">
+   <article class="op completed"><span class="tag done">COMPLETED</span><div class="code">R-01</div><div class="icon">☢️</div><h3>Nuclear Lab</h3><p>The Mystery Box</p></article>
+   <article class="op completed"><span class="tag done">COMPLETED</span><div class="code">R-02</div><div class="icon">🏥</div><h3>R-02 • PROTECT</h3><p>Protect the Medical Team</p></article>
+   <article class="op completed"><span class="tag done">COMPLETED</span><div class="code">R-03</div><div class="icon">✈️</div><h3>Airport Security</h3><p>The Suspicious Luggage</p></article>
+   <article class="op current" onclick="acceptMission()"><span class="tag now">CURRENT MISSION</span><div class="code">R-04</div><div class="icon">🍎</div><h3>Food Factory</h3><p>The Decaying Cargo</p></article>
+   <article class="op locked"><span class="tag lock">LOCKED</span><div class="code">R-05</div><div class="icon">🚨</div><h3>Radiation Leak</h3><p>Emergency Response</p></article>
+   <article class="op locked"><span class="tag lock">LOCKED</span><div class="code">R-06</div><div class="icon">🏛️</div><h3>Mission Phoenix</h3><p>Final Operation</p></article>
+  </div>
+ </div>
+
+ <div class="bottom-grid">
+  <div class="card"><span class="pill">RDA NEWS FEED</span><h2>ข่าวสารล่าสุด</h2><div class="feed"><div><span>📱</span><p>EXPORT BATCH F-04 ถูก HOLD ระหว่างตรวจสอบ Source Activity</p><small>NEW</small></div><div><span>🧪</span><p>Source calibration record และ Half-life data พร้อมตรวจสอบ</p><small>NEW</small></div><div><span>🌍</span><p>Export deadline และ Target Dose พร้อมสำหรับ Process Modeling</p><small>LIVE</small></div></div></div>
+  <div class="card"><span class="pill">MISSION PROGRESS</span><div class="radial-wrap"><div id="radial" class="radial"><div><b id="dashPct">0%</b><small>R-04</small></div></div><div class="legend"><p><i class="done-dot"></i> R-01–R-03 Completed</p><p><i class="now-dot"></i> R-04 Current Mission</p><p><i class="lock-dot"></i> R-05–R-06 Locked</p></div></div></div>
+  <div class="card tip"><span class="pill">RDA TIP OF THE DAY</span><h3>Half-life เป็นสมบัติของแหล่งกำเนิดรังสี ไม่ใช่ของผลไม้</h3><p>Activity ของแหล่งกำเนิดลดลงตามเวลาแบบเอ็กซ์โพเนนเชียล จึงต้องปรับเวลา Process เพื่อรักษา Target Dose ขณะที่ผลไม้หลังฉายรังสียังคงมีค่าการตรวจใกล้ Background</p><div class="tip-tags"><span>TRACE</span><span>MODEL</span><span>TIME SHIFT</span><span>PREDICT</span></div></div>
+ </div>
+</section>
+
+<section id="mission" class="page">
+ <div class="mission-shell">
+  <div class="card r04-mission-head"><div><span class="pill">R-04 • PREDICT</span><h2>THE DECAYING CARGO</h2><p class="muted">FOOD IRRADIATION & RADIOACTIVE DECAY • Radiation Process Analyst</p></div><div id="roadmap" class="roadmap"></div></div>
+  <div class="mission-layout"><div id="stage" class="card stage"></div><aside class="card side"><div class="muted">Mission Progress</div><h1 id="missionPct">0%</h1><div class="xpbar"><span id="missionBar"></span></div><div class="notice"><b>Objective ปัจจุบัน</b><div id="currentTask" class="muted">Mission Brief</div></div><div id="checklist" class="feed" style="margin-top:12px"></div></aside></div>
+ </div>
+</section>
+<section id="passport" class="page"><div class="card" id="passportContent"></div></section>
+<section id="teacher" class="page"><div class="card" id="teacherContent"></div></section>
+</main>
+</div>
+<div id="toast" class="toast hidden"></div>
+<script>
+
+const phases=['TRACE','MODEL','TIME SHIFT','PROCESS','EVIDENCE','CRISIS','EXPLAIN','RELEASE'];
+const steps=['TRACE • EXPORT BATCH HOLD','MODEL • INITIAL PREDICTION','TIME SHIFT LAB','IRRADIATION CHAMBER','BUILD PREDICTION EVIDENCE','EXPORT DEADLINE CRISIS','EXPLAIN • PHYSICS REASONING','RELEASE • FINAL DECISION','COMPLETE'];
+const H=5.27,A0=800,BG=18,TARGET=5,BASE_TIME=10;
+const def={step:0,traceOpened:[],prediction:{trend:'',activity:'',reason:''},timeYears:0,timeTrials:[],food:'Mango',exposure:10,process:null,evidenceChoice:'',evidenceReason:'',crisisYears:10.54,crisisPrediction:'',reasoning:{claim:'',evidence:'',physics:''},selectedFinalEvidence:[],manualHalfEvidence:[],revisedThinking:'',finalDecision:'',completed:false,correct:false,score:0,breakdown:{prediction:0,model:0,evidence:0,decision:0},feedback:[]};
+let state=Object.assign({},def,JSON.parse(localStorage.getItem('rdkR04Complete')||'{}'));
+state.prediction=Object.assign({},def.prediction,state.prediction||{});state.reasoning=Object.assign({},def.reasoning,state.reasoning||{});state.timeTrials=Array.isArray(state.timeTrials)?state.timeTrials:[];state.traceOpened=Array.isArray(state.traceOpened)?state.traceOpened:[];state.selectedFinalEvidence=Array.isArray(state.selectedFinalEvidence)?state.selectedFinalEvidence:[];state.manualHalfEvidence=Array.isArray(state.manualHalfEvidence)?state.manualHalfEvidence:[];
+const activity=t=>A0*Math.pow(.5,t/H);const fraction=t=>Math.pow(.5,t/H);const requiredTime=t=>BASE_TIME/fraction(t);const deliveredDose=(age,min)=>TARGET*fraction(age)*(min/BASE_TIME);
+const fmt=n=>Number(n).toFixed(1);
+
+document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>showPage(b.dataset.page));
+function save(){localStorage.setItem('rdkR04Complete',JSON.stringify(state));renderGlobal()}
+function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));const el=document.getElementById(id);if(el)el.classList.add('active');document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===id));pageTitle.textContent=id==='mission'?'R-04 • PREDICT — The Decaying Cargo':id==='passport'?'Research Passport':id==='teacher'?'Teacher Center':'R-04 • PREDICT Headquarters';if(id==='mission')renderMission();if(id==='passport')renderPassport();if(id==='teacher')renderTeacher()}
+function toastMsg(x){toast.textContent=x;toast.classList.remove('hidden');setTimeout(()=>toast.classList.add('hidden'),2200)}
+function acceptMission(){state.step=0;save();showPage('mission');window.scrollTo({top:0,left:0,behavior:'auto'})}
+function next(){if(state.step<8){state.step++;save();renderMission();window.scrollTo({top:0,left:0,behavior:'auto'})}}
+function back(){if(state.step>0){state.step--;save();renderMission();window.scrollTo({top:0,left:0,behavior:'auto'})}}
+function foot(btn,allow=true){return `<div class="stage-footer"><button class="btn btn-ghost" ${allow?'':'disabled'} onclick="back()">← BACK</button><div>${btn}</div></div>`}
+function phaseIndex(){return Math.min(phases.length-1,state.step)}
+function renderGlobal(){const pct=Math.round(Math.min(1,state.step/8)*100);if(window.dashPct)dashPct.textContent=pct+'%';if(window.radial)radial.style.background=`conic-gradient(var(--green) 0 ${pct}%,#123722 ${pct}% 100%)`;if(window.sideXp)sideXp.style.width=(state.completed?'100':'67')+'%';if(window.sideXpText)sideXpText.textContent=(state.completed?'1000 / 1000':'750 / 1000')+' XP';if(window.totalXp)totalXp.textContent=state.completed?'1000 / 1000':'750 / 1000'}
+function stopHalfLifeAnimation(){if(window.r04HalfLifeTimer){clearInterval(window.r04HalfLifeTimer);window.r04HalfLifeTimer=null}}
+function renderMission(){const pi=phaseIndex();roadmap.innerHTML=phases.map((p,i)=>`<div class="road ${i<pi?'done':i===pi?'active':''}">${i<pi?'✓ ':''}${p}</div>`).join('');const pct=Math.round(state.step/8*100);missionPct.textContent=pct+'%';missionBar.style.width=pct+'%';currentTask.textContent=steps[state.step];checklist.innerHTML=phases.map((p,i)=>`<div><span>${i<pi?'✓':i===pi?'▶':'🔒'}</span><p>${p}</p><small>${i<pi?'ผ่านแล้ว':i===pi?'กำลังทำ':'ล็อก'}</small></div>`).join('');stage.innerHTML=stageHTML(state.step);restore()}
+function stageHTML(i){return [traceStage,modelStage,timeShiftStage,processStage,evidenceStage,crisisStage,explainStage,releaseStage,completeStage][i]()}
+
+function traceStage(){const files=[
+ ['A','📦','BATCH F-04','Mango Export • STATUS: HOLD'],
+ ['B','☢️','SOURCE RECORD','Co-60 • Initial Activity 800 TBq (instructional model)'],
+ ['C','⏱️','HALF-LIFE FILE','Co-60 Half-life = 5.27 years'],
+ ['D','🎯','PROCESS TARGET','Target Dose = 5 kGy • Reference exposure = 10 min at A0']];
+ return `<div class="stage-head"><div><span class="pill">TRACE • EXPORT BATCH HOLD</span><h3>🍎 THE DECAYING CARGO</h3></div><span class="pill">${state.traceOpened.length}/4 RECORDS</span></div>
+ <div class="r04-hold-alert"><div>⚠</div><section><small>QUALITY CONTROL ALERT</small><h2>EXPORT BATCH F-04 — HOLD</h2><p>ข้อมูลอายุของแหล่งกำเนิดรังสีไม่ตรงกัน ก่อนปล่อย Batch ต้องตรวจ Source Record และทำนาย Activity ใหม่</p></section></div>
+ <div class="r04-trace-grid">${files.map((x,i)=>`<button class="r04-trace ${state.traceOpened.includes(i)?'open':''}" onclick="openTrace(${i})"><span>${x[1]}</span><small>FILE ${x[0]}</small><b>${x[2]}</b><p>${state.traceOpened.includes(i)?x[3]:'CLASSIFIED • TAP TO OPEN'}</p></button>`).join('')}</div>
+ <div class="notice"><b>MISSION QUESTION:</b> เมื่อ Activity ของ Co-60 ลดลงตามเวลา กระบวนการฉายผลไม้ต้องปรับอย่างไรเพื่อให้ได้ Target Dose เดิม?</div>
+ ${foot(state.traceOpened.length===4?'<button class="btn btn-primary" onclick="next()">TRACE COMPLETE → MODEL</button>':'<button class="btn btn-primary" disabled>OPEN ALL SOURCE RECORDS</button>',false)}`}
+function openTrace(i){if(!state.traceOpened.includes(i)){state.traceOpened.push(i);save();renderMission()}}
+
+function modelStage(){return `<div class="stage-head"><div><span class="pill">MODEL • BEFORE SIMULATION</span><h3>📉 Initial Decay Prediction</h3></div><span class="pill">NO ANSWER REVEALED</span></div>
+ <div class="r04-model-question"><small>PREDICT THE PATTERN</small><h2>เมื่อเวลาผ่านไป Activity ของแหล่งกำเนิด Co-60 จะเปลี่ยนอย่างไร?</h2></div>
+ <div class="r04-trend-grid">${[['UP','↗ เพิ่มขึ้น'],['SAME','→ คงที่'],['LINEAR','↘ ลดลงเชิงเส้น'],['EXP','⌁ ลดลงแบบ exponential']].map(x=>`<button class="${state.prediction.trend===x[0]?'active':''}" onclick="pickTrend('${x[0]}')">${x[1]}</button>`).join('')}</div>
+ <div class="r04-predict-form"><label>ทำนาย Activity หลัง 1 half-life (TBq)<input id="predActivity" type="number" value="${state.prediction.activity||''}" placeholder="เช่น 400"></label><label>เหตุผลเบื้องต้น<textarea id="predReason" rows="4" placeholder="อธิบายก่อนเห็น Time Shift Lab...">${state.prediction.reason||''}</textarea></label></div>
+ ${foot('<button class="btn btn-primary" onclick="lockPrediction()">LOCK PREDICTION → TIME SHIFT</button>')}`}
+function pickTrend(v){state.prediction.trend=v;save();renderMission()}
+function lockPrediction(){const a=document.getElementById('predActivity')?.value||'',r=document.getElementById('predReason')?.value.trim()||'';if(!state.prediction.trend)return toastMsg('เลือกแนวโน้มก่อน');if(a===''||r.length<10)return toastMsg('กรอก Activity ที่ทำนายและเหตุผลอย่างน้อย 10 ตัวอักษร');state.prediction.activity=Number(a);state.prediction.reason=r;save();next()}
+
+function nucleiMarkup(t){
+ const remain=Math.max(8,Math.round(72*fraction(t)));
+ const flash=Math.max(0,Math.min(71,Number(window.r04DecayFlashIndex??-1)));
+ return `<div class="r04-nuclei"><div class="r04-decay-wave ${window.r04DecayWave?'play':''}"></div>${Array.from({length:72},(_,i)=>`<i class="${i<remain?'alive':'decayed'} ${i===flash?'decay-now':''}"></i>`).join('')}</div>`;
+}
+function graphSvg(){let pts=[];for(let i=0;i<=60;i++){let tt=(3*H)*i/60,xx=35+520*i/60,yy=210-170*fraction(tt);pts.push(`${xx.toFixed(1)},${yy.toFixed(1)}`)}let x=35+520*Math.min(1,state.timeYears/(3*H)),y=210-170*fraction(state.timeYears);return `<svg viewBox="0 0 590 240" class="r04-graph"><line x1="35" y1="210" x2="565" y2="210"/><line x1="35" y1="35" x2="35" y2="210"/><polyline points="${pts.join(' ')}"/><circle class="r04-current-point" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="7"/><text x="38" y="28">ACTIVITY</text><text x="500" y="232">TIME</text></svg>`}
+function timeShiftStage(){
+ const A=activity(state.timeYears),frac=fraction(state.timeYears),req=requiredTime(state.timeYears);
+ const halfIndex=Math.min(3,Math.max(0,Math.round(state.timeYears/H)));
+ const manualPoints=[0,1,2,3].map(n=>({n,t:n*H,A:activity(n*H),pct:fraction(n*H)*100,req:requiredTime(n*H)}));
+ const captured=state.manualHalfEvidence||[];
+ return `<div class="stage-head"><div><span class="pill">TIME SHIFT LAB • MANUAL MODE</span><h3>⏱️ SELECT TIME → WATCH DECAY → CAPTURE EVIDENCE</h3></div><span class="pill">T½ = ${H} years</span></div>
+ <div class="r04-manual-timeshift">
+   <div class="r04-manual-controls">
+     ${manualPoints.map(x=>`<button class="${halfIndex===x.n?'active':''}" onclick="selectHalfLifePoint(${x.n})"><small>${x.n===0?'NOW':x.n+' T½'}</small><b>${fmt(x.pct)}%</b></button>`).join('')}
+   </div>
+   <div class="r04-manual-grid">
+     <div class="r04-manual-visual">
+       ${nucleiMarkup(state.timeYears)}
+       <div class="r04-manual-caption"><b>Co-60 DECAY MODEL</b><span>เด็กเป็นผู้เลือกเวลาเอง • ระบบไม่เล่นอัตโนมัติ</span></div>
+     </div>
+     <div class="r04-manual-readout">
+       <div><small>SELECTED TIME</small><b>${halfIndex===0?'NOW':halfIndex+' T½'}</b><span>${fmt(state.timeYears)} y</span></div>
+       <div><small>ACTIVITY</small><b>${fmt(A)} TBq</b><span>${fmt(frac*100)}% of A₀</span></div>
+       <div><small>REMAINING</small><b>${fmt(frac*100)}%</b><span>N / N₀</span></div>
+       <div><small>REQ. PROCESS TIME*</small><b>${fmt(req)} min</b><span>เพื่อคง Target Dose เดิม</span></div>
+     </div>
+   </div>
+   ${graphSvgInteractive(halfIndex,captured)}
+   <div class="r04-manual-actions">
+     <button class="btn btn-secondary" onclick="captureManualHalfEvidence(${halfIndex})">${captured.includes(halfIndex)?'✓ EVIDENCE CAPTURED':'＋ CAPTURE EVIDENCE'}</button>
+     <span>${captured.length}/4 time points captured</span>
+   </div>
+   ${captured.length?`<div class="r04-manual-evidence-strip">${captured.sort((a,b)=>a-b).map(n=>{const x=manualPoints[n];return `<div><small>${n===0?'NOW':n+' T½'}</small><b>${fmt(x.A)} TBq</b><span>${fmt(x.pct)}% • ${fmt(x.req)} min</span></div>`}).join('')}</div>`:''}
+   <div class="r04-equation-reveal ${captured.length>=3?'show':''}"><small>MODEL REVEALED AFTER YOUR DATA</small><b>A = A₀(1/2)<sup>t/T½</sup></b><span>${captured.length>=3?'ข้อมูลที่คุณเก็บแสดง pattern ของ exponential decay':'เก็บ Evidence อย่างน้อย 3 จุดก่อนเปิดสมการ'}</span></div>
+   <small class="muted">*Simplified process model: delivered dose ∝ source activity × exposure time.</small>
+ </div>
+ ${foot(captured.length>=3?'<button class="btn btn-primary" onclick="next()">USE EVIDENCE → IRRADIATION CHAMBER</button>':'<button class="btn btn-primary" disabled>CAPTURE ≥ 3 TIME POINTS</button>')}`;
+}
+function selectHalfLifePoint(n){
+ state.timeYears=Math.max(0,Math.min(3*H,n*H));
+ window.r04DecayFlashIndex=Math.floor(Math.random()*72);
+ window.r04DecayWave=true;
+ save();renderMission();
+ setTimeout(()=>{window.r04DecayWave=false;window.r04DecayFlashIndex=-1},520);
+}
+function captureManualHalfEvidence(n){
+ if(!state.manualHalfEvidence.includes(n))state.manualHalfEvidence.push(n);
+ state.manualHalfEvidence.sort((a,b)=>a-b);
+ const t=n*H;
+ state.timeTrials=state.timeTrials.filter(x=>Math.abs(x.t-t)>.02);
+ state.timeTrials.push({t,A:activity(t),percent:fraction(t)*100,required:requiredTime(t),manual:true,halfLives:n});
+ state.timeTrials.sort((a,b)=>a.t-b.t);
+ save();renderMission();
+}
+function graphSvgInteractive(activeN,captured){
+ const W=620,Hg=250,left=45,right=590,top=30,bottom=210;
+ let pts=[];for(let i=0;i<=60;i++){let tt=(3*H)*i/60,xx=left+(right-left)*i/60,yy=bottom-(bottom-top)*fraction(tt);pts.push(`${xx.toFixed(1)},${yy.toFixed(1)}`)}
+ const marks=[0,1,2,3].map(n=>{
+   const x=left+(right-left)*(n/3),y=bottom-(bottom-top)*Math.pow(.5,n);
+   const cap=captured.includes(n)?'captured':'';
+   const act=n===activeN?'active':'';
+   return `<g class="r04-graph-mark ${cap} ${act}" onclick="selectHalfLifePoint(${n})">
+     <circle cx="${x}" cy="${y}" r="${n===activeN?9:6}"></circle>
+     <text x="${x}" y="${Math.max(16,y-13)}" text-anchor="middle">${n===0?'NOW':n+'T½'}</text>
+     <text x="${x}" y="${Math.min(238,y+22)}" text-anchor="middle">${(100*Math.pow(.5,n)).toFixed(n===3?1:0)}%</text>
+   </g>`;
+ }).join('');
+ return `<svg viewBox="0 0 ${W} ${Hg}" class="r04-graph r04-interactive-graph">
+   <line x1="${left}" y1="${bottom}" x2="${right}" y2="${bottom}"/><line x1="${left}" y1="${top}" x2="${left}" y2="${bottom}"/>
+   <polyline points="${pts.join(' ')}"/>${marks}
+   <text x="${left}" y="18">ACTIVITY</text><text x="${right-45}" y="240">TIME</text>
+ </svg>`;
+}
+function processStage(){const age=H,A=activity(age),dose=state.process?.dose??deliveredDose(age,state.exposure),bacteria=state.process?.bacteria??Math.max(0,100-dose*18),quality=state.process?.quality??Math.max(35,100-Math.max(0,dose-6)*12);return `<div class="stage-head"><div><span class="pill">PROCESS • FOOD IRRADIATION CONNECTION</span><h3>🏭 Irradiation Chamber</h3></div><span class="pill">SOURCE AGE = 1 T½</span></div>
+ <div class="r04-process-principle"><b>SOURCE ACTIVITY ↓</b><i>→</i><b>DOSE RATE ↓</b><i>→</i><b>PROCESS TIME MUST ADJUST</b></div>
+ <div class="r04-chamber-grid"><div class="r04-controls"><label>FRUIT<select id="foodSelect" onchange="chooseFood(this.value)">${['Mango','Longan','Papaya'].map(x=>`<option ${state.food===x?'selected':''}>${x}</option>`).join('')}</select></label><label>EXPOSURE TIME <b id="exposureLabel">${state.exposure} min</b><input type="range" min="5" max="50" step="1" value="${state.exposure}" oninput="changeExposure(this.value)"></label><button class="btn btn-primary" onclick="runProcess()">▶ START IRRADIATION</button><div class="r04-source-card"><small>Co-60 at 1 half-life</small><b>${fmt(A)} TBq</b><span>50% of initial activity</span></div></div>
+ <div class="r04-chamber"><div class="r04-door ${state.process?'open':''}"><span>☢</span><b>IRRADIATION CHAMBER</b><small>${state.process?'PROCESS COMPLETE':'READY'}</small></div><div class="r04-conveyor"><span>🥭</span><i></i><span>📦</span></div></div>
+ <div class="r04-process-result"><div><small>DELIVERED DOSE</small><b>${fmt(dose)} kGy</b></div><div><small>MICROBIAL LOAD</small><b>${fmt(bacteria)}%</b></div><div><small>QUALITY</small><b>${fmt(quality)}%</b></div><div><small>STATUS</small><b>${state.process?(state.process.good?'PASS':'ADJUST'):'WAIT'}</b></div></div></div>
+ <div class="r04-before-after-detector"><div><small>BACKGROUND</small><b>18 CPM</b></div><div><small>FRUIT BEFORE</small><b>19 CPM</b></div><div><small>FRUIT AFTER</small><b>20 CPM</b></div><strong>IRRADIATED FOOD ≠ RADIOACTIVE FOOD</strong></div>
+ <div class="notice"><b>Physics connection:</b> Half-life เป็นของ radioactive source ไม่ใช่ผลไม้ และค่า Before/After ที่ใกล้ Background ไม่สนับสนุนข้อกล่าวหาว่าผลไม้กลายเป็นแหล่งกัมมันตรังสี</div>
+ ${foot(state.process?'<button class="btn btn-primary" onclick="next()">PROCESS DATA → EVIDENCE</button>':'<button class="btn btn-primary" disabled>RUN IRRADIATION PROCESS</button>')}`}
+function chooseFood(x){state.food=x;save();renderMission()}
+function changeExposure(v){state.exposure=Number(v);save();renderMission()}
+function runProcess(){const age=H,dose=deliveredDose(age,state.exposure),bacteria=Math.max(0,100-dose*18),quality=Math.max(35,100-Math.max(0,dose-6)*12),good=bacteria<=15&&quality>=70&&dose>=4.5&&dose<=6.5;state.process={age,food:state.food,exposure:state.exposure,dose,bacteria,quality,good};save();renderMission()}
+
+function evidenceStage(){
+ const proc=state.process||{},captured=state.manualHalfEvidence||[];
+ const cards=captured.map(n=>({n,A:activity(n*H),pct:fraction(n*H)*100,req:requiredTime(n*H)}));
+ return `<div class="stage-head"><div><span class="pill">EVIDENCE • GENERATED FROM YOUR TIME SHIFT DATA</span><h3>🧾 Prediction Evidence Board</h3></div><span class="pill">${cards.length} TIME POINTS</span></div>
+ <div class="r04-student-evidence-board">
+   ${cards.map(x=>`<div><small>${x.n===0?'NOW':x.n+' HALF-LIFE'+(x.n>1?'S':'')}</small><b>${fmt(x.A)} TBq</b><span>${fmt(x.pct)}% remaining</span><em>Required process time: ${fmt(x.req)} min</em></div>`).join('')}
+   <div class="process"><small>IRRADIATION PROCESS</small><b>${fmt(proc.dose||0)} kGy</b><span>${proc.good?'TARGET ACHIEVED':'ADJUST REQUIRED'}</span><em>${state.food} • ${state.exposure} min</em></div>
+ </div>
+ <div class="r04-prediction-actual">
+   <div><small>YOUR PREDICTION</small><b>${state.prediction.activity||'—'} TBq</b><span>${state.prediction.trend||'—'}</span></div>
+   <i>→</i>
+   <div><small>MODEL RESULT @ 1T½</small><b>${fmt(activity(H))} TBq</b><span>50% of A₀</span></div>
+   <i>→</i>
+   <div><small>REVISED THINKING</small><textarea id="revisedThinking" rows="3" placeholder="หลังเห็นข้อมูล คุณคิดต่างจากเดิมอย่างไร?">${state.revisedThinking||''}</textarea></div>
+ </div>
+ <div class="r04-evidence-decision"><h3>Evidence ของคุณสนับสนุน Prediction เดิมหรือไม่?</h3><div><button class="${state.evidenceChoice==='KEEP'?'active':''}" onclick="chooseEvidenceDecision('KEEP')">KEEP PREDICTION</button><button class="${state.evidenceChoice==='REVISE'?'active':''}" onclick="chooseEvidenceDecision('REVISE')">REVISE PREDICTION</button></div><textarea id="evidenceReason" rows="4" placeholder="อธิบายโดยอ้างอิง Time Shift Evidence และ Process Result...">${state.evidenceReason||''}</textarea></div>
+ ${foot('<button class="btn btn-primary" onclick="submitEvidenceDecision()">LOCK EVIDENCE → CRISIS</button>')}`;
+}
+function chooseEvidenceDecision(v){state.evidenceChoice=v;save();renderMission()}
+function submitEvidenceDecision(){
+ const r=document.getElementById('evidenceReason')?.value.trim()||'',rev=document.getElementById('revisedThinking')?.value.trim()||'';
+ if(!state.evidenceChoice||r.length<15)return toastMsg('เลือก KEEP/REVISE และอธิบายอย่างน้อย 15 ตัวอักษร');
+ if(rev.length<10)return toastMsg('เขียน Revised Thinking อย่างน้อย 10 ตัวอักษร');
+ state.evidenceReason=r;state.revisedThinking=rev;save();next()
+}
+function crisisStage(){
+ const actual=state.crisisYears,A=activity(actual),req=requiredTime(actual),halves=actual/H;
+ return `<div class="r04-crisis-v468">
+   <div class="r04-crisis-alert"><span>!</span><div><small>EXPORT DEADLINE CHANGED • SOURCE AGE RECORD UPDATED</small><h2>BATCH F-04 MUST SHIP TOMORROW</h2><p>ตรวจพบว่า Source จริงมีอายุ <b>${fmt(actual)} years (${fmt(halves)} T½)</b> ไม่ใช่ค่าที่ใช้ตอน Process Trial</p></div><strong>MODEL REQUIRED</strong></div>
+   <div class="r04-crisis-model">
+     <div><small>UPDATED SOURCE AGE</small><b>${fmt(actual)} y</b><span>${fmt(halves)} half-lives</span></div>
+     <div><small>PREDICTED ACTIVITY</small><b>${fmt(A)} TBq</b><span>${fmt(fraction(actual)*100)}% remaining</span></div>
+     <div><small>REQUIRED PROCESS TIME</small><b>${fmt(req)} min</b><span>เพื่อคง Target Dose ≈ ${TARGET} kGy</span></div>
+   </div>
+   <div class="r04-crisis-task"><small>YOUR MODEL CHECK</small><h3>จาก Time Shift Evidence ของคุณ Process เดิม ${state.exposure} min ยังเหมาะสมหรือไม่?</h3>
+     <label>ทำนาย Activity ณ Source Age ใหม่ (TBq)<input id="crisisPrediction" type="number" step="0.1" value="${state.crisisPrediction||''}" placeholder="ใช้ Half-life Model ของคุณ"></label>
+     <p>ระบบจะไม่เฉลยจนกว่าคุณจะส่ง Prediction</p>
+   </div>
+ </div>
+ ${foot('<button class="btn btn-primary" onclick="submitCrisisPrediction()">SUBMIT MODEL PREDICTION → EXPLAIN</button>')}`;
+}
+function submitCrisisPrediction(){
+ const v=Number(document.getElementById('crisisPrediction')?.value);
+ if(!Number.isFinite(v)||v<=0)return toastMsg('กรอก Activity ที่ทำนาย');
+ state.crisisPrediction=v;save();next()
+}
+function explainStage(){return `<div class="stage-head"><div><span class="pill">EXPLAIN • SCIENTIFIC DEBRIEF</span><h3>🧠 Explain the Prediction</h3></div><span class="pill">CLAIM • EVIDENCE • PHYSICS</span></div>
+ <div class="r04-explain-context"><div><small>YOUR INITIAL PREDICTION</small><b>${state.prediction.trend||'—'} • ${state.prediction.activity||'—'} TBq after T½</b></div><div><small>MODEL EVIDENCE</small><b>${fmt(activity(H))} → ${fmt(activity(2*H))} TBq</b></div><div><small>CRISIS PREDICTION</small><b>${state.crisisPrediction||'—'} min</b></div></div>
+ <label class="r04-dark-field">CLAIM<textarea id="claim" rows="3" placeholder="คุณสรุปว่า Activity และ Process Time เปลี่ยนอย่างไร?">${state.reasoning.claim||''}</textarea></label><label class="r04-dark-field">EVIDENCE<textarea id="reasonEvidence" rows="3" placeholder="ใช้ค่าจาก Time Shift / Activity / Process Result...">${state.reasoning.evidence||''}</textarea></label><label class="r04-dark-field">PHYSICS REASONING<textarea id="physicsReason" rows="4" placeholder="เชื่อม A=A₀(1/2)^(t/T½) กับการปรับ Process Time...">${state.reasoning.physics||''}</textarea></label>
+ ${foot('<button class="btn btn-primary" onclick="submitReasoning()">EXPLANATION COMPLETE → RELEASE BOARD</button>')}`}
+function submitReasoning(){const c=document.getElementById('claim').value.trim(),e=document.getElementById('reasonEvidence').value.trim(),p=document.getElementById('physicsReason').value.trim();if(c.length<15||e.length<15||p.length<20)return toastMsg('ตอบ Claim / Evidence / Physics Reasoning ให้ครบ');state.reasoning={claim:c,evidence:e,physics:p};save();next()}
+
+function releaseStage(){const ev=[['half','T½ = 5.27 y • Activity halves each half-life'],['model',`${A0} → ${fmt(activity(H))} → ${fmt(activity(2*H))} TBq`],['process',`At 1 T½: ${fmt(state.process?.dose||0)} kGy with ${state.process?.exposure||'—'} min`],['crisis',`At 2 T½: model requires ${fmt(requiredTime(2*H))} min for target dose`],['food','Background 18 • Before 19 • After 20 CPM']];return `<div class="r04-release-head"><div><small>FOOD SAFETY & PROCESS BOARD</small><h2>FINAL RELEASE DECISION</h2><p>เลือก Evidence อย่างน้อย 2 ชิ้นก่อนตัดสิน PROCESS • ADJUST • HOLD</p></div><div><small>EXPORT BATCH</small><b>F-04</b><span>STATUS: HOLD</span></div></div>
+ <div class="r04-before-model-after"><div><small>BEFORE</small><b>${state.prediction.trend||'—'}</b><span>${state.prediction.activity||'—'} TBq after T½</span></div><i>→</i><div><small>MODEL</small><b>${fmt(activity(2*H))} TBq</b><span>25% Activity at 2T½</span></div><i>→</i><div><small>AFTER</small><b>${state.finalDecision||'?'}</b><span>Process Decision</span></div></div>
+ <div class="r04-release-grid"><div><h3>SELECT EVIDENCE</h3><div class="r04-select-evidence">${ev.map(x=>`<button class="${state.selectedFinalEvidence.includes(x[0])?'active':''}" onclick="toggleFinalEvidence('${x[0]}')"><span>${state.selectedFinalEvidence.includes(x[0])?'✓':'○'}</span>${x[1]}</button>`).join('')}</div></div><div><h3>BOARD DECISION</h3><div class="r04-final-choices"><button class="${state.finalDecision==='PROCESS'?'active':''}" onclick="chooseFinal('PROCESS')">🟢 PROCESS<small>ใช้ Protocol เดิม</small></button><button class="${state.finalDecision==='ADJUST'?'active':''}" onclick="chooseFinal('ADJUST')">🟡 ADJUST<small>ปรับ Process Time</small></button><button class="${state.finalDecision==='HOLD'?'active':''}" onclick="chooseFinal('HOLD')">🔴 HOLD<small>หยุด Batch</small></button></div><div class="r04-board-note"><b>Expected scientific decision</b><span>ใช้ Evidence ของคุณตัดสิน ไม่ใช่เลือกจากสีของปุ่ม</span></div></div></div>
+ ${foot('<button class="btn btn-primary" onclick="submitFinalDecision()">CONFIRM RELEASE DECISION</button>')}`}
+function toggleFinalEvidence(k){state.selectedFinalEvidence=state.selectedFinalEvidence.includes(k)?state.selectedFinalEvidence.filter(x=>x!==k):[...state.selectedFinalEvidence,k];save();renderMission()}
+function chooseFinal(v){state.finalDecision=v;save();renderMission()}
+function submitFinalDecision(){if(state.selectedFinalEvidence.length<2)return toastMsg('เลือก Evidence อย่างน้อย 2 ชิ้น');if(!state.finalDecision)return toastMsg('เลือก PROCESS / ADJUST / HOLD');const expected=requiredTime(2*H),crisisErr=Math.abs(Number(state.crisisPrediction)-expected)/expected;const predPts=(state.prediction.trend==='EXP'?12:4)+(Math.abs(Number(state.prediction.activity)-activity(H))/activity(H)<=.10?13:5);const modelPts=Math.min(25,(state.timeTrials.length>=3?10:4)+(state.timeTrials.some(x=>Math.abs(x.t-H)<.15)?6:2)+(state.timeTrials.some(x=>Math.abs(x.t-2*H)<.15)?6:2)+(state.process?3:0));const evPts=Math.min(25,(state.evidenceReason.length>=25?8:4)+Math.min(10,state.selectedFinalEvidence.length*4)+(state.reasoning.evidence.length>=20?7:3));const correct=state.finalDecision==='ADJUST';const decPts=Math.min(25,(correct?12:4)+(crisisErr<=.10?6:2)+(state.reasoning.physics.length>=35?7:3));state.breakdown={prediction:predPts,model:modelPts,evidence:evPts,decision:decPts};state.score=predPts+modelPts+evPts+decPts;state.correct=correct;state.completed=true;state.feedback=[{ok:state.prediction.trend==='EXP',text:'ระบุรูปแบบการสลายเป็น exponential'},{ok:Math.abs(Number(state.prediction.activity)-activity(H))/activity(H)<=.10,text:'Prediction หลัง 1 half-life ใกล้ 50% ของ A₀'},{ok:crisisErr<=.10,text:'ทำนาย Process Time หลัง Source อายุ 2 half-lives ได้สอดคล้องกับ Model'},{ok:correct,text:'เลือก ADJUST เพราะ Activity ลดลงทำให้ต้องเพิ่ม Process Time เพื่อคง Target Dose'},{ok:true,text:'แยก Half-life ของ Source ออกจากแนวคิด Irradiated Food ≠ Radioactive Food'}];save();next()}
+
+function completeStage(){
+ const b=state.breakdown;
+ const actual=state.crisisYears,A=activity(actual),req=requiredTime(actual);
+ return `<div class="complete r04-complete-v468">
+   <div class="r04-complete-hero-v468"><small>R-04 • PREDICT COMPLETE</small><h1>THE DECAYING CARGO RESOLVED</h1><p>คุณใช้ Half-life Model จาก Evidence ของตนเองเพื่อทำนาย Activity และตัดสินใจปรับ Food Irradiation Process</p></div>
+   <div class="r04-learning-chain">
+     <div><span>1</span><small>HALF-LIFE</small><b>${H} y</b><em>TIME MODEL</em></div><i>→</i>
+     <div><span>2</span><small>ACTIVITY</small><b>${fmt(A)} TBq</b><em>${fmt(fraction(actual)*100)}% REMAINING</em></div><i>→</i>
+     <div><span>3</span><small>PROCESS TIME</small><b>${fmt(req)} min</b><em>TARGET ${TARGET} kGy</em></div><i>→</i>
+     <div><span>4</span><small>DECISION</small><b>${state.finalDecision}</b><em>EVIDENCE-BASED</em></div>
+   </div>
+   <div class="r04-before-model-after final">
+     <div><small>BEFORE</small><b>${state.prediction.activity||'—'} TBq</b><span>Initial Prediction</span></div><i>→</i>
+     <div><small>YOUR EVIDENCE</small><b>${(state.manualHalfEvidence||[]).length} points</b><span>Manual Time Shift Data</span></div><i>→</i>
+     <div><small>AFTER</small><b>${state.finalDecision}</b><span>${state.revisedThinking||'Revised Thinking'}</span></div>
+   </div>
+   <div class="final-score">${state.score}/100</div>
+   <div class="score-grid"><div class="score"><span>Prediction</span><strong>${b.prediction}/25</strong></div><div class="score"><span>Model/Data</span><strong>${b.model}/25</strong></div><div class="score"><span>Evidence</span><strong>${b.evidence}/25</strong></div><div class="score"><span>Reasoning/Decision</span><strong>${b.decision}/25</strong></div></div>
+   <div class="feedback">${state.feedback.map(x=>`<div class="${x.ok?'':'no'}">${x.ok?'✓':'•'} ${x.text}</div>`).join('')}</div>
+   <div class="r04-stamp-v468"><small>RDA CERTIFICATION</small><strong>R-04 • PREDICT</strong><b>RADIATION PROCESS ANALYST</b></div>
+   <button class="btn btn-primary" onclick="finishR04()">RETURN TO HEADQUARTERS → R-05 UNLOCKED</button>
+   <button class="btn btn-secondary" onclick="resetGame()">REPLAY R-04</button>
+ </div>`;
+}
+function finishR04(){try{localStorage.setItem('RDA_CASE_COMPLETE_R04','1');localStorage.setItem('RDA_LAST_COMPLETED_CASE','r04');if(window.RDAMaster?.completeCaseAndReturn){window.RDAMaster.completeCaseAndReturn('r04',Number(state.score||0));return}const chain=(new URLSearchParams(location.search).get('rda_chain')||'').split(',').filter(Boolean);if(!chain.includes('r04'))chain.push('r04');location.href='../../index.html?rda_case_complete=r04&rda_score='+encodeURIComponent(Number(state.score||0))+'&rda_chain='+encodeURIComponent(chain.join(','))+'#portal'}catch(e){console.error(e);location.href='../../index.html#portal'}}
+function restore(){setTimeout(()=>{},0)}
+function renderPassport(){passportContent.innerHTML=state.completed?`<div class="complete"><div style="font-size:90px">⏱️</div><h1>R-04 • PREDICT Stamp</h1><p>Radiation Process Analyst</p><div class="final-score">${state.score}/100</div></div>`:`<div class="notice">ทำ R-04 • PREDICT ให้เสร็จก่อนรับ Stamp</div>`}
+function renderTeacher(){teacherContent.innerHTML=`<h1>R-04 Local Mission Summary</h1><div class="score-grid"><div class="score"><span>Prediction</span><strong>${state.breakdown.prediction}/25</strong></div><div class="score"><span>Model/Data</span><strong>${state.breakdown.model}/25</strong></div><div class="score"><span>Evidence</span><strong>${state.breakdown.evidence}/25</strong></div><div class="score"><span>Decision</span><strong>${state.breakdown.decision}/25</strong></div></div><div class="notice">ส่วนนี้เป็น local mission summary เท่านั้น Teacher Dashboard / Google Sheets ส่วนกลางไม่ได้ถูกแก้ไข</div>`}
+function resetGame(){if(confirm('รีเซ็ต R-04 หรือไม่?')){localStorage.removeItem('rdkR04Complete');location.reload()}}
+window.addEventListener('beforeunload',stopHalfLifeAnimation);document.addEventListener('mousemove',e=>{if(window.worldBg)worldBg.style.transform=`scale(1.05) translate(${(e.clientX/innerWidth-.5)*9}px,${(e.clientY/innerHeight-.5)*7}px)`});
+renderGlobal();
+
+</script>
+<script src="../../classroom-config.js"></script>
+<script src="../../shared/rda-classroom-backend.js"></script>
+<script src="../../shared/rda-master.js"></script>
+<script src="../../shared/rda-unlock-bridge.js"></script>
+<script src="../../shared/rda-story.js"></script>
+
+<!-- RDA CASE ARCHITECTURE V3 -->
+<div id="r04CaseLayer" class="rda-case-layer" aria-hidden="true"><div class="rda-case-shell">
+<header class="rda-case-head"><div><small>Radiation Detective Agency</small><h2>R-04 — DECAY FILE</h2><p>CASE QUESTION • สารกัมมันตรังสีจะยังเป็นปัญหาอีกนานเท่าใด และควรจัดการอย่างไร?</p></div><button id="r04CaseClose">×</button></header>
+<div class="rda-case-progress"><span data-step="1">1 PREDICTION</span><span data-step="2">2 SIMULATION</span><span data-step="3">3 EVIDENCE</span><span data-step="4">4 REASONING</span><span data-step="5">5 RISK</span><span data-step="6">6 DECISION</span><span data-step="7">7 FEEDBACK</span><span data-step="8">8 REVISION</span></div>
+<section data-rda-case="r04" data-case-step="1"><small>MISCONCEPTION TRAP</small><h3>Prediction ก่อนเห็นหลักฐาน</h3><p class="rda-prompt">“เมื่อผ่านไปหนึ่งครึ่งชีวิต สารกัมมันตรังสีจะหมดและถือว่าปลอดภัย”</p><div class="rda-row"><button data-predict="agree">เห็นด้วย</button><button data-predict="disagree">ไม่เห็นด้วย</button><button data-predict="unsure">ไม่แน่ใจ</button></div><label>เหตุผลเบื้องต้น<textarea id="r04PredictionReason"></textarea></label><div class="rda-confidence"><b>CONFIDENCE BEFORE</b><input id="r04ConfidenceBefore" type="range" min="1" max="5" value="3"><output id="r04ConfidenceBeforeOut">3/5</output></div><button class="rda-primary" id="r04SavePrediction">LOCK PREDICTION → INVESTIGATE</button></section>
+<section data-rda-case="r04" data-case-step="2" hidden><small>INVESTIGATION</small><h3>Simulation = Evidence Generator</h3><p>ทดลองเวลา/จำนวนครึ่งชีวิต แล้วบันทึกปริมาณหรือกัมมันตภาพที่เหลือ</p><div class="rda-row"><button id="r04BackToMission">↗ OPEN LIVE SIMULATION</button><button id="r04CaptureEvidence">＋ CAPTURE EVIDENCE</button></div><div id="r04CaptureForm" class="rda-capture" hidden><label>สิ่งที่ทดลอง/แหล่งข้อมูล<input id="r04EvidenceTest" placeholder="เช่น 0, 1, 2, 3 half-lives"></label><label>ผลที่สังเกต<input id="r04EvidenceObservation" placeholder="เช่น ปริมาณลดลงครึ่งหนึ่งในแต่ละครึ่งชีวิต"></label><label>ค่าหรือข้อมูลสำคัญ<input id="r04EvidenceValue" placeholder="เช่น 100 → 50 → 25 → 12.5%"></label><button class="rda-primary" id="r04SaveEvidence">SAVE TO EVIDENCE BOARD</button></div><div id="r04MiniEvidence"></div><button class="rda-primary" id="r04ToEvidence">EVIDENCE BOARD →</button></section>
+<section data-rda-case="r04" data-case-step="3" hidden><small>EVIDENCE BOARD</small><h3>เลือกหลักฐานที่จะใช้สนับสนุนการตัดสินใจ</h3><p>เลือกอย่างน้อย 2 รายการ เลือกหลักฐานที่จะใช้สร้าง Claim และอธิบายด้วยหลักฟิสิกส์ในขั้น Reasoning</p><div id="r04EvidenceBoard" class="rda-evidence-board"></div><button class="rda-primary" id="r04ToDecision">CONTINUE → REASONING</button></section>
+
+<section data-rda-case="r04" data-case-step="4" hidden>
+  <small>PHYSICS REASONING</small>
+  <h3>สร้าง Claim แล้วเชื่อม Evidence ด้วยหลักฟิสิกส์</h3>
+  <p>ขั้นนี้ยังไม่ตัดสินใจ ให้ตอบก่อนว่า “หลักฐานบอกอะไร” และ “หลักฟิสิกส์อธิบายหลักฐานนั้นอย่างไร”</p>
+  <label>CLAIM<textarea id="r04Claim"></textarea></label>
+  <label>SELECTED EVIDENCE<textarea id="r04EvidenceText" readonly></textarea></label>
+  <label>PHYSICS REASONING<textarea id="r04Reasoning" placeholder="ใช้ความหมายของครึ่งชีวิตและการสลายแบบเอ็กซ์โพเนนเชียลอธิบาย..."></textarea></label>
+  <button class="rda-primary" id="r04ToRisk">REASONING COMPLETE → ASSESS RISK</button>
+</section>
+
+<section data-rda-case="r04" data-case-step="5" hidden>
+  <small>RISK ASSESSMENT</small>
+  <h3>หลักฐานชุดนี้บอกถึงความเสี่ยงระดับใด?</h3>
+  <p>เลือกระดับ Risk หลังจากพิจารณา Evidence และ Physics Reasoning แล้ว</p>
+  <div class="rda-row">
+    <button data-risk="LOW">🟢 LOW</button>
+    <button data-risk="MODERATE">🟡 MODERATE</button>
+    <button data-risk="HIGH">🟠 HIGH</button>
+    <button data-risk="CRITICAL">🔴 CRITICAL</button>
+  </div>
+  <button class="rda-primary" id="r04ToDecisionFinal">RISK ASSESSED → MAKE DECISION</button>
+</section>
+
+<section data-rda-case="r04" data-case-step="6" hidden>
+  <small>FINAL DECISION</small>
+  <h3>ตัดสินใจจาก Evidence + Physics Reasoning + Risk</h3>
+  <label>DECISION<textarea id="r04Decision" placeholder="ตัดสินระยะเวลาควบคุม/ติดตาม/จัดเก็บโดยอ้างอิง Evidence..."></textarea></label>
+  <div class="rda-confidence">
+    <b>CONFIDENCE AFTER</b>
+    <input id="r04ConfidenceAfter" type="range" min="1" max="5" value="3">
+    <output id="r04ConfidenceAfterOut">3/5</output>
+  </div>
+  <button class="rda-primary" id="r04SubmitInitial">SUBMIT INITIAL DECISION</button>
+</section>
+
+<section data-rda-case="r04" data-case-step="7" hidden>
+  <small>DIAGNOSTIC FEEDBACK</small>
+  <h3>ตรวจคุณภาพการให้เหตุผลก่อนแก้ไข</h3>
+  <div id="r04FeedbackBox" class="rda-feedback"></div>
+  <button class="rda-primary" id="r04ToRevision">REVIEW FEEDBACK → REVISION</button>
+</section>
+
+<section data-rda-case="r04" data-case-step="8" hidden>
+  <small>REVISION 01</small>
+  <h3>ปรับเหตุผลและการตัดสินใจจาก Feedback</h3>
+  <p>ระบบเก็บ Initial → Revision เพื่อแสดงพัฒนาการของการให้เหตุผลเชิงหลักฐาน</p>
+  <label>REVISED PHYSICS REASONING<textarea id="r04RevisedReasoning"></textarea></label>
+  <label>REVISED DECISION<textarea id="r04RevisedDecision"></textarea></label>
+  <button class="rda-primary" id="r04SubmitRevision">SUBMIT REVISION & CLOSE CASE</button>
+  <div id="r04RubricResult" class="rda-rubric-result"></div>
+</section>
+</div></div><button id="r04CaseButton" class="rda-case-button">☢ START CASE</button>
+
+<style id="rdaCaseArchitectureStyles">
+.rda-case-button{position:fixed;left:14px;bottom:58px;z-index:99998;border:1px solid #f4c430;border-radius:999px;padding:9px 14px;background:#061722;color:#ffe17d;font:800 11px system-ui;cursor:pointer;box-shadow:0 0 20px rgba(244,196,48,.18)}.rda-case-layer{position:fixed;inset:0;z-index:100100;display:none;align-items:center;justify-content:center;padding:14px;background:rgba(0,7,12,.91);backdrop-filter:blur(10px)}.rda-case-layer.open{display:flex}.rda-case-shell{width:min(1000px,97vw);max-height:94vh;overflow:auto;border:1px solid rgba(45,226,230,.4);border-radius:20px;background:#061722;padding:18px;color:#dcecf2;font-family:system-ui;box-shadow:0 0 60px rgba(45,226,230,.12)}.rda-case-head{display:flex;justify-content:space-between;gap:10px}.rda-case-head small,[data-rda-case]>small{color:#2de2e6;font-weight:900;letter-spacing:1.4px}.rda-case-head h2{margin:3px 0;color:#fff}.rda-case-head p{margin:0;color:#9bb1ba}.rda-case-head button{border:0;background:none;color:white;font-size:26px;cursor:pointer}.rda-case-progress{display:grid;grid-template-columns:repeat(8,1fr);gap:5px;margin:15px 0}.rda-case-progress span{padding:8px;text-align:center;border-radius:8px;background:#0a2633;color:#78929d;font-size:8px;font-weight:800}.rda-case-progress span.active{color:#fff;border:1px solid #2de2e6}[data-rda-case]{padding:13px;border:1px solid rgba(255,255,255,.08);border-radius:14px;background:rgba(255,255,255,.02)}[data-rda-case] h3{color:#fff}.rda-prompt{padding:12px;border-left:3px solid #f4c430;background:rgba(244,196,48,.05)}.rda-row{display:flex;gap:7px;flex-wrap:wrap;margin:9px 0}.rda-row button{border:1px solid rgba(45,226,230,.2);border-radius:9px;padding:8px 11px;background:#08222e;color:#dff;cursor:pointer}.rda-row button.selected{border-color:#f4c430;color:#ffe17d}[data-rda-case] label{display:grid;gap:5px;margin:9px 0;font-size:10px;font-weight:800}[data-rda-case] textarea,[data-rda-case] input{box-sizing:border-box;width:100%;border:1px solid rgba(45,226,230,.18);border-radius:9px;background:#03111a;color:#eefcff;padding:9px}[data-rda-case] textarea{min-height:75px}.rda-primary{border:1px solid #2de2e6;border-radius:9px;padding:10px 14px;background:#0b3543;color:#dfffff;font-weight:900;cursor:pointer}.rda-confidence{display:flex;gap:10px;align-items:center;margin:10px 0}.rda-confidence input{flex:1}.rda-evidence-board{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}.rda-evidence-card{display:grid;gap:3px;padding:11px;border:1px solid rgba(45,226,230,.16);border-radius:11px;background:#061b25;cursor:pointer}.rda-evidence-card.selected{border-color:#f4c430;background:rgba(244,196,48,.05)}.rda-evidence-card small{color:#2de2e6}.rda-evidence-card em{color:#ffe17d}.rda-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.rda-feedback div{padding:9px;margin:5px 0;border-left:3px solid #f4c430;background:rgba(244,196,48,.05)}.rda-rubric-result{display:flex;gap:12px;align-items:center;margin-top:12px;padding:12px;border:1px solid rgba(45,226,230,.2);border-radius:12px}.rda-rubric-result b{font-size:25px;color:#2de2e6}@media(max-width:700px){.rda-case-progress,.rda-evidence-board,.rda-grid{grid-template-columns:1fr}.rda-case-shell{max-height:96vh;padding:12px}}
+</style>
+<script id="r04CaseArchitectureScript">
+(()=>{const MID='r04',KEY='RDA_R04_CASE_V3',DK='RDA_DECISION_R04',NK='rdkR04Complete',$=id=>document.getElementById(id),I=s=>MID+s,read=k=>{try{return JSON.parse(localStorage.getItem(k)||'{}')}catch(e){return{}}},save=(k,v)=>localStorage.setItem(k,JSON.stringify(v));const st=Object.assign({step:1,prediction:'',predictionReason:'',confidenceBefore:3,evidence:[],selected:[],claim:'',reasoning:'',risk:'',decision:'',confidenceAfter:3,initialScore:0,revisedReasoning:'',revisedDecision:'',revisedScore:0,feedback:[]},read(KEY));
+// Migrate legacy Decision Quality scores from /20 to the unified /100 scale without touching Google Sheets.
+if(st.rubricMaxScore!==100){if(Number(st.initialScore)>0&&Number(st.initialScore)<=20)st.initialScore=Number(st.initialScore)*5;if(Number(st.revisedScore)>0&&Number(st.revisedScore)<=20)st.revisedScore=Number(st.revisedScore)*5;st.rubricMaxScore=100;}
+const persist=()=>save(KEY,st),esc=s=>String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));function show(n){st.step=n;persist();try{window.RDAMaster&&window.RDAMaster.pulse('r04',n,8)}catch(e){}document.querySelectorAll(`[data-rda-case="${MID}"][data-case-step]`).forEach(x=>x.hidden=+x.dataset.caseStep!==n);$(MID+'CaseLayer').querySelectorAll('.rda-case-progress span').forEach(x=>x.classList.toggle('active',+x.dataset.step===n));const b=$(MID+'CaseButton');if(b)b.textContent=n===1?'☢ START CASE':'☢ CONTINUE CASE • '+['','PREDICTION','SIMULATION','EVIDENCE','REASONING','RISK','DECISION','FEEDBACK','REVISION'][n]}function open(){$(MID+'CaseLayer').classList.add('open');render();show(st.step||1)}function close(){$(MID+'CaseLayer').classList.remove('open')}function et(){return st.evidence.filter(e=>st.selected.includes(e.id)).map((e,i)=>`E${i+1}: ${e.test} — ${e.observation}${e.value?' ('+e.value+')':''}`).join('\n')}function re(){let b=$(MID+'EvidenceBoard');b.innerHTML=st.evidence.map((e,i)=>`<label class="rda-evidence-card ${st.selected.includes(e.id)?'selected':''}"><input type="checkbox" data-eid="${e.id}" ${st.selected.includes(e.id)?'checked':''}><small>EVIDENCE #R04-${String(i+1).padStart(2,'0')}</small><b>${esc(e.test)}</b><span>${esc(e.observation)}</span><em>${esc(e.value)}</em></label>`).join('')||'<p>ยังไม่มี Evidence — กลับไปทดลองและ Capture ก่อน</p>';b.querySelectorAll('[data-eid]').forEach(c=>c.onchange=()=>{c.checked?(!st.selected.includes(c.dataset.eid)&&st.selected.push(c.dataset.eid)):st.selected=st.selected.filter(x=>x!==c.dataset.eid);persist();re()})}function score(r,d){return window.RDARubricV2.evaluate({caseId:'r04',claim:st.claim,evidenceText:et(),selectedEvidence:st.selected,reasoning:r,risk:st.risk,decision:d})}function fb(sc){return sc.feedback||[]}function sync(r,d){save(DK,{claim:st.claim,evidence:et(),reasoning:r,risk:st.risk,decision:d,confidence:st.confidenceAfter,evidenceIds:st.selected,initialScore:st.initialScore,revisedScore:st.revisedScore,rubricEngine:'RDA_RULE_BASED_V2_100',rubricMaxScore:100,updatedAt:new Date().toISOString()})}function render(){document.querySelectorAll(`#${MID}CaseLayer [data-predict]`).forEach(b=>b.classList.toggle('selected',b.dataset.predict===st.prediction));document.querySelectorAll(`#${MID}CaseLayer [data-risk]`).forEach(b=>b.classList.toggle('selected',b.dataset.risk===st.risk));$(I('PredictionReason')).value=st.predictionReason;$(I('ConfidenceBefore')).value=st.confidenceBefore;$(I('ConfidenceBeforeOut')).value=st.confidenceBefore+'/5';$(I('ConfidenceAfter')).value=st.confidenceAfter;$(I('ConfidenceAfterOut')).value=st.confidenceAfter+'/5';$(I('Claim')).value=st.claim;$(I('Reasoning')).value=st.reasoning;$(I('Decision')).value=st.decision;$(I('RevisedReasoning')).value=st.revisedReasoning||st.reasoning;$(I('RevisedDecision')).value=st.revisedDecision||st.decision;$(I('EvidenceText')).value=et();$(I('FeedbackBox')).innerHTML=st.feedback.map(x=>`<div>${esc(x)}</div>`).join('');if(st.revisedScore)$(I('RubricResult')).innerHTML=`<small>DECISION QUALITY</small><b>${st.revisedScore}/100</b><span>Initial ${st.initialScore}/100 → Revision ${st.revisedScore}/100</span>`;re()}document.addEventListener('DOMContentLoaded',()=>{$(MID+'CaseButton').onclick=open;$(MID+'CaseClose').onclick=close;document.querySelectorAll(`#${MID}CaseLayer [data-predict]`).forEach(b=>b.onclick=()=>{st.prediction=b.dataset.predict;persist();render()});document.querySelectorAll(`#${MID}CaseLayer [data-risk]`).forEach(b=>b.onclick=()=>{st.risk=b.dataset.risk;persist();render()});$(I('ConfidenceBefore')).oninput=e=>{st.confidenceBefore=+e.target.value;$(I('ConfidenceBeforeOut')).value=st.confidenceBefore+'/5';persist()};$(I('ConfidenceAfter')).oninput=e=>{st.confidenceAfter=+e.target.value;$(I('ConfidenceAfterOut')).value=st.confidenceAfter+'/5';persist()};$(I('SavePrediction')).onclick=()=>{st.predictionReason=$(I('PredictionReason')).value.trim();if(!st.prediction||st.predictionReason.length<10)return alert('เลือก Prediction และอธิบายเหตุผลก่อน');persist();show(2)};$(I('BackToMission')).onclick=()=>{close();state.step=3;save();showPage('mission');renderMission();setTimeout(()=>{const el=document.getElementById('stage');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},80)};$(I('CaptureEvidence')).onclick=()=>$(I('CaptureForm')).hidden=!$(I('CaptureForm')).hidden;$(I('SaveEvidence')).onclick=()=>{let t=$(I('EvidenceTest')).value.trim(),o=$(I('EvidenceObservation')).value.trim(),v=$(I('EvidenceValue')).value.trim();if(t.length<2||o.length<5)return alert('กรอกสิ่งที่ทดลอง/แหล่งข้อมูล และผลที่สังเกต');st.evidence.push({id:'e'+Date.now(),test:t,observation:o,value:v});persist();$(I('CaptureForm')).hidden=true;re()};$(I('ToEvidence')).onclick=()=>{if(st.evidence.length<2)return alert('Capture Evidence อย่างน้อย 2 รายการ');show(3)};$(I('ToDecision')).onclick=()=>{if(st.selected.length<2)return alert('เลือก Evidence อย่างน้อย 2 รายการ');$(I('EvidenceText')).value=et();show(4)};$(I('ToRisk')).onclick=()=>{
+ st.claim=$(I('Claim')).value.trim();st.reasoning=$(I('Reasoning')).value.trim();
+ if(st.claim.length<8||st.reasoning.length<15)return alert('กรอก Claim และ Physics Reasoning ให้ครบก่อนประเมิน Risk');
+ persist();show(5)
+};
+$(I('ToDecisionFinal')).onclick=()=>{
+ if(!st.risk)return alert('เลือกระดับ Risk จากหลักฐานก่อนตัดสินใจ');
+ persist();show(6)
+};
+$(I('ToRevision')).onclick=()=>show(8);
+$(I('SubmitInitial')).onclick=()=>{st.claim=$(I('Claim')).value.trim();st.reasoning=$(I('Reasoning')).value.trim();st.decision=$(I('Decision')).value.trim();if(st.claim.length<8||st.reasoning.length<15||st.decision.length<10||!st.risk)return alert('กรอก Claim, Reasoning, Risk, Decision ให้ครบ');let sc=score(st.reasoning,st.decision);st.initialScore=sc.total;st.feedback=fb(sc);st.revisedReasoning=st.reasoning;st.revisedDecision=st.decision;persist();sync(st.reasoning,st.decision);render();show(7)};$(I('SubmitRevision')).onclick=()=>{st.revisedReasoning=$(I('RevisedReasoning')).value.trim();st.revisedDecision=$(I('RevisedDecision')).value.trim();let sc=score(st.revisedReasoning,st.revisedDecision);st.revisedScore=sc.total;persist();sync(st.revisedReasoning,st.revisedDecision);
+     try{
+      const __decision=read(DK);
+      __decision.revisionSubmitted=true;
+      __decision.revisedScore=st.revisedScore;
+      __decision.updatedAt=new Date().toISOString();
+      save(DK,__decision);
+     }catch(e){}
+     render();
+     try{
+      const __native=read(NK);
+      __native.completed=true;
+      __native.evaluated=true;
+      __native.caseWorkflowCompleted=true;
+      __native.caseWorkflowScore=st.revisedScore;
+      __native.updatedAt=new Date().toISOString();
+      save(NK,__native);
+     }catch(e){}
+     if(window.RDAMaster?.completeCaseAndReturn){
+      alert('CASE CLOSED ✓ — R-04\\nNEXT CASE UNLOCK SIGNAL SENT\\nกำลังกลับ Headquarters...');
+      setTimeout(()=>(()=>{
+       try{
+        localStorage.setItem('RDA_CASE_COMPLETE_R04','1');
+        localStorage.setItem('RDA_LAST_COMPLETED_CASE','r04');
+       }catch(e){}
+       window.RDAMaster.completeCaseAndReturn('r04',st.revisedScore);
+      })(),500);
+      return;
+     }
+     let native=read(NK),done=!!(native.completed||native.evaluated);if(sc.total>=60&&done)alert(`R-04 DECISION VERIFIED ✓\nกลับ Headquarters เพื่อดำเนินคดีถัดไป`);else if(sc.total>=60)alert(`Decision Record ผ่านแล้ว ✓\nแต่ต้องทำภารกิจหลัก R-04 ให้สำเร็จก่อน`);else alert('Decision Quality ยังต่ำกว่า 60/100 — ปรับ Revision อีกครั้ง');window.RDAMaster?.patch?.()};render()});window['RDA_R04_CASE']={open,read:()=>read(KEY)}})();
+</script>
+
+<style id="r04UnifiedWorkflowStyles">
+#r04CaseButton{
+  left:50%!important;right:auto!important;bottom:14px!important;
+  transform:translateX(-50%)!important;
+  min-width:190px!important;
+  border-color:#2de2e6!important;color:#dfffff!important;
+  box-shadow:0 0 22px rgba(45,226,230,.20)!important;
+}
+#r04CaseLayer .rda-case-progress{
+  grid-template-columns:repeat(8,minmax(0,1fr))!important;
+}
+#r04CaseLayer [data-case-step]{animation:rdaUnifiedStepIn .25s ease}
+@keyframes rdaUnifiedStepIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+@media(max-width:760px){
+  #r04CaseLayer .rda-case-progress{
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  }
+  #r04CaseButton{width:auto!important;min-width:170px!important;left:50%!important;right:auto!important}
+}
+</style>
+
+
+
+</body>
+</html>
+<style>#r04CaseLayer,#r04CaseButton{display:none!important;visibility:hidden!important;pointer-events:none!important}</style>

@@ -1,0 +1,1436 @@
+
+:root{
+  --bg:#03141b;--panel:#082731;--panel2:#0b313d;--line:#164d5c;--cyan:#48e4ec;
+  --green:#56ecaa;--yellow:#f5c63e;--red:#ff586c;--purple:#c684ff;--orange:#ff9f43;
+  --text:#f2fbfd;--muted:#91adb4;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Kanit,system-ui,sans-serif;background:#020b10;color:var(--text)}
+button,textarea,input{font:inherit}
+button{cursor:pointer}
+.bg{position:fixed;inset:0;z-index:0;background:
+radial-gradient(circle at 70% 20%,rgba(20,90,108,.24),transparent 35%),
+radial-gradient(circle at 48% 80%,rgba(110,28,40,.18),transparent 32%),
+linear-gradient(#03151c,#020b10)}
+.grid{position:absolute;inset:0;background-image:linear-gradient(rgba(60,220,230,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(60,220,230,.045) 1px,transparent 1px);background-size:48px 48px}
+.scan{position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(67,225,235,.04),transparent);animation:scan 7s linear infinite}
+.vignette{position:absolute;inset:0;box-shadow:inset 0 0 180px #000}
+@keyframes scan{from{transform:translateY(-100%)}to{transform:translateY(100%)}}
+@keyframes pulse{50%{box-shadow:0 0 30px rgba(255,88,108,.35)}}
+@keyframes hotspot{50%{transform:scale(1.13);filter:drop-shadow(0 0 12px #ff5369)}}
+@keyframes reveal{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes orb{50%{box-shadow:0 0 60px rgba(71,225,235,.28)}}
+
+.opening{position:fixed;z-index:99999;inset:0;display:grid;place-items:center;background:radial-gradient(circle at 50% 45%,#123d49,#010609 68%);overflow:hidden}
+.opening.hidden{display:none}
+.opening-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(80,220,230,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(80,220,230,.08) 1px,transparent 1px);background-size:46px 46px;animation:pulse 2s infinite}
+.opening-content{position:relative;text-align:center;max-width:900px;padding:30px}
+.opening-kicker{font-size:11px;letter-spacing:.25em;color:#8bdce2;font-weight:800}
+.opening-alert{display:inline-block;margin:16px 0 5px;padding:7px 13px;border:1px solid #ff5368;border-radius:999px;color:#ff7384;background:rgba(255,70,90,.08);font-weight:900}
+.opening h1{font-size:clamp(54px,8vw,110px);line-height:.9;margin:15px 0 0}
+.opening h2{font-size:clamp(24px,4vw,52px);margin:10px 0;color:#ff6578}
+.opening p{color:#abc4c9;letter-spacing:.12em}
+.big{padding:15px 22px!important;font-size:14px!important}
+
+.app{position:relative;z-index:2;display:grid;grid-template-columns:250px minmax(0,1fr);min-height:100vh}
+.sidebar{position:sticky;top:0;height:100vh;padding:18px 14px;background:rgba(2,17,23,.96);border-right:1px solid #103d49;overflow:auto}
+.brand{display:flex;align-items:center;gap:10px;padding:6px 4px 18px;border-bottom:1px solid #123b46}
+.brand img{width:58px;height:58px;object-fit:contain}
+.brand h1{font-size:17px;line-height:1.05;margin:0}.brand small{color:var(--yellow);font-weight:800}
+.hq-link{display:flex;margin:14px 0;padding:11px 12px;border-radius:11px;text-decoration:none;color:#dcebed;background:#0c2d37;border-left:4px solid var(--cyan);font-weight:700}
+.side-title{margin:18px 4px 9px;font-weight:800}
+.mission-mini{display:grid;grid-template-columns:50px 1fr auto;gap:7px;align-items:center;padding:9px 10px;border-radius:10px;margin:6px 0;border:1px solid #153f4a;background:#07242d}
+.mission-mini b{font-size:13px}.mission-mini span{font-size:9px;color:#93afb6}.mission-mini em{font-style:normal;font-size:8px;color:#6decaa}
+.mission-mini.current{border-color:var(--yellow);background:#172e2e}.mission-mini.current em{color:var(--yellow)}
+.commander-card{margin-top:18px;padding:14px;border-radius:14px;background:#082832;border:1px solid #164d5b}
+.commander-card>small{color:#80dce1;font-size:9px}.commander-card>b{display:block;margin:4px 0 12px}
+.energy-line,.side-score{display:flex;justify-content:space-between;font-size:9px;color:#9ab6bc}.energy-line strong{color:#ffe06d}
+.energy-bar{height:7px;border-radius:99px;background:#0c3a44;overflow:hidden;margin:6px 0 12px}.energy-bar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--cyan),var(--yellow))}
+.side-score b{font-size:18px;color:#fff}
+
+.main{min-width:0;padding:18px 22px 60px}
+.topbar{display:flex;justify-content:space-between;gap:20px;align-items:center;padding:15px 18px;border:1px solid #164955;border-radius:16px;background:rgba(5,30,39,.9);position:sticky;top:10px;z-index:30;backdrop-filter:blur(12px)}
+.topbar small{color:#74dfe5;font-size:9px;font-weight:900;letter-spacing:.1em}.topbar h2{margin:3px 0;font-size:22px}.topbar p{margin:0;color:#8daab1;font-size:11px}
+.topstatus{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.pill{padding:7px 10px;border-radius:999px;border:1px solid #246071;background:#0b3340;font-size:9px;font-weight:900}.pill.danger{border-color:#b23d4e;color:#ff7384;background:#38151c}
+.btn{border:1px solid transparent;border-radius:10px;padding:10px 13px;font-weight:800;font-size:11px}
+.btn.primary{background:linear-gradient(180deg,#ffd84f,#ffbb28);color:#0d191b}
+.btn.secondary{background:#123d49;border-color:#236173;color:#fff}
+.btn.ghost{background:#0b2c36;border-color:#245967;color:#dcecee}
+
+.mission-spine{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;margin:14px 0}
+.mission-spine button{padding:9px 5px;border-radius:10px;border:1px solid #164957;background:#082731;color:#78949b;pointer-events:none}
+.mission-spine button b,.mission-spine button span{display:block}.mission-spine button b{font-size:11px}.mission-spine button span{font-size:8px;font-weight:800}
+.mission-spine button.active{border-color:var(--cyan);color:#fff;background:#0b3a46}.mission-spine button.done{border-color:#2e9b70;color:#74e9b0}
+
+.page{display:none;animation:reveal .3s ease}.page.active{display:block}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:16px}
+.hero-copy,.national-map-card,.analysis-panel,.evidence-list,.resource-bank,.city-grid,.deploy-status,.forecast-controls,.forecast-visual,.risk-table,.national-order,.collision-card,.revise-panel,.final-result{border:1px solid #164b58;border-radius:16px;background:rgba(5,31,40,.92)}
+.hero-copy{padding:24px}.hero-copy h1{font-size:48px;line-height:.95;margin:8px 0}.hero-copy>p{color:#a5bdc2;max-width:750px}
+.eyebrow{font-size:9px;font-weight:900;letter-spacing:.13em}.eyebrow.red{color:#ff6a7a}.eyebrow.cyan{color:#65e8ed}.eyebrow.yellow{color:#ffe16d}.eyebrow.purple{color:#d7b1ff}.eyebrow.green{color:#6decaa}.eyebrow.orange{color:#ffac5a}
+.prediction-box{margin:18px 0;padding:16px;border-radius:14px;background:#07242d;border:1px solid #174954}
+textarea{width:100%;min-height:86px;margin-top:10px;padding:10px;border-radius:10px;border:1px solid #205666;background:#031b23;color:#fff;resize:vertical}
+.choice-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.choice-grid.compact{grid-template-columns:repeat(3,1fr)}.choice-grid.vertical{grid-template-columns:1fr}
+.choice-grid button,.time-select button{padding:10px;border:1px solid #205767;border-radius:10px;background:#0a303b;color:#eaf9fb;font-weight:700}
+.choice-grid button.selected,.time-select button.selected{border-color:var(--yellow);background:rgba(245,198,62,.14);color:#ffe16d}
+.confidence{display:flex;align-items:center;gap:10px;margin-top:10px;font-size:9px;color:#9db7bd}.confidence input{flex:1}
+.national-map-card{overflow:hidden}.map-head{display:flex;justify-content:space-between;padding:12px 14px;font-size:9px;font-weight:800}.map-head b{color:#ff5d71}
+.map-stage{position:relative;min-height:490px;background:radial-gradient(circle at 54% 48%,rgba(38,133,151,.26),transparent 34%),linear-gradient(155deg,#041b24,#031016);overflow:hidden}
+.thailand-silhouette{position:absolute;left:45%;top:5%;width:28%;height:88%;background:linear-gradient(180deg,rgba(56,197,210,.26),rgba(26,105,126,.08));clip-path:polygon(54% 0,72% 10%,63% 21%,72% 36%,57% 48%,61% 60%,51% 72%,55% 86%,42% 100%,34% 85%,39% 71%,28% 60%,39% 46%,31% 31%,44% 19%,39% 7%);filter:drop-shadow(0 0 20px rgba(56,220,230,.28))}
+.hotspot{position:absolute;border:1px solid #ff5b6f;border-radius:50%;width:58px;height:58px;background:#32141b;color:#fff;animation:hotspot 1.8s infinite}.hotspot small{display:block;font-size:7px}.h1{left:52%;top:15%}.h2{left:59%;top:42%}.h3{left:38%;top:52%}.h4{left:48%;top:66%}.h5{left:70%;top:62%}
+.map-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#164653}.map-metrics div{background:#082630;padding:10px;text-align:center}.map-metrics span,.map-metrics b{display:block}.map-metrics span{font-size:7px;color:#8ba8af}.map-metrics b{margin-top:3px}
+
+.section-head{display:flex;justify-content:space-between;align-items:end;margin:20px 0 12px}.section-head h1{margin:4px 0;font-size:30px}.section-head p{margin:0;color:#95b0b6}.step-score{text-align:right}.step-score span,.step-score b{display:block}.step-score span{font-size:8px;color:#89a8ae}.step-score b{color:#ffe16d}
+
+.evidence-layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:14px}.evidence-list,.analysis-panel{padding:16px}
+.evidence-item{display:grid;grid-template-columns:40px 1fr auto;gap:9px;align-items:center;padding:10px;border-radius:10px;background:#092b35;border:1px solid #164b58;margin-bottom:8px}
+.evidence-item button{width:34px;height:34px;border-radius:50%;border:1px solid #2c7484;background:#0c3a46;color:#fff}.evidence-item small{display:block;color:#86a5ac}.evidence-item em{font-style:normal;font-size:8px;color:#ffe16d}
+.detector-visual{height:210px;display:grid;place-items:center;position:relative;overflow:hidden}.radiation-core{font-size:54px;z-index:2}.rings{position:absolute;width:160px;height:160px;border:1px solid #47dbe4;border-radius:50%;box-shadow:0 0 0 30px rgba(71,219,228,.05),0 0 0 60px rgba(71,219,228,.03);animation:orb 1.8s infinite}
+.analysis-readout{padding:10px;border:1px solid #164c58;border-radius:9px;background:#031b23;color:#acd0d5;margin-bottom:12px}
+
+.deploy-layout{display:grid;grid-template-columns:240px minmax(0,1fr) 250px;gap:12px}.resource-bank,.city-grid,.deploy-status{padding:14px}
+.resource-bank button{width:100%;display:flex;justify-content:space-between;align-items:center;margin:7px 0;padding:10px;border-radius:10px;border:1px solid #1b5463;background:#092c36;color:#fff}.resource-bank button.selected{border-color:var(--yellow);color:#ffe16d}.resource-bank em{font-style:normal;color:#ffe16d}
+.city-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;background:radial-gradient(circle,#0c3b47,#061b24)}
+.city-grid button{min-height:120px;border-radius:13px;border:1px solid #225f70;background:rgba(6,31,41,.86);color:#fff;text-align:left;padding:13px}.city-grid button.assigned{border-color:#58e6a8;background:rgba(31,116,77,.18)}.city-grid button span,.city-grid button small{display:block}.city-grid button span{color:#ff7b8a;margin:7px 0}.city-grid button small{color:#8eabb1}
+.deploy-status{text-align:center}.dose-meter{height:250px;width:42px;border:1px solid #2a6070;border-radius:20px;margin:20px auto;position:relative;overflow:hidden;background:#051a22}.dose-meter i{position:absolute;bottom:0;left:0;right:0;height:80%;background:linear-gradient(#ffb038,#ff536a);transition:.4s}.dose-number b{font-size:38px;color:#ff7081}.dose-number span{color:#92adb4}
+
+.forecast-layout{display:grid;grid-template-columns:320px 1fr;gap:14px}.forecast-controls,.forecast-visual{padding:18px}.forecast-controls label{display:flex;justify-content:space-between;margin:10px 0;color:#9bb4ba}.forecast-controls b{color:#fff}.time-select{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:15px 0}.formula{padding:15px;text-align:center;background:#041b23;border:1px solid #19505d;border-radius:10px;font-size:24px;color:#d7f8fa}
+.forecast-visual{display:grid;grid-template-columns:200px 1fr;gap:20px;align-items:center}.activity-orb{width:180px;height:180px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle,#103c46,#03161e 65%);border:1px solid #2c8391;animation:orb 2s infinite}.activity-orb span{font-size:44px}.activity-orb small{margin-top:-55px;color:#86adb4}
+.forecast-bars{height:260px;display:flex;gap:16px;align-items:end}.forecast-bars div{height:100%;flex:1;display:flex;flex-direction:column;justify-content:end;align-items:center}.forecast-bars i{width:65%;height:var(--h,5%);min-height:5px;background:linear-gradient(var(--cyan),#1b6070);border-radius:8px 8px 2px 2px;transition:1s}.forecast-bars span,.forecast-bars b{font-size:9px}.insight{grid-column:1/-1;padding:11px;border:1px solid #225d6a;border-radius:9px;background:#082a34;color:#add0d5}
+
+.decision-layout{display:grid;grid-template-columns:1.25fr .75fr;gap:14px}.risk-table,.national-order{padding:16px}.risk-row{display:grid;grid-template-columns:1fr repeat(4,1fr);gap:8px;padding:11px 8px;border-bottom:1px solid #143f49;font-size:10px}.risk-row.head{color:#75e1e7;font-weight:900}.risk-row.priority{background:rgba(245,198,62,.06)}.risk-row b{color:#fff}
+.national-order h3{margin-top:0}
+
+.collision-stage{display:grid;grid-template-columns:1fr 70px 1fr;gap:12px;align-items:center}.collision-card{padding:18px;min-height:190px}.collision-card small{color:#8daab1}.collision-card.original{border-color:#ff697a}.collision-card.evidence{border-color:#ffe16d}.collision-vs{text-align:center;font-size:34px}.collision-banner{margin:14px 0;padding:14px;text-align:center;border:1px solid #d49b2d;background:rgba(245,198,62,.08);border-radius:12px;color:#ffe16d;font-size:18px;font-weight:900}.revise-panel{padding:18px}
+
+.verdict-sequence{max-width:850px;margin:45px auto}.verdict-line{opacity:.15;transform:translateX(-10px);padding:15px 18px;margin:8px 0;border:1px solid #174754;border-radius:11px;background:#082731;font-weight:900;transition:.5s}.verdict-line.on{opacity:1;transform:none;border-color:#43d99e}.verdict-line b{float:right;color:#59e8aa}
+.final-result{padding:24px}.final-result h1{font-size:40px;color:#61ecaa}.final-score-wrap{display:grid;grid-template-columns:190px 1fr;gap:20px;align-items:center}.final-score{width:170px;height:170px;border-radius:50%;display:grid;place-items:center;border:10px solid #1e7781;background:#031820}.final-score b{font-size:58px}.final-score span{margin-top:-55px;color:#91aeb4}.badge{display:inline-block;padding:8px 11px;border:1px solid #d6a52f;border-radius:10px;color:#ffe16d;background:rgba(245,198,62,.08)}
+.score-breakdown{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:18px 0}.metric{padding:11px;border-radius:10px;background:#082a34;border:1px solid #164854}.metric span,.metric b{display:block}.metric span{font-size:8px;color:#9ab4ba}.metric b{font-size:20px}.metric i{display:block;height:4px;margin-top:8px;border-radius:99px;background:linear-gradient(90deg,var(--cyan),var(--yellow));width:var(--w)}
+.feedback-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.feedback-grid article{padding:12px;border-radius:10px;background:#061f28;border:1px solid #15434e}.feedback-grid small{color:#77e1e6}.feedback-grid p{font-size:10px;color:#b1c6ca}
+.mission-series{display:grid;grid-template-columns:repeat(6,1fr);gap:7px;margin:16px 0}.mission-series span{padding:9px;text-align:center;border-radius:9px;background:#092d36;border:1px solid #216958;color:#6fe4aa;font-size:9px;font-weight:800}.final-actions{display:flex;justify-content:flex-end;gap:8px}
+
+.toast{position:fixed;right:20px;bottom:20px;z-index:999999;padding:11px 14px;border-radius:10px;background:#102f38;border:1px solid #2a6775;color:#fff;box-shadow:0 15px 40px #0008}.hidden{display:none!important}
+
+@media(max-width:1250px){
+  .app{grid-template-columns:225px minmax(0,1fr)}.main{padding:14px 16px 50px}
+  .hero{grid-template-columns:1fr}.national-map-card{max-width:none}.map-stage{min-height:380px}
+  .deploy-layout{grid-template-columns:220px minmax(0,1fr)}.deploy-status{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr 2fr;align-items:center}.dose-meter{height:30px;width:100%;margin:5px}.dose-meter i{top:0;bottom:0;width:80%;height:auto;right:auto}
+  .score-breakdown{grid-template-columns:repeat(3,1fr)}.feedback-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:900px){
+  .app{grid-template-columns:1fr}.sidebar{position:relative;height:auto}.topbar{position:relative;top:0;align-items:flex-start;flex-direction:column}
+  .mission-spine{grid-template-columns:repeat(4,1fr)}.evidence-layout,.forecast-layout,.decision-layout{grid-template-columns:1fr}.deploy-layout{grid-template-columns:1fr}.deploy-status{display:block;grid-column:auto}.choice-grid.compact{grid-template-columns:repeat(2,1fr)}
+  .collision-stage{grid-template-columns:1fr}.collision-vs{transform:rotate(90deg)}.forecast-visual{grid-template-columns:1fr}.final-score-wrap{grid-template-columns:1fr}.feedback-grid,.mission-series{grid-template-columns:repeat(2,1fr)}
+}
+
+/* ============================================================
+   R06 V6.1 — LEARNING ANIMATION LAYER
+   Animations visualize physics/evidence; pointer-events disabled.
+   ============================================================ */
+.learning-fx{position:fixed;inset:0;z-index:99998;display:none;place-items:center;overflow:hidden;pointer-events:none}
+.learning-fx.show{display:grid}
+.fx-blackout{position:absolute;inset:0;background:rgba(0,5,8,.94);animation:fxBlackout .25s both}
+.fx-grid{position:absolute;inset:-20%;background-image:linear-gradient(rgba(69,231,239,.11) 1px,transparent 1px),linear-gradient(90deg,rgba(69,231,239,.11) 1px,transparent 1px);background-size:42px 42px;transform:perspective(700px) rotateX(62deg) translateY(35%);transform-origin:center bottom;opacity:.65}
+.fx-scanline{position:absolute;left:0;right:0;height:2px;background:#5cebf0;box-shadow:0 0 20px #5cebf0;animation:fxScan 1.25s linear infinite}
+.fx-center{position:relative;text-align:center;max-width:780px;padding:30px;animation:fxRise .35s both}
+.fx-center small{color:#75e7ec;font-weight:900;letter-spacing:.18em}.fx-center h2{font-size:clamp(30px,5vw,68px);margin:8px 0;line-height:1;color:#fff}.fx-center p{color:#a9c4c9;font-size:15px}.fx-equation{font-size:28px;color:#ffe16d;font-weight:800;margin-top:14px}.fx-counter{font-size:42px;color:#65efae;font-weight:900}
+.fx-rings{position:absolute;width:360px;height:360px}.fx-rings i{position:absolute;inset:0;border:1px solid rgba(78,229,237,.35);border-radius:50%;animation:fxRing 1.5s ease-out infinite}.fx-rings i:nth-child(2){animation-delay:.35s}.fx-rings i:nth-child(3){animation-delay:.7s}
+.learning-fx.alert .fx-center h2{color:#ff6679}.learning-fx.lock .fx-center h2{color:#62efad}.learning-fx.collision .fx-center h2{color:#ffe16d}
+@keyframes fxBlackout{from{opacity:0}to{opacity:1}}@keyframes fxScan{from{top:0}to{top:100%}}@keyframes fxRise{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}@keyframes fxRing{0%{transform:scale(.3);opacity:0}30%{opacity:1}100%{transform:scale(1.45);opacity:0}}
+
+.detector-beam{position:absolute;top:12%;bottom:12%;width:3px;left:12%;background:linear-gradient(transparent,#67eef3,transparent);box-shadow:0 0 14px #67eef3;opacity:0}
+.detector-visual.scanning .detector-beam{opacity:1;animation:detectorSweep 1.2s ease-in-out 2}
+.signal-trace{position:absolute;left:10%;right:10%;bottom:18%;height:34px;opacity:0;background:linear-gradient(90deg,transparent 0 5%,#65eaf0 5% 7%,transparent 7% 14%,#65eaf0 14% 16%,transparent 16% 38%,#65eaf0 38% 41%,transparent 41% 58%,#65eaf0 58% 62%,transparent 62%);filter:drop-shadow(0 0 5px #65eaf0)}
+.detector-visual.scanning .signal-trace{opacity:1;animation:signalBuild .8s steps(5) both}
+@keyframes detectorSweep{0%{left:12%}50%{left:86%}100%{left:12%}}@keyframes signalBuild{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+
+.dose-scene{height:92px;display:grid;grid-template-columns:55px 1fr 48px 1fr 55px;align-items:center;margin:8px 0 4px;position:relative}
+.source-node,.team-node{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;border:1px solid #ff6b7d;background:#31131a;font-weight:900}.team-node{border-color:#62e6ed;background:#0a303a;font-size:10px}
+.radiation-rays{grid-column:2/5;position:absolute;left:45px;right:45px;display:flex;flex-direction:column;gap:7px}.radiation-rays i{height:2px;background:linear-gradient(90deg,#ff6c7d,#ffc64d,#5ee7ed);transform-origin:left;animation:rayFlow 1.1s ease-in-out infinite}
+.radiation-rays i:nth-child(2){animation-delay:.18s}.radiation-rays i:nth-child(3){animation-delay:.36s}
+.shield-visual{grid-column:3;font-size:46px;color:#7b8b91;z-index:3;opacity:.28;transform:translateY(-12px);transition:.45s}
+.shield-visual.active{opacity:1;color:#ffe16d;transform:none;filter:drop-shadow(0 0 9px rgba(255,225,109,.5))}
+.deploy-status.protected .radiation-rays i{animation-duration:2.3s;opacity:.38;transform:scaleX(.55)}
+@keyframes rayFlow{0%,100%{opacity:.25;transform:scaleX(.6)}50%{opacity:1;transform:scaleX(1)}}
+
+.forecast-visual.forecasting .activity-orb{animation:decayPulse .55s ease-in-out 4}.forecast-visual.forecasting .forecast-bars i{filter:drop-shadow(0 0 8px #5ce7ed)}
+@keyframes decayPulse{50%{transform:scale(.88);opacity:.7}}
+
+.collision-stage.collision-hit .original{animation:hitLeft .55s ease both}.collision-stage.collision-hit .evidence{animation:hitRight .55s ease both}.collision-stage.collision-hit .collision-vs{animation:impactFlash .7s ease both}
+@keyframes hitLeft{0%{transform:translateX(0)}50%{transform:translateX(16px)}100%{transform:none}}@keyframes hitRight{0%{transform:translateX(0)}50%{transform:translateX(-16px)}100%{transform:none}}@keyframes impactFlash{50%{transform:scale(1.8);filter:drop-shadow(0 0 18px #ffe16d)}}
+.risk-shift{display:grid;grid-template-columns:auto 1fr 48px;gap:10px;align-items:center;margin:10px 0 14px;color:#9eb8be;font-size:10px}.risk-shift>div{height:10px;background:#17333a;border-radius:99px;overflow:hidden}.risk-shift i{display:block;width:78%;height:100%;background:linear-gradient(90deg,#62e9ad,#ffe16d,#ff6276);transition:1.1s ease}.risk-shift b{font-size:20px;color:#ff7081}.risk-shift.revised i{width:43%}.risk-shift.revised b{color:#62e9ad}
+
+.hotspot{animation:hotspot 1.8s 4}.map-stage.command-scan::after{content:"";position:absolute;left:0;right:0;height:2px;background:#5beaf0;box-shadow:0 0 18px #5beaf0;animation:mapScan 1.7s ease-out both}@keyframes mapScan{from{top:0}to{top:100%}}
+.metric b,.final-score b{font-variant-numeric:tabular-nums}
+@media(prefers-reduced-motion:reduce){.learning-fx,.detector-beam,.signal-trace,.radiation-rays i,.forecast-visual,.collision-stage *{animation:none!important;transition:none!important}}
+
+/* =========================================================
+   R06 V6.3.0 — THAI-FIRST FINAL MISSION VISUAL OVERHAUL
+   ========================================================= */
+body{font-family:'Kanit',system-ui,sans-serif!important}
+.main{max-width:1680px;margin:0 auto}
+.topbar{
+  background:linear-gradient(135deg,rgba(3,24,31,.96),rgba(7,42,53,.94))!important;
+  box-shadow:0 14px 40px rgba(0,0,0,.28),inset 0 1px rgba(255,255,255,.02)
+}
+.topbar h2{font-size:26px!important;letter-spacing:.01em}
+.topbar p{font-size:12px!important;color:#a8c0c5!important}
+
+.opening-content{max-width:980px!important}
+.opening-content .final-brand{display:flex!important;justify-content:center!important;align-items:center!important;gap:20px!important;margin:18px 0 8px}
+.final-brand>span{
+  font-size:clamp(76px,10vw,140px);font-weight:900;line-height:.8;
+  color:#fff;text-shadow:0 0 35px rgba(88,231,237,.24)
+}
+.final-brand h1{font-size:clamp(34px,5vw,66px)!important;margin:0!important;text-align:left}
+.final-brand h2{font-size:clamp(22px,3vw,42px)!important;margin:4px 0 0!important;text-align:left;color:#ff6679!important}
+.opening-content p{font-size:14px!important;letter-spacing:.08em!important}
+
+.mission-spine{
+  padding:8px!important;border:1px solid rgba(64,220,228,.16);
+  border-radius:14px;background:rgba(4,27,35,.82)
+}
+.mission-spine button{min-height:58px!important;border-radius:11px!important}
+.mission-spine button b{font-size:13px!important}
+.mission-spine button span{font-size:9px!important;line-height:1.2}
+
+.hero-copy{
+  background:linear-gradient(145deg,rgba(5,32,42,.97),rgba(9,48,58,.92))!important;
+  box-shadow:inset 0 0 50px rgba(50,216,225,.025)
+}
+.hero-copy h1{font-size:54px!important;line-height:1.02!important;max-width:760px}
+.hero-copy>p{font-size:14px!important;line-height:1.75!important}
+.prediction-box{padding:18px!important;background:rgba(3,24,31,.88)!important}
+.prediction-box h3{font-size:20px!important}
+
+.national-map-card{
+  border-color:rgba(74,226,234,.28)!important;
+  box-shadow:0 15px 50px rgba(0,0,0,.32),inset 0 0 60px rgba(50,218,227,.025)
+}
+.map-stage{min-height:540px!important}
+.map-head{font-size:10px!important;padding:14px 16px!important;background:#061e27}
+.hotspot{
+  width:68px!important;height:68px!important;
+  box-shadow:0 0 0 8px rgba(255,81,103,.05),0 0 25px rgba(255,81,103,.22)
+}
+.hotspot small{font-size:8px!important;font-weight:800}
+
+.section-head{
+  padding:16px 18px!important;border-radius:14px!important;
+  border:1px solid rgba(60,217,225,.13);
+  background:linear-gradient(90deg,rgba(7,36,45,.82),rgba(4,24,31,.25))
+}
+.section-head h1{font-size:34px!important}
+.section-head p{font-size:12px!important;line-height:1.6!important}
+
+.evidence-list,.analysis-panel,.resource-bank,.city-grid,.deploy-status,
+.forecast-controls,.forecast-visual,.risk-table,.national-order,.collision-card,.revise-panel{
+  box-shadow:0 10px 32px rgba(0,0,0,.20)
+}
+.evidence-item{padding:13px!important;min-height:70px!important}
+.evidence-item b{font-size:14px}
+.evidence-item small{font-size:10px!important;line-height:1.45}
+.analysis-panel h2,.resource-bank h3,.deploy-status h3,.national-order h3{font-size:20px!important}
+
+.city-grid button{min-height:140px!important;padding:16px!important}
+.city-grid button b{font-size:16px!important}
+.city-grid button span{font-size:13px!important}
+.city-grid button small{font-size:10px!important;line-height:1.4}
+
+.forecast-controls label{font-size:13px!important}
+.formula{font-size:28px!important}
+.activity-orb{width:200px!important;height:200px!important}
+.activity-orb span{font-size:54px!important}
+
+.risk-row{font-size:11px!important;padding:13px 9px!important}
+.risk-row.head{background:#07242d}
+.national-order textarea,.revise-panel textarea{font-size:13px!important;line-height:1.6!important}
+
+.collision-stage{gap:18px!important}
+.collision-card{min-height:220px!important;padding:22px!important}
+.collision-card h2{font-size:28px!important}
+.collision-card p{font-size:13px!important;line-height:1.7!important}
+.collision-banner{
+  font-size:22px!important;padding:18px!important;
+  background:linear-gradient(90deg,rgba(245,198,62,.05),rgba(245,198,62,.14),rgba(245,198,62,.05))!important
+}
+
+.verdict-line{font-size:17px!important;padding:18px 20px!important}
+.final-result{padding:28px!important}
+.final-result h1{font-size:48px!important;line-height:1.05!important}
+.final-score{width:190px!important;height:190px!important}
+.final-score b{font-size:66px!important}
+.metric{padding:14px!important}
+.feedback-grid article{padding:15px!important}
+.feedback-grid p{font-size:11px!important;line-height:1.55!important}
+
+.btn.primary{
+  box-shadow:0 8px 20px rgba(255,190,40,.14);
+  transition:transform .18s ease,box-shadow .18s ease
+}
+.btn.primary:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(255,190,40,.22)}
+
+@media(min-width:1600px){
+  .main{padding-left:28px!important;padding-right:28px!important}
+  .hero{grid-template-columns:1.05fr .95fr!important}
+  .map-stage{min-height:600px!important}
+}
+@media(max-width:1366px){
+  .hero-copy h1{font-size:46px!important}
+  .map-stage{min-height:460px!important}
+  .section-head h1{font-size:29px!important}
+  .city-grid button{min-height:120px!important}
+}
+
+
+/* ==========================================================
+   R06 V6.3.1 — OMEGA COMMAND CENTER LIVE BACKGROUND
+   Cinematic background + learning-safe ambient animation.
+   ========================================================== */
+
+/* Replace generic R06 background with OMEGA Command Center */
+body{
+  background:#02070b url('assets/background-r06-omega.jpg') center top / cover fixed no-repeat!important;
+}
+.bg{
+  background:
+    linear-gradient(90deg,rgba(0,8,12,.70) 0%,rgba(0,11,16,.22) 34%,rgba(0,11,16,.20) 66%,rgba(0,8,12,.68) 100%),
+    linear-gradient(180deg,rgba(0,7,11,.18),rgba(0,8,12,.50)),
+    url('assets/background-r06-omega.jpg') center top / cover fixed no-repeat!important;
+  overflow:hidden;
+}
+
+/* Keep Thai text readable over cinematic scene */
+.main::before{
+  content:"";
+  position:fixed;
+  z-index:-1;
+  left:250px;right:0;top:0;bottom:0;
+  background:
+    radial-gradient(circle at 55% 36%,rgba(3,22,28,.08),rgba(3,15,20,.34) 54%,rgba(1,8,12,.54) 100%);
+  pointer-events:none;
+}
+.sidebar{
+  background:linear-gradient(180deg,rgba(1,14,19,.96),rgba(2,19,25,.94))!important;
+  backdrop-filter:blur(12px);
+  box-shadow:12px 0 35px rgba(0,0,0,.26);
+}
+.topbar,.hero-copy,.national-map-card,.evidence-list,.analysis-panel,
+.resource-bank,.city-grid,.deploy-status,.forecast-controls,.forecast-visual,
+.risk-table,.national-order,.collision-card,.revise-panel,.final-result{
+  backdrop-filter:blur(10px) saturate(1.08);
+}
+
+/* Animated ambient hologram glow */
+.bg::before{
+  content:"";
+  position:absolute;
+  left:31%;
+  top:39%;
+  width:42vw;
+  height:42vw;
+  max-width:720px;
+  max-height:720px;
+  min-width:360px;
+  min-height:360px;
+  border-radius:50%;
+  background:
+    radial-gradient(circle,
+      rgba(38,225,235,.16) 0 3%,
+      rgba(38,225,235,.07) 18%,
+      rgba(38,225,235,.025) 42%,
+      transparent 68%);
+  filter:blur(2px);
+  animation:omegaHoloPulse 4.6s ease-in-out infinite;
+  pointer-events:none;
+}
+
+/* Slow national scanning beam */
+.bg::after{
+  content:"";
+  position:absolute;
+  left:16%;
+  right:6%;
+  height:3px;
+  top:-4%;
+  background:
+    linear-gradient(90deg,transparent 0%,rgba(60,236,242,.15) 12%,#63eef2 50%,rgba(60,236,242,.14) 88%,transparent 100%);
+  box-shadow:0 0 16px rgba(73,234,241,.6),0 0 42px rgba(73,234,241,.18);
+  opacity:.65;
+  animation:omegaMapScan 8s linear infinite;
+  pointer-events:none;
+}
+
+/* Data movement layer */
+.grid{
+  background-image:
+    linear-gradient(rgba(63,220,228,.036) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(63,220,228,.036) 1px,transparent 1px)!important;
+  background-size:54px 54px!important;
+  animation:omegaGridDrift 24s linear infinite;
+  opacity:.75;
+}
+
+/* Incident ambient warning lights around viewport */
+.vignette::before,.vignette::after{
+  content:"";
+  position:absolute;
+  width:280px;height:280px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(255,61,78,.18),rgba(255,61,78,.05) 38%,transparent 70%);
+  animation:omegaIncidentBeacon 3.4s ease-in-out infinite;
+  pointer-events:none;
+}
+.vignette::before{top:5%;right:8%}
+.vignette::after{bottom:8%;left:23%;animation-delay:1.15s}
+
+/* OMEGA opening becomes a true final-mission entry scene */
+.opening{
+  background:
+    linear-gradient(180deg,rgba(1,7,10,.16),rgba(1,7,10,.56)),
+    radial-gradient(circle at 50% 55%,rgba(24,120,137,.12),transparent 38%),
+    url('assets/background-r06-omega.jpg') center / cover no-repeat!important;
+}
+.opening::before{
+  content:"";
+  position:absolute;inset:0;
+  background:
+    linear-gradient(90deg,rgba(0,0,0,.62),transparent 28%,transparent 72%,rgba(0,0,0,.58)),
+    linear-gradient(180deg,rgba(0,0,0,.10),rgba(0,0,0,.45));
+  pointer-events:none;
+}
+.opening-content{
+  background:linear-gradient(180deg,rgba(2,18,24,.22),rgba(2,14,19,.48));
+  border:1px solid rgba(69,222,230,.12);
+  border-radius:24px;
+  box-shadow:0 28px 90px rgba(0,0,0,.42);
+  backdrop-filter:blur(3px);
+}
+
+/* Let the central National Map feel holographic */
+.national-map-card{
+  box-shadow:
+    0 18px 55px rgba(0,0,0,.38),
+    inset 0 0 80px rgba(48,219,229,.035),
+    0 0 0 1px rgba(62,219,228,.04)!important;
+}
+.map-stage{
+  background:
+    radial-gradient(circle at 55% 48%,rgba(39,217,228,.19),transparent 34%),
+    linear-gradient(155deg,rgba(1,19,26,.72),rgba(1,12,17,.84))!important;
+}
+.thailand-silhouette{
+  filter:
+    drop-shadow(0 0 16px rgba(60,226,235,.48))
+    drop-shadow(0 0 38px rgba(60,226,235,.16))!important;
+  animation:omegaThailandPulse 3.8s ease-in-out infinite;
+}
+
+/* Incident hotspots: finite strong pulse, then calm */
+.hotspot{
+  animation:omegaHotspotPulse 2.2s ease-in-out 5!important;
+}
+.hotspot::after{
+  content:"";
+  position:absolute;
+  inset:-9px;
+  border:1px solid rgba(255,75,95,.42);
+  border-radius:50%;
+  animation:omegaIncidentRing 1.8s ease-out 5;
+}
+
+/* Cards breathe slightly with ambient light, not distracting */
+.page.active > *{
+  animation:omegaCardReveal .42s ease both;
+}
+.section-head{
+  box-shadow:0 10px 34px rgba(0,0,0,.20),inset 0 1px rgba(255,255,255,.018);
+}
+
+/* Make final verdict visually distinct */
+#step6.page.active{
+  position:relative;
+}
+#step6.page.active::before{
+  content:"";
+  position:fixed;
+  z-index:-1;
+  left:250px;right:0;top:0;bottom:0;
+  background:
+    radial-gradient(circle at 58% 45%,rgba(48,226,166,.12),transparent 30%),
+    linear-gradient(180deg,rgba(0,13,17,.20),rgba(0,9,12,.48));
+  animation:omegaContainedGlow 4s ease-in-out infinite;
+  pointer-events:none;
+}
+
+/* Cinematic keyframes */
+@keyframes omegaHoloPulse{
+  0%,100%{transform:scale(.95);opacity:.40}
+  50%{transform:scale(1.08);opacity:.82}
+}
+@keyframes omegaMapScan{
+  0%{top:-4%;opacity:0}
+  8%{opacity:.72}
+  88%{opacity:.56}
+  100%{top:104%;opacity:0}
+}
+@keyframes omegaGridDrift{
+  from{background-position:0 0,0 0}
+  to{background-position:0 108px,108px 0}
+}
+@keyframes omegaIncidentBeacon{
+  0%,100%{transform:scale(.75);opacity:.18}
+  50%{transform:scale(1.15);opacity:.72}
+}
+@keyframes omegaThailandPulse{
+  0%,100%{opacity:.72;transform:scale(.985)}
+  50%{opacity:1;transform:scale(1.015)}
+}
+@keyframes omegaHotspotPulse{
+  0%,100%{transform:scale(1);box-shadow:0 0 0 7px rgba(255,79,101,.04),0 0 18px rgba(255,79,101,.20)}
+  45%{transform:scale(1.12);box-shadow:0 0 0 12px rgba(255,79,101,.07),0 0 34px rgba(255,79,101,.40)}
+}
+@keyframes omegaIncidentRing{
+  from{transform:scale(.58);opacity:.9}
+  to{transform:scale(1.55);opacity:0}
+}
+@keyframes omegaCardReveal{
+  from{opacity:.60;transform:translateY(8px)}
+  to{opacity:1;transform:none}
+}
+@keyframes omegaContainedGlow{
+  0%,100%{opacity:.55}
+  50%{opacity:1}
+}
+
+/* Keep animation accessible and readable */
+@media(prefers-reduced-motion:reduce){
+  .bg::before,.bg::after,.grid,.vignette::before,.vignette::after,
+  .thailand-silhouette,.hotspot,.hotspot::after,#step6.page.active::before{
+    animation:none!important;
+  }
+}
+@media(max-width:900px){
+  body,.bg{background-position:center top!important;background-attachment:scroll!important}
+  .main::before,#step6.page.active::before{left:0}
+  .bg::before{left:16%;width:70vw;height:70vw}
+}
+
+
+/* ==========================================================
+   R06 V6.3.2 — INTERNAL FRAME / PANEL VISUAL POLISH
+   Visual only: no logic / mission / backend changes.
+   ========================================================== */
+
+:root{
+  --r06-glass:rgba(5,27,35,.86);
+  --r06-glass-2:rgba(8,38,48,.90);
+  --r06-glass-soft:rgba(7,32,41,.72);
+  --r06-border:rgba(76,219,229,.18);
+  --r06-border-strong:rgba(76,219,229,.34);
+  --r06-shadow:0 18px 45px rgba(0,0,0,.28);
+  --r06-inner:inset 0 1px 0 rgba(255,255,255,.025), inset 0 0 34px rgba(62,221,230,.025);
+}
+
+/* ----- Common premium panel language ----- */
+.hero-copy,
+.national-map-card,
+.evidence-list,
+.analysis-panel,
+.resource-bank,
+.city-grid,
+.deploy-status,
+.forecast-controls,
+.forecast-visual,
+.risk-table,
+.national-order,
+.collision-card,
+.revise-panel,
+.final-result,
+.prediction-box,
+.section-head,
+.commander-card{
+  border:1px solid var(--r06-border)!important;
+  background:
+    linear-gradient(155deg,rgba(7,37,47,.92),rgba(3,22,29,.88))!important;
+  box-shadow:var(--r06-shadow),var(--r06-inner)!important;
+  backdrop-filter:blur(13px) saturate(1.12)!important;
+  -webkit-backdrop-filter:blur(13px) saturate(1.12)!important;
+}
+
+/* Thin luminous top edge */
+.hero-copy::before,
+.national-map-card::before,
+.evidence-list::before,
+.analysis-panel::before,
+.resource-bank::before,
+.city-grid::before,
+.deploy-status::before,
+.forecast-controls::before,
+.forecast-visual::before,
+.risk-table::before,
+.national-order::before,
+.collision-card::before,
+.revise-panel::before,
+.final-result::before{
+  content:"";
+  position:absolute;
+  left:18px;right:18px;top:0;
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(82,231,238,.52),transparent);
+  opacity:.75;
+  pointer-events:none;
+}
+.hero-copy,
+.national-map-card,
+.evidence-list,
+.analysis-panel,
+.resource-bank,
+.city-grid,
+.deploy-status,
+.forecast-controls,
+.forecast-visual,
+.risk-table,
+.national-order,
+.collision-card,
+.revise-panel,
+.final-result{
+  position:relative;
+  overflow:hidden;
+}
+
+/* Decorative corner marks */
+.hero-copy::after,
+.analysis-panel::after,
+.forecast-visual::after,
+.national-order::after,
+.final-result::after{
+  content:"";
+  position:absolute;
+  right:10px;top:10px;
+  width:18px;height:18px;
+  border-top:1px solid rgba(82,231,238,.34);
+  border-right:1px solid rgba(82,231,238,.34);
+  pointer-events:none;
+}
+
+/* ----- Section heading card ----- */
+.section-head{
+  padding:17px 19px!important;
+  border-radius:16px!important;
+  margin:18px 0 13px!important;
+}
+.section-head::before{
+  content:"";
+  position:absolute;
+  left:0;top:12px;bottom:12px;width:3px;
+  border-radius:0 4px 4px 0;
+  background:linear-gradient(#51e6ed,#f5c63e);
+  box-shadow:0 0 12px rgba(81,230,237,.24);
+}
+.section-head{position:relative}
+.section-head h1{letter-spacing:.01em!important}
+.step-score{
+  min-width:102px;
+  padding:8px 11px;
+  border-radius:10px;
+  border:1px solid rgba(245,198,62,.20);
+  background:rgba(245,198,62,.055);
+}
+.step-score b{font-size:18px!important}
+
+/* ----- Prediction / Input areas ----- */
+.prediction-box{
+  border-radius:14px!important;
+  border-color:rgba(245,198,62,.18)!important;
+  background:
+    linear-gradient(145deg,rgba(5,28,35,.92),rgba(12,34,38,.82))!important;
+}
+.prediction-box h3{
+  padding-bottom:8px;
+  margin-bottom:12px!important;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+textarea{
+  background:rgba(2,17,23,.86)!important;
+  border:1px solid rgba(76,219,229,.18)!important;
+  box-shadow:inset 0 0 20px rgba(0,0,0,.18);
+}
+textarea:focus{
+  outline:none!important;
+  border-color:rgba(80,229,237,.52)!important;
+  box-shadow:0 0 0 3px rgba(80,229,237,.06),inset 0 0 20px rgba(0,0,0,.18)!important;
+}
+
+/* ----- Choice buttons as command chips/cards ----- */
+.choice-grid button,
+.time-select button,
+.resource-bank button,
+.city-grid button{
+  background:
+    linear-gradient(180deg,rgba(11,50,62,.90),rgba(5,31,39,.94))!important;
+  border:1px solid rgba(76,219,229,.18)!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.02);
+  transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease,background .18s ease!important;
+}
+.choice-grid button:hover,
+.time-select button:hover,
+.resource-bank button:hover,
+.city-grid button:hover{
+  transform:translateY(-2px);
+  border-color:rgba(76,219,229,.44)!important;
+  box-shadow:0 10px 22px rgba(0,0,0,.18),0 0 18px rgba(72,220,228,.05)!important;
+}
+.choice-grid button.selected,
+.time-select button.selected,
+.resource-bank button.selected{
+  background:
+    linear-gradient(180deg,rgba(245,198,62,.17),rgba(67,53,12,.16))!important;
+  border-color:rgba(245,198,62,.58)!important;
+  box-shadow:0 0 0 2px rgba(245,198,62,.05),inset 0 0 22px rgba(245,198,62,.05)!important;
+}
+.city-grid button.assigned{
+  background:
+    linear-gradient(180deg,rgba(47,179,117,.16),rgba(4,43,34,.30))!important;
+  border-color:rgba(91,233,168,.52)!important;
+  box-shadow:0 0 22px rgba(91,233,168,.06)!important;
+}
+
+/* ----- Evidence cards ----- */
+.evidence-item{
+  border-radius:12px!important;
+  background:
+    linear-gradient(90deg,rgba(9,44,54,.94),rgba(5,31,39,.92))!important;
+  border:1px solid rgba(76,219,229,.14)!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.015);
+  transition:.18s ease;
+}
+.evidence-item:hover{
+  transform:translateX(3px);
+  border-color:rgba(76,219,229,.36)!important;
+}
+.evidence-item button{
+  background:radial-gradient(circle,#0b4652,#072c36)!important;
+  border-color:rgba(79,224,232,.34)!important;
+  box-shadow:0 0 14px rgba(79,224,232,.06);
+}
+.analysis-readout,
+.insight{
+  border-radius:11px!important;
+  background:rgba(2,21,28,.88)!important;
+  border:1px solid rgba(76,219,229,.16)!important;
+  box-shadow:inset 0 0 22px rgba(0,0,0,.18);
+}
+
+/* ----- Map card refinement ----- */
+.national-map-card{
+  border-color:rgba(82,228,236,.28)!important;
+}
+.map-head{
+  background:
+    linear-gradient(90deg,rgba(8,39,48,.96),rgba(4,25,32,.94))!important;
+  border-bottom:1px solid rgba(76,219,229,.12);
+}
+.map-metrics{
+  background:rgba(22,70,83,.32)!important;
+  gap:1px!important;
+}
+.map-metrics div{
+  background:
+    linear-gradient(180deg,rgba(8,40,50,.96),rgba(5,28,36,.94))!important;
+  border-top:1px solid rgba(255,255,255,.018);
+}
+
+/* ----- Resource / Deploy area ----- */
+.resource-bank h3,
+.deploy-status h3,
+.analysis-panel h2,
+.national-order h3{
+  margin-top:0!important;
+  padding-bottom:10px!important;
+  border-bottom:1px solid rgba(255,255,255,.065);
+}
+.deploy-status{
+  background:
+    linear-gradient(160deg,rgba(8,39,47,.92),rgba(7,28,36,.92))!important;
+}
+.dose-scene{
+  padding:7px;
+  border-radius:12px;
+  background:rgba(2,19,25,.40);
+  border:1px solid rgba(255,255,255,.04);
+}
+
+/* ----- Forecast refinement ----- */
+.forecast-controls label{
+  padding:8px 0;
+  border-bottom:1px dashed rgba(255,255,255,.055);
+}
+.formula{
+  background:
+    linear-gradient(145deg,rgba(3,24,31,.96),rgba(6,36,44,.88))!important;
+  border:1px solid rgba(76,219,229,.22)!important;
+  box-shadow:inset 0 0 25px rgba(61,221,229,.025);
+}
+.activity-orb{
+  border:1px solid rgba(75,228,235,.44)!important;
+  box-shadow:
+    0 0 0 8px rgba(76,220,228,.025),
+    0 0 42px rgba(76,220,228,.08),
+    inset 0 0 30px rgba(76,220,228,.035)!important;
+}
+.forecast-bars div{
+  padding-top:10px;
+}
+.forecast-bars i{
+  box-shadow:0 0 12px rgba(72,220,228,.08);
+}
+
+/* ----- Risk table ----- */
+.risk-table{
+  overflow:hidden;
+}
+.risk-row{
+  border-bottom:1px solid rgba(255,255,255,.05)!important;
+}
+.risk-row.head{
+  background:
+    linear-gradient(90deg,rgba(10,48,58,.96),rgba(7,35,44,.94))!important;
+  border-radius:9px 9px 0 0;
+}
+.risk-row.priority{
+  background:
+    linear-gradient(90deg,rgba(245,198,62,.055),rgba(245,198,62,.025))!important;
+  box-shadow:inset 3px 0 0 rgba(245,198,62,.45);
+}
+
+/* ----- Collision / revision = dramatic premium frame ----- */
+.collision-card.original{
+  border-color:rgba(255,102,121,.34)!important;
+  background:
+    linear-gradient(145deg,rgba(55,17,25,.76),rgba(17,29,35,.92))!important;
+}
+.collision-card.evidence{
+  border-color:rgba(245,198,62,.36)!important;
+  background:
+    linear-gradient(145deg,rgba(58,47,13,.30),rgba(12,31,37,.94))!important;
+}
+.collision-card small{
+  display:inline-block;
+  padding:4px 7px;
+  border-radius:999px;
+  background:rgba(255,255,255,.035);
+  border:1px solid rgba(255,255,255,.06);
+}
+.collision-banner{
+  border-radius:14px!important;
+  box-shadow:0 12px 28px rgba(0,0,0,.18),inset 0 0 30px rgba(245,198,62,.025)!important;
+}
+.revise-panel{
+  border-color:rgba(245,198,62,.24)!important;
+}
+
+/* ----- Final result / scoring ----- */
+.final-result{
+  border-color:rgba(89,234,170,.28)!important;
+  background:
+    linear-gradient(145deg,rgba(5,39,39,.92),rgba(3,24,29,.96))!important;
+}
+.final-score{
+  background:
+    radial-gradient(circle at 50% 38%,rgba(41,129,139,.42),rgba(3,22,28,.96) 64%)!important;
+  border-color:#2c8a92!important;
+  box-shadow:
+    0 0 0 8px rgba(73,220,228,.025),
+    0 0 50px rgba(73,220,228,.10),
+    inset 0 0 35px rgba(73,220,228,.045)!important;
+}
+.metric{
+  background:
+    linear-gradient(180deg,rgba(8,42,51,.94),rgba(5,29,37,.96))!important;
+  border:1px solid rgba(76,219,229,.14)!important;
+  border-radius:11px!important;
+}
+.feedback-grid article{
+  background:
+    linear-gradient(145deg,rgba(6,31,39,.94),rgba(4,24,31,.96))!important;
+  border:1px solid rgba(76,219,229,.12)!important;
+  border-radius:11px!important;
+}
+.mission-series span{
+  background:
+    linear-gradient(180deg,rgba(11,48,57,.94),rgba(5,30,37,.96))!important;
+  border-color:rgba(97,229,174,.22)!important;
+}
+
+/* ----- Consistent inner spacing ----- */
+.evidence-list,
+.analysis-panel,
+.resource-bank,
+.city-grid,
+.deploy-status,
+.forecast-controls,
+.forecast-visual,
+.risk-table,
+.national-order,
+.collision-card,
+.revise-panel{
+  padding:18px!important;
+}
+.hero-copy{padding:26px!important}
+.final-result{padding:30px!important}
+
+/* ----- Mobile / 1366 polish ----- */
+@media(max-width:1366px){
+  .evidence-list,
+  .analysis-panel,
+  .resource-bank,
+  .city-grid,
+  .deploy-status,
+  .forecast-controls,
+  .forecast-visual,
+  .risk-table,
+  .national-order,
+  .collision-card,
+  .revise-panel{
+    padding:15px!important;
+  }
+  .hero-copy{padding:21px!important}
+  .final-result{padding:22px!important}
+}
+@media(max-width:900px){
+  .section-head{padding:13px 14px!important}
+  .step-score{align-self:stretch;text-align:left}
+  .collision-card{min-height:auto!important}
+}
+
+
+/* ==========================================================
+   R06 V6.3.3 — FINAL UI REFINEMENT
+   Compact header + Achievement Grid + Decision Intelligence UI
+   ========================================================== */
+
+/* ---------- Compact command header ---------- */
+.topbar{
+  min-height:auto!important;
+  padding:11px 16px!important;
+  border-radius:14px!important;
+}
+.topbar small{font-size:8px!important}
+.topbar h2{
+  margin:2px 0!important;
+  font-size:22px!important;
+  line-height:1.15!important;
+}
+.topbar p{
+  margin:0!important;
+  font-size:10px!important;
+  line-height:1.35!important;
+}
+.topstatus{gap:6px!important}
+.topstatus .pill,
+.topstatus .btn{
+  padding:6px 9px!important;
+  font-size:8px!important;
+}
+
+/* ---------- Slim 01–07 mission spine ---------- */
+.mission-spine{
+  gap:6px!important;
+  margin:10px 0 12px!important;
+  padding:6px!important;
+  border-radius:12px!important;
+}
+.mission-spine button{
+  min-height:48px!important;
+  padding:6px 4px!important;
+  border-radius:9px!important;
+}
+.mission-spine button b{
+  font-size:11px!important;
+  line-height:1!important;
+}
+.mission-spine button span{
+  margin-top:3px;
+  font-size:7.5px!important;
+  line-height:1.15!important;
+}
+
+/* ---------- Make panels lighter so OMEGA background stays visible ---------- */
+.hero-copy,
+.evidence-list,.analysis-panel,.resource-bank,.city-grid,.deploy-status,
+.forecast-controls,.forecast-visual,.risk-table,.national-order,
+.collision-card,.revise-panel,.final-result{
+  background:
+    linear-gradient(155deg,rgba(7,37,47,.82),rgba(3,22,29,.78))!important;
+}
+.section-head{
+  background:
+    linear-gradient(90deg,rgba(7,36,45,.76),rgba(4,24,31,.16))!important;
+}
+
+/* ---------- Step 05: Risk Intelligence + Decision Cards ---------- */
+#step4 .decision-layout{
+  display:grid!important;
+  grid-template-columns:minmax(0,1.12fr) minmax(330px,.88fr)!important;
+  gap:12px!important;
+  align-items:stretch!important;
+}
+#step4 .risk-table{
+  padding:14px!important;
+  border-color:rgba(80,222,231,.22)!important;
+  background:linear-gradient(150deg,rgba(5,31,40,.80),rgba(3,21,28,.70))!important;
+}
+#step4 .risk-table::before{
+  content:"ข้อมูลประเมินความเสี่ยง • RISK INTELLIGENCE";
+  display:block;
+  margin-bottom:10px;
+  padding-bottom:8px;
+  border-bottom:1px solid rgba(255,255,255,.06);
+  color:#66e6eb;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.04em;
+}
+#step4 .risk-row{
+  grid-template-columns:1.05fr .9fr .85fr .9fr 1fr!important;
+  gap:6px!important;
+  padding:10px 8px!important;
+  border-radius:7px;
+}
+#step4 .risk-row:not(.head):hover{
+  background:rgba(72,218,228,.045)!important;
+}
+#step4 .risk-row.priority{
+  border-left:3px solid rgba(245,198,62,.68);
+}
+
+/* Decision panel becomes a visual command deck */
+#step4 .national-order{
+  padding:14px!important;
+  background:linear-gradient(150deg,rgba(5,29,37,.82),rgba(4,22,29,.74))!important;
+}
+#step4 .national-order h3{
+  font-size:21px!important;
+  margin-bottom:4px!important;
+}
+#step4 .national-order h3::after{
+  content:"คำสั่งของคุณจะส่งผลต่อชีวิตประชาชนและความเชื่อมั่นของประเทศ";
+  display:block;
+  margin-top:4px;
+  color:#89aeb5;
+  font-size:8px;
+  font-weight:400;
+}
+#step4 .choice-grid.vertical{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:9px!important;
+}
+#step4 .choice-grid.vertical button{
+  position:relative;
+  min-height:118px!important;
+  padding:14px 12px 38px!important;
+  text-align:left!important;
+  font-size:13px!important;
+  line-height:1.25!important;
+  overflow:hidden;
+}
+#step4 .choice-grid.vertical button::before{
+  display:block;
+  margin-bottom:6px;
+  font-size:22px;
+}
+#step4 [data-order="EVACUATE"]::after,
+#step4 [data-order="SHELTER"]::after,
+#step4 [data-order="RESTRICT"]::after,
+#step4 [data-order="MONITOR"]::after{
+  position:absolute;
+  left:11px;right:11px;bottom:9px;
+  padding-top:6px;
+  border-top:1px solid rgba(255,255,255,.06);
+  color:#90adb3;
+  font-size:7.5px;
+  font-weight:500;
+  line-height:1.3;
+}
+#step4 [data-order="EVACUATE"]{
+  border-color:rgba(255,91,111,.30)!important;
+}
+#step4 [data-order="EVACUATE"]::before{content:"🚨"}
+#step4 [data-order="EVACUATE"]::after{content:"ผลกระทบสูง • ใช้เมื่อความเสี่ยงรุนแรงและกว้าง"}
+#step4 [data-order="SHELTER"]{
+  border-color:rgba(245,198,62,.30)!important;
+}
+#step4 [data-order="SHELTER"]::before{content:"🏠"}
+#step4 [data-order="SHELTER"]::after{content:"ลดการเคลื่อนที่ • เหมาะเมื่อภายนอกยังมีความเสี่ยง"}
+#step4 [data-order="RESTRICT"]{
+  border-color:rgba(255,174,75,.34)!important;
+}
+#step4 [data-order="RESTRICT"]::before{content:"⛔"}
+#step4 [data-order="RESTRICT"]::after{content:"จำกัดเฉพาะจุด • ลดผลกระทบต่อพื้นที่ปลอดภัย"}
+#step4 [data-order="MONITOR"]{
+  border-color:rgba(75,224,232,.30)!important;
+}
+#step4 [data-order="MONITOR"]::before{content:"📡"}
+#step4 [data-order="MONITOR"]::after{content:"เฝ้าระวังต่อ • ใช้เมื่อข้อมูลยังไม่ชี้ว่าต้องแทรกแซง"}
+#step4 .choice-grid.vertical button.selected{
+  transform:translateY(-2px)!important;
+  box-shadow:0 0 0 2px rgba(245,198,62,.06),0 12px 30px rgba(0,0,0,.20)!important;
+}
+#step4 .national-order textarea{
+  min-height:78px!important;
+  margin-top:10px!important;
+}
+
+/* ---------- Final verdict: Achievement Grid instead of long strips ---------- */
+#step6 .verdict-sequence{
+  max-width:1120px!important;
+  margin:24px auto 18px!important;
+  display:grid!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  gap:12px!important;
+}
+#step6 .verdict-sequence::before{
+  content:"ภารกิจ R-06 เสร็จสมบูรณ์";
+  grid-column:1/-1;
+  display:block;
+  margin-bottom:2px;
+  text-align:center;
+  color:#69edac;
+  font-size:20px;
+  font-weight:900;
+}
+#step6 .verdict-line{
+  min-height:180px!important;
+  margin:0!important;
+  padding:18px 14px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:10px!important;
+  text-align:center!important;
+  border-radius:15px!important;
+  background:
+    linear-gradient(155deg,rgba(6,40,48,.82),rgba(3,24,30,.82))!important;
+  border:1px solid rgba(80,226,234,.18)!important;
+  box-shadow:0 14px 36px rgba(0,0,0,.20),inset 0 0 32px rgba(62,221,230,.022)!important;
+  font-size:13px!important;
+  line-height:1.35!important;
+  overflow:hidden;
+}
+#step6 .verdict-line::before{
+  display:grid;
+  place-items:center;
+  width:62px;height:62px;
+  border-radius:50%;
+  border:1px solid rgba(81,230,237,.32);
+  background:radial-gradient(circle,rgba(42,153,163,.25),rgba(5,35,43,.92) 68%);
+  color:#6ee8ed;
+  font-size:28px;
+  box-shadow:0 0 24px rgba(78,226,234,.08);
+}
+#step6 .verdict-line:nth-of-type(1)::before{content:"🎯"}
+#step6 .verdict-line:nth-of-type(2)::before{content:"🛡️"}
+#step6 .verdict-line:nth-of-type(3)::before{content:"☢️"}
+#step6 .verdict-line:nth-of-type(4)::before{content:"⏳"}
+#step6 .verdict-line:nth-of-type(5)::before{content:"👥"}
+#step6 .verdict-line b{
+  float:none!important;
+  display:grid!important;
+  place-items:center!important;
+  width:32px;height:32px;
+  border-radius:50%;
+  margin-top:auto;
+  border:1px solid rgba(87,236,171,.36);
+  background:rgba(49,177,116,.10);
+  color:#62efad!important;
+  font-size:19px!important;
+  box-shadow:0 0 18px rgba(86,235,170,.08);
+}
+#step6 .verdict-line.on{
+  border-color:rgba(89,234,170,.36)!important;
+  background:
+    linear-gradient(155deg,rgba(8,52,48,.84),rgba(3,28,31,.88))!important;
+}
+
+/* ---------- Final result cleaner + compact ---------- */
+#step6 .final-result{
+  max-width:1180px;
+  margin:0 auto;
+}
+#step6 .final-score-wrap{
+  grid-template-columns:170px 1fr!important;
+  gap:18px!important;
+}
+#step6 .final-score{
+  width:158px!important;
+  height:158px!important;
+}
+#step6 .final-score b{font-size:54px!important}
+#step6 .final-result h1{
+  font-size:40px!important;
+  margin:6px 0 14px!important;
+}
+#step6 .score-breakdown{
+  gap:7px!important;
+}
+#step6 .metric{
+  padding:11px!important;
+}
+#step6 .metric b{font-size:17px!important}
+
+/* ---------- 1366 × 768 specifically ---------- */
+@media(max-width:1450px){
+  .topbar{padding:9px 14px!important}
+  .topbar h2{font-size:19px!important}
+  .mission-spine button{min-height:44px!important}
+  .section-head{padding:12px 15px!important;margin:12px 0 10px!important}
+  .section-head h1{font-size:27px!important}
+  #step4 .decision-layout{grid-template-columns:1.08fr .92fr!important}
+  #step4 .choice-grid.vertical button{min-height:104px!important;padding:11px 10px 34px!important}
+  #step6 .verdict-sequence{gap:8px!important;margin-top:15px!important}
+  #step6 .verdict-line{min-height:150px!important;padding:13px 10px!important;font-size:11px!important}
+  #step6 .verdict-line::before{width:50px;height:50px;font-size:22px}
+}
+
+/* ---------- Responsive fallback ---------- */
+@media(max-width:1000px){
+  #step4 .decision-layout{grid-template-columns:1fr!important}
+  #step6 .verdict-sequence{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:650px){
+  #step4 .choice-grid.vertical{grid-template-columns:1fr!important}
+  #step6 .verdict-sequence{grid-template-columns:1fr!important}
+}
+
+
+/* ==========================================================
+   R06 V6.3.4 — SIDEBAR OPERATIONS 2-COLUMN GRID
+   Match R01–R05 visual structure.
+   ========================================================== */
+
+/* Convert R06 operation list from 1 column to 2 columns */
+.sidebar .side-title{
+  margin:16px 4px 8px!important;
+}
+
+.sidebar .mission-mini{
+  min-width:0!important;
+}
+
+/* Wrap the six mission cards into a visual 2-column grid
+   using CSS Grid on the sidebar flow area. */
+.sidebar{
+  display:block!important;
+}
+
+/* Mission cards themselves become compact tiles */
+.sidebar .mission-mini{
+  width:calc(50% - 5px)!important;
+  display:inline-grid!important;
+  grid-template-columns:28px 1fr auto!important;
+  gap:4px!important;
+  vertical-align:top!important;
+  margin:4px 2px!important;
+  padding:9px 8px!important;
+  min-height:44px!important;
+  border-radius:10px!important;
+  align-items:center!important;
+}
+
+/* Keep pairs aligned cleanly */
+.sidebar .mission-mini:nth-of-type(odd){
+  margin-left:0!important;
+}
+.sidebar .mission-mini:nth-of-type(even){
+  margin-right:0!important;
+}
+
+/* Compact R number and status */
+.sidebar .mission-mini b{
+  font-size:11px!important;
+  line-height:1!important;
+}
+.sidebar .mission-mini span{
+  font-size:7px!important;
+  line-height:1.15!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+.sidebar .mission-mini em{
+  font-size:7px!important;
+  white-space:nowrap!important;
+}
+
+/* R06 current tile retains gold focus */
+.sidebar .mission-mini.current{
+  border-color:#f5c63e!important;
+  background:
+    linear-gradient(145deg,rgba(45,54,29,.80),rgba(12,36,40,.88))!important;
+  box-shadow:0 0 0 1px rgba(245,198,62,.04),0 0 18px rgba(245,198,62,.05)!important;
+}
+.sidebar .mission-mini.current em{
+  color:#ffe16d!important;
+}
+
+/* Keep commander card safely below mission tiles */
+.sidebar .commander-card{
+  clear:both!important;
+  margin-top:14px!important;
+}
+
+/* At very narrow sidebar/mobile widths fall back to single column */
+@media(max-width:900px){
+  .sidebar .mission-mini{
+    width:calc(50% - 5px)!important;
+  }
+}
+@media(max-width:480px){
+  .sidebar .mission-mini{
+    width:100%!important;
+    margin:4px 0!important;
+  }
+}
+
+
+/* ==========================================================
+   RDA V6.3.5 — SYSTEM-WIDE BRAND IDENTITY SYNC
+   Entry Portal → Headquarters → R01–R06
+   ========================================================== */
+.sidebar .brand,
+.sidebar .brand-block,
+.sidebar .side-brand,
+.sidebar .logo-wrap,
+.sidebar header:first-child{
+  align-items:center!important;
+}
+.sidebar .brand img,
+.sidebar .brand-block img,
+.sidebar .side-brand img,
+.sidebar .logo-wrap img,
+.sidebar > img:first-child{
+  width:54px!important;
+  height:auto!important;
+  flex:0 0 54px!important;
+  object-fit:contain!important;
+  filter:drop-shadow(0 0 10px rgba(65,222,230,.10));
+}
+.sidebar .brand h1,
+.sidebar .brand h2,
+.sidebar .brand-block h1,
+.sidebar .brand-block h2,
+.sidebar .side-brand h1,
+.sidebar .side-brand h2{
+  font-size:13px!important;
+  line-height:1.08!important;
+  letter-spacing:.005em!important;
+  margin:0!important;
+}
+.sidebar .brand small,
+.sidebar .brand p,
+.sidebar .brand-block small,
+.sidebar .brand-block p,
+.sidebar .side-brand small,
+.sidebar .side-brand p{
+  margin-top:4px!important;
+  font-size:8px!important;
+  line-height:1.15!important;
+  letter-spacing:.04em!important;
+}
+
+
+/* ==========================================================
+   R06 V6.3.8 — OPERATIONS SIDEBAR CLICK FIX
+   Sidebar mission tiles are navigation controls, not decorative cards.
+   ========================================================== */
+.sidebar .mission-mini{
+  position:relative!important;
+  z-index:20!important;
+  pointer-events:auto!important;
+  cursor:pointer!important;
+  text-decoration:none!important;
+}
+.sidebar .mission-mini *{
+  pointer-events:none!important;
+}
+.sidebar .side-title{
+  position:relative;
+  z-index:20;
+}
+.sidebar{
+  position:relative!important;
+  z-index:50!important;
+}
+.sidebar::before,
+.sidebar::after{
+  pointer-events:none!important;
+}
+
+
+/* ==========================================================
+   R06 V6.3.9 — R06 TILE MATCH OTHER OPERATIONS
+   R06 sidebar tile now visually matches R01–R05.
+   ========================================================== */
+.sidebar .mission-mini.current,
+.sidebar .mission-mini.completed{
+  border-color:#15815f!important;
+  background:linear-gradient(145deg,rgba(5,38,43,.94),rgba(4,29,35,.96))!important;
+  box-shadow:none!important;
+}
+.sidebar .mission-mini.current em,
+.sidebar .mission-mini.completed em{
+  color:#5ee6a7!important;
+}
+
+
+/* ==========================================================
+   R06 V6.4.0 — SIDEBAR EXACT MATCH TO R01–R05
+   Icon + mission number + check only.
+   ========================================================== */
+.sidebar .mission-mini{
+  width:calc(50% - 5px)!important;
+  min-height:44px!important;
+  display:inline-grid!important;
+  grid-template-columns:24px 1fr 18px!important;
+  align-items:center!important;
+  gap:5px!important;
+  padding:8px 9px!important;
+  margin:4px 2px!important;
+  border:1px solid #15815f!important;
+  border-radius:10px!important;
+  background:linear-gradient(145deg,rgba(5,38,43,.94),rgba(4,29,35,.96))!important;
+  color:#eefbfc!important;
+  text-decoration:none!important;
+  box-shadow:none!important;
+}
+.sidebar .mission-mini .mission-icon{
+  display:block!important;
+  width:24px!important;
+  text-align:center!important;
+  font-size:14px!important;
+  line-height:1!important;
+}
+.sidebar .mission-mini b{
+  display:block!important;
+  margin:0!important;
+  color:#eefbfc!important;
+  font-size:11px!important;
+  line-height:1!important;
+  font-weight:800!important;
+}
+.sidebar .mission-mini em{
+  display:block!important;
+  margin:0!important;
+  color:#5ee6a7!important;
+  font-size:10px!important;
+  font-style:normal!important;
+  text-align:right!important;
+  line-height:1!important;
+}
+.sidebar .mission-mini:hover{
+  border-color:#20a77b!important;
+  background:linear-gradient(145deg,rgba(6,48,51,.96),rgba(5,34,40,.96))!important;
+  transform:translateY(-1px);
+}

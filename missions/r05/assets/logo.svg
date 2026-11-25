@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+<defs>
+  <radialGradient id="g" cx="50%" cy="45%" r="60%">
+    <stop offset="0" stop-color="#2de2e6"/>
+    <stop offset="0.55" stop-color="#0b3954"/>
+    <stop offset="1" stop-color="#06141d"/>
+  </radialGradient>
+  <filter id="glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<circle cx="128" cy="128" r="118" fill="url(#g)" stroke="#ffcc33" stroke-width="8"/>
+<circle cx="128" cy="128" r="88" fill="#081b27" stroke="#2de2e6" stroke-width="4"/>
+<g filter="url(#glow)" fill="#ffcc33">
+  <circle cx="128" cy="128" r="22"/>
+  <path d="M128 26a44 44 0 0 1 38 66l-23 39a18 18 0 0 0-15-27z"/>
+  <path d="M216 178a44 44 0 0 1-76 0l-23-39a18 18 0 0 0 30 0z"/>
+  <path d="M40 178a44 44 0 0 1 38-66l46 0a18 18 0 0 0-15 27z"/>
+</g>
+<text x="128" y="236" text-anchor="middle" font-family="Arial" font-size="17" font-weight="700" fill="#f4fbff">RADIATION DETECTIVE</text>
+</svg>

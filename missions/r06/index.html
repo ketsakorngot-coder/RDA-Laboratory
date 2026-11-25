@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>R-06 COMMAND — วิกฤตรังสีครั้งสุดท้าย</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="bg"><div class="grid"></div><div class="scan"></div><div class="vignette"></div></div>
+
+<div id="opening" class="opening">
+  <div class="opening-grid"></div>
+  <div class="opening-content">
+    <div class="opening-kicker">เครือข่ายฉุกเฉินรังสีแห่งชาติ</div>
+    <div class="opening-alert">ระดับวิกฤตสูงสุด</div>
+    <h1>R-06 • บัญชาการ</h1>
+    <h2>วิกฤตรังสีครั้งสุดท้าย</h2>
+    <p>หนึ่งวิกฤต • ห้าทักษะ • หนึ่งคำสั่งระดับประเทศ</p>
+    <button id="startMissionBtn" class="btn primary big">เข้าสู่ศูนย์บัญชาการแห่งชาติ</button>
+  </div>
+</div>
+
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <img src="../../assets/logo.png" onerror="this.style.display='none'">
+      <div><h1>Radiation Detective Agency</h1><small>RDA</small></div>
+    </div>
+
+    <a class="hq-link" href="../../index.html">🏛️ Headquarters</a>
+
+    <div class="side-title">📁 Operations</div>
+    <a class="mission-mini completed" href="../r01/index.html" aria-label="เปิดภารกิจ R-01"><span class="mission-icon">☢️</span><b>R-01</b><em>✓</em></a>
+    <a class="mission-mini completed" href="../r02/index.html" aria-label="เปิดภารกิจ R-02"><span class="mission-icon">🏥</span><b>R-02</b><em>✓</em></a>
+    <a class="mission-mini completed" href="../r03/index.html" aria-label="เปิดภารกิจ R-03"><span class="mission-icon">✈️</span><b>R-03</b><em>✓</em></a>
+    <a class="mission-mini completed" href="../r04/index.html" aria-label="เปิดภารกิจ R-04"><span class="mission-icon">🏭</span><b>R-04</b><em>✓</em></a>
+    <a class="mission-mini completed" href="../r05/index.html" aria-label="เปิดภารกิจ R-05"><span class="mission-icon">🚨</span><b>R-05</b><em>✓</em></a>
+    <a class="mission-mini completed" href="index.html" aria-label="เปิดภารกิจ R-06"><span class="mission-icon">⚠️</span><b>R-06</b><em>✓</em></a>
+
+    <div class="commander-card">
+      <small>ผู้บัญชาการเหตุการณ์</small>
+      <b id="rankText">Expert Commander</b>
+      <div class="energy-line"><span>พลังงานบัญชาการ</span><strong id="energySide">100</strong></div>
+      <div class="energy-bar"><i id="energyBar"></i></div>
+      <div class="side-score"><span>คะแนนบัญชาการ</span><b id="sideScore">0</b></div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <small>R-06 • ภารกิจสรุปสมรรถนะ</small>
+        <h2>ศูนย์บัญชาการวิกฤตรังสีแห่งชาติ</h2>
+        <p>บูรณาการหลักฐานจาก R-01 → R-05 เพื่อควบคุมวิกฤตระดับประเทศ</p>
+      </div>
+      <div class="topstatus">
+        <span class="pill danger">ระดับวิกฤตสูงสุด</span>
+        <span class="pill" id="timelinePill">T+00</span>
+        <button class="btn ghost" id="resetBtn">↻ รีเซ็ต R-06</button>
+      </div>
+    </header>
+
+    <section class="mission-spine">
+      <button data-step="0" class="active"><b>01</b><span>รับวิกฤต</span></button>
+      <button data-step="1"><b>02</b><span>วิเคราะห์</span></button>
+      <button data-step="2"><b>03</b><span>จัดกำลัง</span></button>
+      <button data-step="3"><b>04</b><span>พยากรณ์</span></button>
+      <button data-step="4"><b>05</b><span>ตัดสินใจ</span></button>
+      <button data-step="5"><b>06</b><span>หลักฐานท้าทาย</span></button>
+      <button data-step="6"><b>07</b><span>บทสรุป</span></button>
+    </section>
+
+    <section id="step0" class="page active">
+      <div class="hero crisis-hero">
+        <div class="hero-copy">
+          <span class="eyebrow red">รับวิกฤต • T+00</span>
+          <h1>5 เหตุการณ์ • 1 ผู้บัญชาการ</h1>
+          <p>ระบบเฝ้าระวังระดับประเทศตรวจพบเหตุรังสีพร้อมกัน 5 จุด แต่ข้อมูลยังไม่ครบ คุณต้องตั้ง Prediction ก่อนเปิดหลักฐานทั้งหมด</p>
+          <div class="prediction-box">
+            <h3>พื้นที่ใดควรได้รับ Priority สูงสุดในตอนนี้?</h3>
+            <div class="choice-grid compact" id="predictionChoices">
+              <button data-value="LAB">☢️ Research Lab</button>
+              <button data-value="โรงพยาบาล">🏥 Hospital</button>
+              <button data-value="สนามบิน">✈️ Airport</button>
+              <button data-value="FACTORY">🏭 Food Factory</button>
+              <button data-value="TRUCK">🚛 Unknown Truck</button>
+            </div>
+            <textarea id="predictionReason" placeholder="อธิบายเหตุผลเบื้องต้นของคุณ..."></textarea>
+            <div class="confidence"><span>CONFIDENCE BEFORE</span><input id="confBefore" type="range" min="1" max="5" value="3"><b id="confBeforeOut">3/5</b></div>
+          </div>
+          <button class="btn primary" id="lockPrediction">LOCK PREDICTION → OPEN NATIONAL EVIDENCE</button>
+        </div>
+        <div class="national-map-card">
+          <div class="map-head"><span>แผนที่เหตุการณ์ประเทศไทย • LIVE</span><b>● LIVE</b></div>
+          <div class="map-stage">
+            <div class="thailand-silhouette"></div>
+            <button class="hotspot h1">☢️<small>LAB</small></button>
+            <button class="hotspot h2">🏥<small>โรงพยาบาล</small></button>
+            <button class="hotspot h3">✈️<small>สนามบิน</small></button>
+            <button class="hotspot h4">🏭<small>FACTORY</small></button>
+            <button class="hotspot h5">🚛<small>TRUCK</small></button>
+          </div>
+          <div class="map-metrics">
+            <div><span>สถานะเครือข่าย</span><b>บางส่วน</b></div>
+            <div><span>เหตุการณ์ที่กำลังเกิด</span><b>5</b></div>
+            <div><span>ความเชื่อมั่นประชาชน</span><b>72%</b></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="step1" class="page">
+      <div class="section-head">
+        <div><span class="eyebrow cyan">STEP 02 • วิเคราะห์</span><h1>ระบุแหล่งกำเนิดจากหลักฐาน</h1><p>ดึงความสามารถจาก R-01 และ R-03 เพื่อระบุ Threat และตรวจความน่าเชื่อถือของหลักฐาน</p></div>
+        <div class="step-score"><span>คะแนนส่วนนี้</span><b>20 pts</b></div>
+      </div>
+      <div class="evidence-layout">
+        <div class="evidence-list" id="evidenceList"></div>
+        <div class="analysis-panel">
+          <h2>UNKNOWN SOURCE วิเคราะห์R</h2>
+          <div class="detector-visual" id="detectorVisual"><div class="radiation-core">☢</div><div class="rings"></div><div class="detector-beam"></div><div class="signal-trace"></div></div>
+          <div class="analysis-readout" id="analysisReadout">เลือก Evidence A–E เพื่อเริ่มวิเคราะห์</div>
+          <h3>ภัยคุกคามหลักคืออะไร?</h3>
+          <div class="choice-grid">
+            <button data-analyze="GAMMA_SOURCE">รังสีแกมมา • ทะลุทะลวงสูง</button>
+            <button data-analyze="ALPHA_CONTAMINATION">การปนเปื้อนแอลฟา • ผิวสัมผัส</button>
+            <button data-analyze="FALSE_ALARM">สัญญาณพื้นหลัง / ไม่ใช่เหตุจริง</button>
+          </div>
+          <button class="btn primary" id="submitAnalyze">VERIFY SOURCE → จัดกำลัง</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="step2" class="page">
+      <div class="section-head">
+        <div><span class="eyebrow yellow">STEP 03 • PROTECT & จัดกำลัง</span><h1>โต๊ะบัญชาการทรัพยากร</h1><p>ดึงความสามารถจาก R-02 และ R-03: TIME • DISTANCE • SHIELDING + Verification</p></div>
+        <div class="step-score"><span>คะแนนส่วนนี้</span><b>15 pts</b></div>
+      </div>
+      <div class="deploy-layout">
+        <div class="resource-bank">
+          <h3>ทรัพยากรพร้อมใช้</h3>
+          <button data-resource="DETECTOR">📡 ทีมตรวจวัด <em>2</em></button>
+          <button data-resource="SHIELD">🛡️ หน่วยกำบังรังสี <em>2</em></button>
+          <button data-resource="MEDICAL">🏥 ทีมแพทย์ <em>1</em></button>
+          <button data-resource="POLICE">🚓 หน่วยควบคุมพื้นที่ <em>2</em></button>
+          <button data-resource="DRONE">🚁 โดรนสำรวจ <em>1</em></button>
+        </div>
+        <div class="city-grid" id="deployZones">
+          <button data-zone="LAB"><b>☢️ ห้องปฏิบัติการวิจัย</b><span>Risk 91%</span><small>Cooling system failure</small></button>
+          <button data-zone="โรงพยาบาล"><b>🏥 โรงพยาบาล</b><span>Risk 68%</span><small>Missing medical source</small></button>
+          <button data-zone="สนามบิน"><b>✈️ สนามบิน</b><span>Risk 57%</span><small>Portal alarm</small></button>
+          <button data-zone="FACTORY"><b>🏭 โรงงานอาหาร</b><span>Risk 39%</span><small>Contamination claim</small></button>
+          <button data-zone="TRUCK"><b>🚛 รถบรรทุกไม่ทราบแหล่ง</b><span>Risk 84%</span><small>Approaching city</small></button>
+        </div>
+        <div class="deploy-status">
+          <h3>ปริมาณรับรังสีของทีม</h3>
+          <div class="dose-scene"><div class="source-node">☢</div><div class="radiation-rays"><i></i><i></i><i></i></div><div id="shieldVisual" class="shield-visual">▥</div><div class="team-node">MED</div></div><div class="dose-meter"><i id="doseFill"></i></div>
+          <div class="dose-number"><b id="teamDose">2.6</b><span>μSv</span></div>
+          <p id="deployFeedback">เลือก Resource แล้วเลือก Zone เพื่อส่งทีม</p>
+          <button class="btn primary" id="submitDeploy">LOCK จัดกำลังMENT → พยากรณ์</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="step3" class="page">
+      <div class="section-head">
+        <div><span class="eyebrow purple">STEP 04 • DECAY พยากรณ์</span><h1>คาดการณ์ 6 / 12 / 24 ชั่วโมง</h1><p>ดึงความสามารถจาก R-04 เพื่อคาดการณ์ Activity ก่อนตัดสินใจระดับประเทศ</p></div>
+        <div class="step-score"><span>คะแนนส่วนนี้</span><b>15 pts</b></div>
+      </div>
+      <div class="forecast-layout">
+        <div class="forecast-controls">
+          <label>กัมมันตภาพเริ่มต้น <b>160 units</b></label>
+          <label>ครึ่งชีวิต <b>6 h</b></label>
+          <div class="time-select">
+            <button data-time="6">T + 6 h</button>
+            <button data-time="12">T + 12 h</button>
+            <button data-time="24">T + 24 h</button>
+          </div>
+          <div class="formula">A = A₀(1/2)<sup>t/T½</sup></div>
+          <button class="btn primary" id="runForecast">RUN DECAY พยากรณ์</button>
+        </div>
+        <div class="forecast-visual">
+          <div class="activity-orb"><span id="activityValue">160</span><small>กัมมันตภาพ</small></div>
+          <div class="forecast-bars">
+            <div><span>NOW</span><i style="--h:100%"></i><b>160</b></div>
+            <div><span>6h</span><i id="bar6"></i><b id="val6">?</b></div>
+            <div><span>12h</span><i id="bar12"></i><b id="val12">?</b></div>
+            <div><span>24h</span><i id="bar24"></i><b id="val24">?</b></div>
+          </div>
+          <div id="forecastInsight" class="insight">เลือกเวลาและ RUN พยากรณ์</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="step4" class="page">
+      <div class="section-head">
+        <div><span class="eyebrow green">ขั้นที่ 05 • คำสั่งระดับประเทศ</span><h1>ออกคำสั่งระดับประเทศ</h1><p>ดึงความสามารถจาก R-05: Hazard ≠ Risk — ใช้ Dose • Exposure • Population • Context</p></div>
+        <div class="step-score"><span>คะแนนส่วนนี้</span><b>15 pts</b></div>
+      </div>
+      <div class="decision-layout">
+        <div class="risk-table">
+          <div class="risk-row head"><span>พื้นที่</span><span>อัตรารังสี</span><span>ระยะเวลาสัมผัส</span><span>ประชาชน</span><span>บริบทพื้นที่</span></div>
+          <div class="risk-row"><b>LAB</b><span>1.20 μSv/h</span><span>0.2 h</span><span>0</span><span>พื้นที่จำกัด</span></div>
+          <div class="risk-row priority"><b>โรงพยาบาล</b><span>0.48 μSv/h</span><span>2.5 h</span><span>180</span><span>พื้นที่การแพทย์</span></div>
+          <div class="risk-row priority"><b>TRUCK ROUTE</b><span>0.40 μSv/h</span><span>3.0 h</span><span>420</span><span>เส้นทางสาธารณะ</span></div>
+        </div>
+        <div class="national-order">
+          <h3>เลือกมาตรการระดับประเทศ</h3>
+          <div class="choice-grid vertical">
+            <button data-order="EVACUATE">🚨 อพยพทั้งหมด</button>
+            <button data-order="หลบภัยในอาคาร">🏠 หลบภัยในอาคาร</button>
+            <button data-order="RESTRICT">⛔ จำกัดพื้นที่เป้าหมาย</button>
+            <button data-order="MONITOR">📡 เฝ้าระวังต่อเนื่อง</button>
+          </div>
+          <textarea id="decisionReason" placeholder="อธิบาย Evidence ที่สนับสนุนคำสั่งของคุณ..."></textarea>
+          <div class="confidence"><span>CONFIDENCE AFTER EVIDENCE</span><input id="confAfter" type="range" min="1" max="5" value="4"><b id="confAfterOut">4/5</b></div>
+          <button class="btn primary" id="submitDecision">SUBMIT NATIONAL ORDER → EVIDENCE หลักฐานท้าทาย</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="step5" class="page">
+      <div class="section-head">
+        <div><span class="eyebrow orange">STEP 06 • EVIDENCE หลักฐานท้าทาย</span><h1>คำตัดสินของคุณกำลังถูกท้าทาย</h1><p>หลักฐานใหม่อาจขัดกับคำสั่งเดิม — คุณจะ KEEP หรือ REVISE?</p></div>
+        <div class="step-score"><span>คะแนนส่วนนี้</span><b>15 pts</b></div>
+      </div>
+      <div class="collision-stage">
+        <div class="collision-card original">
+          <small>คำสั่งของคุณ</small>
+          <h2 id="collisionOrder">—</h2>
+          <p id="collisionReason">—</p>
+        </div>
+        <div class="collision-vs">⚡</div>
+        <div class="collision-card evidence">
+          <small>หลักฐานใหม่ • T+15</small>
+          <h2>การเคลื่อนที่ของประชาชนเปลี่ยน</h2>
+          <p>Activity ลดเหลือ 25% แต่ประชาชนบน Truck Route เพิ่มเป็น 620 คน การอพยพทั้งเมืองอาจทำให้คนเคลื่อนผ่าน Hot Zone มากขึ้น</p>
+        </div>
+      </div>
+      <div class="collision-banner">อันตรายสูงกว่า ≠ ความเสี่ยงต่อประชาชนสูงกว่าเสมอ</div><div class="risk-shift"><span>ความเสี่ยงประชาชน</span><div><i id="riskShiftBar"></i></div><b id="riskShiftValue">78</b></div>
+      <div class="revise-panel">
+        <h3>ผู้บัญชาการ • ทบทวนคำตัดสินครั้งสุดท้าย</h3>
+        <div class="choice-grid compact">
+          <button data-revision="KEEP">คงคำตัดสินเดิม</button>
+          <button data-revision="REVISE">ปรับคำตัดสิน</button>
+        </div>
+        <textarea id="revisionReason" placeholder="อธิบายว่าคุณจะคงหรือปรับคำตัดสิน เพราะหลักฐานใด..."></textarea>
+        <button class="btn primary" id="authorizeFinal">ยืนยันคำสั่งสุดท้าย</button>
+      </div>
+    </section>
+
+    <section id="step6" class="page">
+      <div id="verdictSequence" class="verdict-sequence">
+        <div class="verdict-line" data-v="1">ระบุแหล่งกำเนิด <b>✓</b></div>
+        <div class="verdict-line" data-v="2">SHIELDING จัดกำลังED <b>✓</b></div>
+        <div class="verdict-line" data-v="3">ควบคุมการรับรังสี <b>✓</b></div>
+        <div class="verdict-line" data-v="4">DECAY พยากรณ์ VERIFIED <b>✓</b></div>
+        <div class="verdict-line" data-v="5">จัดการความเสี่ยงประชาชน <b>✓</b></div>
+      </div>
+      <div id="finalResult" class="final-result hidden">
+        <span class="eyebrow green">COMMAND บทสรุป</span>
+        <h1>ควบคุมวิกฤตรังสีสำเร็จ</h1>
+        <div class="final-score-wrap">
+          <div class="final-score"><b id="finalScore">0</b><span>/100</span></div>
+          <div>
+            <h2 id="finalRank">ผู้บัญชาการระดับสูงสุด</h2>
+            <p id="finalSummary">Final integrated performance assessment</p>
+            <div class="badge">🏅 ผู้บัญชาการตัดสินใจด้านรังสี</div>
+          </div>
+        </div>
+        <div id="scoreBreakdown" class="score-breakdown"></div>
+        <div class="feedback-grid">
+          <article><small>จุดแข็ง</small><p id="finalStrength"></p></article>
+          <article><small>ควรพัฒนา</small><p id="finalImprove"></p></article>
+          <article><small>ความมั่นใจก่อน → หลัง</small><p id="finalConfidence"></p></article>
+          <article><small>ประสิทธิภาพการบัญชาการ</small><p id="finalEfficiency"></p></article>
+        </div>
+        <div class="mission-series">
+          <span>R-01 IDENTIFY ✓</span><span>R-02 PROTECT ✓</span><span>R-03 VERIFY ✓</span>
+          <span>R-04 PREDICT ✓</span><span>R-05 ตัดสินใจ ✓</span><span>R-06 COMMAND ✓</span>
+        </div>
+        <div class="final-actions">
+          <button class="btn secondary" id="saveReportBtn">บันทึกรายงานหลักฐาน</button>
+          <button class="btn primary" id="completeR06Btn">จบ R-06 • กลับศูนย์บัญชาการ</button>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+
+<div id="learningFx" class="learning-fx" aria-hidden="true">
+  <div class="fx-blackout"></div>
+  <div class="fx-grid"></div>
+  <div class="fx-scanline"></div>
+  <div class="fx-center">
+    <small id="fxKicker">RDA COMMAND NETWORK</small>
+    <h2 id="fxTitle">SYSTEM EVENT</h2>
+    <p id="fxText"></p>
+    <div id="fxEquation" class="fx-equation"></div>
+    <div id="fxCounter" class="fx-counter"></div>
+  </div>
+  <div class="fx-rings"><i></i><i></i><i></i></div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+<script src="script.js"></script>
+<script src="../../classroom-config.js"></script>
+<script src="../../shared/rda-classroom-backend.js"></script>
+<script src="../../shared/rda-master.js"></script>
+<script src="../../shared/rda-unlock-bridge.js"></script>
+<script src="../../shared/rda-story.js"></script>
+</body>
+</html>

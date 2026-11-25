@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="th">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>R-05 • DECIDE — THE CITY RADIATION EVENT</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.gstatic.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+ <div class="brand"><img src="../../assets/logo.png" alt="Radiation Detective Agency"><div><h1>Radiation Detective Agency</h1><small>RDA Headquarters</small></div></div>
+ <nav class="rda-nav">
+  <button data-page="headquarters" class="rda-nav-item active"><span class="nav-icon">🏢</span><span>Headquarters</span></button>
+  <div class="rda-section-title"><span class="nav-icon">📁</span><span>Operations</span></div>
+  <button data-page="operation1" class="rda-mission-item current"><span class="mission-dot current-dot">●</span><span>R-05 Mission</span><small>CURRENT</small></button>
+  <button data-page="passport" class="rda-nav-item"><span class="nav-icon">📘</span><span>Research Passport</span></button>
+  <button data-page="teacher" class="rda-nav-item"><span class="nav-icon">📊</span><span>Teacher Center</span></button>
+ </nav>
+ <div class="side-card"><b>นักสืบเกศกร</b><div class="muted" id="sideRank">Junior Detective</div><div class="xpbar"><span id="sideXpBar"></span></div><small id="sideXp">0 / 300 XP</small></div>
+</aside>
+<main class="main">
+<div class="topbar"><div><h2 id="r05PageTitle">Headquarters</h2><div class="muted">Radiation Detective Agency</div></div>
+
+
+
+<div id="r05MissionExperience" class="">
+<div class="r05-mission-backbar">
+<button class="r05-back-btn" type="button" onclick="location.href='index.html'">← BACK • กลับหน้ารับภารกิจ</button>
+</div>
+<header class="r5top">
+    <div><div class="eyebrow">R-05 • DECIDE</div><h1>THE CITY RADIATION EVENT</h1>
+    <div class="sub">Radiation Risk & Public Safety Decision</div></div>
+    <div class="badge">🎯 Evidence-Based Decision</div>
+  </header>
+
+  <nav class="flow" aria-label="Mission flow">
+    <button id="f0" class="active">1 MONITOR</button><button id="f1">2 EVIDENCE</button>
+    <button id="f2">3 ASSESS RISK</button><button id="f3">4 PUBLIC ALERT</button><button id="f4">5 DECIDE</button>
+  </nav>
+
+  <section id="step0" class="panel">
+    <div class="eyebrow">CURRENT OBJECTIVE • MONITOR</div>
+    <h2>ค่ารังสีสูงสุด = พื้นที่เสี่ยงที่สุดจริงหรือ?</h2>
+    <p class="lead">เครือข่าย Sensor ของเมืองตรวจพบค่ารังสีผิดปกติหลายพื้นที่ คลิก Sensor เพื่ออ่าน <b>Dose Rate • Exposure Time • Population • Context</b> ก่อนตัดสินว่าจุดใดควรได้รับความสำคัญ</p>
+<div class="r5-confidence-card">
+  <div><span class="eyebrow">CONFIDENCE • BEFORE EVIDENCE</span><h3>ตอนนี้คุณมั่นใจแค่ไหนว่าจุดที่ค่ารังสีสูงสุดคือจุดเสี่ยงที่สุด?</h3></div>
+  <div class="r5-confidence-scale" id="confidenceBefore">
+    <button onclick="R05.setConfidence('before',1)">1</button><button onclick="R05.setConfidence('before',2)">2</button>
+    <button onclick="R05.setConfidence('before',3)">3</button><button onclick="R05.setConfidence('before',4)">4</button>
+    <button onclick="R05.setConfidence('before',5)">5</button>
+  </div>
+</div>
+    <div class="grid2"><div class="map"><div class="r5-city-heatmap"></div><div class="r5-map-grid"></div><button class="sensor " style="left:18%;top:25%"
+    data-id="S01" onclick="R05.selectSensor('S01')">S01<small>0.12 μSv/h</small></button>
+<button class="sensor " style="left:42%;top:60%"
+    data-id="S02" onclick="R05.selectSensor('S02')">S02<small>0.18 μSv/h</small></button>
+<button class="sensor hot" style="left:64%;top:28%"
+    data-id="S03" onclick="R05.selectSensor('S03')">S03<small>1.20 μSv/h</small></button>
+<button class="sensor hot" style="left:66%;top:58%"
+    data-id="S04" onclick="R05.selectSensor('S04')">S04<small>0.40 μSv/h</small></button>
+<button class="sensor " style="left:35%;top:72%"
+    data-id="S05" onclick="R05.selectSensor('S05')">S05<small>0.26 μSv/h</small></button>
+<button class="sensor " style="left:78%;top:78%"
+    data-id="S06" onclick="R05.selectSensor('S06')">S06<small>0.15 μSv/h</small></button></div>
+      <div><div class="sidecard"><h3>📡 SENSOR DETAIL</h3><div id="sensorDetail"><p class="lead">เลือก Sensor บนแผนที่เพื่อเปิดข้อมูล</p></div></div>
+      <div class="sidecard"><h3>ภารกิจ</h3><p class="lead">สำรวจอย่างน้อย 4 จุด รวม S03 และ S04 เพื่อเปรียบเทียบ Hazard กับ Risk</p><div id="seenCount">สำรวจแล้ว 0 / 4 จุด</div></div></div>
+    </div>
+    <div class="actions"><button id="toEvidence" class="btn primary" disabled onclick="R05.go(1)">ไปยัง EVIDENCE →</button></div>
+  </section>
+
+  <section id="step1" class="panel hidden">
+    <div class="eyebrow">CURRENT OBJECTIVE • EVIDENCE</div>
+    <h2>Evidence Vault — หลักฐานใดจำเป็นต่อการประเมิน Risk?</h2>
+    <p class="lead">เปิดแฟ้มทีละชุด แล้วเก็บหลักฐานที่จำเป็นต่อการตัดสินใจ ไม่ใช่เลือกเฉพาะค่ารังสีที่สูงที่สุด</p>
+
+    <div class="r5-vault-shell">
+      <aside class="r5-vault-index">
+        <h3>🗂 EVIDENCE VAULT</h3>
+        <button class="r5-vault-folder active" data-vault="dose" onclick="R05.openVault(this,'dose')"><span>☢ Dose Rate</span><small>Hazard signal</small></button>
+        <button class="r5-vault-folder" data-vault="time" onclick="R05.openVault(this,'time')"><span>⏱ Exposure Time</span><small>How long?</small></button>
+        <button class="r5-vault-folder" data-vault="population" onclick="R05.openVault(this,'population')"><span>👥 Population</span><small>Who is exposed?</small></button>
+        <button class="r5-vault-folder" data-vault="context" onclick="R05.openVault(this,'context')"><span>📍 Context</span><small>Where / conditions?</small></button>
+      </aside>
+
+      <div class="r5-vault-monitor">
+        <div id="vaultContent">
+          <div class="eyebrow">FILE A • DOSE RATE</div>
+          <h3>Hazard Signal</h3>
+          <p>Dose Rate บอกระดับรังสี ณ จุดนั้น แต่ยังไม่บอก Risk ทั้งหมด</p>
+          <div class="r5-vault-data">
+            <div><small>S03</small><b>1.20 μSv/h</b></div>
+            <div><small>S04</small><b>0.40 μSv/h</b></div>
+            <div><small>QUESTION</small><b>Which matters more?</b></div>
+            <div><small>STATUS</small><b>Needs context</b></div>
+          </div>
+        </div>
+        <div class="r5-vault-selected">Selected Evidence: <b id="vaultSelected">0 / 4</b></div>
+      </div>
+    </div>
+
+    <div class="r5-link-chain">
+      <div class="node"><small>INPUT 1</small><b>Dose Rate</b></div><div class="arrow">→</div>
+      <div class="node"><small>INPUT 2</small><b>Exposure Time</b></div><div class="arrow">→</div>
+      <div class="node"><small>INPUT 3</small><b>Population + Context</b></div><div class="arrow">→</div>
+      <div class="node"><small>OUTPUT</small><b>Risk Evidence</b></div>
+    </div>
+
+    <div class="actions">
+      <button class="btn secondary" onclick="R05.go(0)">← MONITOR</button>
+      <button id="toAssess" class="btn primary" disabled onclick="R05.go(2)">ASSESS RISK →</button>
+    </div>
+  </section>
+
+  <section id="step2" class="panel hidden">
+    <div class="eyebrow">CURRENT OBJECTIVE • ASSESS RISK</div><h2>เปรียบเทียบ “Hazard” กับ “Risk”</h2>
+    <div class="formula">Dose ≈ Dose Rate × Exposure Time</div><div class="r5-risk-chain">
+      <div><small>HAZARD</small><b>Dose Rate</b></div><i>→</i>
+      <div><small>EXPOSURE</small><b>Time</b></div><i>→</i>
+      <div><small>WHO / WHERE</small><b>Population + Context</b></div><i>→</i>
+      <div><small>PRIORITY</small><b>Risk Decision</b></div>
+    </div>
+    
+<div class="r5-collision-stage" id="riskCollision">
+  <div class="r5-collision-scanline"></div>
+  <div class="r5-collision-phase" id="collisionPhase">READY • COMPARE HAZARD</div>
+  <div class="r5-collision-head">
+    <span class="eyebrow">RISK COLLISION • LIVE MODEL</span>
+    <h3>ค่ารังสีสูงกว่า ≠ ความเสี่ยงต่อประชาชนสูงกว่า</h3>
+    <p>กด “RUN COLLISION” เพื่อให้ระบบรวม Hazard + Exposure + Population + Context</p>
+    <button class="btn primary" onclick="R05.runCollision()">▶ RUN RISK COLLISION</button>
+  </div>
+  <div class="r5-collision-grid">
+    <article class="r5-risk-zone s03">
+      <div class="r5-zone-signal"></div>
+      <span>S03 • INDUSTRIAL PERIMETER</span>
+      <b>1.20 μSv/h</b>
+      <p>Exposure 0.2 h • Population 0</p>
+      <div class="r5-dose-track"><i style="--risk:20%"></i></div>
+      <small>Estimated Dose 0.24 μSv • Restricted</small>
+    </article>
+    <div class="r5-vs">VS</div>
+    <article class="r5-risk-zone s04">
+      <div class="r5-zone-signal"></div>
+      <span>S04 • MARKET / TRANSIT</span>
+      <b>0.40 μSv/h</b>
+      <p>Exposure 3.0 h • Population <strong id="collisionPopulation">240</strong></p>
+      <div class="r5-dose-track"><i style="--risk:100%"></i></div>
+      <small>Estimated Dose 1.20 μSv • Public access</small>
+    </article>
+  </div>
+  <div id="collisionVerdict" class="r5-collision-verdict hidden">
+    <strong>HIGH RADIATION ≠ HIGHEST PUBLIC RISK</strong>
+    <span>S04 มี Dose Rate ต่ำกว่า แต่ Exposure นานกว่า มีประชาชนจำนวนมาก และเป็นพื้นที่สาธารณะ จึงมี Priority สูงกว่า</span>
+  </div>
+</div>
+
+<div class="r5-assess-choice">
+  <h3>พื้นที่ใดควรได้รับ Priority ก่อน?</h3>
+  <div class="r5-choice-row">
+    <button onclick="R05.assessPick(this,'S03')">S03 • ค่ารังสีสูงสุด</button>
+    <button onclick="R05.assessPick(this,'S04')">S04 • Exposure + Population สูงกว่า</button>
+  </div>
+</div>
+
+<div class="r5-confidence-card">
+  <div><span class="eyebrow">CONFIDENCE • AFTER EVIDENCE</span><h3>หลังเห็นหลักฐานทั้งหมด คุณมั่นใจในคำตัดสินแค่ไหน?</h3></div>
+  <div class="r5-confidence-scale" id="confidenceAfter">
+    <button onclick="R05.setConfidence('after',1)">1</button><button onclick="R05.setConfidence('after',2)">2</button>
+    <button onclick="R05.setConfidence('after',3)">3</button><button onclick="R05.setConfidence('after',4)">4</button>
+    <button onclick="R05.setConfidence('after',5)">5</button>
+  </div>
+</div>
+<div class="actions"><button class="btn secondary" onclick="R05.go(1)">← EVIDENCE</button><button class="btn primary" onclick="R05.go(3)">PUBLIC ALERT →</button></div>
+  </section>
+
+  <section id="step3" class="panel hidden">
+<div class="eyebrow">CURRENT OBJECTIVE • PUBLIC ALERT</div><h2>ข่าวกำลังเร็วกว่าหลักฐาน</h2>
+<div class="alert"><h3>🚨 PUBLIC ALERT REQUEST</h3><p class="lead">โพสต์บนสื่อสังคมออนไลน์กำลังแพร่ข้อความว่า “พบรังสีรั่วในเมือง ต้องอพยพทันที!” ศูนย์ข้อมูลเมืองขอคำแนะนำจากคุณก่อนออกประกาศอย่างเป็นทางการ</p></div>
+
+<div class="r5-public-options">
+  <button onclick="R05.publicAlert(this,'EVACUATE ALL')">🚨 EVACUATE ALL</button>
+  <button onclick="R05.publicAlert(this,'SHELTER')">🏠 SHELTER</button>
+  <button onclick="R05.publicAlert(this,'RESTRICT ZONE')">⛔ RESTRICT ZONE</button>
+  <button onclick="R05.publicAlert(this,'MONITOR')">📡 CONTINUE MONITORING</button>
+</div>
+
+<div id="cityResponsePreview" class="r5-city-response hidden">
+  <div class="r5-response-map" id="responseMap">
+  <div class="r5-response-zone"></div>
+  <div class="r5-city-core">S04</div>
+  <div class="r5-route route-a"></div><div class="r5-route route-b"></div>
+  <div class="r5-people-stream"></div>
+  <div class="r5-response-label" id="responseMapLabel">AWAITING RESPONSE</div>
+</div>
+  <div><span class="eyebrow">LIVE CITY RESPONSE PREVIEW</span><h3 id="responseTitle">Response Model</h3><p id="responseText"></p></div>
+</div>
+
+<div id="sensorUpdate" class="r5-update-card hidden">
+  <span class="eyebrow">SENSOR UPDATE • +5 MINUTES</span>
+  <h3>S04 Population เพิ่มขึ้น <b>240 → <span id="populationTicker">240</span></b></h3>
+  <p>รถโดยสารรอบใหม่มาถึง Market / Transit ขณะที่ Dose Rate ยังอยู่ที่ 0.40 μSv/h</p>
+  <div class="r5-choice-row">
+    <button onclick="R05.updateDecision(this,'CONFIRM')">✓ ยืนยันคำแนะนำเดิม</button>
+    <button onclick="R05.updateDecision(this,'REVISE')">↻ REVISE RESPONSE</button>
+  </div>
+</div>
+
+<div class="actions"><button class="btn secondary" onclick="R05.go(2)">← ASSESS</button><button id="toFinalDecision" class="btn primary" disabled onclick="R05.go(4)">เข้าสู่ FINAL DECISION →</button></div>
+</section>
+
+  <section id="step4" class="panel hidden">
+    <div class="eyebrow">CURRENT OBJECTIVE • DECIDE</div><h2>ออกคำแนะนำด้านความปลอดภัยต่อประชาชน</h2>
+    <p class="lead">เลือกการตอบสนองโดยอ้างอิง Evidence ของคุณ แล้วอธิบายด้วย Dose • Exposure • Population • Context</p>
+    <div class="decision-grid">
+      <button class="decision" onclick="R05.choose(this,'EVACUATE')">🚨 EVACUATE</button>
+      <button class="decision" onclick="R05.choose(this,'SHELTER')">🏠 SHELTER</button>
+      <button class="decision" onclick="R05.choose(this,'RESTRICT ZONE')">⛔ RESTRICT ZONE</button>
+      <button class="decision" onclick="R05.choose(this,'CONTINUE MONITORING')">📡 CONTINUE MONITORING</button>
+    </div>
+    <h3>Evidence-based reasoning</h3><textarea id="reason" class="textarea" placeholder="อธิบายว่าเหตุใดจึงเลือกคำตอบนี้ โดยใช้ข้อมูล Dose Rate, Exposure Time, Population และ Context..."></textarea>
+    <div class="actions"><button class="btn secondary" onclick="R05.go(3)">← PUBLIC ALERT</button><button id="submitDecision" class="btn primary" disabled onclick="R05.finish()">ISSUE PUBLIC SAFETY DECISION</button></div>
+  </section>
+
+  
+<section id="complete" class="panel hidden result r5-standard-result">
+  <div class="r5-result-header">
+    <div>
+      <span class="eyebrow">R-05 • CASE CLOSED</span>
+      <h2>THE CITY RADIATION EVENT</h2>
+      <p class="lead">Evidence-Based Public Safety Decision completed</p>
+    </div>
+    <div class="r5-result-status">✓ COMPLETED</div>
+  </div>
+
+  <div class="r5-result-score-card">
+    <div class="r5-result-score-main">
+      <small>FINAL SCORE</small>
+      <div class="r5-result-score-value"><b id="totalScore">0</b><span>/100</span></div>
+      <div id="performanceRank" class="r5-result-rank">RISK DECISION QUALITY</div>
+    </div>
+
+    <div class="r5-result-summary">
+      <span class="eyebrow">FINAL DECISION</span>
+      <p id="finalSummary" class="lead"></p>
+      <div class="r5-result-badge">🏅 R-05 • DECISION SPECIALIST</div>
+    </div>
+  </div>
+
+  <div class="r5-result-section">
+    <div class="r5-result-section-head">
+      <div><span class="eyebrow">PERFORMANCE BREAKDOWN</span><h3>ผลการปฏิบัติภารกิจ</h3></div>
+      <div class="r5-result-total-label">TOTAL • 100 POINTS</div>
+    </div>
+    <div id="scoreBreakdown" class="r5-result-breakdown"></div>
+  </div>
+
+  <div class="r5-result-feedback">
+    <article>
+      <span class="eyebrow">STRENGTH</span>
+      <h4>จุดแข็ง</h4>
+      <p id="scoreStrength"></p>
+    </article>
+    <article>
+      <span class="eyebrow">IMPROVE</span>
+      <h4>สิ่งที่ควรพัฒนา</h4>
+      <p id="scoreImprove"></p>
+    </article>
+    <article>
+      <span class="eyebrow">CONFIDENCE SHIFT</span>
+      <h4>การเปลี่ยนแปลงความมั่นใจ</h4>
+      <p id="confidenceShift"></p>
+    </article>
+  </div>
+
+  <div class="r5-result-footer">
+    <div class="r5-result-note">R-05 COMPLETE • Evidence saved to Research Passport</div>
+    <button class="btn primary" onclick="R05.unlockNext()">COMPLETE R-05 → UNLOCK R-06</button>
+  </div>
+</section>
+
+</div>
+
+</main>
+<div id="r5CaseClosedOverlay" class="r5-case-closed-overlay hidden" aria-hidden="true">
+  <div class="r5-case-closed-grid"></div>
+  <div class="r5-case-closed-content">
+    <span>RDA HEADQUARTERS • R-05</span>
+    <strong>CASE CLOSED</strong>
+    <em>PUBLIC SAFETY DECISION VERIFIED</em>
+    <div class="r5-case-closed-line"></div>
+  </div>
+</div>
+</div>
+<script src="../../shared/rda-rubric-v2.js"></script><script src="script.js"></script><script src="../../classroom-config.js"></script><script src="../../shared/rda-classroom-backend.js"></script><script src="../../shared/rda-master.js"></script>
+<script src="../../shared/rda-unlock-bridge.js"></script><script src="../../shared/rda-story.js"></script><script>
+const SENSOR_DATA={"S01": {"name": "Residential North", "rate": 0.12, "time": 0.5, "population": 35, "context": "Background-like; residents mostly indoors", "dose": 0.06}, "S02": {"name": "School Zone", "rate": 0.18, "time": 2.0, "population": 180, "context": "School dismissal period", "dose": 0.36}, "S03": {"name": "Industrial Perimeter", "rate": 1.2, "time": 0.2, "population": 0, "context": "Restricted fenced zone; no public present", "dose": 0.24}, "S04": {"name": "Market / Transit", "rate": 0.4, "time": 3.0, "population": 240, "context": "Crowded market and transit interchange", "dose": 1.2}, "S05": {"name": "Hospital Access", "rate": 0.26, "time": 1.5, "population": 95, "context": "Patients and staff moving through area", "dose": 0.39}, "S06": {"name": "Riverside Park", "rate": 0.15, "time": 1.0, "population": 22, "context": "Low occupancy outdoor area", "dose": 0.15}};
+const R05=(()=>{
+ const state={step:0,seen:new Set(),evidence:new Set(),decision:'',confidenceBefore:0,confidenceAfter:0,collisionRun:false,assessPick:'',publicAlert:'',updateDecision:'',score:null};
+ function go(n){state.step=n;try{window.RDAMaster&&window.RDAMaster.pulse('r05',n,4)}catch(e){} document.querySelectorAll('[id^=step]').forEach((x,i)=>x.classList.toggle('hidden',i!==n)); document.getElementById('complete').classList.add('hidden'); if(n===1)setTimeout(()=>{const b=document.querySelector('.r5-vault-folder[data-vault="dose"]');if(b){document.querySelectorAll('.r5-vault-folder').forEach(x=>x.classList.remove('active'));b.classList.add('active');const box=document.getElementById('vaultContent');if(box)box.innerHTML=vaultHTML('dose')}},0); for(let i=0;i<5;i++){let b=document.getElementById('f'+i);b.classList.toggle('active',i===n);b.classList.toggle('done',i<n)} window.scrollTo({top:0,behavior:'smooth'})}
+ function selectSensor(id){const d=SENSOR_DATA[id];state.seen.add(id);document.querySelectorAll('.sensor').forEach(x=>x.classList.toggle('selected',x.dataset.id===id));document.getElementById('sensorDetail').innerHTML=`<h3>${id} • ${d.name}</h3><div class="metric"><span>Dose Rate</span><b>${d.rate.toFixed(2)} μSv/h</b></div><div class="metric"><span>Exposure Time</span><b>${d.time} h</b></div><div class="metric"><span>Population</span><b>${d.population}</b></div><div class="metric"><span>Estimated Dose</span><b>${d.dose.toFixed(2)} μSv</b></div><p class="lead">${d.context}</p>`;document.getElementById('seenCount').textContent=`สำรวจแล้ว ${Math.min(state.seen.size,4)} / 4 จุด`;document.getElementById('toEvidence').disabled=!(state.seen.size>=4&&state.seen.has('S03')&&state.seen.has('S04'));}
+ function toggleEvidence(el){const k=el.dataset.e;if(state.evidence.has(k))state.evidence.delete(k);else state.evidence.add(k);el.classList.toggle('selected');document.getElementById('toAssess').disabled=state.evidence.size<4;}
+ function choose(el,val){state.decision=val;document.querySelectorAll('.decision').forEach(x=>x.classList.remove('selected'));el.classList.add('selected');document.getElementById('submitDecision').disabled=false;}
+ 
+
+function setConfidence(which,val){
+  if(which==='before')state.confidenceBefore=val;else state.confidenceAfter=val;
+  const box=document.getElementById(which==='before'?'confidenceBefore':'confidenceAfter');
+  if(box)box.querySelectorAll('button').forEach((b,i)=>b.classList.toggle('selected',i+1===val));
+}
+
+function runCollision(){
+  state.collisionRun=true;
+  const stage=document.getElementById('riskCollision');
+  const verdict=document.getElementById('collisionVerdict');
+  const phase=document.getElementById('collisionPhase');
+  if(stage){stage.classList.remove('running','phase-exposure','phase-risk');void stage.offsetWidth;stage.classList.add('running')}
+  if(verdict)verdict.classList.add('hidden');
+  if(phase)phase.textContent='PHASE 01 • READING DOSE RATE';
+  setTimeout(()=>{if(phase)phase.textContent='PHASE 02 • ADD EXPOSURE TIME';if(stage)stage.classList.add('phase-exposure')},650);
+  setTimeout(()=>{if(phase)phase.textContent='PHASE 03 • ADD POPULATION + CONTEXT';if(stage)stage.classList.add('phase-risk')},1300);
+  setTimeout(()=>{if(phase)phase.textContent='RISK COLLISION • PRIORITY REVEALED';if(verdict)verdict.classList.remove('hidden')},2050);
+}
+
+function assessPick(el,val){
+  state.assessPick=val;
+  document.querySelectorAll('.r5-assess-choice button').forEach(x=>x.classList.remove('selected'));
+  if(el)el.classList.add('selected');
+}
+
+function publicAlert(el,val){
+  state.publicAlert=val;
+  document.querySelectorAll('.r5-public-options button').forEach(x=>x.classList.remove('selected'));
+  if(el)el.classList.add('selected');
+  const preview=document.getElementById('cityResponsePreview');
+  const title=document.getElementById('responseTitle');
+  const text=document.getElementById('responseText');
+  const responseMap=document.getElementById('responseMap');
+  const responseLabel=document.getElementById('responseMapLabel');
+  if(preview)preview.classList.remove('hidden');
+  const map={
+    'EVACUATE ALL':['CITYWIDE EVACUATION','ผลกระทบสูงเกินหลักฐานที่มี — ประชาชนทั้งเมืองเคลื่อนย้ายพร้อมกัน','mode-evacuate','CITYWIDE MOVEMENT'],
+    'SHELTER':['SHELTER ADVISORY','ลดการเคลื่อนที่ของประชาชน แต่ยังไม่เจาะจงพื้นที่ Priority','mode-shelter','SHELTER IN PLACE'],
+    'RESTRICT ZONE':['TARGETED RESTRICTION','จำกัด S04 และเส้นทางใกล้เคียง ลดจำนวนผู้สัมผัสโดยไม่กระทบทั้งเมือง','mode-restrict','S04 ACCESS RESTRICTED'],
+    'MONITOR':['MONITOR ONLY','ยังไม่มีมาตรการลด Exposure ในพื้นที่สาธารณะที่มี Priority สูง','mode-monitor','SENSOR WATCH ACTIVE']
+  };
+  if(title)title.textContent=map[val][0];
+  if(text)text.textContent=map[val][1];
+  if(responseMap){
+    responseMap.classList.remove('mode-evacuate','mode-shelter','mode-restrict','mode-monitor');
+    void responseMap.offsetWidth;
+    responseMap.classList.add(map[val][2]);
+  }
+  if(responseLabel)responseLabel.textContent=map[val][3];
+  const update=document.getElementById('sensorUpdate');
+  if(update)update.classList.remove('hidden');
+  animatePopulation();
+}
+function animatePopulation(){
+  const el=document.getElementById('populationTicker');if(!el)return;
+  let n=240;const target=420;clearInterval(window.__r05PopTimer);
+  window.__r05PopTimer=setInterval(()=>{n+=12;if(n>=target){n=target;clearInterval(window.__r05PopTimer)}el.textContent=n},35);
+}
+
+function updateDecision(el,val){
+  state.updateDecision=val;
+  document.querySelectorAll('#sensorUpdate .r5-choice-row button').forEach(x=>x.classList.remove('selected'));
+  if(el)el.classList.add('selected');
+  const next=document.getElementById('toFinalDecision');if(next)next.disabled=false;
+}
+
+function calculateScore(reason){
+  const monitor=(state.seen.size>=4&&state.seen.has('S03')&&state.seen.has('S04'))?15:Math.min(15,state.seen.size*3);
+  const evidence=Math.min(20,state.evidence.size*5);
+  let assess=0;
+  if(state.collisionRun)assess+=5;
+  if(state.assessPick==='S04')assess+=15;else if(state.assessPick)assess+=4;
+  if(state.confidenceAfter>0)assess+=5;
+  const alertBase={'RESTRICT ZONE':10,'SHELTER':7,'MONITOR':4,'EVACUATE ALL':2}[state.publicAlert]||0;
+  const updatePts=(state.updateDecision==='CONFIRM'&&state.publicAlert==='RESTRICT ZONE')?5:(state.updateDecision?3:0);
+  const publicScore=Math.min(15,alertBase+updatePts);
+  const decisionScore={'RESTRICT ZONE':15,'SHELTER':10,'CONTINUE MONITORING':6,'EVACUATE':4}[state.decision]||0;
+  const txt=String(reason||'').toLowerCase();
+  let explanation=0;
+  if(/dose|รังสี/.test(txt))explanation+=2.5;
+  if(/exposure|time|เวลา|สัมผัส/.test(txt))explanation+=2.5;
+  if(/population|240|420|ประชาชน|คน/.test(txt))explanation+=2.5;
+  if(/context|market|transit|public|พื้นที่|สาธารณะ/.test(txt))explanation+=2.5;
+  const total=Math.round(monitor+evidence+assess+publicScore+decisionScore+explanation);
+  return {monitor,evidence,assess,publicScore,decisionScore,explanation,total};
+}
+
+function renderPerformance(reason){
+  const s=calculateScore(reason);state.score=s;
+  const rows=[
+    ['MONITOR',s.monitor,15],['EVIDENCE',s.evidence,20],['ASSESS RISK',s.assess,25],
+    ['PUBLIC ALERT',s.publicScore,15],['DECIDE',s.decisionScore,15],['EXPLANATION',s.explanation,10]
+  ];
+  const box=document.getElementById('scoreBreakdown');
+  if(box)box.innerHTML=rows.map(r=>`<div class="r5-result-metric"><div><span>${r[0]}</span><b>${r[1]}<small> / ${r[2]}</small></b></div><div class="r5-result-bar"><i style="width:${Math.round(r[1]/r[2]*100)}%"></i></div></div>`).join('');
+  const total=document.getElementById('totalScore');if(total)total.textContent=s.total;
+  const rank=document.getElementById('performanceRank');
+  if(rank)rank.textContent=s.total>=90?'RISK DECISION QUALITY • EXPERT':s.total>=75?'RISK DECISION QUALITY • ADVANCED':s.total>=60?'RISK DECISION QUALITY • DEVELOPING':'RISK DECISION QUALITY • NEEDS REVISION';
+  const strength=document.getElementById('scoreStrength');
+  const improve=document.getElementById('scoreImprove');
+  if(strength)strength.textContent=s.assess>=20?'คุณแยก Hazard ออกจาก Risk และใช้ Exposure/Population ได้ดี':'คุณสำรวจ Sensor และรวบรวม Evidence ได้ครบ';
+  if(improve)improve.textContent=s.explanation<8?'เพิ่มการอ้าง Dose • Exposure • Population • Context ในคำอธิบายให้ครบ':'พิจารณาผลต่อประชาชนเมื่อข้อมูลเปลี่ยนแบบ Real-time ให้ชัดขึ้น';
+  const shift=document.getElementById('confidenceShift');
+  if(shift)shift.textContent=`${state.confidenceBefore||'-'} → ${state.confidenceAfter||'-'} ${state.confidenceAfter>state.confidenceBefore?'• Evidence increased confidence':''}`;
+  return s;
+}
+
+function saveR05MasterCompletion(reason,scoreObj){
+  const evidenceIds=Array.from(state.evidence||[]);
+  const decisionText=String(state.decision||'').trim();
+  const now=new Date().toISOString();
+  const nativeRecord={
+    completed:true,evaluated:true,score:Number(scoreObj?.total||0),
+    decision:decisionText,reason:reason,evidenceIds:evidenceIds,
+    completedAt:now,updatedAt:now
+  };
+  const decisionRecord={
+    claim:'พื้นที่ที่มี Exposure ต่อประชาชนควรได้รับ Priority จากหลักฐาน ไม่ใช่ดูเฉพาะค่ารังสีสูงสุด',
+    evidence:'Dose Rate + Exposure Time + Population + Context',
+    evidenceIds:evidenceIds.length>=2?evidenceIds:['dose','time','population','context'],
+    reasoning:reason,
+    risk:'PUBLIC SAFETY PRIORITY',
+    decision:'PUBLIC SAFETY: '+decisionText,
+    initialScore:Number(scoreObj?.total||0),revisedScore:Number(scoreObj?.total||0),revisionSubmitted:true,
+    completed:true,updatedAt:now
+  };
+  try{
+    localStorage.setItem('rda_r05_completed','true');
+    localStorage.setItem('rda_r05_decision',decisionText);
+    localStorage.setItem('rda_r05_reason',reason);
+    localStorage.setItem('rdkR05Standalone',JSON.stringify(nativeRecord));
+    localStorage.setItem('RDA_DECISION_R05',JSON.stringify(decisionRecord));
+    localStorage.setItem('RDA_LAST_COMPLETED_CASE','r05');
+    let chain=[];
+    try{
+      const raw=localStorage.getItem('RDA_COMPLETION_HANDOFF');
+      chain=raw?JSON.parse(raw):[];
+      if(!Array.isArray(chain))chain=[];
+    }catch(e){chain=[]}
+    ['r01','r02','r03','r04','r05'].forEach(id=>{if(!chain.includes(id))chain.push(id)});
+    localStorage.setItem('RDA_COMPLETION_HANDOFF',JSON.stringify(chain));
+  }catch(e){}
+}
+
+function finish(){
+  const reason=document.getElementById('reason').value.trim();
+  if(reason.length<20){
+    alert('กรุณาอธิบายเหตุผลจาก Evidence อย่างน้อย 20 ตัวอักษร');
+    return;
+  }
+  const scoreObj=renderPerformance(reason);
+  saveR05MasterCompletion(reason,scoreObj);
+  try{localStorage.setItem('rda_r05_score',String(scoreObj.total))}catch(e){}
+  const overlay=document.getElementById('r5CaseClosedOverlay');
+  if(overlay){overlay.classList.remove('hidden');overlay.setAttribute('aria-hidden','false')}
+  setTimeout(()=>{
+    document.getElementById('step4').classList.add('hidden');
+    document.getElementById('complete').classList.remove('hidden');
+    document.getElementById('finalSummary').innerHTML=`คำตัดสินของคุณ: <b>${state.decision}</b><br>Evidence synthesis: ${reason}`;
+    if(overlay){overlay.classList.add('fade-out')}
+    setTimeout(()=>{if(overlay){overlay.classList.add('hidden');overlay.classList.remove('fade-out');overlay.setAttribute('aria-hidden','true')}},500);
+    document.getElementById('complete')?.scrollIntoView({behavior:'smooth',block:'start'});
+  },1750);
+  try{
+    if(window.RDAMaster){
+      if(typeof window.RDAMaster.snapshot==='function')window.RDAMaster.snapshot();
+      if(typeof window.RDAMaster.patch==='function')window.RDAMaster.patch();
+    }
+  }catch(e){}
+}
+
+function unlockNext(){
+  const reason=(document.getElementById('reason')?.value||localStorage.getItem('rda_r05_reason')||'').trim();
+  if(reason)saveR05MasterCompletion(reason,state.score||calculateScore(reason));
+
+  if(window.RDAMaster&&typeof window.RDAMaster.completeCaseAndReturn==='function'){
+    window.RDAMaster.completeCaseAndReturn('r05',Number(state.score?.total||localStorage.getItem('rda_r05_score')||0));
+    return;
+  }
+
+  try{localStorage.setItem('rda_r06_unlocked','true')}catch(e){}
+  location.href='../../index.html?rda_case_complete=r05&rda_chain=r01%2Cr02%2Cr03%2Cr04%2Cr05#portal';
+}
+
+ 
+
+ function vaultHTML(k){
+   const files={
+     dose:`<div class="eyebrow">FILE A • DOSE RATE</div><h3>Hazard Signal</h3><p>Dose Rate บอกระดับรังสี ณ จุดนั้น แต่ยังไม่บอก Risk ทั้งหมด</p><div class="r5-vault-data"><div><small>S03</small><b>1.20 μSv/h</b></div><div><small>S04</small><b>0.40 μSv/h</b></div><div><small>QUESTION</small><b>Which matters more?</b></div><div><small>STATUS</small><b>Needs context</b></div></div>`,
+     time:`<div class="eyebrow">FILE B • EXPOSURE TIME</div><h3>Duration of Exposure</h3><p>เวลาที่อยู่ในพื้นที่มีผลต่อ Dose ที่ได้รับโดยประมาณ</p><div class="r5-vault-data"><div><small>S03</small><b>0.2 h</b></div><div><small>S04</small><b>3.0 h</b></div><div><small>S03 DOSE</small><b>0.24 μSv</b></div><div><small>S04 DOSE</small><b>1.20 μSv</b></div></div>`,
+     population:`<div class="eyebrow">FILE C • POPULATION</div><h3>Who is exposed?</h3><p>จำนวนคนในพื้นที่เปลี่ยน Priority ทางสาธารณสุขได้อย่างมาก</p><div class="r5-vault-data"><div><small>S03</small><b>0 people</b></div><div><small>S04</small><b>240 people</b></div><div><small>S04</small><b>Crowded zone</b></div><div><small>PRIORITY</small><b>Potentially higher</b></div></div>`,
+     context:`<div class="eyebrow">FILE D • CONTEXT</div><h3>Where and under what conditions?</h3><p>S03 เป็นพื้นที่อุตสาหกรรมที่ถูกกั้น ส่วน S04 เป็นตลาดและจุดต่อรถที่ประชาชนเข้าถึงได้ต่อเนื่อง</p><div class="r5-vault-data"><div><small>S03</small><b>Restricted</b></div><div><small>S04</small><b>Public access</b></div><div><small>S04</small><b>Long exposure</b></div><div><small>CONTEXT</small><b>Changes risk</b></div></div>`
+   };
+   return files[k]||files.dose;
+ }
+ function openVault(btn,k){
+   document.querySelectorAll('.r5-vault-folder').forEach(x=>x.classList.remove('active'));
+   if(btn)btn.classList.add('active');
+   const box=document.getElementById('vaultContent');if(box)box.innerHTML=vaultHTML(k);
+   if(k&&!state.evidence.has(k))state.evidence.add(k);
+   document.querySelectorAll('.r5-vault-folder').forEach(x=>x.classList.toggle('selected',state.evidence.has(x.dataset.vault)));
+   const count=document.getElementById('vaultSelected');if(count)count.textContent=state.evidence.size+' / 4';
+   const next=document.getElementById('toAssess');if(next)next.disabled=state.evidence.size<4;
+ }
+
+
+ function acceptMission(){
+   const opening = document.getElementById('r05Opening');
+   const exp = document.getElementById('r05MissionExperience');
+
+   if(opening){
+      opening.classList.add('hidden');
+      opening.style.display = 'none';
+   }
+
+   if(exp){
+      exp.classList.remove('hidden');
+      exp.style.display = '';
+   }
+
+   // Start R-05 at MONITOR every time mission is accepted.
+   if(typeof go === 'function'){
+      go(0);
+   }
+
+   // Move viewport to the mission content.
+   setTimeout(()=>{
+      const target = document.getElementById('step0') || exp;
+      if(target && target.scrollIntoView){
+         target.scrollIntoView({behavior:'smooth', block:'start'});
+      }
+   }, 50);
+ }
+ function showBrief(){
+   alert('R-05 • DECIDE — THE CITY RADIATION EVENT\n\nเป้าหมาย: หาพื้นที่ที่มี Risk จริงจาก Dose Rate + Exposure Time + Population + Context\n\nFlow: MONITOR → EVIDENCE → ASSESS RISK → PUBLIC ALERT → DECIDE');
+ }
+ function initOpening(){
+   const opening=document.getElementById('r05Opening');
+   const exp=document.getElementById('r05MissionExperience');
+   if(opening)opening.classList.remove('hidden');
+   if(exp)exp.classList.add('hidden');
+ }
+
+ return{go,selectSensor,toggleEvidence,choose,finish,unlockNext,openVault,acceptMission,showBrief,initOpening,setConfidence,runCollision,assessPick,publicAlert,updateDecision};
+})();
+</script>
+
+<script>
+(function(){
+  function bootR05Mission(){
+    const exp = document.getElementById('r05MissionExperience');
+    if(exp){
+      exp.classList.remove('hidden');
+      exp.style.display = '';
+    }
+    if(window.R05 && typeof R05.go === 'function'){
+      R05.go(0);
+    }
+  }
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', bootR05Mission);
+  }else{
+    bootR05Mission();
+  }
+})();
+</script>
+
+</body>
+</html>

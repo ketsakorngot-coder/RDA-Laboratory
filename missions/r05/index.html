@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="th">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>R-05 • DECIDE — THE CITY RADIATION EVENT</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.gstatic.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+ <div class="brand"><img src="../../assets/logo.png" alt="Radiation Detective Agency"><div><h1>Radiation Detective Agency</h1><small>RDA</small></div></div>
+ <nav class="rda-nav">
+  <button data-page="headquarters" class="rda-nav-item active"><span class="nav-icon">🏢</span><span>Headquarters</span></button>
+  <div class="rda-section-title"><span class="nav-icon">📁</span><span>Operations</span></div>
+  <button data-page="operation1" class="rda-mission-item current"><span class="mission-dot current-dot">●</span><span>R-05 Mission</span><small>CURRENT</small></button>
+  <button data-page="passport" class="rda-nav-item"><span class="nav-icon">📘</span><span>Research Passport</span></button>
+  <button data-page="teacher" class="rda-nav-item"><span class="nav-icon">📊</span><span>Teacher Center</span></button>
+ </nav>
+ <div class="side-card"><b>นักสืบเกศกร</b><div class="muted" id="sideRank">Junior Detective</div><div class="xpbar"><span id="sideXpBar"></span></div><small id="sideXp">0 / 300 XP</small></div>
+</aside>
+<main class="main">
+<div class="topbar"><div><h2 id="r05PageTitle">Headquarters</h2><div class="muted">Radiation Detective Agency</div></div>
+
+<section id="r05Opening" class="page active">
+  <div class="dashboard-hero">
+    <div class="dashboard-copy">
+      <span class="pill">RDA • CURRENT MISSION</span>
+      <h1>R-05<br><span>DECIDE</span></h1>
+      <p>
+        ระบบ Sensor ของเมืองตรวจพบค่ารังสีผิดปกติหลายพื้นที่
+        คุณต้องค้นหาว่า <b>“พื้นที่ใดมีความเสี่ยงจริง”</b>
+        โดยใช้ <b>Dose Rate • Exposure Time • Population • Context</b>
+        ก่อนออกคำแนะนำด้านความปลอดภัยต่อประชาชน
+      </p>
+      <div class="dashboard-actions">
+        <button class="btn btn-primary" onclick="location.href='mission.html'">▶ รับภารกิจ</button>
+        <button class="btn btn-secondary" onclick="R05.showBrief()">ดูรายละเอียดภารกิจ</button>
+      </div>
+
+      <div class="quick-steps r05-five-steps">
+        <div><b>1</b><span>MONITOR<br><small>Live Radiation Map</small></span></div>
+        <div><b>2</b><span>EVIDENCE<br><small>เก็บหลักฐานสำคัญ</small></span></div>
+        <div><b>3</b><span>ASSESS RISK<br><small>เปรียบเทียบ Hazard/Risk</small></span></div>
+        <div><b>4</b><span>PUBLIC ALERT<br><small>ตอบสถานการณ์สาธารณะ</small></span></div>
+        <div><b>5</b><span>DECIDE<br><small>Public Safety Decision</small></span></div>
+      </div>
+    </div>
+
+    <div class="case-file">
+      <div class="file-tag">R-05</div>
+      <div class="file-icon">🚨</div>
+      <div class="file-title">THE CITY<br>RADIATION EVENT</div>
+      <div class="file-status">CURRENT MISSION</div>
+    </div>
+  </div>
+
+  <section class="r05-hq-operations">
+    <div class="r05-hq-section-head">
+      <span class="pill">OPERATIONS</span>
+      <div>
+        <h2>เลือกภารกิจของคุณ</h2>
+        <p>เส้นทางการเรียนรู้ RDA จาก Identify → Command</p>
+      </div>
+      <div class="r05-hq-stats">
+        <span><small>Completed</small><b>4 / 6</b></span>
+        <span><small>Total XP</small><b>0 / 300</b></span>
+        <span><small>Rank</small><b>Junior Detective</b></span>
+      </div>
+    </div>
+
+    <div class="r05-mission-grid">
+      <article class="r05-mission-card complete">
+        <span class="r05-tag">COMPLETED</span><h3>R-01</h3><div class="r05-icon">☢</div>
+        <h4>UNKNOWN<br>SOURCE</h4><p>Identify an unknown radiation source from detector and penetration evidence.</p>
+      </article>
+      <article class="r05-mission-card complete">
+        <span class="r05-tag">COMPLETED</span><h3>R-02</h3><div class="r05-icon">🏥</div>
+        <h4>SHIELDING<br>PROTOCOL</h4><p>Use medical-radiation evidence to choose protection and response measures.</p>
+      </article>
+      <article class="r05-mission-card complete">
+        <span class="r05-tag">COMPLETED</span><h3>R-03</h3><div class="r05-icon">✈️</div>
+        <h4>EXPOSURE<br>ZONE</h4><p>Interpret screening evidence and make a defensible security decision.</p>
+      </article>
+      <article class="r05-mission-card complete">
+        <span class="r05-tag">COMPLETED</span><h3>R-04</h3><div class="r05-icon">🍎</div>
+        <h4>THE DECAYING<br>CARGO</h4><p>Use a Half-life Model to predict Activity and decide PROCESS • ADJUST • HOLD.</p>
+      </article>
+      <article class="r05-mission-card current">
+        <span class="r05-tag">CURRENT MISSION</span><h3>R-05</h3><div class="r05-icon">🚨</div>
+        <h4>THE CITY<br>RADIATION EVENT</h4><p>Assess Dose Rate • Exposure Time • Population • Context to identify real risk.</p>
+      </article>
+      <article class="r05-mission-card locked">
+        <span class="r05-tag">LOCKED</span><h3>R-06</h3><div class="r05-icon">🏛️</div>
+        <h4>FINAL<br>RADIATION CRISIS</h4><p>Integrate all prior missions in a final transfer challenge.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="r05-hq-bottom">
+    <article class="r05-bottom-card">
+      <span class="pill">RDA NEWS FEED</span>
+      <h3>ข่าวสารล่าสุด</h3>
+      <div class="r05-news-item"><b>เมือง A ตรวจพบค่ารังสีสูงกว่าปกติใน 3 พื้นที่</b><span>NEW</span></div>
+      <div class="r05-news-item"><b>ระบบ Sensor Network ส่งข้อมูลต่อเนื่องเข้าสู่ Command Center</b><span>LIVE</span></div>
+    </article>
+
+    <article class="r05-bottom-card progress-card">
+      <span class="pill">MISSION PROGRESS</span>
+      <div class="r05-progress-wrap">
+        <div class="r05-progress-ring"><b>67%</b><small>R-05</small></div>
+        <div class="r05-progress-list">
+          <p>● R-01–R-04 Completed</p>
+          <p class="current-text">● R-05 Current Mission</p>
+          <p>○ R-06 Locked</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="r05-bottom-card">
+      <span class="pill">RDA TIP OF THE DAY</span>
+      <h3>HIGH RADIATION ≠ HIGHEST RISK</h3>
+      <p>Dose Rate เพียงค่าเดียวไม่พอ ต้องพิจารณา Exposure Time • Population • Context ก่อนตัดสินใจ</p>
+    </article>
+  </section>
+</section>
+
+</main>
+</div>
+<script src="../../shared/rda-rubric-v2.js"></script><script src="script.js"></script><script src="../../classroom-config.js"></script><script src="../../shared/rda-classroom-backend.js"></script><script src="../../shared/rda-master.js"></script>
+<script src="../../shared/rda-unlock-bridge.js"></script><script src="../../shared/rda-story.js"></script><script>
+const SENSOR_DATA={"S01": {"name": "Residential North", "rate": 0.12, "time": 0.5, "population": 35, "context": "Background-like; residents mostly indoors", "dose": 0.06}, "S02": {"name": "School Zone", "rate": 0.18, "time": 2.0, "population": 180, "context": "School dismissal period", "dose": 0.36}, "S03": {"name": "Industrial Perimeter", "rate": 1.2, "time": 0.2, "population": 0, "context": "Restricted fenced zone; no public present", "dose": 0.24}, "S04": {"name": "Market / Transit", "rate": 0.4, "time": 3.0, "population": 240, "context": "Crowded market and transit interchange", "dose": 1.2}, "S05": {"name": "Hospital Access", "rate": 0.26, "time": 1.5, "population": 95, "context": "Patients and staff moving through area", "dose": 0.39}, "S06": {"name": "Riverside Park", "rate": 0.15, "time": 1.0, "population": 22, "context": "Low occupancy outdoor area", "dose": 0.15}};
+const R05=(()=>{
+ const state={step:0,seen:new Set(),evidence:new Set(),decision:''};
+ function go(n){state.step=n;try{window.RDAMaster&&window.RDAMaster.pulse('r05',n,4)}catch(e){} document.querySelectorAll('[id^=step]').forEach((x,i)=>x.classList.toggle('hidden',i!==n)); document.getElementById('complete').classList.add('hidden'); if(n===1)setTimeout(()=>{const b=document.querySelector('.r5-vault-folder[data-vault="dose"]');if(b){document.querySelectorAll('.r5-vault-folder').forEach(x=>x.classList.remove('active'));b.classList.add('active');const box=document.getElementById('vaultContent');if(box)box.innerHTML=vaultHTML('dose')}},0); for(let i=0;i<5;i++){let b=document.getElementById('f'+i);b.classList.toggle('active',i===n);b.classList.toggle('done',i<n)} window.scrollTo({top:0,behavior:'smooth'})}
+ function selectSensor(id){const d=SENSOR_DATA[id];state.seen.add(id);document.querySelectorAll('.sensor').forEach(x=>x.classList.toggle('selected',x.dataset.id===id));document.getElementById('sensorDetail').innerHTML=`<h3>${id} • ${d.name}</h3><div class="metric"><span>Dose Rate</span><b>${d.rate.toFixed(2)} μSv/h</b></div><div class="metric"><span>Exposure Time</span><b>${d.time} h</b></div><div class="metric"><span>Population</span><b>${d.population}</b></div><div class="metric"><span>Estimated Dose</span><b>${d.dose.toFixed(2)} μSv</b></div><p class="lead">${d.context}</p>`;document.getElementById('seenCount').textContent=`สำรวจแล้ว ${Math.min(state.seen.size,4)} / 4 จุด`;document.getElementById('toEvidence').disabled=!(state.seen.size>=4&&state.seen.has('S03')&&state.seen.has('S04'));}
+ function toggleEvidence(el){const k=el.dataset.e;if(state.evidence.has(k))state.evidence.delete(k);else state.evidence.add(k);el.classList.toggle('selected');document.getElementById('toAssess').disabled=state.evidence.size<4;}
+ function choose(el,val){state.decision=val;document.querySelectorAll('.decision').forEach(x=>x.classList.remove('selected'));el.classList.add('selected');document.getElementById('submitDecision').disabled=false;}
+ function finish(){const reason=document.getElementById('reason').value.trim();if(reason.length<20){alert('กรุณาอธิบายเหตุผลจาก Evidence อย่างน้อย 20 ตัวอักษร');return;}document.getElementById('step4').classList.add('hidden');document.getElementById('complete').classList.remove('hidden');document.getElementById('finalSummary').innerHTML=`คำตัดสินของคุณ: <b>${state.decision}</b><br>Evidence synthesis: ${reason}`;try{localStorage.setItem('rda_r05_completed','true');localStorage.setItem('rda_r05_decision',state.decision);localStorage.setItem('rda_r05_reason',reason);}catch(e){}}
+ function unlockNext(){try{localStorage.setItem('rda_r05_completed','true');localStorage.setItem('rda_r06_unlocked','true');}catch(e){} const link=document.querySelector('a[href*="r06"]'); if(link){location.href=link.href;return;} location.href='../r06/index.html';}
+
+ function vaultHTML(k){
+   const files={
+     dose:`<div class="eyebrow">FILE A • DOSE RATE</div><h3>Hazard Signal</h3><p>Dose Rate บอกระดับรังสี ณ จุดนั้น แต่ยังไม่บอก Risk ทั้งหมด</p><div class="r5-vault-data"><div><small>S03</small><b>1.20 μSv/h</b></div><div><small>S04</small><b>0.40 μSv/h</b></div><div><small>QUESTION</small><b>Which matters more?</b></div><div><small>STATUS</small><b>Needs context</b></div></div>`,
+     time:`<div class="eyebrow">FILE B • EXPOSURE TIME</div><h3>Duration of Exposure</h3><p>เวลาที่อยู่ในพื้นที่มีผลต่อ Dose ที่ได้รับโดยประมาณ</p><div class="r5-vault-data"><div><small>S03</small><b>0.2 h</b></div><div><small>S04</small><b>3.0 h</b></div><div><small>S03 DOSE</small><b>0.24 μSv</b></div><div><small>S04 DOSE</small><b>1.20 μSv</b></div></div>`,
+     population:`<div class="eyebrow">FILE C • POPULATION</div><h3>Who is exposed?</h3><p>จำนวนคนในพื้นที่เปลี่ยน Priority ทางสาธารณสุขได้อย่างมาก</p><div class="r5-vault-data"><div><small>S03</small><b>0 people</b></div><div><small>S04</small><b>240 people</b></div><div><small>S04</small><b>Crowded zone</b></div><div><small>PRIORITY</small><b>Potentially higher</b></div></div>`,
+     context:`<div class="eyebrow">FILE D • CONTEXT</div><h3>Where and under what conditions?</h3><p>S03 เป็นพื้นที่อุตสาหกรรมที่ถูกกั้น ส่วน S04 เป็นตลาดและจุดต่อรถที่ประชาชนเข้าถึงได้ต่อเนื่อง</p><div class="r5-vault-data"><div><small>S03</small><b>Restricted</b></div><div><small>S04</small><b>Public access</b></div><div><small>S04</small><b>Long exposure</b></div><div><small>CONTEXT</small><b>Changes risk</b></div></div>`
+   };
+   return files[k]||files.dose;
+ }
+ function openVault(btn,k){
+   document.querySelectorAll('.r5-vault-folder').forEach(x=>x.classList.remove('active'));
+   if(btn)btn.classList.add('active');
+   const box=document.getElementById('vaultContent');if(box)box.innerHTML=vaultHTML(k);
+   if(k&&!state.evidence.has(k))state.evidence.add(k);
+   document.querySelectorAll('.r5-vault-folder').forEach(x=>x.classList.toggle('selected',state.evidence.has(x.dataset.vault)));
+   const count=document.getElementById('vaultSelected');if(count)count.textContent=state.evidence.size+' / 4';
+   const next=document.getElementById('toAssess');if(next)next.disabled=state.evidence.size<4;
+ }
+
+
+ function acceptMission(){
+   const opening = document.getElementById('r05Opening');
+   const exp = document.getElementById('r05MissionExperience');
+
+   if(opening){
+      opening.classList.add('hidden');
+      opening.style.display = 'none';
+   }
+
+   if(exp){
+      exp.classList.remove('hidden');
+      exp.style.display = '';
+   }
+
+   // Start R-05 at MONITOR every time mission is accepted.
+   if(typeof go === 'function'){
+      go(0);
+   }
+
+   // Move viewport to the mission content.
+   setTimeout(()=>{
+      const target = document.getElementById('step0') || exp;
+      if(target && target.scrollIntoView){
+         target.scrollIntoView({behavior:'smooth', block:'start'});
+      }
+   }, 50);
+ }
+ function showBrief(){
+   alert('R-05 • DECIDE — THE CITY RADIATION EVENT\n\nเป้าหมาย: หาพื้นที่ที่มี Risk จริงจาก Dose Rate + Exposure Time + Population + Context\n\nFlow: MONITOR → EVIDENCE → ASSESS RISK → PUBLIC ALERT → DECIDE');
+ }
+ function initOpening(){
+   const opening=document.getElementById('r05Opening');
+   const exp=document.getElementById('r05MissionExperience');
+   if(opening)opening.classList.remove('hidden');
+   if(exp)exp.classList.add('hidden');
+ }
+
+ return{go,selectSensor,toggleEvidence,choose,finish,unlockNext,openVault,acceptMission,showBrief,initOpening};
+})();
+</script>
+</body>
+</html>

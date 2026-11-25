@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#07131b"/><stop offset="1" stop-color="#020608"/></linearGradient>
+<linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0f3344"/><stop offset="1" stop-color="#09141c"/></linearGradient>
+<filter id="glow"><feGaussianBlur stdDeviation="10"/></filter>
+</defs>
+<rect width="1920" height="1080" fill="url(#bg)"/>
+<rect x="0" y="0" width="1920" height="130" fill="#071018"/>
+<rect x="160" y="140" width="1600" height="600" rx="28" fill="url(#glass)" stroke="#1d546b" stroke-width="4"/>
+<rect x="230" y="190" width="420" height="220" rx="18" fill="#081a24" stroke="#2de2e6" stroke-opacity=".55"/>
+<rect x="690" y="190" width="540" height="220" rx="18" fill="#081a24" stroke="#ff4d5a" stroke-opacity=".7"/>
+<rect x="1270" y="190" width="420" height="220" rx="18" fill="#081a24" stroke="#ffcc33" stroke-opacity=".55"/>
+<g opacity=".9">
+  <circle cx="960" cy="300" r="82" fill="none" stroke="#ff4d5a" stroke-width="18"/>
+  <circle cx="960" cy="300" r="42" fill="#ff4d5a" opacity=".7"/>
+  <path d="M950 245 h20 v72 h-20z M950 334 h20 v20 h-20z" fill="#fff"/>
+</g>
+<g fill="#0a2230" stroke="#1c4c62" stroke-width="3">
+  <rect x="230" y="450" width="460" height="230" rx="18"/>
+  <rect x="730" y="450" width="460" height="230" rx="18"/>
+  <rect x="1230" y="450" width="460" height="230" rx="18"/>
+</g>
+<g fill="#0b1820">
+  <rect x="160" y="760" width="1600" height="210" rx="30"/>
+  <rect x="220" y="800" width="300" height="110" rx="18"/>
+  <rect x="560" y="800" width="300" height="110" rx="18"/>
+  <rect x="900" y="800" width="300" height="110" rx="18"/>
+  <rect x="1240" y="800" width="300" height="110" rx="18"/>
+</g>
+<g stroke="#2de2e6" stroke-opacity=".15">
+  <path d="M0 900h1920M0 940h1920M0 980h1920"/>
+  <path d="M240 740v340M520 740v340M800 740v340M1080 740v340M1360 740v340M1640 740v340"/>
+</g>
+<circle cx="180" cy="120" r="22" fill="#ff4d5a" filter="url(#glow)"/>
+<circle cx="1740" cy="120" r="22" fill="#ff4d5a" filter="url(#glow)"/>
+</svg>

@@ -1,0 +1,800 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Radiation Detective Agency — Laboratory Mission Edition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050b12;--panel:#0b1d2a;--panel2:#10293a;--line:#24495f;--cyan:#4fc3f7;--yellow:#f4c430;--red:#e94c4c;--green:#45d483;--white:#f5fbff;--muted:#9bb4c4;--shadow:0 24px 70px rgba(0,0,0,.42)}
+*{box-sizing:border-box}html{scroll-behavior:smooth;background:var(--bg)}body{margin:0;font-family:'Kanit',system-ui,sans-serif;color:var(--white);min-height:100vh;background:linear-gradient(rgba(1,7,12,.68),rgba(2,10,17,.92)),url('assets/headquarters-bg.jpg') center/cover fixed no-repeat;position:relative}body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(circle at 52% 18%,rgba(79,195,247,.16),transparent 28%),linear-gradient(90deg,rgba(79,195,247,.045) 1px,transparent 1px),linear-gradient(rgba(79,195,247,.045) 1px,transparent 1px);background-size:auto,52px 52px,52px 52px;animation:labGrid 22s linear infinite}body::after{content:'';position:fixed;left:0;right:0;top:-35%;height:24%;pointer-events:none;z-index:1;background:linear-gradient(180deg,transparent,rgba(79,195,247,.09),transparent);animation:scanRoom 8s linear infinite}@keyframes labGrid{to{background-position:center,52px 52px,52px 52px}}@keyframes scanRoom{to{top:115%}}button,input,textarea,select{font:inherit}.hidden{display:none!important}
+.app{display:grid;grid-template-columns:250px 1fr;min-height:100vh;position:relative;z-index:2}.sidebar{position:sticky;top:0;height:100vh;padding:20px 15px;background:rgba(2,12,20,.84);backdrop-filter:blur(18px);border-right:1px solid rgba(79,195,247,.18)}.brand{display:flex;gap:11px;align-items:center;margin-bottom:24px}.brand img{width:56px;height:56px;object-fit:contain}.brand h1{font-size:17px;line-height:1.15;margin:0}.brand small{color:var(--yellow)}.nav{display:grid;gap:7px}.nav button{border:0;background:transparent;color:var(--muted);padding:12px 13px;border-radius:12px;text-align:left;cursor:pointer}.nav button:hover,.nav button.active{color:#fff;background:linear-gradient(90deg,rgba(79,195,247,.17),rgba(244,196,48,.07))}.side-card{margin-top:22px;padding:14px;border-radius:16px;background:rgba(255,255,255,.035);border:1px solid var(--line)}.xpbar{height:9px;background:#122d3d;border-radius:999px;overflow:hidden;margin:8px 0}.xpbar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--yellow));transition:.35s}
+.main{padding:22px 28px 50px;max-width:1650px;width:100%;margin:auto}.topbar{display:flex;justify-content:space-between;gap:18px;align-items:center;padding:13px 16px;margin-bottom:18px;background:rgba(5,21,34,.72);border:1px solid rgba(79,195,247,.17);border-radius:16px;backdrop-filter:blur(13px)}.topbar h2{margin:0;font-size:26px}.status{display:flex;gap:9px;flex-wrap:wrap}.pill{display:inline-flex;padding:7px 11px;border-radius:999px;background:#112c3d;border:1px solid var(--line);font-size:13px}.card{background:linear-gradient(160deg,rgba(15,47,67,.82),rgba(5,20,32,.89));border:1px solid var(--line);border-radius:20px;padding:19px;box-shadow:var(--shadow);backdrop-filter:blur(14px)}.muted{color:var(--muted)}.btn{border:0;border-radius:12px;padding:11px 16px;cursor:pointer;font-weight:800}.btn-primary{background:linear-gradient(90deg,var(--yellow),#ffe06d);color:#111}.btn-secondary{background:#12364b;color:#fff;border:1px solid #2b5b75}.btn-ghost{background:transparent;color:#d7e7f0;border:1px solid var(--line)}.btn-danger{background:var(--red);color:#fff}.btn:disabled{opacity:.42;cursor:not-allowed}.field{display:grid;gap:7px}.field label{font-size:13px;color:#c4d5df}.field textarea,.field input,.field select{width:100%;padding:11px;border-radius:11px;border:1px solid #2a526a;background:#071a28;color:#fff}.field textarea:focus,.field input:focus,.field select:focus{outline:2px solid rgba(79,195,247,.35);border-color:var(--cyan)}.charcount{font-size:11px;color:var(--muted);text-align:right}.notice{padding:13px 15px;border-radius:13px;background:rgba(244,196,48,.09);border-left:4px solid var(--yellow);color:#e5edf2}.success{border-left-color:var(--green);background:rgba(69,212,131,.09)}.danger{border-left-color:var(--red);background:rgba(233,76,76,.09)}
+.hero{min-height:410px;position:relative;overflow:hidden;display:grid;grid-template-columns:1.15fr .85fr;align-items:center;border-radius:28px;border:1px solid rgba(79,195,247,.32);background:linear-gradient(90deg,rgba(3,16,28,.95) 0%,rgba(4,20,34,.72) 52%,rgba(3,15,25,.12)),url('assets/headquarters-bg.jpg') center/cover no-repeat;box-shadow:0 30px 80px rgba(0,0,0,.5)}.hero-content{padding:45px 50px;position:relative;z-index:2}.eyebrow{display:inline-flex;padding:7px 11px;border-radius:999px;color:#ffe58b;background:rgba(244,196,48,.12);border:1px solid rgba(244,196,48,.5);font-size:12px;font-weight:800;letter-spacing:.08em}.hero h3{font-size:clamp(38px,5vw,68px);line-height:1.02;margin:18px 0 12px}.hero p{font-size:18px;line-height:1.7;color:#d6e4ec;max-width:720px}.hero-actions{display:flex;gap:11px;flex-wrap:wrap;margin-top:25px}.hero-object{display:grid;place-items:center;position:relative;min-height:360px}.crate{width:215px;height:185px;display:grid;place-items:center;border-radius:16px;background:linear-gradient(145deg,#805d34,#2f1d0d 75%);border:4px solid #b68a4b;box-shadow:0 30px 60px rgba(0,0,0,.6),inset 0 0 0 9px rgba(0,0,0,.2);transform:rotate(-4deg);position:relative}.crate b{font-size:72px;color:var(--yellow);text-shadow:0 0 28px rgba(244,196,48,.72)}.crate span{position:absolute;right:14px;top:12px;color:#ffe596;font-weight:900}.scan-ring{position:absolute;width:320px;height:320px;border-radius:50%;border:2px solid rgba(79,195,247,.55);box-shadow:0 0 50px rgba(79,195,247,.25),inset 0 0 38px rgba(79,195,247,.12);animation:ring 2.2s ease-in-out infinite}@keyframes ring{50%{transform:scale(1.08);opacity:.45}}
+.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}.quick .card{display:grid;grid-template-columns:46px 1fr;gap:10px;align-items:center}.quick i{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--yellow);color:#111;font-style:normal;font-weight:900}.quick b{font-size:17px}.quick small{color:var(--muted)}
+.ops{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.op{position:relative}.op.locked{filter:grayscale(.72);opacity:.58}.op .num{font-size:42px;font-weight:800;color:var(--yellow)}.op h4{font-size:20px;margin:0 0 4px}.progressline{height:8px;border-radius:999px;background:#17384a;overflow:hidden;margin:13px 0}.progressline span{display:block;height:100%;background:linear-gradient(90deg,var(--cyan),var(--yellow))}
+.mission-layout{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:16px;align-items:start}.mission-header{margin-bottom:14px}.mission-header h3{font-size:31px;margin:7px 0}.stepper{display:flex;gap:7px;overflow:auto;padding:4px 0 2px}.step{min-width:145px;padding:10px 11px;border-radius:11px;border:1px solid var(--line);background:#0b2434;color:var(--muted);font-size:12px}.step.active{border-color:var(--yellow);color:#fff;box-shadow:0 0 20px rgba(244,196,48,.12)}.step.done{color:#c9ffe1;background:rgba(69,212,131,.09);border-color:rgba(69,212,131,.38)}.step.locked{opacity:.45}.stage{min-height:500px}.stage-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;border-bottom:1px solid rgba(79,195,247,.16);padding-bottom:14px;margin-bottom:17px}.stage-head h3{margin:0;font-size:25px}.stage-footer{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:19px;padding-top:15px;border-top:1px solid rgba(79,195,247,.16)}.mission-side{position:sticky;top:18px}.side-progress{font-size:36px;font-weight:800;color:var(--yellow)}.side-list{display:grid;gap:8px;margin-top:13px}.side-list div{display:flex;justify-content:space-between;gap:10px;padding:9px 10px;border-radius:10px;background:#0a2231}.side-list .ok{color:var(--green)}.side-list .current{color:var(--yellow)}
+.evidence-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.evidence-card{padding:15px;border-radius:14px;background:#08202f;border:1px solid var(--line)}.metric-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.metric{padding:17px;border-radius:15px;background:#071d2b;border:1px solid var(--line)}.metric strong{font-size:32px}.metric.alert strong{color:var(--red)}
+.training-shell{position:relative;overflow:hidden;border-radius:20px;min-height:440px;background:radial-gradient(circle at 50% 36%,#123a55,#061521 60%,#02080e);border:1px solid rgba(79,195,247,.32)}.training-stage{min-height:340px;padding:23px;display:grid;place-items:center}.training-scene{display:none;width:100%;animation:fade .35s ease}.training-scene.active{display:block}@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}.scene-title{text-align:center}.scene-title h4{font-size:31px;margin:7px 0}.nucleus-demo{height:210px;display:grid;place-items:center;position:relative}.nucleus{width:130px;height:130px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff7bf,#ffd748 19%,#e9891d 45%,#721b11 75%);box-shadow:0 0 50px rgba(244,196,48,.6);animation:pulse 1.3s ease-in-out infinite}@keyframes pulse{50%{transform:scale(1.07);filter:brightness(1.2)}}.types{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.type{padding:18px;text-align:center;border-radius:18px;border:1px solid var(--line);background:#092435}.type i{display:grid;place-items:center;width:84px;height:84px;border-radius:50%;margin:auto;font-size:36px;font-weight:900;font-style:normal;box-shadow:0 0 30px currentColor}.alpha{color:#ff9e44}.beta{color:var(--cyan)}.gamma{color:#c79cff}.compare{width:100%;border-collapse:collapse}.compare th,.compare td{padding:10px;border:1px solid var(--line);text-align:left}.compare th{background:#123e57;color:var(--yellow)}.training-controls{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:14px;border-top:1px solid rgba(79,195,247,.18);background:rgba(3,15,25,.78)}
+.lab-controls{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.beam{height:130px;display:flex;align-items:center;gap:12px;margin:16px 0;padding:14px;background:#06151f;border-radius:15px;border:1px solid var(--line);overflow:hidden}.source{width:44px;height:44px;border-radius:50%;background:radial-gradient(circle,#fff,var(--yellow) 30%,#815700 75%);box-shadow:0 0 24px var(--yellow)}.particles{flex:1;height:100%;position:relative;overflow:hidden}.particle{position:absolute;width:10px;height:10px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px var(--cyan);left:0;top:45%;animation:fly 1.7s linear infinite}.particle:nth-child(2){top:30%;animation-delay:.35s}.particle:nth-child(3){top:65%;animation-delay:.7s}@keyframes fly{to{transform:translateX(900px)}}.shield{width:30px;height:95px;border:2px solid #fff;border-radius:4px;background:linear-gradient(#eff4f7,#84939c)}.result-box{padding:14px;border-radius:13px;background:#0d2e41;border:1px solid #2a5c77}.table{width:100%;border-collapse:collapse}.table th,.table td{padding:10px;border-bottom:1px solid var(--line);text-align:left}.table th{color:var(--yellow)}
+.notebook-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.nb-block{padding:14px;border-radius:15px;background:#08202f;border:1px solid var(--line)}.nb-block h4{margin:0 0 8px;color:var(--yellow)}.score-row{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:12px}.score-pill{padding:4px 8px;border-radius:999px;background:#102f42;color:#d5e8f3}.chat{display:grid;grid-template-columns:120px 1fr;gap:14px}.avatar{width:105px;height:105px;border-radius:25px;background:linear-gradient(145deg,#164660,#071b29);border:1px solid #32728e;display:grid;place-items:center;font-size:55px;box-shadow:0 0 35px rgba(79,195,247,.18)}.chatbox{height:330px;display:flex;flex-direction:column}.messages{flex:1;overflow:auto;display:grid;gap:9px;padding-right:5px}.msg{max-width:82%;padding:10px 12px;border-radius:14px}.msg.ai{background:#12364b}.msg.user{background:#3f4d18;margin-left:auto}.chat-input{display:flex;gap:8px;margin-top:9px}.chat-input input{flex:1;background:#071a28;color:#fff;border:1px solid #2a526a;border-radius:10px;padding:10px}.hint-levels{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}
+.rubric{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.rubric .metric strong{color:var(--yellow)}.report-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.complete-box{text-align:center;padding:30px}.complete-box h2{font-size:42px;color:var(--yellow);margin:5px}.stamp-big{font-size:82px}.confetti{font-size:30px;letter-spacing:10px}
+.passport{display:grid;grid-template-columns:300px 1fr;gap:18px}.passport-cover{min-height:420px;padding:27px;text-align:center;border-radius:22px;border:2px solid #b98f24;background:linear-gradient(145deg,#0a1925,#050d14)}.passport-cover img{width:145px}.stamps{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.stamp{aspect-ratio:1;border-radius:50%;border:2px dashed #526978;display:grid;place-items:center;text-align:center;color:#7690a1}.stamp.unlocked{color:var(--yellow);border-style:solid;border-color:var(--yellow);background:rgba(244,196,48,.08)}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.stat strong{font-size:29px}.teacher-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:14px}.heatmap{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.heat{padding:16px;border-radius:12px;text-align:center;background:#0c2b3d}.heat.low{background:rgba(233,76,76,.15);border:1px solid rgba(233,76,76,.4)}.heat.mid{background:rgba(244,196,48,.13);border:1px solid rgba(244,196,48,.35)}.heat.high{background:rgba(69,212,131,.12);border:1px solid rgba(69,212,131,.35)}
+.intro{position:fixed;inset:0;z-index:100;background:#02070c;display:grid;place-items:center;text-align:center;transition:.7s}.intro.hide{opacity:0;pointer-events:none}.intro img{width:155px}.intro h1{font-size:clamp(32px,6vw,72px);margin:15px 0 4px}.intro .loader{width:min(520px,80vw);height:7px;background:#142b3a;border-radius:999px;overflow:hidden;margin:20px auto}.intro .loader span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--yellow));animation:load 2.1s forwards}@keyframes load{to{width:100%}}.toast{position:fixed;right:20px;bottom:20px;z-index:90;padding:12px 15px;border-radius:12px;background:#102c3d;border:1px solid var(--cyan);box-shadow:var(--shadow)}
+.mobile-nav{display:none}.trial-list{display:grid;gap:8px}.trial-item{display:flex;gap:10px;align-items:flex-start;padding:10px;border-radius:11px;background:#092331}.trial-item input{margin-top:4px}
+@media(max-width:1050px){.mission-layout,.teacher-grid{grid-template-columns:1fr}.mission-side{position:static}.hero{grid-template-columns:1fr}.hero-object{display:none}.quick,.ops{grid-template-columns:1fr 1fr}.passport{grid-template-columns:1fr}}
+@media(max-width:820px){.app{grid-template-columns:1fr}.sidebar{display:none}.main{padding:14px 14px 88px}.topbar{align-items:flex-start;flex-direction:column}.quick,.ops,.types,.evidence-grid,.metric-grid,.lab-controls,.notebook-grid,.report-grid,.stats,.rubric{grid-template-columns:1fr}.hero-content{padding:35px 25px}.chat{grid-template-columns:1fr}.avatar{width:74px;height:74px}.mobile-nav{display:grid;grid-template-columns:repeat(8,1fr);position:fixed;left:8px;right:8px;bottom:8px;z-index:80;background:rgba(4,17,28,.94);backdrop-filter:blur(15px);border:1px solid var(--line);border-radius:16px;padding:7px}.mobile-nav button{border:0;background:transparent;color:#b8cfdd;padding:7px 3px;font-size:11px}.mobile-nav button.active{color:var(--yellow)}}
+
+/* ===== Laboratory Experience Upgrade ===== */
+.hero::after{content:"RDA LAB • LIVE SCAN";position:absolute;right:22px;top:18px;padding:7px 11px;border:1px solid rgba(79,195,247,.45);border-radius:999px;background:rgba(2,12,20,.62);color:#bfeaff;font-size:11px;letter-spacing:.12em;animation:hudBlink 1.8s ease-in-out infinite}
+@keyframes hudBlink{50%{opacity:.45;box-shadow:0 0 18px rgba(79,195,247,.35)}}
+.training-shell::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(79,195,247,.07) 1px,transparent 1px),linear-gradient(rgba(79,195,247,.07) 1px,transparent 1px);background-size:38px 38px;animation:trainingGrid 12s linear infinite}
+@keyframes trainingGrid{to{background-position:38px 38px}}
+.nucleus-demo::before,.nucleus-demo::after{content:"";position:absolute;width:170px;height:170px;border:2px solid rgba(79,195,247,.6);border-radius:50%;animation:energyWave 2.2s ease-out infinite}.nucleus-demo::after{animation-delay:1.1s}
+@keyframes energyWave{from{transform:scale(.55);opacity:.85}to{transform:scale(1.9);opacity:0}}
+.type{position:relative;overflow:hidden;transition:.25s}.type:hover{transform:translateY(-6px);border-color:currentColor;box-shadow:0 18px 40px rgba(0,0,0,.32)}.type::after{content:"";position:absolute;left:-50%;right:-50%;bottom:20px;height:4px;background:linear-gradient(90deg,transparent,currentColor,transparent);animation:typeScan 1.8s linear infinite}@keyframes typeScan{from{transform:translateX(-25%)}to{transform:translateX(25%)}}
+.beam{position:relative;background:linear-gradient(90deg,rgba(3,15,24,.94),rgba(10,40,57,.88));box-shadow:inset 0 0 35px rgba(79,195,247,.08)}.beam::before{content:"LIVE PARTICLE TRACK";position:absolute;left:14px;top:8px;color:rgba(190,228,244,.48);font-size:10px;letter-spacing:.14em}.beam::after{content:"";position:absolute;left:18px;right:18px;bottom:12px;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),var(--yellow),transparent);animation:beamScan 1.4s linear infinite}@keyframes beamScan{from{transform:scaleX(.15);opacity:.25}50%{opacity:1}to{transform:scaleX(1);opacity:.15}}
+.particle:nth-child(4){top:20%;animation-delay:1.05s}.particle:nth-child(5){top:78%;animation-delay:1.35s}.particle{animation-duration:1.35s}
+.stage{position:relative;overflow:hidden}.stage::before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:20px;background:radial-gradient(circle at 70% 0%,rgba(79,195,247,.07),transparent 25%)}
+.card,.topbar,.sidebar{backdrop-filter:blur(16px) saturate(125%)}
+
+
+/* ===== Clear Mission Flow v3 ===== */
+.mission-header{position:relative;overflow:hidden}
+.mission-header::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(110deg,transparent 30%,rgba(79,195,247,.08) 48%,transparent 64%);transform:translateX(-120%);animation:headerScan 5s linear infinite}
+@keyframes headerScan{to{transform:translateX(120%)}}
+.mission-header-top{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
+.phase-roadmap{display:grid;grid-template-columns:repeat(8,1fr);gap:8px;margin-top:16px}
+.phase-node{position:relative;padding:12px 10px;border-radius:14px;border:1px solid var(--line);background:#0a2333;color:var(--muted);text-align:center;transition:.25s}
+.phase-node b{display:block;font-size:13px;color:inherit}.phase-node small{display:block;margin-top:3px;font-size:10px}
+.phase-node.active{border-color:var(--yellow);color:#fff;background:linear-gradient(145deg,rgba(244,196,48,.18),rgba(13,43,61,.9));box-shadow:0 0 26px rgba(244,196,48,.14);transform:translateY(-2px)}
+.phase-node.done{border-color:rgba(69,212,131,.5);color:#caffdf;background:rgba(69,212,131,.09)}
+.phase-node.locked{opacity:.45}
+.phase-icon{width:34px;height:34px;margin:0 auto 7px;border-radius:50%;display:grid;place-items:center;background:#15384d;border:1px solid #2f657f;font-size:17px}
+.phase-node.active .phase-icon{background:var(--yellow);color:#111;border-color:#ffe581;box-shadow:0 0 20px rgba(244,196,48,.4)}
+.phase-node.done .phase-icon{background:var(--green);color:#07120c;border-color:#8af0b6}
+.phase-banner{display:grid;grid-template-columns:56px 1fr auto;gap:14px;align-items:center;padding:14px 16px;margin-bottom:17px;border-radius:16px;border:1px solid rgba(79,195,247,.28);background:linear-gradient(120deg,rgba(79,195,247,.10),rgba(244,196,48,.05));animation:bannerIn .35s ease}
+.phase-banner .phase-big-icon{width:52px;height:52px;border-radius:15px;display:grid;place-items:center;font-size:28px;background:#123a51;border:1px solid #32708e;box-shadow:0 0 24px rgba(79,195,247,.15)}
+.phase-banner h4{margin:0 0 3px;font-size:19px}.phase-banner p{margin:0;color:var(--muted);font-size:13px}.phase-banner .phase-count{font-size:12px;color:var(--yellow);font-weight:700}
+@keyframes bannerIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.stage{position:relative;overflow:hidden}.stage::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.07;background-image:linear-gradient(rgba(79,195,247,.18) 1px,transparent 1px),linear-gradient(90deg,rgba(79,195,247,.18) 1px,transparent 1px);background-size:36px 36px;mask-image:linear-gradient(to bottom,#000,transparent 80%)}
+.stage>*{position:relative;z-index:1}.stage-content-animate{animation:stageEnter .42s cubic-bezier(.2,.8,.2,1)}
+@keyframes stageEnter{from{opacity:0;transform:translateX(14px) scale(.992)}to{opacity:1;transform:none}}
+.evidence-card,.metric,.nb-block{animation:itemPop .45s both}.evidence-card:nth-child(2),.metric:nth-child(2),.nb-block:nth-child(2){animation-delay:.08s}.evidence-card:nth-child(3),.metric:nth-child(3),.nb-block:nth-child(3){animation-delay:.16s}.nb-block:nth-child(4){animation-delay:.24s}
+@keyframes itemPop{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.training-shell::after{content:"";position:absolute;left:0;right:0;top:-30%;height:34%;background:linear-gradient(180deg,transparent,rgba(79,195,247,.12),transparent);animation:trainingScan 3.2s linear infinite;pointer-events:none}
+@keyframes trainingScan{to{top:110%}}
+.type{animation:typeFloat 3s ease-in-out infinite}.type:nth-child(2){animation-delay:.35s}.type:nth-child(3){animation-delay:.7s}
+@keyframes typeFloat{50%{transform:translateY(-7px);filter:brightness(1.08)}}
+.mission-help{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.mission-help .mini-help{padding:8px 10px;border-radius:10px;background:#082334;border:1px solid var(--line);font-size:12px;color:#c8dce7}
+.guide-overlay{position:fixed;inset:0;z-index:300;display:grid;place-items:center;padding:22px;background:rgba(1,7,12,.86);backdrop-filter:blur(10px)}
+.guide-card{width:min(980px,100%);max-height:90vh;overflow:auto;border-radius:26px;border:1px solid rgba(79,195,247,.36);background:linear-gradient(160deg,#102f43,#061621);box-shadow:0 40px 120px rgba(0,0,0,.65);padding:26px}
+.guide-card h2{font-size:31px;margin:5px 0}.guide-steps{display:grid;grid-template-columns:repeat(8,1fr);gap:10px;margin:22px 0}.guide-step-card{padding:16px 12px;border-radius:16px;border:1px solid var(--line);background:#092334;text-align:center}.guide-step-card .gicon{font-size:36px}.guide-step-card b{display:block;color:var(--yellow);margin:8px 0 4px}.guide-step-card p{font-size:12px;color:var(--muted);margin:0;line-height:1.45}
+.guide-tip{padding:13px 15px;border-left:4px solid var(--yellow);border-radius:10px;background:rgba(244,196,48,.08)}
+.current-task-card{margin-top:13px;padding:12px 13px;border-radius:12px;background:rgba(79,195,247,.08);border:1px solid rgba(79,195,247,.25)}
+.current-task-card b{color:var(--yellow)}
+@media(max-width:900px){.phase-roadmap,.guide-steps{grid-template-columns:1fr}.phase-node{text-align:left;display:grid;grid-template-columns:40px 1fr;align-items:center}.phase-icon{margin:0}.phase-node small{grid-column:2}.phase-banner{grid-template-columns:48px 1fr}.phase-banner .phase-count{grid-column:2}.mission-header-top{flex-direction:column}}
+
+
+/* ===== R-01 FINAL SCORING ===== */
+.final-result{margin:18px auto;padding:20px;border-radius:20px;max-width:650px;border:1px solid var(--line);background:#071d2b}
+.final-result.correct{border-color:rgba(69,212,131,.65);box-shadow:0 0 35px rgba(69,212,131,.14)}
+.final-result.incorrect{border-color:rgba(233,76,76,.65);box-shadow:0 0 35px rgba(233,76,76,.14)}
+.result-status{font-size:23px;font-weight:800}.correct .result-status{color:var(--green)}.incorrect .result-status{color:var(--red)}
+.final-score-big{font-size:72px;line-height:1;color:var(--yellow);font-weight:800;margin:12px 0}
+.grade-badge{display:inline-flex;padding:7px 14px;border-radius:999px;background:#12364b;border:1px solid var(--line)}
+.score-breakdown{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}
+.score-box{padding:15px;border-radius:14px;background:#071d2b;border:1px solid var(--line)}
+.score-box span{display:block;color:var(--muted);font-size:12px}.score-box b{font-size:28px;color:var(--yellow)}
+.answer-compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.answer-compare>div{padding:15px;border-radius:14px;background:#08202f;border:1px solid var(--line)}
+.answer-compare small{display:block;color:var(--muted)}.answer-compare strong{font-size:20px}
+.feedback-panel{text-align:left;margin:18px 0;padding:16px;border-radius:16px;background:#061923;border:1px solid var(--line)}
+.feedback-row{padding:10px 12px;margin-top:8px;border-radius:10px;background:#0a2434;border-left:4px solid var(--cyan)}
+.feedback-row.ok{border-left-color:var(--green)}.feedback-row.no{border-left-color:var(--red)}
+.result-actions{display:flex;gap:9px;justify-content:center;flex-wrap:wrap}
+@media(max-width:820px){.score-breakdown,.answer-compare{grid-template-columns:1fr}}
+
+
+/* ===== LIVING LABORATORY BACKGROUND ===== */
+.lab-world{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;perspective:1200px}
+.lab-world .lab-photo{position:absolute;inset:-4%;background:
+linear-gradient(180deg,rgba(1,7,13,.12),rgba(1,7,13,.55) 48%,rgba(1,7,13,.82)),
+url('assets/headquarters-bg.jpg') center/cover no-repeat;transform:scale(1.08);transition:transform .35s ease;filter:saturate(1.08) contrast(1.06)}
+.lab-world .lab-vignette{position:absolute;inset:0;background:radial-gradient(circle at 52% 35%,transparent 28%,rgba(0,0,0,.42) 70%,rgba(0,0,0,.82) 100%)}
+.lab-world .lab-grid{position:absolute;inset:0;opacity:.12;background:
+linear-gradient(rgba(79,195,247,.22) 1px,transparent 1px),
+linear-gradient(90deg,rgba(79,195,247,.22) 1px,transparent 1px);
+background-size:46px 46px;animation:livingGrid 18s linear infinite}
+@keyframes livingGrid{to{background-position:46px 46px,46px 46px}}
+.lab-world .scan-beam{position:absolute;left:0;right:0;top:-20%;height:22%;background:linear-gradient(180deg,transparent,rgba(79,195,247,.16),transparent);box-shadow:0 0 35px rgba(79,195,247,.18);animation:livingScan 7s linear infinite}
+@keyframes livingScan{to{top:110%}}
+.lab-world .reactor-glow{position:absolute;left:50%;top:35%;translate:-50% -50%;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(244,196,48,.28),rgba(79,195,247,.08) 45%,transparent 70%);filter:blur(4px);animation:reactorPulse 3.2s ease-in-out infinite}
+@keyframes reactorPulse{50%{transform:scale(1.18);opacity:.55}}
+.lab-world .holo-orbit{position:absolute;right:7%;top:18%;width:210px;height:210px;border:2px solid rgba(79,195,247,.45);border-radius:50%;box-shadow:0 0 28px rgba(79,195,247,.18),inset 0 0 25px rgba(79,195,247,.08);animation:holoOrbit 8s linear infinite}
+.lab-world .holo-orbit::before,.lab-world .holo-orbit::after{content:"";position:absolute;inset:22px;border:1px solid rgba(244,196,48,.42);border-radius:50%;transform:rotateX(65deg)}
+.lab-world .holo-orbit::after{inset:52px;transform:rotateY(65deg);border-color:rgba(199,156,255,.45)}
+@keyframes holoOrbit{to{rotate:360deg}}
+.lab-world .holo-core{position:absolute;right:calc(7% + 73px);top:calc(18% + 73px);width:64px;height:64px;border-radius:50%;display:grid;place-items:center;font-size:34px;background:radial-gradient(circle,#fff7bd,#f4c430 34%,#6a4a00 72%);box-shadow:0 0 32px #f4c430;animation:holoCore 2.8s ease-in-out infinite}
+@keyframes holoCore{50%{transform:translateY(-8px) scale(1.08)}}
+.lab-monitor{position:fixed;right:22px;bottom:22px;z-index:4;width:245px;padding:14px;border-radius:16px;background:rgba(3,16,26,.76);border:1px solid rgba(79,195,247,.35);box-shadow:0 18px 50px rgba(0,0,0,.45),0 0 25px rgba(79,195,247,.08);backdrop-filter:blur(12px);pointer-events:none}
+.lab-monitor::before{content:"LIVE LAB FEED";display:block;color:#9fdcf6;font-size:10px;letter-spacing:.16em;margin-bottom:8px}
+.monitor-row{display:flex;justify-content:space-between;gap:10px;padding:5px 0;font-size:12px;border-bottom:1px solid rgba(79,195,247,.12)}
+.monitor-row:last-child{border-bottom:0}.monitor-row b{color:var(--yellow)}
+.sound-wave{display:flex;gap:3px;align-items:end;height:30px;margin-top:8px}
+.sound-wave i{width:4px;border-radius:999px;background:linear-gradient(var(--cyan),var(--yellow));animation:wave 1.2s ease-in-out infinite}
+.sound-wave i:nth-child(1){height:25%;animation-delay:-.1s}.sound-wave i:nth-child(2){height:60%;animation-delay:-.3s}.sound-wave i:nth-child(3){height:95%;animation-delay:-.5s}.sound-wave i:nth-child(4){height:45%;animation-delay:-.7s}.sound-wave i:nth-child(5){height:75%;animation-delay:-.9s}.sound-wave i:nth-child(6){height:35%;animation-delay:-1.1s}.sound-wave i:nth-child(7){height:88%;animation-delay:-.4s}.sound-wave i:nth-child(8){height:52%;animation-delay:-.8s}
+@keyframes wave{50%{transform:scaleY(.35);opacity:.45}}
+.steam{position:absolute;bottom:-50px;width:90px;height:220px;filter:blur(10px);opacity:.18;background:radial-gradient(ellipse at center,rgba(220,244,255,.65),transparent 70%);animation:steamRise linear infinite}
+.steam.s1{left:8%;animation-duration:9s}.steam.s2{left:78%;animation-duration:12s;animation-delay:-5s}.steam.s3{left:40%;animation-duration:14s;animation-delay:-9s}
+@keyframes steamRise{to{transform:translateY(-115vh) scale(1.8);opacity:0}}
+.lab-particle{position:absolute;width:3px;height:3px;border-radius:50%;background:rgba(79,195,247,.9);box-shadow:0 0 12px rgba(79,195,247,.9);animation:particleRise linear infinite}
+.lab-particle.p1{left:10%;bottom:-5%;animation-duration:11s}.lab-particle.p2{left:28%;bottom:-8%;animation-duration:15s;animation-delay:-4s}.lab-particle.p3{left:49%;bottom:-6%;animation-duration:13s;animation-delay:-8s}.lab-particle.p4{left:68%;bottom:-7%;animation-duration:17s;animation-delay:-6s}.lab-particle.p5{left:87%;bottom:-5%;animation-duration:12s;animation-delay:-10s}
+@keyframes particleRise{to{transform:translateY(-115vh) scale(2);opacity:0}}
+.step-transition-flash{position:fixed;inset:0;z-index:3000;pointer-events:none;background:linear-gradient(180deg,transparent,rgba(79,195,247,.28),transparent);transform:translateY(-110%);opacity:0}
+.step-transition-flash.run{animation:stepFlash .8s ease-out}
+@keyframes stepFlash{0%{transform:translateY(-110%);opacity:0}25%{opacity:1}100%{transform:translateY(110%);opacity:0}}
+.stage,.mission-header,.mission-side{background-color:rgba(3,15,25,.66)!important;backdrop-filter:blur(16px) saturate(130%)}
+.stage:hover,.mission-header:hover{border-color:rgba(79,195,247,.45);box-shadow:0 28px 85px rgba(0,0,0,.45),0 0 30px rgba(79,195,247,.08)}
+.evidence-card:hover,.metric:hover,.nb-block:hover{transform:translateY(-5px);border-color:var(--yellow);box-shadow:0 18px 45px rgba(0,0,0,.32),0 0 22px rgba(244,196,48,.08)}
+.notebook-focus .lab-world{filter:blur(4px) brightness(.6)}
+.notebook-focus .lab-monitor{opacity:.35}
+.mission-complete-lab .lab-world .reactor-glow{background:radial-gradient(circle,rgba(244,196,48,.55),rgba(244,196,48,.12) 45%,transparent 72%);animation-duration:1.4s}
+.mission-complete-lab .lab-world .scan-beam{background:linear-gradient(180deg,transparent,rgba(244,196,48,.28),transparent)}
+body{background:none!important}
+.app{position:relative;z-index:2}
+@media(max-width:900px){.lab-monitor{display:none}.lab-world .holo-orbit,.lab-world .holo-core{opacity:.45;transform:scale(.72);transform-origin:right top}}
+
+
+/* ===== R-01 Dashboard Style matching R-02 ===== */
+.rda-brand{display:flex;align-items:center;gap:12px;padding:2px 4px 20px;margin-bottom:6px;border-bottom:1px solid rgba(79,195,247,.12)}
+.rda-brand img{width:54px;height:54px;object-fit:contain;filter:drop-shadow(0 0 14px rgba(79,195,247,.38))}.rda-brand small{display:block;margin-top:7px;color:var(--yellow);font-weight:700}
+.rda-nav{display:grid;gap:7px}.rda-nav-item,.rda-mission-item{width:100%;min-height:48px;border:0;border-radius:12px;background:transparent;color:#a9c0cf;display:flex;align-items:center;gap:10px;text-align:left;padding:11px 13px;transition:.22s}
+.rda-nav-item:hover,.rda-mission-item:hover{color:#fff;background:rgba(79,195,247,.08);transform:translateX(3px)}.rda-nav-item.active{color:#fff;background:linear-gradient(90deg,rgba(24,71,96,.95),rgba(20,42,44,.82));box-shadow:inset 3px 0 0 var(--cyan),0 0 18px rgba(79,195,247,.08)}
+.rda-section-title{display:flex;align-items:center;gap:10px;padding:12px 13px 5px;color:#a9c0cf;font-weight:600}.rda-mission-item.current{color:#d7e8f2;padding-left:24px}.rda-mission-item small{margin-left:auto;color:var(--yellow);font-size:10px;padding:3px 7px;border-radius:999px;background:rgba(244,196,48,.09);border:1px solid rgba(244,196,48,.25)}.mission-dot{font-size:12px}.current-dot{color:var(--cyan);text-shadow:0 0 12px var(--cyan);animation:missionDotPulse 1.8s ease-in-out infinite}@keyframes missionDotPulse{50%{opacity:.4;transform:scale(.8)}}.nav-icon{width:20px;text-align:center}
+.dashboard-hero{min-height:460px;display:grid;grid-template-columns:minmax(0,1.15fr) .85fr;align-items:center;gap:24px;border:1px solid rgba(79,195,247,.32);border-radius:28px;padding:42px;background:linear-gradient(90deg,rgba(2,12,20,.97),rgba(2,12,20,.62),rgba(2,12,20,.18)),url('assets/headquarters-bg.jpg') center/cover no-repeat;box-shadow:0 30px 90px rgba(0,0,0,.5);position:relative;overflow:hidden}
+.dashboard-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 25%,rgba(79,195,247,.08) 48%,transparent 70%);transform:translateX(-130%);animation:dashboardSweep 5s linear infinite;pointer-events:none}@keyframes dashboardSweep{to{transform:translateX(130%)}}
+.dashboard-copy{position:relative;z-index:2}.dashboard-copy h1{font-size:clamp(48px,7vw,92px);line-height:.92;margin:18px 0;color:#fff}.dashboard-copy h1 span{font-size:.55em;color:var(--yellow)}.dashboard-copy p{max-width:720px;font-size:18px;line-height:1.7;color:#d5e7ef}.dashboard-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.quick-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:28px}.quick-steps>div{display:flex;gap:12px;align-items:center;padding:13px 14px;border-radius:14px;background:rgba(5,20,32,.74);border:1px solid rgba(79,195,247,.2)}.quick-steps b{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--yellow);color:#111;font-size:20px}.quick-steps small{color:var(--muted)}
+.dashboard-card-file{width:min(390px,90%);aspect-ratio:1.3;justify-self:center;border-radius:24px;border:1px solid rgba(244,196,48,.55);background:linear-gradient(155deg,#5d3f12,#211500 70%);box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 35px rgba(244,196,48,.18);padding:24px;transform:rotate(3deg);position:relative;display:grid;place-items:center;text-align:center;animation:fileFloat 3s ease-in-out infinite}@keyframes fileFloat{50%{transform:rotate(1deg) translateY(-10px)}}.file-tag{position:absolute;right:18px;top:14px;color:#ffe17d;font-weight:800}.file-icon{font-size:86px;filter:drop-shadow(0 0 25px rgba(244,196,48,.45))}.file-title{font-size:26px;font-weight:800;line-height:1.15}.file-status{position:absolute;left:18px;bottom:16px;padding:6px 10px;border-radius:999px;background:rgba(244,196,48,.13);border:1px solid rgba(244,196,48,.4);color:#ffe17d;font-size:11px}
+.operations-panel{margin-top:16px}.panel-heading{display:flex;justify-content:space-between;gap:16px;align-items:flex-end}.panel-heading h2{margin:8px 0 0}.mission-stats{display:flex;gap:12px;flex-wrap:wrap}.mission-stats>div{padding:10px 14px;border-radius:12px;background:#08202f;border:1px solid var(--line)}.mission-stats small{display:block;color:var(--muted);font-size:10px}.mission-stats b{font-size:17px}
+.operation-cards{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-top:16px}.operation-card{min-height:260px;padding:16px;border-radius:18px;border:1px solid var(--line);background:linear-gradient(160deg,rgba(14,45,64,.9),rgba(5,20,32,.95));text-align:center;position:relative;overflow:hidden;transition:.25s}.operation-card:hover{transform:translateY(-6px)}.current-card{border-color:var(--yellow);box-shadow:0 0 28px rgba(244,196,48,.14);cursor:pointer}.locked-card{filter:grayscale(.7);opacity:.55}.status-chip{position:absolute;left:10px;top:10px;padding:5px 9px;border-radius:999px;font-size:10px;font-weight:800}.status-chip.current{background:rgba(244,196,48,.13);color:#ffe17d;border:1px solid rgba(244,196,48,.45)}.status-chip.locked{background:rgba(155,180,196,.09);color:#9bb4c4;border:1px solid rgba(155,180,196,.2)}.op-code{font-size:28px;font-weight:800;margin-top:28px}.op-icon{font-size:56px;margin:12px 0}.operation-card h3{font-size:17px;margin:4px 0}.operation-card p{font-size:12px;color:var(--muted)}.op-progress{height:8px;border-radius:999px;background:#123043;overflow:hidden;margin-top:14px}.op-progress span{display:block;height:100%;background:linear-gradient(90deg,var(--cyan),var(--yellow))}
+.dashboard-bottom{display:grid;grid-template-columns:1.1fr .9fr 1fr;gap:14px;margin-top:16px}.feed-list{display:grid;gap:9px}.feed-list>div{display:grid;grid-template-columns:32px 1fr auto;gap:9px;align-items:center;padding:10px;border-radius:11px;background:#08202f}.feed-list p{margin:0}.feed-list small{color:var(--yellow)}.progress-card{display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:center}.radial-progress{width:140px;height:140px;border-radius:50%;background:conic-gradient(var(--green) 0 0%,#123043 0%);display:grid;place-items:center;position:relative}.radial-progress::before{content:"";width:102px;height:102px;border-radius:50%;background:#061621;position:absolute}.radial-progress>div{position:relative;z-index:2;text-align:center}.radial-progress b{font-size:30px;display:block}.radial-progress small{color:var(--muted)}.progress-legend p{margin:8px 0}.progress-legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:7px}.current-dot-legend{background:var(--yellow)}.locked-dot{background:#607888}.tip-card{background:linear-gradient(160deg,rgba(15,47,67,.84),rgba(70,50,10,.35))}.tip-card h3{font-size:23px;line-height:1.4}
+@media(max-width:1300px){.operation-cards{grid-template-columns:repeat(3,1fr)}}@media(max-width:1000px){.dashboard-hero{grid-template-columns:1fr}.dashboard-card-file{display:none}.dashboard-bottom{grid-template-columns:1fr}.quick-steps{grid-template-columns:1fr}.panel-heading{align-items:flex-start;flex-direction:column}}@media(max-width:700px){.operation-cards{grid-template-columns:1fr 1fr}.progress-card{grid-template-columns:1fr}.radial-progress{margin:auto}}
+
+</style>
+<script src="../../shared/rda-rubric-v2.js"></script>
+
+<style id="rdaResetUiFix">
+/* ===== V2.8.1 RESET CONTROL UI FIX ===== */
+.topbar{
+  min-height:64px;
+  align-items:center!important;
+  gap:12px!important;
+}
+.topbar>.status,
+.status{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-end!important;
+  gap:7px!important;
+  flex-wrap:wrap!important;
+  min-width:0;
+}
+.rda-reset-control{
+  position:static!important;
+  inset:auto!important;
+  transform:none!important;
+  margin:0!important;
+  min-width:0!important;
+  width:auto!important;
+  max-width:100%!important;
+  min-height:34px!important;
+  padding:7px 11px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  border-radius:10px!important;
+  line-height:1!important;
+  font-size:10px!important;
+  font-weight:700!important;
+  z-index:auto!important;
+}
+@media(max-width:780px){
+  .topbar{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) auto!important;
+    align-items:start!important;
+    padding:10px 12px!important;
+  }
+  .topbar>div:first-child{min-width:0}
+  .topbar h2{
+    margin:0!important;
+    font-size:clamp(15px,4vw,20px)!important;
+    line-height:1.15!important;
+  }
+  .topbar>.status,.status{
+    max-width:46vw!important;
+    gap:5px!important;
+  }
+  .topbar .pill{
+    padding:5px 7px!important;
+    font-size:7px!important;
+    white-space:nowrap!important;
+  }
+  .rda-reset-control{
+    min-height:30px!important;
+    padding:6px 8px!important;
+    font-size:8px!important;
+  }
+}
+@media(max-width:520px){
+  .topbar{
+    grid-template-columns:1fr!important;
+    gap:7px!important;
+  }
+  .topbar>.status,.status{
+    max-width:none!important;
+    width:100%!important;
+    justify-content:flex-start!important;
+  }
+  .rda-reset-control{
+    margin-left:auto!important;
+  }
+}
+</style>
+
+<style id="r01NativeFiveStage">
+#r01CaseButton,#r01CaseLayer{display:none!important}
+#stepper{display:none!important}
+#phaseRoadmap{grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:8px!important}
+#phaseRoadmap .phase-node{min-height:70px!important;border-radius:14px!important}
+#phaseRoadmap .phase-node.active{border-color:#38e7f2!important;box-shadow:0 0 22px rgba(56,231,242,.10)!important}
+.native-predict-card{margin:16px 0;padding:16px;border:1px solid rgba(244,196,48,.34);border-radius:16px;background:linear-gradient(135deg,rgba(244,196,48,.09),rgba(9,38,50,.66));box-shadow:inset 0 1px rgba(255,255,255,.03)}
+.native-predict-card>small{color:#f4c430;font-weight:900;letter-spacing:.13em}.native-predict-card h3{margin:5px 0 12px}
+.native-predict-options{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.native-predict-options button{min-height:56px;border:1px solid rgba(45,226,230,.22);border-radius:13px;background:#08232e;color:#dffcff;font-weight:800;cursor:pointer;transition:.2s}
+.native-predict-options button:hover{transform:translateY(-2px);border-color:#2de2e6}
+.native-predict-options button.selected{border-color:#f4c430;color:#ffe477;background:rgba(244,196,48,.10);box-shadow:0 0 22px rgba(244,196,48,.10)}
+.native-predict-options button>b{display:block;margin-top:2px;font-size:10px;letter-spacing:.08em}
+.native-predict-lock{margin-top:10px;padding:9px 11px;border-radius:10px;background:rgba(255,255,255,.035);color:#9fb9c3;font-size:11px}
+.native-before-after{display:grid;grid-template-columns:1fr 46px 1fr;align-items:center;gap:10px;margin:0 0 15px}
+.native-before-after>div{padding:13px;border:1px solid rgba(45,226,230,.16);border-radius:13px;background:rgba(255,255,255,.025);text-align:center}
+.native-before-after small{display:block;color:#6f9aa6;font-size:8px;font-weight:900;letter-spacing:.13em}.native-before-after b{display:block;margin:4px 0;color:#fff;font-size:22px}.native-before-after span{color:#89a8b1;font-size:9px}.native-before-after>i{font-size:25px;color:#f4c430;text-align:center;font-style:normal}
+@media(max-width:700px){.native-predict-options{grid-template-columns:1fr}.native-before-after{grid-template-columns:1fr}.native-before-after>i{transform:rotate(90deg)}}
+</style>
+
+<style id="r01EvidenceFirstPatch">
+.native-analyze-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}.native-analyze-options button{min-height:56px;padding:10px;border:1px solid rgba(45,226,230,.20);border-radius:13px;background:#08232e;color:#dffcff;font-weight:800;cursor:pointer}.native-analyze-options button.selected{border-color:#f4c430;color:#ffe477;background:rgba(244,196,48,.09)}.native-report-embedded{margin-top:18px;padding-top:15px;border-top:1px solid rgba(45,226,230,.14)}@media(max-width:700px){.native-analyze-options{grid-template-columns:1fr}}
+</style>
+<style id="r01StudentEvidenceCPatch">
+.student-evidence-c{margin:14px 0;padding:14px;border:1px solid rgba(97,238,180,.30);border-radius:15px;background:linear-gradient(135deg,rgba(97,238,180,.07),rgba(4,24,31,.65))}
+.student-evidence-head{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:11px}.student-evidence-head small{display:block;color:#61eeb4;font-weight:900;font-size:8px;letter-spacing:.13em}.student-evidence-head h4{margin:3px 0;color:#fff}.student-evidence-head>span{color:#61eeb4;font-size:9px;font-weight:900}
+.student-evidence-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}.student-evidence-metric{padding:10px;border:1px solid rgba(255,255,255,.07);border-radius:11px;background:rgba(255,255,255,.025)}.student-evidence-metric small{display:block;color:#88a9b1;font-size:8px;font-weight:900}.student-evidence-metric b{display:block;margin:2px 0;color:#fff;font-size:20px}.student-evidence-metric span{color:#7899a2;font-size:8px}
+.student-evidence-table-wrap{overflow:auto}.student-evidence-source{margin-top:9px;padding-top:8px;border-top:1px solid rgba(97,238,180,.13);color:#61eeb4;font-size:8px;font-weight:800;letter-spacing:.04em}
+@media(max-width:700px){.student-evidence-head{align-items:flex-start;flex-direction:column}.student-evidence-metrics{grid-template-columns:1fr}}
+</style>
+<style id="r01ExplainReportSplitPatch">
+.native-report-embedded{display:none!important}
+.native-after-submit{margin:14px 0 18px!important}
+</style>
+<style id="r01UnlockR02Patch">
+.native-unlock-next{min-width:310px!important;border-color:#61eeb4!important;background:linear-gradient(135deg,#126344,#0b4334)!important;color:#eafff5!important;box-shadow:0 0 24px rgba(97,238,180,.15)!important}
+</style>
+</head>
+<body>
+<div id="labWorld" class="lab-world">
+  <div id="labPhoto" class="lab-photo"></div>
+  <div class="lab-grid"></div>
+  <div class="reactor-glow"></div>
+  <div class="scan-beam"></div>
+  <div class="holo-orbit"></div>
+  <div class="holo-core">☢</div>
+  <i class="steam s1"></i><i class="steam s2"></i><i class="steam s3"></i>
+  <i class="lab-particle p1"></i><i class="lab-particle p2"></i><i class="lab-particle p3"></i><i class="lab-particle p4"></i><i class="lab-particle p5"></i>
+  <div class="lab-vignette"></div>
+</div>
+<div class="lab-monitor">
+  <div class="monitor-row"><span>RADIATION LEVEL</span><b id="liveCpm">18 CPM</b></div>
+  <div class="monitor-row"><span>CASE STATUS</span><b id="liveCase">R-01 ACTIVE</b></div>
+  <div class="monitor-row"><span>AI CORE</span><b>ONLINE</b></div>
+  <div class="sound-wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+</div>
+<div id="stepFlash" class="step-transition-flash"></div>
+<div class="app">
+<aside class="sidebar">
+ <div class="brand rda-brand"><img src="../../assets/logo.png"><div><h1>Radiation Detective Agency</h1><small>RDA</small></div></div>
+ <nav class="rda-nav">
+  <button data-page="headquarters" class="rda-nav-item active"><span class="nav-icon">🏢</span><span>Headquarters</span></button>
+  <div class="rda-section-title"><span class="nav-icon">📁</span><span>Operations</span></div>
+  <button data-page="operation1" class="rda-mission-item current"><span class="mission-dot current-dot">●</span><span>R-01 Mission</span><small>CURRENT</small></button>
+  <button data-page="passport" class="rda-nav-item"><span class="nav-icon">📘</span><span>Research Passport</span></button>
+  <button data-page="teacher" class="rda-nav-item"><span class="nav-icon">📊</span><span>Teacher Center</span></button>
+ </nav>
+ <div class="side-card"><b>นักสืบเกศกร</b><div class="muted" id="sideRank">Junior Detective</div><div class="xpbar"><span id="sideXpBar"></span></div><small id="sideXp">0 / 300 XP</small></div>
+</aside>
+<main class="main">
+ <div class="topbar"><div><h2 id="pageTitle">Headquarters</h2><div class="muted">Radiation Detective Agency</div></div><div class="status"><span class="pill" id="topXp">⭐ 0 XP</span><span class="pill" id="topRank">Junior Detective</span><button class="btn btn-ghost rda-reset-control" onclick="resetPrototype()" aria-label="รีเซ็ตภารกิจ" title="รีเซ็ตภารกิจ">↻ รีเซ็ต</button></div></div>
+
+ <section id="headquarters" class="page">
+  <div class="dashboard-hero">
+    <div class="dashboard-copy">
+      <span class="pill">RDA • CURRENT MISSION</span>
+      <h1>R-01<br><span>NUCLEAR LAB</span></h1>
+      <p>สืบสวนกล่องโลหะปริศนา วิเคราะห์การทะลุผ่านของรังสี ทดลองใน Shield Investigation Lab และสรุปว่าเป็น Alpha, Beta หรือ Gamma ด้วยเหตุผลทางฟิสิกส์</p>
+      <div class="dashboard-actions">
+        <button class="btn btn-primary" onclick="showPage('operation1')">▶ รับภารกิจ</button>
+        <button class="btn btn-secondary" onclick="showMissionGuide()">ดูรายละเอียดภารกิจ</button>
+      </div>
+      <div class="quick-steps">
+        <div><b>1</b><span>รับคดี<br><small>อ่านสถานการณ์และหลักฐาน</small></span></div>
+        <div><b>2</b><span>ทดลอง<br><small>พิสูจน์ใน Shield Lab</small></span></div>
+        <div><b>3</b><span>ให้เหตุผล<br><small>Polya + AI + Report</small></span></div>
+      </div>
+    </div>
+    <div class="dashboard-card-file">
+      <div class="file-tag">R-01</div>
+      <div class="file-icon">☢</div>
+      <div class="file-title">THE MYSTERY<br>BOX</div>
+      <div class="file-status">CURRENT MISSION</div>
+    </div>
+  </div>
+
+  <div class="operations-panel card">
+    <div class="panel-heading"><div><span class="pill">OPERATIONS</span><h2>เลือกภารกิจของคุณ</h2></div>
+      <div class="mission-stats"><div><small>Completed</small><b id="dashCompleted">0 / 6</b></div><div><small>Total XP</small><b id="dashXp">0 / 300</b></div><div><small>Rank</small><b id="dashRank">Junior Detective</b></div></div>
+    </div>
+    <div class="operation-cards">
+      <div class="operation-card current-card" onclick="showPage('operation1')"><span class="status-chip current">CURRENT MISSION</span><div class="op-code">R-01</div><div class="op-icon">☢</div><h3>Nuclear Lab</h3><p>The Mystery Box</p><div class="op-progress"><span id="dashboardMissionProgress"></span></div></div>
+      <div class="operation-card locked-card"><span class="status-chip locked">LOCKED</span><div class="op-code">R-02</div><div class="op-icon">🏥</div><h3>Hospital Investigation</h3><p>The Missing Radiation Source</p></div>
+      <div class="operation-card locked-card"><span class="status-chip locked">LOCKED</span><div class="op-code">R-03</div><div class="op-icon">✈️</div><h3>Airport Scan</h3><p>Security Investigation</p></div>
+      <div class="operation-card locked-card"><span class="status-chip locked">LOCKED</span><div class="op-code">R-04</div><div class="op-icon">🥫</div><h3>Food Truth</h3><p>Food Irradiation</p></div>
+      <div class="operation-card locked-card"><span class="status-chip locked">LOCKED</span><div class="op-code">R-05</div><div class="op-icon">🚨</div><h3>Emergency Response</h3><p>Radiation Incident</p></div>
+      <div class="operation-card locked-card"><span class="status-chip locked">LOCKED</span><div class="op-code">R-06</div><div class="op-icon">🏛️</div><h3>Mission Phoenix</h3><p>Final Operation</p></div>
+    </div>
+  </div>
+
+  <div class="dashboard-bottom">
+    <div class="card news-card"><span class="pill">RDA NEWS FEED</span><h3>ข่าวสารล่าสุด</h3><div class="feed-list"><div><span>☢</span><p>พบกล่องโลหะปริศนาหน้าห้องปฏิบัติการ</p><small>NEW</small></div><div><span>📟</span><p>Geiger Counter ตรวจพบค่ารังสีสูงผิดปกติ</p><small>NEW</small></div></div></div>
+    <div class="card progress-card"><span class="pill">MISSION PROGRESS</span><div class="radial-progress"><div><b id="dashPct">0%</b><small>R-01</small></div></div><div class="progress-legend"><p><i class="current-dot-legend"></i> R-01 In Progress</p><p><i class="locked-dot"></i> R-02–R-06 Locked</p></div></div>
+    <div class="card tip-card"><span class="pill">RDA TIP OF THE DAY</span><h3>ค่า CPM บอกว่ามีรังสี แต่ยังระบุชนิดไม่ได้</h3><p>ต้องใช้หลักฐานการทะลุผ่านร่วมกับผลจากกระดาษ อะลูมิเนียม และตะกั่ว</p></div>
+  </div>
+ </section>
+
+ <section id="operations" class="page hidden"><div class="ops" id="operationCards"></div></section>
+
+ <section id="operation1" class="page hidden">
+  <div class="card mission-header"><div class="mission-header-top"><div><span class="pill">CASE R-01</span><h3>THE MYSTERY BOX</h3><p class="muted">ทำภารกิจตาม 5 ช่วง ระบบจะพาไปทีละขั้น ไม่ต้องเลือกเมนูเอง</p></div><button class="btn btn-secondary" onclick="showMissionGuide()">❔ ดูวิธีทำภารกิจ</button></div><div class="phase-roadmap" id="phaseRoadmap"></div><div class="mission-help"><span class="mini-help">① สำรวจหลักฐาน</span><span class="mini-help">② เรียนรู้แนวคิด</span><span class="mini-help">③ ทดลองพิสูจน์</span><span class="mini-help">④ ให้เหตุผล</span><span class="mini-help">⑤ ส่งรายงาน</span></div><div class="stepper hidden" id="stepper"></div></div>
+  <div class="mission-layout">
+   <div id="stage" class="card stage"></div>
+   <aside class="card mission-side"><div class="muted">ภาพรวมภารกิจ</div><div class="side-progress" id="missionPct">0%</div><div class="xpbar"><span id="missionBar"></span></div><div class="current-task-card"><b>ตอนนี้ต้องทำ</b><div id="currentTaskText" class="muted">รับภารกิจ</div></div><div class="side-list" id="missionChecklist"></div><div class="notice" style="margin-top:13px"><b>กติกา:</b><br>ทำช่วงปัจจุบันให้เสร็จ ปุ่มไปต่อจึงจะปลดล็อก</div></aside>
+  </div>
+ </section>
+
+ <section id="passport" class="page hidden"><div class="passport"><div class="passport-cover"><img src="../../assets/logo.png"><h2>RADIATION<br>DETECTIVE<br>PASSPORT</h2><p>นักสืบเกศกร</p><p class="muted">RDA-2026-001</p></div><div class="card"><h3>Detective Progress</h3><p><b id="pRank">Junior Detective</b></p><div class="xpbar"><span id="pXpBar"></span></div><p id="pXp">0 XP</p><h3>Mission Stamps</h3><div class="stamps" id="stamps"></div></div></div></section>
+
+ <section id="teacher" class="page hidden">
+  <div class="stats"><div class="card stat"><div class="muted">นักเรียนทั้งหมด</div><strong>24</strong></div><div class="card stat"><div class="muted">R-01 Completion</div><strong id="tCompletion">0%</strong></div><div class="card stat"><div class="muted">Notebook Edit</div><strong id="tEdits">0</strong></div><div class="card stat"><div class="muted">AI Hints</div><strong id="tHints">0</strong></div></div>
+  <div class="teacher-grid" style="margin-top:14px">
+   <div class="card"><h3>คะแนนกระบวนการคิด</h3><div class="heatmap" id="teacherScores"></div><h3 style="margin-top:20px">Teacher Answer Key</h3><div class="notice success"><b>คำตอบเป้าหมาย: Gamma</b><br>Geiger counter ยืนยันการมีอยู่ของรังสี แต่ไม่สามารถระบุชนิดได้เพียงลำพัง หลักฐานชี้ขาดคือการทะลุผ่านกระดาษและอะลูมิเนียมได้มาก และลดลงอย่างชัดเจนเมื่อใช้ตะกั่วหนา</div><table class="table" style="margin-top:12px"><tr><th>หลักฐานสำคัญ</th><th>ความหมาย</th></tr><tr><td>Background 20 CPM</td><td>ค่าพื้นหลังปกติ</td></tr><tr><td>Near box 4,520 CPM</td><td>ยืนยันว่ามีแหล่งกำเนิดรังสี</td></tr><tr><td>Paper 4,300 CPM</td><td>ตัด Alpha ออกได้</td></tr><tr><td>Aluminium 3,950 CPM</td><td>ตัด Beta ออกได้มากขึ้น</td></tr><tr><td>Thick lead 620 CPM</td><td>สอดคล้องกับ Gamma ที่ถูกลดทอนด้วยตะกั่ว</td></tr></table></div>
+   <div class="card"><h3>แบบบันทึกทดลองใช้จริง</h3><div class="trial-list"><label class="trial-item"><input type="checkbox"> นักเรียนเริ่มภารกิจได้โดยไม่ต้องให้ครูอธิบายซ้ำ</label><label class="trial-item"><input type="checkbox"> ใช้เวลาอยู่ในช่วง 25–40 นาที</label><label class="trial-item"><input type="checkbox"> นักเรียนเข้าใจว่าค่า CPM ระบุชนิดรังสีไม่ได้โดยตรง</label><label class="trial-item"><input type="checkbox"> Lab ช่วยให้จำแนก Alpha/Beta/Gamma ได้</label><label class="trial-item"><input type="checkbox"> AI ช่วยให้เหตุผลชัดขึ้น ไม่ทำให้สับสน</label><label class="trial-item"><input type="checkbox"> ใช้งานบนโทรศัพท์หรือแท็บเล็ตได้สะดวก</label></div><button class="btn btn-secondary" style="margin-top:13px" onclick="exportTrial()">ส่งออกบันทึกเป็น TXT</button></div>
+  </div>
+ </section>
+</main>
+</div>
+<nav class="mobile-nav"><button data-page="headquarters">HQ</button><button data-page="operations">Ops</button><button data-page="operation1">R-01</button><button data-page="passport">Passport</button><button data-page="teacher">Teacher</button></nav>
+<div id="missionGuide" class="guide-overlay hidden"><div class="guide-card"><span class="pill">MISSION GUIDE</span><h2>วิธีทำภารกิจ R-01</h2><p class="muted">จำง่าย ๆ เพียง 5 ช่วง — ระบบจะนำทางให้เองทีละช่วง</p><div class="guide-steps"><div class="guide-step-card"><div class="gicon">🔎</div><b>1. สำรวจคดี</b><p>อ่านเหตุการณ์ เปิด Evidence A–B และแยกว่าสิ่งใดรู้แล้ว/ยังไม่รู้</p></div><div class="guide-step-card"><div class="gicon">🎬</div><b>2. เรียนรู้</b><p>ดู Animation Alpha–Beta–Gamma ให้ครบ เพื่อเตรียมสมมติฐาน</p></div><div class="guide-step-card"><div class="gicon">🔬</div><b>3. ทดลอง</b><p>ทำ Shield Lab อย่างน้อย 3 ครั้ง แล้วใช้ผลเทียบกับ Evidence C</p></div><div class="guide-step-card"><div class="gicon">🧠</div><b>4. ให้เหตุผล</b><p>เขียน Notebook 4 ขั้น และใช้ AI ช่วยตรวจสอบเหตุผล</p></div><div class="guide-step-card"><div class="gicon">📝</div><b>5. สรุปคดี</b><p>ส่ง Mission Report เพื่อรับ XP, Badge และ Stamp</p></div></div><div class="guide-tip"><b>สิ่งสำคัญ:</b> ไม่ต้องเดาคำตอบตั้งแต่ต้น ให้ใช้หลักฐาน + ผลทดลอง + เหตุผลร่วมกัน</div><div style="display:flex;justify-content:flex-end;margin-top:18px"><button class="btn btn-primary" onclick="closeMissionGuide()">เข้าใจแล้ว เริ่มภารกิจ</button></div></div></div>
+<div id="toast" class="toast hidden"></div>
+<script>
+const operations=[
+{id:1,name:'Mystery Box',th:'จำแนก Alpha Beta Gamma',xp:100,badge:'Evidence Rookie'}];
+const stepNames=['PREDICT','Evidence A','Evidence B','ANALYZE','Animation','LAB','Evidence C','DECIDE','EXPLAIN','FINAL REPORT','Complete'];
+const phaseData=[
+ {name:'PREDICT',icon:'◉',desc:'ตั้งสมมติฐาน',start:0,end:0},
+ {name:'EVIDENCE',icon:'◆',desc:'สำรวจ A + B',start:1,end:2},
+ {name:'SIMULATE',icon:'⚛',desc:'Analyze → Animation → Lab',start:3,end:5},
+ {name:'DECIDE',icon:'⚖',desc:'Evidence C + Decision',start:6,end:7},
+ {name:'EXPLAIN',icon:'✦',desc:'Explain → Final Report → Complete',start:8,end:10}
+];
+const defaultState={xp:0,completed:false,currentStep:0,answers:{},notebook:{nb1:'',nb2:'',nb3:'',nb4:''},scoresBefore:{analyze:0,plan:0,solve:0,verify:0},scoresAfter:{analyze:0,plan:0,solve:0,verify:0},experiments:[],hints:0,edits:0,chat:[],report:{},trainingScene:0,finalEvaluation:{total:0,isCorrect:false,grade:'-',knowledge:0,evidence:0,lab:0,polya:0,feedback:[]}};
+let state={...defaultState,...JSON.parse(localStorage.getItem('rdkR01Complete')||'{}')};
+function persist(){localStorage.setItem('rdkR01Complete',JSON.stringify(state));renderGlobal()}
+function toast(t){const e=document.getElementById('toast');e.textContent=t;e.classList.remove('hidden');setTimeout(()=>e.classList.add('hidden'),2300)}
+function rankFor(xp){if(xp>=1800)return'Master Radiation Detective';if(xp>=1200)return'Chief Investigator';if(xp>=700)return'Senior Detective';if(xp>=300)return'Field Detective';return'Junior Detective'}
+function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===id));document.getElementById('pageTitle').textContent=id==='operation1'?'Operation R-01':id==='teacher'?'Teacher Center':id.charAt(0).toUpperCase()+id.slice(1);if(id==='operation1'){renderMission();if(!localStorage.getItem('rdkGuideSeen'))setTimeout(showMissionGuide,350)}}
+document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>showPage(b.dataset.page));
+function saveAnswer(k,v){state.answers[k]=v;persist()}
+function selectPrediction(v){state.answers.prediction=v;persist();renderMission();toast('ล็อก Prediction แล้ว — ยังไม่เฉลยคำตอบ')}
+function saveABAnalysis(v){state.answers.abEnough=v;persist();renderMission()}
+function requireText(v,min=10){return(v||'').trim().length>=min}
+function goNext(){if(state.currentStep<10){state.currentStep++;persist();renderMission();toast('ปลดล็อกขั้นตอนถัดไปแล้ว')}}
+function goBack(){if(state.currentStep>0){state.currentStep--;persist();renderMission()}}
+function jumpStep(i){if(i<=state.currentStep||i===state.currentStep) {state.currentStep=i;persist();renderMission()} else toast('ต้องทำขั้นก่อนหน้าให้สำเร็จก่อน')}
+function phaseIndexForStep(step){return phaseData.findIndex(p=>step>=p.start&&step<=p.end)}
+function phaseBannerHTML(step){const pi=phaseIndexForStep(step),p=phaseData[pi];const tasks=[
+'คาดการณ์ Alpha / Beta / Gamma ก่อนเห็นหลักฐาน',
+'สำรวจ Evidence A จากสถานที่เกิดเหตุ',
+'อ่าน Evidence B จาก Geiger Counter Report',
+'วิเคราะห์ว่า A+B เพียงพอหรือยัง',
+'ดู Animation เพื่อเตรียมความรู้เรื่องการทะลุผ่าน',
+'ทำ Shield Investigation Lab อย่างน้อย 3 Trial',
+'สร้าง Evidence C จากข้อมูล Lab ของคุณ',
+'ตัดสินใจใน Detective Notebook ด้วยหลักฐาน',
+'EXPLAIN: อธิบายเหตุผลกับ Inspector Atom โดยยังไม่เห็นคำตอบสุดท้าย',
+'FINAL REPORT: ส่งคำตัดสินของคุณจากหลักฐานทั้งหมด',
+'ดู Prediction → Final Decision และ Mission Complete'
+];
+return `<div class="phase-banner"><div class="phase-big-icon">${p.icon}</div><div><h4>ช่วงที่ ${pi+1}: ${p.name}</h4><p>${tasks[step]}</p></div><div class="phase-count">ขั้นย่อย ${step+1}/11</div></div>`}
+function renderMission(){
+ document.getElementById('stepper').innerHTML=stepNames.map((s,i)=>`<button class="step ${i<state.currentStep?'done':''} ${i===state.currentStep?'active':''} ${i>state.currentStep?'locked':''}" onclick="jumpStep(${i})">${i+1}. ${s}</button>`).join('');
+ const currentPhase=phaseIndexForStep(state.currentStep);
+ document.getElementById('phaseRoadmap').innerHTML=phaseData.map((p,i)=>`<button class="phase-node ${i<currentPhase?'done':i===currentPhase?'active':'locked'}" onclick="jumpPhase(${i})"><span class="phase-icon">${i<currentPhase?'✓':p.icon}</span><b>${i+1}. ${p.name}</b><small>${p.desc}</small></button>`).join('');
+ const pct=Math.round((state.currentStep/10)*100);document.getElementById('missionPct').textContent=pct+'%';document.getElementById('missionBar').style.width=pct+'%';
+ document.getElementById('currentTaskText').textContent=stepNames[state.currentStep];
+ document.getElementById('missionChecklist').innerHTML=phaseData.map((p,i)=>`<div><span>${i<currentPhase?'✓':i===currentPhase?'▶':'🔒'} ${p.name}</span><span class="${i<currentPhase?'ok':i===currentPhase?'current':''}">${i<currentPhase?'ผ่านแล้ว':i===currentPhase?'กำลังทำ':'ล็อก'}</span></div>`).join('');
+ const stage=document.getElementById('stage');stage.innerHTML=`<div class="stage-content-animate">${phaseBannerHTML(state.currentStep)}${stageHTML(state.currentStep)}</div>`;restoreStageValues();
+}
+function jumpPhase(i){const p=phaseData[i];if(p.start<=state.currentStep){state.currentStep=p.start;persist();renderMission()}else toast('ต้องผ่านช่วงก่อนหน้าให้สำเร็จก่อน')}
+function showMissionGuide(){document.getElementById('missionGuide').classList.remove('hidden')}
+function closeMissionGuide(){document.getElementById('missionGuide').classList.add('hidden');localStorage.setItem('rdkGuideSeen','1')}
+
+function footer(back=true,next=''){return `<div class="stage-footer"><button class="btn btn-ghost" ${back?'':'disabled'} onclick="goBack()">← ย้อนกลับ</button><div>${next}</div></div>`}
+function stageHTML(i){
+ if(i===0)return `<div class="stage-head"><div><span class="pill">PREDICT • BEFORE EVIDENCE</span><h3>🚨 Mission Brief</h3></div><span class="pill">R-01 • UNKNOWN SOURCE</span></div>
+<p>เวลา 09.30 น. เจ้าหน้าที่พบกล่องโลหะสีดำหน้าห้องปฏิบัติการ เครื่อง Geiger counter ส่งเสียงผิดปกติ แต่ยังไม่ทราบชนิดของรังสี</p>
+<div class="notice"><b>MISSION:</b> ระบุว่าแหล่งกำเนิดเป็น Alpha, Beta หรือ Gamma พร้อมอธิบายจากหลักฐานและผลทดลอง</div>
+<div class="native-predict-card">
+ <small>YOUR INITIAL HYPOTHESIS</small>
+ <h3>ก่อนตรวจหลักฐาน คุณคิดว่ารังสีปริศนานี้คือชนิดใด?</h3>
+ <div class="native-predict-options">
+  ${['Alpha','Beta','Gamma'].map(x=>`<button type="button" class="${state.answers.prediction===x?'selected':''}" onclick="selectPrediction('${x}')">${x==='Alpha'?'α':x==='Beta'?'β':'γ'} <b>${x}</b></button>`).join('')}
+ </div>
+ <div class="native-predict-lock">${state.answers.prediction?`✓ LOCKED: ${state.answers.prediction} — ระบบจะเปรียบเทียบกับคำตัดสินหลัง Evidence`:'เลือก Prediction ก่อนรับภารกิจ'}</div>
+</div>
+${footer(false,`<button class="btn btn-primary" ${state.answers.prediction?'':'disabled'} onclick="goNext()">LOCK PREDICTION & ACCEPT MISSION →</button>`)}`;
+ if(i===1)return `<div class="stage-head"><div><span class="pill">EVIDENCE • A</span><h3>📷 Scene Examination</h3></div></div><div class="evidence-grid"><div class="evidence-card"><b>สถานที่</b><p>หน้าห้องปฏิบัติการ</p></div><div class="evidence-card"><b>วัตถุ</b><p>กล่องโลหะติดสัญลักษณ์รังสี</p></div><div class="evidence-card"><b>สิ่งที่ไม่พบ</b><p>ไม่มีแสง ควัน หรือเสียงจากกล่อง</p></div></div><div class="field" style="margin-top:14px"><label>จากหลักฐานนี้ สามารถสรุปชนิดรังสีได้หรือไม่ เพราะอะไร</label><textarea id="ansA" rows="5" oninput="saveAnswer('ansA',this.value);countChars(this,'cA')"></textarea><div id="cA" class="charcount"></div></div>${footer(true,'<button class="btn btn-primary" onclick="submitA()">บันทึก Evidence A →</button>')}`;
+ if(i===2)return `<div class="stage-head"><div><span class="pill">EVIDENCE • B</span><h3>📟 Geiger Counter Report</h3></div></div><div class="metric-grid"><div class="metric"><div class="muted">Background</div><strong>20 CPM</strong></div><div class="metric alert"><div class="muted">Near Box</div><strong>4,520 CPM</strong></div><div class="metric"><div class="muted">ผลเบื้องต้น</div><strong>Detected</strong></div></div><div class="notice" style="margin-top:14px">Geiger counter ยืนยันว่ามีรังสี แต่ค่าการนับเพียงอย่างเดียวยังไม่สามารถระบุว่าเป็น Alpha, Beta หรือ Gamma ได้</div><div class="field" style="margin-top:14px"><label>ข้อมูลนี้ยืนยันอะไร และยังไม่สามารถยืนยันอะไร</label><textarea id="ansB" rows="5" oninput="saveAnswer('ansB',this.value);countChars(this,'cB')"></textarea><div id="cB" class="charcount"></div></div>${footer(true,'<button class="btn btn-primary" onclick="submitB()">เข้าสู่ Training →</button>')}`;
+ if(i===3)return `<div class="stage-head"><div><span class="pill">ANALYZE • EVIDENCE CHECKPOINT</span><h3>🧠 Evidence A + B เพียงพอหรือยัง?</h3></div><span class="pill">THINK BEFORE LAB</span></div>
+<p>ตอนนี้คุณรู้เพียงข้อมูลจากสถานที่เกิดเหตุและ Geiger Counter เท่านั้น</p>
+<div class="notice"><b>คำถาม:</b> ข้อมูล A + B เพียงพอให้ระบุ Alpha, Beta หรือ Gamma อย่างมั่นใจแล้วหรือยัง?</div>
+<div class="native-analyze-options">
+<button type="button" class="${state.answers.abEnough==='yes'?'selected':''}" onclick="saveABAnalysis('yes')">เพียงพอแล้ว</button>
+<button type="button" class="${state.answers.abEnough==='no'?'selected':''}" onclick="saveABAnalysis('no')">ยังไม่พอ — ต้องทดสอบการทะลุผ่าน</button>
+</div>
+${state.answers.abEnough==='yes'?`<div class="feedback bad"><b>ยังไม่พอ</b><br>Geiger Counter ยืนยันว่ามีรังสี แต่ยังไม่แสดงรูปแบบการทะลุผ่าน จึงยังจำแนกชนิดไม่ได้อย่างมั่นใจ</div>`:''}
+${state.answers.abEnough==='no'?`<div class="feedback good"><b>ถูกต้อง</b><br>Mission จึงต้องไปต่อเพื่อเรียนรู้พฤติกรรมการทะลุผ่านและสร้าง Evidence C จาก Lab</div>`:''}
+${footer(false,`<button class="btn btn-primary" ${state.answers.abEnough==='no'?'':'disabled'} onclick="goNext()">เตรียมการทดลอง →</button>`)}`;
+ if(i===4)return trainingHTML();
+ if(i===5)return labHTML();
+ if(i===6)return `<div class="stage-head"><div><span class="pill">EVIDENCE • C</span><h3>🧾 Lab-Generated Penetration Evidence</h3></div><span class="pill">YOUR DATA</span></div>
+<p>Evidence C เกิดจาก Shield Investigation Lab ที่คุณเพิ่งทำ ไม่ใช่การ์ดคำตอบที่ระบบแจกให้</p>
+${studentEvidenceCHTML()}
+<div class="notice" style="margin-top:13px"><b>ใช้ข้อมูลของคุณ:</b> เปรียบเทียบรูปแบบการผ่าน Paper / Aluminium / Lead กับสิ่งที่เรียนจาก Animation</div>
+<div class="field" style="margin-top:14px"><label>จาก Evidence A + B + ผล Lab ของคุณ แหล่งกำเนิดมีแนวโน้มเป็นรังสีชนิดใด?</label>
+<select id="radiationGuess" onchange="saveAnswer('guess',this.value)"><option value="">เลือกคำตอบ</option><option ${state.answers.guess==='Alpha'?'selected':''}>Alpha</option><option ${state.answers.guess==='Beta'?'selected':''}>Beta</option><option ${state.answers.guess==='Gamma'?'selected':''}>Gamma</option></select></div>
+${footer(true,`<button class="btn btn-primary" ${state.answers.guess?'':'disabled'} onclick="goNext()">ใช้ Evidence → DECIDE</button>`)}`;
+ if(i===7)return notebookHTML();
+ if(i===8)return aiHTML();
+ if(i===9)return reportHTML();
+ const ev=state.finalEvaluation||defaultState.finalEvaluation;
+ return `<div class="complete-box">
+ <div class="confetti">✦ ✧ ✦ ✧ ✦</div>
+ <div class="stamp-big">${ev.isCorrect?'🏅':'🧭'}</div>
+ <h2>${ev.isCorrect?'MISSION COMPLETE':'MISSION REVIEW'}</h2>
+ <div class="native-before-after native-after-submit">
+   <div><small>BEFORE EVIDENCE</small><b>${escapeHTML(state.answers.prediction||'-')}</b><span>Initial Prediction</span></div>
+   <i>→</i>
+   <div><small>FINAL DECISION</small><b>${escapeHTML(state.report.repType||'-')}</b><span>Submitted after Evidence</span></div>
+ </div>
+ 
+ <div class="final-result ${ev.isCorrect?'correct':'incorrect'}"><div class="result-status">${ev.isCorrect?'✓ ตอบถูกต้อง':'✕ ทบทวนหลักฐานอีกครั้ง'}</div><div class="final-score-big">${ev.total}/100</div><div class="grade-badge">ระดับ ${ev.grade}</div></div>
+ <div class="score-breakdown"><div class="score-box"><span>คำตอบหลัก</span><b>${ev.knowledge}/40</b></div><div class="score-box"><span>การใช้หลักฐาน</span><b>${ev.evidence}/20</b></div><div class="score-box"><span>การทดลอง</span><b>${ev.lab}/20</b></div><div class="score-box"><span>กระบวนการโพลยา</span><b>${ev.polya}/20</b></div></div>
+ <div class="feedback-panel"><h3>ผลสะท้อนกลับรายด้าน</h3>${(ev.feedback||[]).map(x=>`<div class="feedback-row ${x.ok?'ok':'no'}">${x.ok?'✓':'✕'} ${escapeHTML(x.text)}</div>`).join('')}</div>
+ <div class="result-actions">
+ ${ev.isCorrect?'<button class="btn btn-primary native-unlock-next" onclick="finishR01AndUnlock()">UNLOCK R-02 → RETURN HEADQUARTERS</button>':''}
+ <button class="btn btn-secondary" onclick="showPage('passport')">เปิด Research Passport</button>
+ <button class="btn btn-secondary" onclick="reviewMission()">ทบทวนคำตอบ</button>
+ <button class="btn btn-ghost" onclick="retryMission()">ทำภารกิจใหม่</button>
+ </div>
+ </div>`;
+}
+function trainingHTML(){const s=state.trainingScene||0;const scenes=[
+`<div class="scene-title"><span class="pill">SCENE 1/4</span><h4>นิวเคลียสไม่เสถียร</h4><p class="muted">นิวเคลียสจะปล่อยอนุภาคหรือพลังงานเพื่อเข้าสู่สภาวะที่เสถียรมากขึ้น</p></div><div class="nucleus-demo"><div class="energy-wave"></div><div class="energy-wave"></div><div class="energy-wave"></div><div class="nucleus"></div></div>`,
+`<div class="scene-title"><span class="pill">SCENE 2/4</span><h4>รังสี 3 ชนิด</h4></div><div class="types"><div class="type alpha"><i>α</i><h3>Alpha</h3><p>หนัก ประจุ +2<br>ทะลุทะลวงต่ำ</p></div><div class="type beta"><i>β</i><h3>Beta</h3><p>อิเล็กตรอน/โพซิตรอน<br>ทะลุทะลวงปานกลาง</p></div><div class="type gamma"><i>γ</i><h3>Gamma</h3><p>โฟตอนพลังงานสูง<br>ทะลุทะลวงสูง</p></div></div>`,
+`<div class="scene-title"><span class="pill">SCENE 3/4</span><h4>ฉากกำบัง</h4></div><table class="compare"><tr><th>ชนิด</th><th>กระดาษ</th><th>อะลูมิเนียม</th><th>ตะกั่ว</th></tr><tr><td>Alpha</td><td>หยุดได้</td><td>หยุดได้</td><td>หยุดได้</td></tr><tr><td>Beta</td><td>ผ่าน</td><td>ลดลงมาก</td><td>ลดลงมาก</td></tr><tr><td>Gamma</td><td>ผ่าน</td><td>ผ่านได้มาก</td><td>ลดลง</td></tr></table>`,
+`<div class="scene-title"><span class="pill">SCENE 4/4</span><h4>พร้อมพิสูจน์สมมติฐาน</h4><p>อย่าเพิ่งสรุปจากการจำ ให้ทดลองใน Shield Investigation Lab แล้วเปรียบเทียบกับหลักฐานของคดี</p></div><div style="text-align:center;font-size:70px;margin:35px">🔬</div>`];return `<div class="stage-head"><div><span class="pill">SIMULATE • PREPARE</span><h3>🎬 Radiation Behavior Animation</h3></div><span class="pill">${s+1}/4</span></div><div class="training-shell"><div class="training-stage"><div class="training-scene active">${scenes[s]}</div></div><div class="training-controls"><button class="btn btn-secondary" onclick="trainingMove(-1)">← ก่อนหน้า</button><button class="btn btn-secondary" onclick="trainingMove(1)">ถัดไป →</button></div></div>${footer(true,s===3?'<button class="btn btn-primary" onclick="goNext()">เข้าสู่ Lab →</button>':'<button class="btn btn-primary" disabled>ดูให้ครบทุกฉาก</button>')}`}
+function labHTML(){return `<div class="stage-head"><div><span class="pill">SIMULATE • TEST</span><h3>🔬 Shield Investigation Lab</h3></div></div><p class="muted">ทดลองหลายเงื่อนไขเพื่อสร้างหลักฐานของตนเอง ต้องบันทึกอย่างน้อย 3 การทดลอง และควรทดลองครบ Alpha, Beta, Gamma</p><div class="lab-controls"><div class="field"><label>ชนิดรังสี</label><select id="radiation"><option>Alpha</option><option>Beta</option><option>Gamma</option></select></div><div class="field"><label>วัสดุ</label><select id="material"><option>Paper</option><option>Aluminium</option><option>Lead</option></select></div><div class="field"><label>ความหนา: <span id="thickVal">3</span></label><input id="thickness" type="range" min="1" max="10" value="3" oninput="document.getElementById('thickVal').textContent=this.value"></div></div><div class="beam"><div class="source"></div><div class="particles"><i class="particle"></i><i class="particle"></i><i class="particle"></i><i class="particle"></i><i class="particle"></i></div><div class="shield"></div></div><div><button class="btn btn-secondary" onclick="runLab()">Run Experiment</button> <button class="btn btn-ghost" onclick="resetLab()">Reset</button></div><div class="result-box" id="labResult" style="margin-top:12px">เลือกตัวแปรแล้วกด Run Experiment</div><table class="table" style="margin-top:13px"><thead><tr><th>รังสี</th><th>วัสดุ</th><th>ความหนา</th><th>Transmission</th><th>ผล</th></tr></thead><tbody id="experimentRows"></tbody></table>${footer(true,`<button class="btn btn-primary" ${state.experiments.length<3?'disabled':''} onclick="goNext()">สร้าง Evidence C จาก ${state.experiments.length} Trial →</button>`)}`}
+function notebookHTML(){return `<div class="stage-head"><div><span class="pill">DECIDE</span><h3>📒 Detective Decision Notebook</h3></div><span class="pill">20 คะแนน</span></div><div class="notebook-grid">${nbBlock('nb1','1. Analyze the Evidence','ข้อมูลสำคัญคืออะไร โจทย์ต้องการหาอะไร',state.scoresBefore.analyze)}${nbBlock('nb2','2. Investigation Plan','จะใช้หลักการใดและตรวจสอบอย่างไร',state.scoresBefore.plan)}${nbBlock('nb3','3. Solve the Case','สรุปชนิดรังสี พร้อมหลักฐานสนับสนุน',state.scoresBefore.solve)}${nbBlock('nb4','4. Verify the Conclusion','ผลสอดคล้องกับ Lab หรือไม่ และตรวจสอบอย่างไร',state.scoresBefore.verify)}</div><div class="notice" style="margin-top:13px">เมื่อส่ง Notebook ระบบจะบันทึกคะแนนก่อนรับคำแนะนำจาก AI จากนั้นสามารถกลับมาแก้ไขเพื่อเปรียบเทียบคะแนนหลัง AI</div>${footer(true,'<button class="btn btn-secondary" onclick="saveNotebook()">บันทึกฉบับร่าง</button> <button class="btn btn-primary" onclick="submitNotebook()">ส่ง Notebook →</button>')}`}
+function nbBlock(id,title,ph,score){return `<div class="nb-block"><h4>${title}</h4><textarea id="${id}" rows="6" placeholder="${ph}" oninput="state.notebook.${id}=this.value;persist();countChars(this,'c${id}')"></textarea><div id="c${id}" class="charcount"></div><div class="score-row"><span>คะแนนก่อน AI</span><span class="score-pill">${score}/5</span></div></div>`}
+function aiHTML(){const chat=state.chat.length?state.chat:[{role:'ai',text:'หลักฐานชิ้นใดสนับสนุนข้อสรุปของคุณมากที่สุด และเพราะเหตุใด?'}];return `<div class="stage-head"><div><span class="pill">EXPLAIN • REVIEW</span><h3>🤖 Inspector Atom</h3></div><span class="pill">Hint ${state.hints}/3</span></div><div class="chat"><div class="avatar">🧑‍🔬</div><div class="chatbox"><div id="messages" class="messages">${chat.map(m=>`<div class="msg ${m.role}">${escapeHTML(m.text)}</div>`).join('')}</div><div class="chat-input"><input id="chatText" placeholder="อธิบายเหตุผลของคุณ…"><button class="btn btn-primary" onclick="sendChat()">ส่ง</button></div><div class="hint-levels"><button class="btn btn-ghost" onclick="requestHint(1)">Hint 1</button><button class="btn btn-ghost" onclick="requestHint(2)">Hint 2</button><button class="btn btn-ghost" onclick="requestHint(3)">Hint 3</button></div></div></div><div class="notice" style="margin-top:14px">AI จะถามกลับและให้คำใบ้ทีละระดับ โดยไม่เฉลยคำตอบก่อนส่งรายงาน</div>${footer(true,'<button class="btn btn-secondary" onclick="reviseNotebook()">กลับไปปรับ Notebook</button> <button class="btn btn-primary" onclick="finishAI()">ประเมินหลัง AI →</button>')}`}
+function reportHTML(){return `<div class="stage-head"><div><span class="pill">FINAL REPORT • SUBMIT YOUR DECISION</span><h3>📝 Final Mission Report</h3></div></div><div class="report-grid"><div class="field"><label>ข้อสรุปของคดี</label><textarea id="rep1" rows="5"></textarea></div><div class="field"><label>ชนิดรังสี</label><select id="repType"><option value="">เลือก</option><option>Alpha</option><option>Beta</option><option>Gamma</option></select></div><div class="field"><label>หลักฐานสำคัญที่สุด</label><textarea id="rep2" rows="5"></textarea></div><div class="field"><label>ข้อเสนอแนะด้านความปลอดภัย</label><textarea id="rep3" rows="5"></textarea></div><div class="field"><label>ระดับความมั่นใจ 1–5</label><input id="confidence" type="range" min="1" max="5" value="3"></div></div><div class="notice danger" style="margin-top:13px">ส่งคำตอบสุดท้ายจากหลักฐานที่คุณเลือก ระบบจะยังไม่แสดงคำตอบเป้าหมายในขั้นนี้</div>${footer(true,'<button class="btn btn-primary" onclick="submitReport()">ยืนยันและส่ง Mission Report</button>')}`}
+function restoreStageValues(){['ansA','ansB'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=state.answers[id]||''});const g=document.getElementById('radiationGuess');if(g)g.value=state.answers.guess||'';['nb1','nb2','nb3','nb4'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=state.notebook[id]||''});renderExperiments()}
+function countChars(el,id){const c=document.getElementById(id);if(c)c.textContent=`${el.value.trim().length} ตัวอักษร`}
+function submitA(){const v=document.getElementById('ansA').value;if(!requireText(v,15))return toast('กรุณาอธิบายอย่างน้อย 15 ตัวอักษร');saveAnswer('ansA',v);goNext()}
+function submitB(){const v=document.getElementById('ansB').value;if(!requireText(v,20))return toast('กรุณาอธิบายทั้งสิ่งที่ยืนยันและยังไม่ยืนยัน');saveAnswer('ansB',v);goNext()}
+function trainingMove(d){state.trainingScene=Math.max(0,Math.min(3,(state.trainingScene||0)+d));persist();renderMission()}
+function transmission(r,m,t){if(r==='Alpha')return m==='Paper'?Math.max(0,7-t*2):0;if(r==='Beta')return m==='Paper'?Math.max(55,82-t*2):m==='Aluminium'?Math.max(2,40-t*4):Math.max(1,22-t*2);return m==='Paper'?Math.max(86,100-t):m==='Aluminium'?Math.max(68,96-t*2):Math.max(6,72-t*6)}
+function studentEvidenceCHTML(){
+ const xs=state.experiments||[];
+ if(!xs.length)return `<div class="feedback bad"><b>ยังไม่มีข้อมูลการทดลองของคุณ</b><br>ย้อนกลับไปทำ Shield Investigation Lab ก่อนสร้าง Evidence C</div>`;
+ const rows=xs.map((x,i)=>`<tr><td>${i+1}</td><td><b>${escapeHTML(x.r)}</b></td><td>${escapeHTML(x.m)}</td><td>${x.t}</td><td><b>${x.tr}%</b></td><td>${escapeHTML(x.result)}</td></tr>`).join('');
+ const byRad=['Alpha','Beta','Gamma'].map(r=>{
+   const a=xs.filter(x=>x.r===r);
+   if(!a.length)return '';
+   const avg=Math.round(a.reduce((s,x)=>s+x.tr,0)/a.length);
+   return `<div class="student-evidence-metric"><small>${r.toUpperCase()}</small><b>${avg}%</b><span>Average transmission • ${a.length} trial${a.length>1?'s':''}</span></div>`;
+ }).join('');
+ return `<div class="student-evidence-c">
+   <div class="student-evidence-head"><div><small>EVIDENCE C • GENERATED BY YOUR LAB</small><h4>ข้อมูลจริงจากการทดลองของคุณ</h4></div><span>${xs.length} TRIALS RECORDED</span></div>
+   <div class="student-evidence-metrics">${byRad}</div>
+   <div class="student-evidence-table-wrap"><table class="table"><thead><tr><th>#</th><th>รังสีที่ทดสอบ</th><th>วัสดุ</th><th>ความหนา</th><th>Transmission</th><th>ผล</th></tr></thead><tbody>${rows}</tbody></table></div>
+   <div class="student-evidence-source">● DATA SOURCE: Shield Investigation Lab • ดึงจาก Trial ที่นักเรียนทำใน Mission นี้โดยตรง</div>
+ </div>`;
+}
+function runLab(){const r=document.getElementById('radiation').value,m=document.getElementById('material').value,t=+document.getElementById('thickness').value,tr=Math.round(transmission(r,m,t));const result=tr<10?'Blocked':tr<60?'Partially Blocked':'Penetrated';state.experiments.push({r,m,t,tr,result});persist();renderMission();toast('บันทึกผลทดลองแล้ว')}
+function resetLab(){state.experiments=[];persist();renderMission()}
+function renderExperiments(){const rows=document.getElementById('experimentRows');if(rows)rows.innerHTML=state.experiments.map(x=>`<tr><td>${x.r}</td><td>${x.m}</td><td>${x.t}</td><td>${x.tr}%</td><td>${x.result}</td></tr>`).join('')}
+function submitEvidenceC(){const v=document.getElementById('radiationGuess').value;if(!v)return toast('กรุณาเลือกสมมติฐาน');saveAnswer('guess',v);goNext()}
+function saveNotebook(){state.edits++;persist();toast('บันทึกฉบับร่างแล้ว')}
+function evaluateNotebook(){const vals=['nb1','nb2','nb3','nb4'].map(id=>(state.notebook[id]||'').trim());const keys=['analyze','plan','solve','verify'];const scores={};vals.forEach((v,i)=>{let s=1;if(v.length>=30)s++;if(/หลักฐาน|CPM|กระดาษ|อะลูมิเนียม|ตะกั่ว|ทดลอง|simulation|lab/i.test(v))s++;if(/เพราะ|ดังนั้น|สอดคล้อง|เปรียบเทียบ/i.test(v))s++;if(v.length>=90)s++;scores[keys[i]]=Math.min(5,s)});return scores}
+function submitNotebook(){if(['nb1','nb2','nb3','nb4'].some(id=>!requireText(state.notebook[id],25)))return toast('กรุณาตอบทุกขั้นอย่างน้อย 25 ตัวอักษร');state.scoresBefore=evaluateNotebook();state.edits++;persist();goNext()}
+function requestHint(level){if(state.hints>=3)return toast('ใช้คำใบ้ครบ 3 ระดับแล้ว');const hints={1:'ลองใช้ผลการทดสอบกระดาษเพื่อตัดตัวเลือกบางชนิดออก',2:'เปรียบเทียบผลของอะลูมิเนียมกับสมบัติของ Beta และ Gamma',3:'พิจารณาว่ารังสีชนิดใดผ่านกระดาษและอะลูมิเนียมได้มาก แต่ถูกลดทอนด้วยตะกั่วหนา'};state.hints=Math.max(state.hints,level);state.chat.push({role:'ai',text:hints[level]});persist();renderMission()}
+function sendChat(){const inp=document.getElementById('chatText'),text=inp.value.trim();if(!text)return;state.chat.push({role:'user',text});let reply='คุณอ้างหลักฐานแล้วหรือยัง? ลองระบุค่าหรือผลการทดลองอย่างน้อย 2 ชิ้น';if(/gamma|แกมมา/i.test(text))reply='สมมติฐานของคุณชัดขึ้นแล้ว แต่โปรดอธิบายว่าทำไม Alpha และ Beta จึงไม่สอดคล้องกับหลักฐาน';if(/กระดาษ|อะลูมิเนียม|ตะกั่ว|CPM/i.test(text))reply='ดีมาก คุณกำลังใช้หลักฐานเชิงประจักษ์ ลองเชื่อมผลนั้นกับสมบัติการทะลุทะลวงของรังสี';state.chat.push({role:'ai',text:reply});persist();renderMission()}
+function reviseNotebook(){state.currentStep=6;persist();renderMission();toast('ปรับ Notebook จากคำแนะนำ AI แล้วค่อยกลับมาประเมินอีกครั้ง')}
+function finishAI(){state.scoresAfter=evaluateNotebook();Object.keys(state.scoresAfter).forEach(k=>state.scoresAfter[k]=Math.min(5,state.scoresAfter[k]+(state.hints?1:0)));persist();goNext()}
+function scoreCards(s){return [['Analyze',s.analyze],['Plan',s.plan],['Solve',s.solve],['Verify',s.verify]].map(([k,v])=>`<div class="metric"><div class="muted">${k}</div><strong>${v}/5</strong></div>`).join('')}
+function calculateFinalEvaluation(rep1,repType,rep2,rep3){
+ const isCorrect=repType==='Gamma';
+ const allText=(rep1+' '+rep2+' '+rep3+' '+Object.values(state.notebook).join(' ')).toLowerCase();
+ const evidenceTerms=['4300','3950','620','กระดาษ','อะลูมิเนียม','ตะกั่ว','ทะลุ','ลดทอน','cpm'];
+ const evidenceHits=evidenceTerms.filter(k=>allText.includes(k)).length;
+ const knowledge=isCorrect?40:0;
+ const evidence=Math.min(20,Math.max(5,evidenceHits*3));
+ const hasGammaExperiment=state.experiments.some(x=>x.r==='Gamma');
+ const hasLeadExperiment=state.experiments.some(x=>x.m==='Lead');
+ const hasVariety=new Set(state.experiments.map(x=>x.r)).size>=3;
+ let lab=5;
+ if(state.experiments.length>=3)lab+=5;
+ if(hasGammaExperiment)lab+=4;
+ if(hasLeadExperiment)lab+=3;
+ if(hasVariety)lab+=3;
+ lab=Math.min(20,lab);
+ const polyaRaw=Object.values(state.scoresAfter||{}).reduce((a,b)=>a+(Number(b)||0),0);
+ const polya=Math.min(20,polyaRaw);
+ const total=knowledge+evidence+lab+polya;
+ const grade=total>=90?'A':total>=80?'B+':total>=70?'B':total>=60?'C+':total>=50?'C':'ควรทบทวน';
+ const feedback=[
+  {ok:isCorrect,text:isCorrect?'ระบุชนิดรังสีเป็น Gamma ได้ถูกต้อง':'คำตอบหลักยังไม่ถูกต้อง คำตอบเป้าหมายคือ Gamma'},
+  {ok:evidenceHits>=4,text:evidenceHits>=4?'อ้างหลักฐานการทะลุผ่านและค่าที่วัดได้อย่างเพียงพอ':'ควรอ้างค่า Paper 4,300 CPM, Aluminium 3,950 CPM และ Lead 620 CPM ให้ชัดเจน'},
+  {ok:state.experiments.length>=3&&hasGammaExperiment&&hasLeadExperiment,text:state.experiments.length>=3&&hasGammaExperiment&&hasLeadExperiment?'ทำการทดลองครบและมีเงื่อนไข Gamma–Lead':'ควรทดลองอย่างน้อย 3 ครั้ง และตรวจ Gamma กับ Lead โดยตรง'},
+  {ok:polya>=16,text:polya>=16?'กระบวนการคิดโพลยาครบและมีเหตุผล':'ควรขยายขั้นรู้ปัญหา พาความรู้ สู่คำตอบ และย้อนคิดพิสูจน์ผลให้ชัดขึ้น'},
+  {ok:/ปลอดภัย|ระยะ|ฉากกำบัง|ตะกั่ว|เวลา/i.test(rep3),text:/ปลอดภัย|ระยะ|ฉากกำบัง|ตะกั่ว|เวลา/i.test(rep3)?'มีข้อเสนอแนะด้านความปลอดภัย':'ควรระบุมาตรการเวลา ระยะทาง และฉากกำบังในข้อเสนอแนะ'}
+ ];
+ return {total,isCorrect,grade,knowledge,evidence,lab,polya,feedback};
+}
+function submitReport(){
+ const rep1=document.getElementById('rep1').value.trim(),repType=document.getElementById('repType').value,rep2=document.getElementById('rep2').value.trim(),rep3=document.getElementById('rep3').value.trim();
+ if(!requireText(rep1,20)||!repType||!requireText(rep2,20)||!requireText(rep3,15))return toast('กรุณากรอก Mission Report ให้ครบและอธิบายเหตุผล');
+ state.report={rep1,repType,rep2,rep3};
+ state.finalEvaluation=calculateFinalEvaluation(rep1,repType,rep2,rep3);
+ if(!state.completed){state.completed=true;if(state.finalEvaluation.isCorrect)state.xp+=100}
+ if(state.finalEvaluation.isCorrect){try{localStorage.setItem('RDA_CASE_COMPLETE_R01','1');localStorage.setItem('RDA_LAST_COMPLETED_CASE','r01')}catch(e){}}
+ state.currentStep=10;persist();renderMission();
+ toast(state.finalEvaluation.isCorrect?'ตอบถูกต้อง! Mission Complete +100 XP':'ส่งรายงานแล้ว — คำตอบยังไม่ถูกต้อง');
+}
+function finishR01AndUnlock(){
+ if(!state.finalEvaluation?.isCorrect){toast('ต้องผ่าน Final Mission Report ก่อนจึงจะปลดล็อก R-02');return}
+ try{
+  localStorage.setItem('RDA_CASE_COMPLETE_R01','1');
+  localStorage.setItem('RDA_LAST_COMPLETED_CASE','r01');
+ }catch(e){}
+ if(window.RDAMaster?.completeCaseAndReturn){
+  toast('R-01 COMPLETE ✓ • กำลังปลดล็อก R-02');
+  setTimeout(()=>window.RDAMaster.completeCaseAndReturn('r01',state.finalEvaluation.total||0),650);
+  return;
+ }
+ toast('บันทึก R-01 Complete แล้ว กรุณากลับ Headquarters');
+}
+function reviewMission(){state.currentStep=5;persist();renderMission();toast('กลับไปทบทวน Evidence C แล้ว')}
+function retryMission(){
+ const keepXp=state.xp;
+ state={...structuredClone(defaultState),xp:keepXp};
+ localStorage.setItem('rdkR01Complete',JSON.stringify(state));
+ renderGlobal();showPage('operation1');renderMission();toast('เริ่มภารกิจใหม่แล้ว');
+}
+function renderOperations(){document.getElementById('operationCards').innerHTML=operations.map(o=>{const done=state.completed;return `<div class="card op"><div class="num">01</div><h4>${o.name}</h4><div class="muted">${o.th}</div><p>Reward: ${o.xp} XP</p><div class="progressline"><span style="width:${done?100:Math.round(state.currentStep/10*100)}%"></span></div><button class="btn btn-primary" onclick="showPage('operation1')">${done?'ดูผลการประเมิน':'เริ่ม Operation'}</button></div>`}).join('')}
+function renderPassport(){document.getElementById('stamps').innerHTML=`<div class="stamp ${state.completed&&state.finalEvaluation?.isCorrect?'unlocked':''}">${state.completed&&state.finalEvaluation?.isCorrect?'☢️<br>R-01<br>'+state.finalEvaluation.total+'/100':'🔒<br>R-01'}</div>`}
+function renderTeacher(){document.getElementById('teacherScores').innerHTML=[['Analyze',state.scoresAfter.analyze],['Plan',state.scoresAfter.plan],['Solve',state.scoresAfter.solve],['Verify',state.scoresAfter.verify]].map(([k,v])=>`<div class="heat ${v>=4?'high':v>=3?'mid':'low'}"><b>${k}</b><div style="font-size:29px">${v}/5</div></div>`).join('')}
+function renderGlobal(){const rank=rankFor(state.xp),pct=Math.min(100,state.xp/300*100);document.getElementById('sideRank').textContent=rank;document.getElementById('topRank').textContent=rank;document.getElementById('pRank').textContent=rank;document.getElementById('sideXp').textContent=`${state.xp} / 300 XP`;document.getElementById('sideXpBar').style.width=pct+'%';document.getElementById('pXpBar').style.width=pct+'%';document.getElementById('pXp').textContent=state.xp+' XP';document.getElementById('topXp').textContent='⭐ '+state.xp+' XP';document.getElementById('tCompletion').textContent=state.completed?'100%':'0%';document.getElementById('tEdits').textContent=state.edits;document.getElementById('tHints').textContent=state.hints;renderOperations();renderPassport();renderTeacher()}
+function resetPrototype(){if(!confirm('รีเซ็ตความคืบหน้า R-01 ทั้งหมดหรือไม่?'))return;state=structuredClone(defaultState);localStorage.removeItem('rdkR01Complete');renderGlobal();showPage('headquarters');toast('รีเซ็ตต้นแบบแล้ว')}
+function exportTrial(){const checks=[...document.querySelectorAll('.trial-item input')].map((x,i)=>`${i+1}. ${x.checked?'ผ่าน':'ยังไม่ผ่าน'} - ${x.parentElement.textContent.trim()}`).join('\n');const blob=new Blob([`Radiation Detective Agency R-01 Pilot Checklist\n\n${checks}\n\nวันที่: ${new Date().toLocaleString('th-TH')}`],{type:'text/plain;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='R01-pilot-checklist.txt';a.click();URL.revokeObjectURL(a.href)}
+function escapeHTML(s){return String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
+renderGlobal();renderMission();
+
+/* ===== Living Laboratory interaction ===== */
+document.addEventListener('mousemove',e=>{
+ const photo=document.getElementById('labPhoto');
+ if(!photo)return;
+ const x=(e.clientX/window.innerWidth-.5)*10;
+ const y=(e.clientY/window.innerHeight-.5)*8;
+ photo.style.transform=`scale(1.08) translate(${x}px,${y}px)`;
+});
+setInterval(()=>{
+ const el=document.getElementById('liveCpm');
+ if(el)el.textContent=(16+Math.floor(Math.random()*7))+' CPM';
+},1500);
+function runStepFlash(){
+ const f=document.getElementById('stepFlash');
+ if(!f)return;
+ f.classList.remove('run');void f.offsetWidth;f.classList.add('run');
+}
+const _livingGoNext=goNext;
+goNext=function(){runStepFlash();setTimeout(()=>_livingGoNext(),220)}
+const _livingGoBack=goBack;
+goBack=function(){runStepFlash();setTimeout(()=>_livingGoBack(),180)}
+const _livingRenderMission=renderMission;
+renderMission=function(){
+ _livingRenderMission();
+ const step=state.currentStep;
+ const caseEl=document.getElementById('liveCase');
+ if(caseEl)caseEl.textContent=['MISSION BRIEF','EVIDENCE A','EVIDENCE B','TRAINING','LAB LIVE','EVIDENCE C','POLYA NOTEBOOK','AI COACH','REPORT','COMPLETE'][step]||'R-01 ACTIVE';
+ document.body.classList.toggle('notebook-focus',step===6);
+ document.body.classList.toggle('mission-complete-lab',step===9);
+}
+
+
+const _dashboardRenderGlobal=renderGlobal;
+renderGlobal=function(){
+ _dashboardRenderGlobal();
+ const pct=state.completed?100:Math.round((state.currentStep/9)*100);
+ const p=document.getElementById('dashboardMissionProgress');if(p)p.style.width=pct+'%';
+ const d=document.getElementById('dashPct');if(d)d.textContent=pct+'%';
+ const radial=document.querySelector('.radial-progress');if(radial)radial.style.background=`conic-gradient(var(--green) 0 ${pct}%,#123043 ${pct}%)`;
+ const dc=document.getElementById('dashCompleted');if(dc)dc.textContent=(state.completed?'1':'0')+' / 6';
+ const dx=document.getElementById('dashXp');if(dx)dx.textContent=state.xp+' / 300';
+ const dr=document.getElementById('dashRank');if(dr)dr.textContent=rankFor(state.xp);
+}
+
+</script>
+<script src="../../classroom-config.js"></script>
+<script src="../../shared/rda-classroom-backend.js"></script>
+<script src="../../shared/rda-master.js"></script>
+<script src="../../shared/rda-unlock-bridge.js"></script>
+<script src="../../shared/rda-story.js"></script>
+
+<div id="r01CaseLayer" class="r01-case-layer" aria-hidden="true"><div class="r01-case-shell">
+<header class="r01-case-head"><div><small>Radiation Detective Agency</small><h2>R-01 — UNKNOWN SOURCE</h2><p>CASE QUESTION • นี่คือรังสีอะไร และหลักฐานใดทำให้คุณตัดสินใจเช่นนั้น?</p></div><button id="r01CaseClose">×</button></header>
+<div class="r01-case-progress"><span data-step="1">1 PREDICTION</span><span data-step="2">2 SIMULATION</span><span data-step="3">3 EVIDENCE</span><span data-step="4">4 REASONING</span><span data-step="5">5 RISK</span><span data-step="6">6 DECISION</span><span data-step="7">7 FEEDBACK</span><span data-step="8">8 REVISION</span></div>
+<section data-case-step="1"><small>MISCONCEPTION TRAP</small><h3>Prediction ก่อนเห็นหลักฐาน</h3><p class="r01-prompt">“รังสีที่ทะลุผ่านวัสดุได้มากที่สุด ย่อมอันตรายที่สุดในทุกสถานการณ์”</p><div class="r01-row"><button data-predict="agree">เห็นด้วย</button><button data-predict="disagree">ไม่เห็นด้วย</button><button data-predict="unsure">ไม่แน่ใจ</button></div><label>เหตุผลเบื้องต้น<textarea id="r01PredictionReason"></textarea></label><div class="r01-confidence"><b>CONFIDENCE BEFORE</b><input id="r01ConfidenceBefore" type="range" min="1" max="5" value="3"><output id="r01ConfidenceBeforeOut">3/5</output></div><button class="r01-primary" id="r01SavePrediction">LOCK PREDICTION → INVESTIGATE</button></section>
+<section data-case-step="2" hidden><small>INVESTIGATION</small><h3>Simulation = Evidence Generator</h3><p>ใช้ Simulation เดิมของ R-01 ทดลอง แล้วบันทึกผลที่มีความหมายเป็น Evidence</p><div class="r01-row"><button id="r01BackToMission">↗ OPEN LIVE SIMULATION</button><button id="r01CaptureEvidence">＋ CAPTURE EVIDENCE</button></div><div id="r01CaptureForm" hidden><label>สิ่งที่ทดลอง<input id="r01EvidenceTest" placeholder="Paper / Aluminium / Lead"></label><label>ผลที่สังเกต<input id="r01EvidenceObservation" placeholder="Count rate ลดลง..."></label><label>ค่าหรือข้อมูล<input id="r01EvidenceValue" placeholder="82 → 14 counts/s"></label><button class="r01-primary" id="r01SaveEvidence">SAVE TO EVIDENCE BOARD</button></div><div id="r01MiniEvidence"></div><button class="r01-primary" id="r01ToEvidence">EVIDENCE BOARD →</button></section>
+<section data-case-step="3" hidden><small>EVIDENCE BOARD</small><h3>เลือกหลักฐาน 2–3 รายการ</h3><p>เลือกหลักฐานที่จะใช้สร้าง Claim และอธิบายด้วยหลักฟิสิกส์ในขั้น Reasoning</p><div id="r01EvidenceBoard" class="r01-evidence-board"></div><button class="r01-primary" id="r01ToDecision">CONTINUE → REASONING</button></section>
+
+<section data-case-step="4" hidden>
+  <small>PHYSICS REASONING</small>
+  <h3>สร้าง Claim แล้วเชื่อม Evidence ด้วยหลักฟิสิกส์</h3>
+  <p>ขั้นนี้ยังไม่ตัดสินใจ ให้ตอบก่อนว่า “หลักฐานบอกอะไร” และ “หลักฟิสิกส์อธิบายหลักฐานนั้นอย่างไร”</p>
+  <label>CLAIM<textarea id="r01Claim"></textarea></label>
+  <label>SELECTED EVIDENCE<textarea id="r01EvidenceText" readonly></textarea></label>
+  <label>PHYSICS REASONING<textarea id="r01Reasoning"></textarea></label>
+  <button class="r01-primary" id="r01ToRisk">REASONING COMPLETE → ASSESS RISK</button>
+</section>
+
+<section data-case-step="5" hidden>
+  <small>RISK ASSESSMENT</small>
+  <h3>หลักฐานชุดนี้บอกถึงความเสี่ยงระดับใด?</h3>
+  <p>เลือกระดับ Risk หลังจากพิจารณา Evidence และ Physics Reasoning แล้ว</p>
+  <div class="r01-row">
+    <button data-risk="LOW">🟢 LOW</button>
+    <button data-risk="MODERATE">🟡 MODERATE</button>
+    <button data-risk="HIGH">🟠 HIGH</button>
+    <button data-risk="CRITICAL">🔴 CRITICAL</button>
+  </div>
+  <button class="r01-primary" id="r01ToDecisionFinal">RISK ASSESSED → MAKE DECISION</button>
+</section>
+
+<section data-case-step="6" hidden>
+  <small>FINAL DECISION</small>
+  <h3>ตัดสินใจจาก Evidence + Physics Reasoning + Risk</h3>
+  <label>DECISION<textarea id="r01Decision"></textarea></label>
+  <div class="r01-confidence">
+    <b>CONFIDENCE AFTER</b>
+    <input id="r01ConfidenceAfter" type="range" min="1" max="5" value="3">
+    <output id="r01ConfidenceAfterOut">3/5</output>
+  </div>
+  <button class="r01-primary" id="r01SubmitInitial">SUBMIT INITIAL DECISION</button>
+</section>
+
+<section data-case-step="7" hidden>
+  <small>DIAGNOSTIC FEEDBACK</small>
+  <h3>ตรวจคุณภาพการให้เหตุผลก่อนแก้ไข</h3>
+  <div id="r01FeedbackBox"></div>
+  <button class="r01-primary" id="r01ToRevision">REVIEW FEEDBACK → REVISION</button>
+</section>
+
+<section data-case-step="8" hidden>
+  <small>REVISION 01</small>
+  <h3>ปรับเหตุผลและการตัดสินใจจาก Feedback</h3>
+  <p>ระบบเก็บ Initial → Revision เพื่อแสดงพัฒนาการของการให้เหตุผลเชิงหลักฐาน</p>
+  <label>REVISED PHYSICS REASONING<textarea id="r01RevisedReasoning"></textarea></label>
+  <label>REVISED DECISION<textarea id="r01RevisedDecision"></textarea></label>
+  <button class="r01-primary" id="r01SubmitRevision">SUBMIT REVISION & CLOSE CASE</button>
+  <div id="r01RubricResult"></div>
+</section>
+</div></div><button id="r01CaseButton" class="r01-case-button">☢ START CASE</button>
+
+<style id="r01CaseStyles">
+.r01-case-button{position:fixed;left:14px;bottom:58px;z-index:99998;border:1px solid #f4c430;border-radius:999px;padding:9px 14px;background:#061722;color:#ffe17d;font:800 11px system-ui;cursor:pointer}.r01-case-layer{position:fixed;inset:0;z-index:100100;display:none;align-items:center;justify-content:center;padding:14px;background:rgba(0,7,12,.91);backdrop-filter:blur(10px)}.r01-case-layer.open{display:flex}.r01-case-shell{width:min(1000px,97vw);max-height:94vh;overflow:auto;border:1px solid rgba(45,226,230,.4);border-radius:20px;background:#061722;padding:18px;color:#dcecf2;font-family:system-ui}.r01-case-head{display:flex;justify-content:space-between}.r01-case-head small,[data-case-step]>small{color:#2de2e6;font-weight:900;letter-spacing:1.4px}.r01-case-head h2{margin:3px 0;color:#fff}.r01-case-head p{margin:0;color:#9bb1ba}.r01-case-head button{border:0;background:none;color:white;font-size:26px}.r01-case-progress{display:grid;grid-template-columns:repeat(8,1fr);gap:5px;margin:15px 0}.r01-case-progress span{padding:8px;text-align:center;border-radius:8px;background:#0a2633;color:#78929d;font-size:8px;font-weight:800}.r01-case-progress span.active{color:#fff;border:1px solid #2de2e6}[data-case-step]{padding:13px;border:1px solid rgba(255,255,255,.08);border-radius:14px;background:rgba(255,255,255,.02)}[data-case-step] h3{color:white}.r01-prompt{padding:12px;border-left:3px solid #f4c430;background:rgba(244,196,48,.05)}.r01-row{display:flex;gap:7px;flex-wrap:wrap;margin:9px 0}.r01-row button{border:1px solid rgba(45,226,230,.2);border-radius:9px;padding:8px 11px;background:#08222e;color:#dff}.r01-row button.selected{border-color:#f4c430;color:#ffe17d}[data-case-step] label{display:grid;gap:5px;margin:9px 0;font-size:10px;font-weight:800}[data-case-step] textarea,[data-case-step] input[type=text],#r01CaptureForm input{box-sizing:border-box;width:100%;border:1px solid rgba(45,226,230,.18);border-radius:9px;background:#03111a;color:#eefcff;padding:9px}[data-case-step] textarea{min-height:75px}.r01-primary{border:1px solid #2de2e6;border-radius:9px;padding:10px 14px;background:#0b3543;color:#dfffff;font-weight:900}.r01-confidence{display:flex;gap:10px;align-items:center;margin:10px 0}.r01-confidence input{flex:1}.r01-evidence-board{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}.r01-evidence-card{display:grid;gap:3px;padding:11px;border:1px solid rgba(45,226,230,.16);border-radius:11px;background:#061b25}.r01-evidence-card.selected{border-color:#f4c430}.r01-evidence-card small{color:#2de2e6}.r01-evidence-card em{color:#ffe17d}.r01-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}#r01FeedbackBox div{padding:9px;margin:5px 0;border-left:3px solid #f4c430;background:rgba(244,196,48,.05)}#r01RubricResult{display:flex;gap:12px;align-items:center;margin-top:12px;padding:12px;border:1px solid rgba(45,226,230,.2);border-radius:12px}#r01RubricResult b{font-size:25px;color:#2de2e6}@media(max-width:700px){.r01-case-progress,.r01-evidence-board,.r01-grid{grid-template-columns:1fr}}
+</style>
+<script id="r01CaseScript">
+(()=>{const KEY='RDA_R01_CASE_V2',DK='RDA_DECISION_R01',NK='rdkR01Complete',$=id=>document.getElementById(id),read=k=>{try{return JSON.parse(localStorage.getItem(k)||'{}')}catch(e){return{}}},save=(k,v)=>localStorage.setItem(k,JSON.stringify(v));const st=Object.assign({step:1,prediction:'',predictionReason:'',confidenceBefore:3,evidence:[],selected:[],claim:'',reasoning:'',risk:'',decision:'',confidenceAfter:3,initialScore:0,revisedReasoning:'',revisedDecision:'',revisedScore:0,feedback:[]},read(KEY));
+// Migrate legacy Decision Quality scores from /20 to the unified /100 scale without touching Google Sheets.
+if(st.rubricMaxScore!==100){if(Number(st.initialScore)>0&&Number(st.initialScore)<=20)st.initialScore=Number(st.initialScore)*5;if(Number(st.revisedScore)>0&&Number(st.revisedScore)<=20)st.revisedScore=Number(st.revisedScore)*5;st.rubricMaxScore=100;}
+const persist=()=>save(KEY,st),esc=s=>String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));function show(n){st.step=n;persist();try{window.RDAMaster&&window.RDAMaster.pulse('r01',n,8)}catch(e){}document.querySelectorAll('[data-case-step]').forEach(x=>x.hidden=+x.dataset.caseStep!==n);document.querySelectorAll('.r01-case-progress span').forEach(x=>x.classList.toggle('active',+x.dataset.step===n));const b=$('r01CaseButton');if(b)b.textContent=n===1?'☢ START CASE':'☢ CONTINUE CASE • '+['','PREDICTION','SIMULATION','EVIDENCE','REASONING','RISK','DECISION','FEEDBACK','REVISION'][n]}function open(){document.getElementById('r01CaseLayer').classList.add('open');render();show(st.step||1)}function close(){document.getElementById('r01CaseLayer').classList.remove('open')}function evidenceText(){return st.evidence.filter(e=>st.selected.includes(e.id)).map((e,i)=>`E${i+1}: ${e.test} — ${e.observation}${e.value?' ('+e.value+')':''}`).join('\n')}function renderEvidence(){const b=$('r01EvidenceBoard');b.innerHTML=st.evidence.map((e,i)=>`<label class="r01-evidence-card ${st.selected.includes(e.id)?'selected':''}"><input type="checkbox" data-eid="${e.id}" ${st.selected.includes(e.id)?'checked':''}><small>EVIDENCE #R01-${String(i+1).padStart(2,'0')}</small><b>${esc(e.test)}</b><span>${esc(e.observation)}</span><em>${esc(e.value)}</em></label>`).join('')||'<p>ยังไม่มี Evidence</p>';document.querySelectorAll('[data-eid]').forEach(c=>c.onchange=()=>{c.checked?(!st.selected.includes(c.dataset.eid)&&st.selected.push(c.dataset.eid)):st.selected=st.selected.filter(x=>x!==c.dataset.eid);persist();renderEvidence()})}function score(r,d){return window.RDARubricV2.evaluate({caseId:'r01',claim:st.claim,evidenceText:evidenceText(),selectedEvidence:st.selected,reasoning:r,risk:st.risk,decision:d})}function fb(sc){return sc.feedback||[]}function sync(r,d){save(DK,{claim:st.claim,evidence:evidenceText(),reasoning:r,risk:st.risk,decision:d,confidence:st.confidenceAfter,evidenceIds:st.selected,initialScore:st.initialScore,revisedScore:st.revisedScore,rubricEngine:'RDA_RULE_BASED_V2_100',rubricMaxScore:100,updatedAt:new Date().toISOString()})}function render(){document.querySelectorAll('[data-predict]').forEach(b=>b.classList.toggle('selected',b.dataset.predict===st.prediction));document.querySelectorAll('[data-risk]').forEach(b=>b.classList.toggle('selected',b.dataset.risk===st.risk));$('r01PredictionReason').value=st.predictionReason;$('r01ConfidenceBefore').value=st.confidenceBefore;$('r01ConfidenceBeforeOut').value=st.confidenceBefore+'/5';$('r01ConfidenceAfter').value=st.confidenceAfter;$('r01ConfidenceAfterOut').value=st.confidenceAfter+'/5';$('r01Claim').value=st.claim;$('r01Reasoning').value=st.reasoning;$('r01Decision').value=st.decision;$('r01RevisedReasoning').value=st.revisedReasoning||st.reasoning;$('r01RevisedDecision').value=st.revisedDecision||st.decision;$('r01EvidenceText').value=evidenceText();$('r01FeedbackBox').innerHTML=st.feedback.map(x=>`<div>${esc(x)}</div>`).join('');if(st.revisedScore)$('r01RubricResult').innerHTML=`<small>DECISION QUALITY</small><b>${st.revisedScore}/100</b><span>Initial ${st.initialScore}/100 → Revision ${st.revisedScore}/100</span>`;renderEvidence()}document.addEventListener('DOMContentLoaded',()=>{$('r01CaseButton').onclick=open;$('r01CaseClose').onclick=close;document.querySelectorAll('[data-predict]').forEach(b=>b.onclick=()=>{st.prediction=b.dataset.predict;persist();render()});document.querySelectorAll('[data-risk]').forEach(b=>b.onclick=()=>{st.risk=b.dataset.risk;persist();render()});$('r01ConfidenceBefore').oninput=e=>{st.confidenceBefore=+e.target.value;$('r01ConfidenceBeforeOut').value=st.confidenceBefore+'/5';persist()};$('r01ConfidenceAfter').oninput=e=>{st.confidenceAfter=+e.target.value;$('r01ConfidenceAfterOut').value=st.confidenceAfter+'/5';persist()};$('r01SavePrediction').onclick=()=>{st.predictionReason=$('r01PredictionReason').value.trim();if(!st.prediction||st.predictionReason.length<10)return alert('เลือก Prediction และอธิบายเหตุผลก่อน');persist();show(2)};$('r01BackToMission').onclick=()=>{close();state.currentStep=4;persist();showPage('operation1');renderMission();setTimeout(()=>{const el=document.getElementById('stage');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},80)};$('r01CaptureEvidence').onclick=()=>$('r01CaptureForm').hidden=!$('r01CaptureForm').hidden;$('r01SaveEvidence').onclick=()=>{let t=$('r01EvidenceTest').value.trim(),o=$('r01EvidenceObservation').value.trim(),v=$('r01EvidenceValue').value.trim();if(t.length<2||o.length<5)return alert('กรอกสิ่งที่ทดลองและผลที่สังเกต');st.evidence.push({id:'e'+Date.now(),test:t,observation:o,value:v});persist();$('r01CaptureForm').hidden=true;renderEvidence()};$('r01ToEvidence').onclick=()=>{if(st.evidence.length<2)return alert('Capture Evidence อย่างน้อย 2 รายการ');show(3)};$('r01ToDecision').onclick=()=>{if(st.selected.length<2)return alert('เลือก Evidence อย่างน้อย 2 รายการ');$('r01EvidenceText').value=evidenceText();show(4)};$('r01ToRisk').onclick=()=>{
+  st.claim=$('r01Claim').value.trim();st.reasoning=$('r01Reasoning').value.trim();
+  if(st.claim.length<8||st.reasoning.length<15)return alert('กรอก Claim และ Physics Reasoning ให้ครบก่อนประเมิน Risk');
+  persist();show(5)
+};
+$('r01ToDecisionFinal').onclick=()=>{
+  if(!st.risk)return alert('เลือกระดับ Risk จากหลักฐานก่อนตัดสินใจ');
+  persist();show(6)
+};
+$('r01ToRevision').onclick=()=>show(8);
+$('r01SubmitInitial').onclick=()=>{st.claim=$('r01Claim').value.trim();st.reasoning=$('r01Reasoning').value.trim();st.decision=$('r01Decision').value.trim();if(st.claim.length<8||st.reasoning.length<15||st.decision.length<10||!st.risk)return alert('กรอก Claim, Reasoning, Risk, Decision ให้ครบ');let sc=score(st.reasoning,st.decision);st.initialScore=sc.total;st.feedback=fb(sc);st.revisedReasoning=st.reasoning;st.revisedDecision=st.decision;persist();sync(st.reasoning,st.decision);render();show(7)};$('r01SubmitRevision').onclick=()=>{st.revisedReasoning=$('r01RevisedReasoning').value.trim();st.revisedDecision=$('r01RevisedDecision').value.trim();let sc=score(st.revisedReasoning,st.revisedDecision);st.revisedScore=sc.total;persist();sync(st.revisedReasoning,st.revisedDecision);
+     try{
+      const __decision=read(DK);
+      __decision.revisionSubmitted=true;
+      __decision.revisedScore=st.revisedScore;
+      __decision.updatedAt=new Date().toISOString();
+      save(DK,__decision);
+     }catch(e){}
+     render();
+     try{
+      const __native=read(NK);
+      __native.completed=true;
+      __native.evaluated=true;
+      __native.caseWorkflowCompleted=true;
+      __native.caseWorkflowScore=st.revisedScore;
+      __native.updatedAt=new Date().toISOString();
+      save(NK,__native);
+     }catch(e){}
+     if(window.RDAMaster?.completeCaseAndReturn){
+      alert('CASE CLOSED ✓ — R-01\\nNEXT CASE UNLOCK SIGNAL SENT\\nกำลังกลับ Headquarters...');
+      setTimeout(()=>(()=>{
+       try{
+        localStorage.setItem('RDA_CASE_COMPLETE_R01','1');
+        localStorage.setItem('RDA_LAST_COMPLETED_CASE','r01');
+       }catch(e){}
+       window.RDAMaster.completeCaseAndReturn('r01',st.revisedScore);
+      })(),500);
+      return;
+     }
+     let native=read(NK),done=!!(native.completed||native.evaluated);if(sc.total>=60&&done)alert('R-01 DECISION VERIFIED ✓\\nกลับ Headquarters เพื่อเปิด R-02');else if(sc.total>=60)alert('Decision Record ผ่านแล้ว ✓\\nทำภารกิจหลัก R-01 ให้สำเร็จก่อน');else alert('Decision Quality ยังต่ำกว่า 60/100 — ปรับ Revision อีกครั้ง');window.RDAMaster?.patch?.()};render()});window.RDA_R01_CASE={open,read:()=>read(KEY)}})();
+</script>
+
+<style id="r01UnifiedWorkflowStyles">
+#r01CaseButton{
+  left:50%!important;right:auto!important;bottom:14px!important;
+  transform:translateX(-50%)!important;
+  min-width:190px!important;
+  border-color:#2de2e6!important;color:#dfffff!important;
+  box-shadow:0 0 22px rgba(45,226,230,.20)!important;
+}
+#r01CaseLayer .r01-case-progress{
+  grid-template-columns:repeat(8,minmax(0,1fr))!important;
+}
+#r01CaseLayer [data-case-step]{animation:rdaUnifiedStepIn .25s ease}
+@keyframes rdaUnifiedStepIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+@media(max-width:760px){
+  #r01CaseLayer .r01-case-progress{
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  }
+  #r01CaseButton{width:auto!important;min-width:170px!important;left:50%!important;right:auto!important}
+}
+</style>
+</body>
+</html>

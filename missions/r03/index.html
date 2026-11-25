@@ -1,0 +1,819 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RDA — R-03 VERIFY • Airport Security</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="../../shared/rda-rubric-v2.js"></script>
+
+<style id="rdaResetUiFix">
+/* ===== V2.8.1 RESET CONTROL UI FIX ===== */
+.topbar{
+  min-height:64px;
+  align-items:center!important;
+  gap:12px!important;
+}
+.topbar>.status,
+.status{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-end!important;
+  gap:7px!important;
+  flex-wrap:wrap!important;
+  min-width:0;
+}
+.rda-reset-control{
+  position:static!important;
+  inset:auto!important;
+  transform:none!important;
+  margin:0!important;
+  min-width:0!important;
+  width:auto!important;
+  max-width:100%!important;
+  min-height:34px!important;
+  padding:7px 11px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  border-radius:10px!important;
+  line-height:1!important;
+  font-size:10px!important;
+  font-weight:700!important;
+  z-index:auto!important;
+}
+@media(max-width:780px){
+  .topbar{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) auto!important;
+    align-items:start!important;
+    padding:10px 12px!important;
+  }
+  .topbar>div:first-child{min-width:0}
+  .topbar h2{
+    margin:0!important;
+    font-size:clamp(15px,4vw,20px)!important;
+    line-height:1.15!important;
+  }
+  .topbar>.status,.status{
+    max-width:46vw!important;
+    gap:5px!important;
+  }
+  .topbar .pill{
+    padding:5px 7px!important;
+    font-size:7px!important;
+    white-space:nowrap!important;
+  }
+  .rda-reset-control{
+    min-height:30px!important;
+    padding:6px 8px!important;
+    font-size:8px!important;
+  }
+}
+@media(max-width:520px){
+  .topbar{
+    grid-template-columns:1fr!important;
+    gap:7px!important;
+  }
+  .topbar>.status,.status{
+    max-width:none!important;
+    width:100%!important;
+    justify-content:flex-start!important;
+  }
+  .rda-reset-control{
+    margin-left:auto!important;
+  }
+}
+</style>
+<style id="nativeMissionLearningSpine">
+.native-learning-spine{max-width:1280px;margin:12px auto 18px;padding:14px 16px;border:1px solid rgba(45,226,230,.22);border-radius:16px;background:linear-gradient(135deg,rgba(6,35,46,.94),rgba(4,20,29,.96));box-shadow:0 16px 45px rgba(0,0,0,.18)}
+.native-spine-head{display:grid;grid-template-columns:minmax(260px,.8fr) 1.2fr;gap:18px;align-items:center}.native-spine-head small{display:block;color:#2de2e6;font-size:8px;font-weight:900;letter-spacing:.14em}.native-spine-head strong{display:block;margin-top:3px;color:#fff;font-size:16px}.native-spine-head p{margin:0;color:#b9d4dc;font-size:12px}
+.native-spine-flow{display:flex;gap:6px;overflow:auto;margin-top:11px;padding-bottom:2px}.native-spine-flow span{flex:1;min-width:110px;padding:8px 9px;border:1px solid rgba(255,255,255,.07);border-radius:10px;color:#f4c430;font-size:9px;font-weight:900;background:rgba(255,255,255,.025)}.native-spine-flow b{display:block;margin-top:2px;color:#dffcff;font-size:8px;letter-spacing:.03em}
+@media(max-width:760px){.native-spine-head{grid-template-columns:1fr}.native-spine-flow span{min-width:125px}}
+</style>
+<style id="r03IntegratedMissionV440">
+.r03-integrated-flow{position:sticky;top:8px;z-index:7000;max-width:720px;margin:8px auto 10px;display:flex;justify-content:center;gap:4px;padding:6px;border-radius:999px;background:rgba(2,18,28,.92);border:1px solid rgba(55,213,228,.22);backdrop-filter:blur(10px)}
+.r03-integrated-flow span{font-size:8px;font-weight:900;padding:6px 10px;border-radius:999px;color:#688592;white-space:nowrap}.r03-integrated-flow span.active{background:#20d6e5;color:#03202b}.r03-integrated-flow span.done{color:#60efb6}
+.r03-predict-card{margin:16px 0;padding:16px;border-radius:15px;border:1px solid rgba(53,219,232,.25);background:linear-gradient(135deg,rgba(7,34,47,.96),rgba(4,22,32,.98))}
+.r03-predict-card h4{margin:0 0 6px;color:#fff}.r03-predict-card p{color:#94b5bf;font-size:12px}.r03-predict-options{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:12px 0}.r03-predict-options button{padding:12px;border-radius:11px;border:1px solid #20586c;background:#092838;color:#fff;cursor:pointer}.r03-predict-options button.active{border-color:#f2c84c;background:rgba(242,200,76,.12)}
+.r03-predict-card textarea{width:100%;box-sizing:border-box;min-height:90px;padding:12px 14px;border-radius:12px;border:1px solid #235e70;background:#061923;color:#f3fbff;font-family:inherit;font-size:14px;line-height:1.55;resize:vertical}
+.r03-auto-evidence{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:14px 0}.r03-auto-evidence>div{padding:14px;border-radius:13px;border:1px solid rgba(52,218,230,.20);background:#071d29}.r03-auto-evidence small,.r03-auto-evidence b{display:block}.r03-auto-evidence small{color:#4bddea;font-size:8px;font-weight:900}.r03-auto-evidence b{color:#fff;margin-top:6px;font-size:14px}
+@media(max-width:1050px){.r03-identity strong,.r03-integrated-flow{overflow-x:auto;justify-content:flex-start}.r03-predict-options,.r03-auto-evidence{grid-template-columns:1fr}}
+</style>
+
+
+
+
+
+
+
+<style id="r03FixedSidebarNoScrollV443">
+/* === R03 sidebar: fixed to viewport, no independent scroll === */
+html,body{
+  margin:0!important;
+  padding:0!important;
+  width:100%!important;
+  min-height:100%!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+}
+
+/* Use normal document flow for main; sidebar is taken out of flow */
+.app{
+  display:block!important;
+  width:100%!important;
+  min-height:100vh!important;
+  position:relative!important;
+}
+
+/* Fixed left rail, visually stable like R01/R02 */
+.sidebar{
+  position:fixed!important;
+  top:0!important;
+  left:0!important;
+  bottom:0!important;
+  width:250px!important;
+  min-width:250px!important;
+  max-width:250px!important;
+  height:100vh!important;
+  max-height:100vh!important;
+  margin:0!important;
+  padding:20px 15px!important;
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+  overflow-y:hidden!important;
+  overscroll-behavior:none!important;
+  z-index:9500!important;
+  background:rgba(2,12,20,.94)!important;
+  backdrop-filter:blur(18px)!important;
+  border-right:1px solid rgba(79,195,247,.18)!important;
+}
+.sidebar::-webkit-scrollbar{display:none!important}
+
+/* Main gets exactly one sidebar offset, no double shifting */
+.main{
+  margin:0 0 0 250px!important;
+  width:calc(100% - 250px)!important;
+  max-width:none!important;
+  min-width:0!important;
+  padding:22px 28px 50px!important;
+  box-sizing:border-box!important;
+  overflow:visible!important;
+}
+
+/* Content uses full remaining width */
+.topbar,
+.dashboard-hero,
+.r03-operations,
+.r03-dashboard-bottom,
+.mission-shell,
+.page,
+.page.active{
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  box-sizing:border-box!important;
+}
+
+/* Compact rail so it fits 100vh without a scrollbar */
+.sidebar .brand{
+  margin-bottom:8px!important;
+  padding-bottom:10px!important;
+}
+.sidebar .rda-nav-item{
+  min-height:46px!important;
+  padding:8px 10px!important;
+  margin:3px 0!important;
+}
+.sidebar .rda-section-title{
+  margin:8px 0 5px!important;
+}
+.sidebar .rda-mission-item{
+  min-height:42px!important;
+  padding:7px 8px!important;
+  margin:3px 0!important;
+}
+.sidebar .side-card{
+  margin-top:7px!important;
+  padding:9px!important;
+}
+.sidebar .objective-box{
+  min-height:0!important;
+  overflow:hidden!important;
+}
+.sidebar .objective-list{
+  max-height:none!important;
+  overflow:hidden!important;
+}
+.sidebar .objective-list>div{
+  padding:3px 0!important;
+  font-size:8.5px!important;
+}
+
+/* Keep one process bar only */
+#phaseStrip,#stepNav{display:none!important}
+#r03IntegratedFlow{
+  position:sticky!important;
+  top:8px!important;
+  z-index:7000!important;
+  width:max-content!important;
+  max-width:100%!important;
+  margin:8px auto 12px!important;
+  display:flex!important;
+  flex-wrap:nowrap!important;
+  overflow:hidden!important;
+}
+
+/* Floating airport widgets must never overlap the sidebar */
+.airport-cctv,
+.airport-monitor,
+.flight-info{
+  max-width:min(320px,calc(100vw - 310px))!important;
+}
+
+/* Small screens: hide rail rather than compress mission */
+@media(max-width:900px){
+  .sidebar{display:none!important}
+  .main{
+    margin-left:0!important;
+    width:100%!important;
+    padding:14px 14px 88px!important;
+  }
+}
+</style>
+
+
+<style id="r03HeaderMergedV444">
+.topbar{
+  margin-bottom:8px!important;
+  padding:14px 18px!important;
+  align-items:center!important;
+}
+.r03-header-copy{
+  min-width:0!important;
+  flex:1 1 auto!important;
+}
+.r03-kicker{
+  color:#48ddec!important;
+  font-size:9px!important;
+  font-weight:900!important;
+  letter-spacing:.10em!important;
+  margin-bottom:3px!important;
+}
+.r03-header-copy h2{
+  margin:0!important;
+  color:#fff!important;
+  font-size:24px!important;
+  line-height:1.05!important;
+  letter-spacing:-.01em!important;
+}
+.r03-subtitle{
+  color:#f2c94c!important;
+  font-size:11px!important;
+  font-weight:900!important;
+  margin-top:4px!important;
+}
+.r03-header-copy .muted{
+  margin-top:4px!important;
+  font-size:11px!important;
+}
+#r03IntegratedFlow{
+  margin:0 auto 12px!important;
+  top:8px!important;
+}
+</style>
+
+
+<style id="r03SystemUiRefinedV445">
+/* ===== FINAL R03 MISSION UI ===== */
+
+/* Keep ONLY one process bar */
+#phaseStrip,
+#stepNav,
+.phase-roadmap,
+.objective-path{
+  display:none!important;
+}
+
+/* Main mission card should immediately present current objective */
+#mission .mission-header{
+  padding:0!important;
+  margin:0!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+#mission .mission-header > .pill,
+#mission .mission-header > h2,
+#mission .mission-header > p{
+  display:none!important;
+}
+
+/* Single R03 header */
+.topbar{
+  padding:13px 18px!important;
+  margin-bottom:6px!important;
+  border-radius:16px!important;
+  border:1px solid rgba(53,215,230,.20)!important;
+  background:linear-gradient(90deg,rgba(4,24,35,.96),rgba(7,42,55,.93),rgba(4,24,35,.96))!important;
+}
+.r03-header-copy h2{
+  font-size:22px!important;
+}
+.r03-header-copy .r03-subtitle{
+  font-size:10px!important;
+}
+
+/* One-line mission process */
+#r03IntegratedFlow{
+  margin:6px auto 14px!important;
+  padding:6px 9px!important;
+  display:flex!important;
+  flex-wrap:nowrap!important;
+  justify-content:center!important;
+  align-items:center!important;
+  gap:2px!important;
+  max-width:720px!important;
+  overflow:hidden!important;
+}
+#r03IntegratedFlow span{
+  padding:6px 11px!important;
+  font-size:8px!important;
+  white-space:nowrap!important;
+}
+
+/* Mission layout: current objective dominates */
+.mission-layout{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) 250px!important;
+  gap:14px!important;
+  align-items:start!important;
+}
+.stage{
+  min-height:560px!important;
+  padding:20px!important;
+  border-radius:18px!important;
+  background:linear-gradient(145deg,rgba(4,29,41,.97),rgba(4,20,30,.97))!important;
+  border:1px solid rgba(48,213,226,.24)!important;
+  box-shadow:0 18px 46px rgba(0,0,0,.26)!important;
+}
+.mission-side{
+  padding:16px!important;
+  border-radius:16px!important;
+  background:rgba(4,26,37,.94)!important;
+  border:1px solid rgba(50,208,222,.20)!important;
+}
+
+/* Current objective block */
+.mission-callout{
+  display:grid!important;
+  grid-template-columns:auto 1fr auto!important;
+  gap:12px!important;
+  align-items:center!important;
+  padding:14px 16px!important;
+  margin-bottom:18px!important;
+  border-radius:14px!important;
+  border:1px solid rgba(44,220,230,.20)!important;
+  background:linear-gradient(90deg,rgba(8,54,66,.55),rgba(5,31,42,.65))!important;
+}
+.mission-callout .call-icon{
+  width:42px!important;
+  height:42px!important;
+  display:grid!important;
+  place-items:center!important;
+  border-radius:50%!important;
+  background:rgba(45,220,230,.12)!important;
+  border:1px solid rgba(45,220,230,.20)!important;
+}
+.mission-callout h4{
+  margin:0 0 3px!important;
+  color:#50e1eb!important;
+  font-size:11px!important;
+  letter-spacing:.06em!important;
+}
+.mission-callout p{
+  margin:0!important;
+  color:#dcecf1!important;
+  font-size:13px!important;
+  line-height:1.45!important;
+}
+.call-step{
+  color:#f2cc4c!important;
+  font-size:10px!important;
+  font-weight:900!important;
+}
+
+/* Evidence visual cards */
+.evidence-grid{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:10px!important;
+  margin:14px 0!important;
+}
+.evidence-card{
+  min-height:190px!important;
+  padding:15px!important;
+  border-radius:14px!important;
+  background:linear-gradient(180deg,rgba(8,43,56,.90),rgba(4,25,35,.96))!important;
+  border:1px solid rgba(57,206,221,.20)!important;
+  transition:.2s ease!important;
+}
+.evidence-card:hover{
+  transform:translateY(-2px)!important;
+  border-color:rgba(53,226,237,.48)!important;
+}
+.evidence-card.opened{
+  border-color:rgba(92,242,183,.34)!important;
+  box-shadow:0 0 0 1px rgba(92,242,183,.05) inset!important;
+}
+.evidence-icon{
+  font-size:28px!important;
+  margin-bottom:8px!important;
+}
+
+/* Prediction panel */
+.r03-predict-card{
+  margin-top:16px!important;
+  padding:17px!important;
+  border-radius:15px!important;
+}
+.r03-predict-options{
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+}
+.r03-predict-card textarea{
+  min-height:96px!important;
+  background:#061923!important;
+  color:#f5fcff!important;
+}
+
+/* Footer = clear BACK/NEXT controls */
+.stage-footer{
+  display:flex!important;
+  justify-content:space-between!important;
+  align-items:center!important;
+  margin-top:20px!important;
+  padding-top:15px!important;
+  border-top:1px solid rgba(255,255,255,.06)!important;
+}
+.stage-footer .btn{
+  min-height:44px!important;
+}
+
+/* Environmental HUDs are smaller/supportive */
+.airport-cctv{
+  max-width:260px!important;
+}
+.flight-info{
+  transform:scale(.88)!important;
+  transform-origin:bottom left!important;
+}
+.airport-monitor{
+  transform:scale(.90)!important;
+  transform-origin:bottom right!important;
+}
+
+/* Sidebar stable / no own scroll */
+.sidebar{
+  overflow:hidden!important;
+  overflow-y:hidden!important;
+}
+.sidebar::-webkit-scrollbar{display:none!important}
+
+/* Hide student-facing legacy Passport/Teacher pages */
+#passport,#teacher{
+  display:none!important;
+}
+
+@media(max-width:1200px){
+  .evidence-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .mission-layout{grid-template-columns:1fr!important}
+  .mission-side{display:none!important}
+}
+</style>
+
+
+<style id="r03PortalZeroV450">
+/* Single flow only */
+.phase-roadmap,.objective-path,#phaseRoadmap,#objectivePath,#phaseStrip,#stepNav{display:none!important}
+
+/* Mission header */
+.r03-portal-header{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:16px!important;padding:14px 16px!important;margin-bottom:12px!important;background:linear-gradient(90deg,rgba(3,28,40,.97),rgba(5,49,62,.95))!important;border:1px solid rgba(48,217,231,.25)!important;border-radius:16px!important}
+.r03-portal-title h2{margin:5px 0 2px!important;color:#fff!important;font-size:22px!important}.r03-portal-title p{margin:0!important;font-size:11px!important}
+#r03IntegratedFlow{display:flex!important;flex-wrap:nowrap!important;gap:3px!important;padding:6px!important;border-radius:999px!important;background:#031923!important;border:1px solid rgba(55,213,228,.22)!important;overflow:hidden!important}
+#r03IntegratedFlow span{padding:6px 9px!important;border-radius:999px!important;font-size:8px!important;font-weight:900!important;color:#698592!important;white-space:nowrap!important}
+#r03IntegratedFlow span.active{background:#20d6e5!important;color:#04212c!important}#r03IntegratedFlow span.done{color:#5ee8b2!important}
+
+/* Opening alert */
+.r03-alert-hero{display:grid;grid-template-columns:56px 1fr 170px;gap:16px;align-items:center;padding:20px;border:1px solid rgba(255,73,87,.42);border-radius:18px;background:radial-gradient(circle at 12% 50%,rgba(255,41,61,.16),transparent 34%),linear-gradient(135deg,#071d29,#07131d);box-shadow:0 0 40px rgba(255,36,58,.08)}
+.r03-alert-pulse{width:50px;height:50px;display:grid;place-items:center;border-radius:50%;background:#ff334d;color:#fff;font-size:28px;font-weight:900;box-shadow:0 0 0 0 rgba(255,51,77,.45);animation:r03pulse 1.4s infinite}
+@keyframes r03pulse{70%{box-shadow:0 0 0 18px rgba(255,51,77,0)}100%{box-shadow:0 0 0 0 rgba(255,51,77,0)}}
+.r03-alert-hero h2{margin:4px 0;color:#fff}.r03-alert-hero p{margin:0;color:#c7dbe2}.r03-board-time{text-align:center;padding:12px;border-radius:13px;background:#071823;border:1px solid #1f5162}.r03-board-time small,.r03-board-time span{display:block;font-size:8px;color:#7899a4}.r03-board-time b{display:block;font-size:28px;color:#ffc62d}
+.r03-mission-question{margin-top:14px;padding:16px;border-radius:14px;background:#082431;border:1px solid rgba(51,211,225,.22)}.r03-mission-question small{color:#43dce7;font-weight:900}.r03-mission-question h3{margin:6px 0;color:#fff}
+
+/* Discover */
+.r03-discover-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+.r03-predict-card{border:1px solid rgba(255,198,45,.30)!important;background:linear-gradient(135deg,rgba(43,35,9,.38),rgba(4,24,34,.96))!important}
+
+/* Training */
+.r03-training-stage{min-height:330px!important;background:radial-gradient(circle at 50% 40%,rgba(41,216,232,.12),transparent 43%),#061822!important}.r03-training-stage .anim-icon{font-size:76px!important}.r03-animation-equation{margin:18px auto 0;max-width:620px;padding:12px 16px;border-radius:12px;border:1px solid rgba(54,220,230,.24);background:#04141d;color:#50dce8;font-weight:900;letter-spacing:.03em}
+
+/* Scanner */
+.r03-physics-note{margin-bottom:12px;padding:12px 14px;border-left:3px solid #37d9e6;background:rgba(5,43,56,.66);color:#cfe5ea;border-radius:8px}
+.r03-scanner-wow{gap:14px!important}.r03-bg-card{padding:14px;border-radius:13px;background:#061923;border:1px solid rgba(62,220,231,.22);text-align:center}.r03-bg-card small,.r03-bg-card span{display:block;color:#7899a4;font-size:8px}.r03-bg-card strong{display:block;color:#62f0b6;font-size:28px;margin:4px 0}
+.r03-mini-scan-table{margin-top:14px;border:1px solid rgba(57,205,220,.18);border-radius:13px;overflow:hidden}.r03-mini-scan-table>div{display:grid;grid-template-columns:70px 1fr 1fr 1fr;padding:8px 10px;background:#061923;border-bottom:1px solid rgba(255,255,255,.05)}.r03-mini-scan-table .head{color:#50dce8;font-size:8px;font-weight:900;background:#092b39}.r03-mini-scan-table b{color:#ffc62d}
+
+/* Evidence Wall */
+.r03-evidence-table{border:1px solid rgba(54,212,226,.22);border-radius:14px;overflow:hidden;margin:14px 0}.r03-evidence-table>div{display:grid;grid-template-columns:70px 100px 110px 110px minmax(220px,1fr);gap:8px;align-items:center;padding:11px 12px;background:#061923;border-bottom:1px solid rgba(255,255,255,.05)}.r03-evidence-table .thead{background:#0a3040;color:#4edeea;font-size:8px;font-weight:900}.r03-evidence-table .hot{background:linear-gradient(90deg,rgba(111,26,36,.32),#061923)}.r03-evidence-insight{display:flex;gap:12px;padding:13px;border-radius:12px;background:rgba(255,198,45,.08);border:1px solid rgba(255,198,45,.20)}.r03-evidence-insight b{color:#ffc62d}.r03-evidence-insight span{color:#d8e8ed}
+.r03-dark-field{display:block;margin-top:14px;color:#dff3f6;font-size:11px;font-weight:800}.r03-dark-field textarea{display:block;width:100%;box-sizing:border-box;margin-top:7px;padding:13px 14px;border-radius:12px;border:1px solid #235d70;background:#061923;color:#f5fcff;font-family:inherit;line-height:1.55}
+
+/* Debrief */
+.r03-debrief-question{display:flex;gap:12px;align-items:center;padding:14px;border-radius:14px;background:#092937;border:1px solid rgba(51,216,229,.20)}.r03-debrief-question b{color:#fff}.r03-debrief-question p{margin:4px 0 0;color:#b8d0d7}.r03-atom-review{display:grid;gap:10px}
+
+/* Secondary Alarm */
+.r03-secondary-alarm{display:grid;grid-template-columns:18px 1fr 150px;gap:15px;align-items:center;padding:16px 18px;border-radius:17px;background:linear-gradient(90deg,rgba(92,15,28,.66),rgba(16,24,33,.96));border:1px solid rgba(255,73,91,.48);box-shadow:0 0 36px rgba(255,38,60,.09)}.alarm-light{width:14px;height:14px;border-radius:50%;background:#ff304c;box-shadow:0 0 18px #ff304c;animation:r03blink .8s infinite}@keyframes r03blink{50%{opacity:.25}}.r03-secondary-alarm small{color:#ff8191;font-weight:900}.r03-secondary-alarm h2{margin:3px 0;color:#fff}.r03-secondary-alarm p{margin:0;color:#d8e8ed}.alarm-code{text-align:center;color:#ff7183;font-weight:900;border-left:1px solid rgba(255,255,255,.12)}
+.r03-before-after{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:10px;align-items:center;margin:14px 0}.r03-before-after>div{padding:13px;border-radius:13px;background:#071d28;border:1px solid rgba(55,207,221,.18);text-align:center}.r03-before-after small,.r03-before-after b,.r03-before-after span{display:block}.r03-before-after small{color:#7496a1;font-size:8px}.r03-before-after b{color:#fff;font-size:19px;margin:4px}.r03-before-after span{color:#9bb5bd;font-size:9px}.r03-before-after i{color:#ffc62d;font-size:20px}
+.r03-board-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.r03-decision-evidence{display:grid;gap:8px}.r03-decision-evidence button{display:flex;gap:9px;text-align:left;padding:11px 12px;border-radius:11px;border:1px solid #1f5364;background:#071d29;color:#dbeef2;cursor:pointer}.r03-decision-evidence button.active{border-color:#55e7b4;background:rgba(40,137,99,.17)}.r03-decision-evidence button span{color:#53e3b1;font-weight:900}.r03-security-choices{grid-template-columns:repeat(3,1fr)!important}.r03-security-choices .choice{min-height:82px!important}.r03-security-choices small{font-size:8px;color:#96b0b8}.r03-intercept-btn{width:100%;min-height:50px;margin-top:12px!important;background:linear-gradient(90deg,#ffad20,#ffd44d)!important;color:#111!important}
+
+/* Complete */
+.r03-secured-banner{padding:20px;border-radius:17px;background:radial-gradient(circle at 50% 0,rgba(63,241,178,.13),transparent 50%),#061923;border:1px solid rgba(84,235,180,.29)}.r03-secured-banner small{color:#57e7b4;font-weight:900}.r03-secured-banner h1{margin:6px 0;color:#fff;font-size:42px}.r03-secured-banner p{margin:0;color:#b9d2d8}.r03-before-after.final{max-width:850px;margin:18px auto}.r03-verify-stamp{max-width:440px;margin:18px auto;padding:16px;border-radius:14px;border:1px solid rgba(255,198,45,.33);color:#ffc62d;letter-spacing:.08em}.r03-verify-stamp b{color:#fff}
+
+/* Sidebar no internal scroll */
+.sidebar{overflow:hidden!important;overflow-y:hidden!important}.sidebar::-webkit-scrollbar{display:none!important}
+
+@media(max-width:1150px){.r03-portal-header{flex-direction:column!important;align-items:flex-start!important}.r03-discover-grid{grid-template-columns:repeat(2,1fr)!important}.r03-board-grid{grid-template-columns:1fr!important}.r03-before-after{grid-template-columns:1fr!important}.r03-before-after i{transform:rotate(90deg)}}
+</style>
+
+
+<style id="r03UxUnlockV451">
+/* Evidence synthesis */
+.r03-synthesis-panel{margin-top:16px;border:1px solid rgba(51,214,228,.25);border-radius:15px;background:linear-gradient(145deg,#061d29,#051722);overflow:hidden}
+.r03-synthesis-head{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.06);background:rgba(8,48,61,.45)}
+.r03-synthesis-head small{display:block;color:#48dce8;font-size:8px;font-weight:900;letter-spacing:.06em}.r03-synthesis-head h4{margin:3px 0 0;color:#fff;font-size:13px}.r03-synthesis-head span{color:#f2c94c;font-size:8px;font-weight:900}
+.r03-synthesis-panel textarea{display:block;width:100%;height:118px!important;min-height:118px!important;max-height:170px!important;box-sizing:border-box;padding:14px 16px;border:0;outline:none;resize:vertical;background:#051923;color:#f5fcff;font-family:inherit;font-size:14px;line-height:1.55}
+
+/* Inspector Atom Debrief — full width, no squeezed column */
+.r03-debrief-console,.r03-atom-console{width:100%;min-width:0;box-sizing:border-box}
+.r03-debrief-top,.r03-atom-console-head{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:14px;align-items:center;padding:14px;border-radius:15px;background:linear-gradient(90deg,rgba(7,43,55,.9),rgba(5,25,35,.96));border:1px solid rgba(52,215,228,.22)}
+.r03-atom-profile{display:flex;align-items:center;gap:12px;min-width:0}.r03-atom-profile .ai-avatar{flex:0 0 56px;width:56px;height:56px;display:grid;place-items:center;border-radius:14px;background:#0b3b4c;font-size:30px}.r03-atom-profile small{color:#48dce8;font-size:8px;font-weight:900}.r03-atom-profile h3{margin:3px 0;color:#fff;font-size:18px;line-height:1.25}.r03-atom-profile p{margin:4px 0 0;color:#bdd2d9;line-height:1.5}
+.r03-live-evidence{padding:12px;border-radius:12px;background:#061923;border:1px solid rgba(87,235,181,.22)}.r03-live-evidence small,.r03-live-evidence b,.r03-live-evidence span{display:block}.r03-live-evidence small{color:#5ee7b5;font-size:8px;font-weight:900}.r03-live-evidence b{color:#fff;font-size:20px;margin:4px 0}.r03-live-evidence span{color:#91adb6;font-size:9px}
+.r03-debrief-body{display:grid;grid-template-columns:300px minmax(0,1fr);gap:14px;margin-top:14px}.r03-user-evidence{padding:14px;border-radius:13px;background:#071d29;border:1px solid rgba(51,211,224,.18)}.r03-user-evidence small{color:#48dce8;font-size:8px;font-weight:900}.r03-user-evidence p{margin:7px 0 0;color:#dbecef;line-height:1.55;word-break:normal!important;overflow-wrap:break-word!important}
+.r03-debrief-answer{margin-top:0!important}.r03-debrief-answer textarea{min-height:150px!important}
+
+/* Final Atom console */
+.r03-atom-console-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr);gap:14px;margin-top:14px}.r03-atom-thread{min-height:240px;max-height:330px;overflow:auto;padding:12px;border-radius:13px;background:#061923;border:1px solid rgba(51,211,224,.18);display:grid;align-content:start;gap:9px}.r03-message{padding:11px 13px;border-radius:11px}.r03-message.atom{background:#0a3040;border-left:3px solid #45dce7}.r03-message.user{background:rgba(44,132,95,.16);border-left:3px solid #5de8b4}.r03-message b{font-size:8px;color:#52dce8}.r03-message p{margin:4px 0 0;color:#e3f0f3;line-height:1.5;word-break:normal!important;overflow-wrap:break-word!important}
+.r03-atom-evidence-panel{padding:14px;border-radius:13px;background:#071d29;border:1px solid rgba(51,211,224,.18)}.r03-atom-evidence-panel small{color:#48dce8;font-size:8px;font-weight:900}.r03-atom-evidence-panel p{color:#dbecef;line-height:1.55}.r03-atom-rule{margin-top:12px;padding:11px;border-radius:10px;background:rgba(255,198,45,.08);border:1px solid rgba(255,198,45,.18)}.r03-atom-rule b,.r03-atom-rule span{display:block}.r03-atom-rule b{color:#ffc62d;font-size:9px}.r03-atom-rule span{color:#d9e8ec;font-size:10px;margin-top:3px}
+.r03-chat-compose{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:8px;margin-top:12px}.r03-chat-compose input{min-width:0;padding:12px 13px;border-radius:11px;border:1px solid #235b6d;background:#061923;color:#fff}
+
+/* Emergency Intercept — full horizontal layout */
+.r03-emergency-intercept{display:grid;grid-template-columns:minmax(250px,.9fr) minmax(360px,1.4fr) 170px;gap:16px;align-items:center;padding:18px 20px;border-radius:18px;border:1px solid rgba(255,71,91,.48);background:linear-gradient(100deg,rgba(94,15,29,.72),rgba(19,21,30,.98));box-shadow:0 0 42px rgba(255,39,61,.10)}
+.r03-emergency-left{display:flex;align-items:center;gap:12px}.r03-emergency-left small{color:#ff7c8e;font-size:8px;font-weight:900;letter-spacing:.06em}.r03-emergency-left h2{margin:4px 0;color:#fff;font-size:24px}.r03-emergency-left p{margin:0;color:#d4e3e7;font-size:11px}
+.r03-route-visual{display:flex;align-items:center;justify-content:center;gap:10px}.route-node{min-width:92px;padding:12px 9px;text-align:center;border-radius:12px;background:#071d29;border:1px solid rgba(255,255,255,.10);font-size:28px}.route-node b{display:block;margin-top:4px;font-size:9px;color:#fff}.r03-route-visual i{color:#ffbf2f;font-size:23px}
+.r03-countdown{text-align:center;padding:13px;border-radius:13px;background:#180c13;border:1px solid rgba(255,72,91,.32)}.r03-countdown small,.r03-countdown b,.r03-countdown span{display:block}.r03-countdown small{color:#ff8998;font-size:8px}.r03-countdown b{font-size:34px;color:#fff;margin:3px 0}.r03-countdown span{color:#ff536b;font-size:10px;font-weight:900}
+
+/* Ensure main content isn't squeezed by side summary on explain/decide */
+#mission .mission-layout{grid-template-columns:minmax(0,1fr) 240px!important}
+#mission .stage{min-width:0!important;overflow:visible!important}
+#mission .mission-side{min-width:0!important}
+
+/* Completion */
+.r03-secured-complete .btn{margin:6px}
+
+/* Responsive */
+@media(max-width:1200px){
+ .r03-debrief-top,.r03-atom-console-head,.r03-debrief-body,.r03-atom-console-grid,.r03-emergency-intercept{grid-template-columns:1fr!important}
+ .r03-route-visual{justify-content:flex-start;overflow-x:auto}
+ #mission .mission-layout{grid-template-columns:1fr!important}
+ #mission .mission-side{display:none!important}
+}
+</style>
+
+</head>
+<body><div class="native-learning-spine" data-native-r="3">
+      <div class="native-spine-head"><div><small>NATIVE MISSION LEARNING FLOW</small><strong>R-03 • AIRPORT SECURITY</strong></div><p>ใช้ระยะทาง ค่าเครื่องตรวจ และหลักฐานสัมภาระเพื่อตัดสิน Allow / Deny</p></div>
+      <div class="native-spine-flow"><span>1<b>PREDICT</b></span><span>2<b>SCREENING EVIDENCE</b></span><span>3<b>DISTANCE / DETECTOR MODEL</b></span><span>4<b>SCANNER SIMULATION</b></span><span>5<b>GENERATE EVIDENCE</b></span><span>6<b>DECIDE</b></span><span>7<b>EXPLAIN</b></span><span>8<b>FINAL REPORT</b></span></div>
+    </div><div class="airport-plane">✈️</div><div class="alarm-light"></div><div class="runway-lights"></div>
+
+<div class="airport-sky"><i class="cloud c1"></i><i class="cloud c2"></i></div>
+<div class="terminal-glass"></div>
+<div class="lens-flare"></div>
+<div class="aircraft-large">✈️</div>
+<div class="baggage-cart">🚜🧳</div>
+<div class="security-car">🚓</div>
+<div class="walker w1">🚶</div><div class="walker w2">🧍‍♀️</div><div class="walker w3">🧑‍✈️</div>
+<div class="portal-world"></div>
+<button id="ambientToggle" class="ambient-toggle" onclick="toggleAmbient()">🔊 Airport Ambience</button>
+<div class="cctv">
+  <div class="cctv-head"><span id="cctvCam">CAM 03 • GATE B3</span><b>● LIVE</b></div>
+  <div class="cctv-view"></div>
+</div>
+<div class="flight-board">
+  <div class="flight-row"><b>TG421</b><span>KORAT → BKK</span><span class="hold">SCREENING</span></div>
+  <div class="flight-row"><b>FD318</b><span>KORAT → CNX</span><span class="ok">BOARDING</span></div>
+  <div class="flight-row"><b>WE122</b><span>KORAT → HKT</span><span class="ok">ON TIME</span></div>
+</div>
+
+<div class="world"><div id="worldPhoto" class="world-photo"></div><div class="grid"></div><div class="scan"></div><div class="radar"></div><i class="particle p1"></i><i class="particle p2"></i><i class="particle p3"></i><i class="particle p4"></i><div class="vignette"></div></div>
+<div class="hud"><div class="hud-row"><span>DOSE RATE</span><b id="liveDose">0.12 μSv/h</b></div><div class="hud-row"><span>CASE STATUS</span><b id="liveStatus">R-03 READY</b></div><div class="hud-row"><span>FLIGHT</span><b>TG421 • GATE B3</b></div></div>
+<div class="app">
+<aside class="sidebar">
+<div class="brand"><img src="../../assets/logo.png"><div><h1>Radiation Detective Agency</h1><small>RDA</small></div></div>
+<div class="nav">
+<button data-page="dashboard" class="active">🏢 Headquarters</button>
+<div class="section-title">📁 Operations</div>
+<button class="current-mission" data-page="mission">● R-03 Mission <small>Current</small></button>
+
+
+</div>
+<div class="side-card"><b>นักสืบเกศกร</b><div class="muted">Intermediate Detective</div><div class="xpbar"><span id="sideXpBar"></span></div><small id="sideXp">0 / 200 XP</small></div>
+</aside>
+<main class="main">
+
+<div class="topbar"><div class="r03-header-copy">
+  <div class="r03-kicker">R-03 • VERIFY</div>
+  <h2 id="pageTitle">AIRPORT SECURITY PROTOCOL</h2>
+  <div class="r03-subtitle">VERIFY THE SUSPICIOUS LUGGAGE</div>
+  <div class="muted">Korat International Airport • Radiation Security Terminal</div>
+</div><div class="status"><span class="pill">⭐⭐⭐ Intermediate</span><span class="pill">50 นาที</span><button class="btn btn-ghost rda-reset-control" onclick="resetGame()" aria-label="รีเซ็ตภารกิจ" title="รีเซ็ตภารกิจ">↻ รีเซ็ต</button></div></div>
+
+<section id="dashboard" class="page active">
+<div class="dashboard-hero">
+<div class="dashboard-copy"><span class="pill">RDA • CURRENT MISSION</span><h1>R-03 • VERIFY<br><span>AIRPORT SECURITY</span></h1><p>Radiation Portal Monitor ตรวจพบสัญญาณรังสีผิดปกติที่ Gate B3 คุณต้องตรวจสอบกระเป๋า 5 ใบ ใช้ข้อมูลจาก Detector และหลักฐานหลายแหล่ง เพื่อตัดสินใจว่า CLEAR • HOLD • DENY อย่างมีเหตุผล</p><div class="dashboard-actions"><button class="btn btn-primary" onclick="acceptMission()">▶ รับภารกิจ</button><button class="btn btn-secondary" onclick="toastMsg('เส้นทาง: Mission Brief → Evidence → Animation → Scanner Simulation → Polya → AI → Report')">ดูรายละเอียดภารกิจ</button></div><div class="quick-steps"><div><b>1</b><span>รับคดี<br><small>อ่านเหตุการณ์และเปิดหลักฐาน</small></span></div><div><b>2</b><span>สแกน<br><small>ตรวจสัมภาระ 5 ใบ</small></span></div><div><b>3</b><span>ตัดสินใจ<br><small>Allow หรือ Deny พร้อมเหตุผล</small></span></div></div></div>
+<div class="case-file"><div class="file-tag">R-03</div><div class="file-icon">✈️</div><div class="file-title">VERIFY THE<br>SUSPICIOUS LUGGAGE</div><div class="file-status">CURRENT MISSION</div></div>
+</div>
+<div class="card" style="margin-top:16px"><h3>Learning Outcomes</h3><div class="notice success">วิเคราะห์ข้อมูลจากเครื่องตรวจรังสี • อธิบายหลักการตรวจจับกัมมันตภาพรังสี • จำแนกชนิดรังสีจากหลักฐาน • ตัดสินใจโดยใช้ข้อมูลหลายแหล่ง</div></div>
+<div class="r03-operations card"><div class="r03-operations-head"><div><span class="pill">OPERATIONS</span><h2>เลือกภารกิจของคุณ</h2></div><div class="r03-stats"><div><small>Completed</small><b>2 / 6</b></div><div><small>Total XP</small><b id="r03TotalXp">300 / 500</b></div><div><small>Rank</small><b>Radiation Safety Officer</b></div></div></div><div class="r03-operation-grid"><article class="r03-operation-card completed"><span class="r03-status completed">COMPLETED</span><div class="r03-code">R-01</div><div class="r03-icon">☢️</div><h3>Nuclear Lab</h3><p>The Mystery Box</p><div class="r03-card-progress"><span style="width:100%"></span></div></article><article class="r03-operation-card completed"><span class="r03-status completed">COMPLETED</span><div class="r03-code">R-02</div><div class="r03-icon">🏥</div><h3>R-02 • PROTECT</h3><p>Protect the Medical Team</p><div class="r03-card-progress"><span style="width:100%"></span></div></article><article class="r03-operation-card current" onclick="acceptMission()"><span class="r03-status current">CURRENT MISSION</span><div class="r03-code">R-03</div><div class="r03-icon">✈️</div><h3>Airport Security</h3><p>Verify the Suspicious Luggage</p><div class="r03-card-progress"><span id="r03CardProgress"></span></div></article><article class="r03-operation-card locked"><span class="r03-status locked">LOCKED</span><div class="r03-code">R-04</div><div class="r03-icon">🥫</div><h3>Food Truth</h3><p>Food Irradiation</p></article><article class="r03-operation-card locked"><span class="r03-status locked">LOCKED</span><div class="r03-code">R-05</div><div class="r03-icon">🚨</div><h3>Emergency Response</h3><p>Radiation Incident</p></article><article class="r03-operation-card locked"><span class="r03-status locked">LOCKED</span><div class="r03-code">R-06</div><div class="r03-icon">🏛️</div><h3>Mission Phoenix</h3><p>Final Operation</p></article></div></div><div class="r03-dashboard-bottom"><section class="card r03-news"><span class="pill">RDA NEWS FEED</span><h2>ข่าวสารล่าสุด</h2><div class="r03-feed"><div><span>✈️</span><p>Radiation Portal ตรวจพบค่ารังสีผิดปกติที่ Gate B3</p><small>NEW</small></div><div><span>📟</span><p>Detector และฐานข้อมูล Nuclear Medicine พร้อมใช้งาน</p><small>NEW</small></div><div><span>🧳</span><p>สัมภาระ 5 ใบถูกส่งเข้าสู่พื้นที่ตรวจสอบพิเศษ</p><small>LIVE</small></div></div></section><section class="card r03-progress-card"><span class="pill">MISSION PROGRESS</span><div class="r03-progress-layout"><div id="r03Radial" class="r03-radial"><div><b id="r03DashPct">0%</b><small>R-03</small></div></div><div class="r03-progress-legend"><p><i class="done"></i> R-01 Completed</p><p><i class="done"></i> R-02 Completed</p><p><i class="current"></i> R-03 Current Mission</p><p><i class="locked"></i> R-04–R-06 Locked</p></div></div></section><section class="card r03-tip"><span class="pill">RDA TIP OF THE DAY</span><h2>ตรวจพบรังสี ไม่ได้แปลว่าเป็นวัตถุอันตรายเสมอไป</h2><p>ควรพิจารณาค่า CPM, Dose Rate, ระยะตรวจ แหล่งกำเนิด และเอกสารกำกับร่วมกัน ก่อนตัดสินใจ ALLOW, HOLD หรือ DENY</p><div class="r03-tip-tags"><span>TIME</span><span>DISTANCE</span><span>SHIELDING</span><span>DOCUMENTS</span></div></section></div>
+</section>
+
+<section id="mission" class="page">
+<div class="mission-shell">
+<div class="card mission-header r03-portal-header">
+      <div class="r03-portal-title">
+        <span class="pill">R-03 • VERIFY</span>
+        <h2>PORTAL ZERO • THE SUSPICIOUS LUGGAGE</h2>
+        <p class="muted">Airport Security Protocol • Detector + Background + Evidence → CLEAR • HOLD • DENY</p>
+      </div>
+      <div id="r03IntegratedFlow" class="r03-integrated-flow">
+        <span data-flow="discover">DISCOVER</span>
+        <span data-flow="predict">PREDICT</span>
+        <span data-flow="test">TEST</span>
+        <span data-flow="evidence">BUILD EVIDENCE</span>
+        <span data-flow="explain">EXPLAIN</span>
+        <span data-flow="decide">DECIDE</span>
+      </div>
+    </div>
+    <div class="mission-layout"><div id="stage" class="card stage"></div><aside class="card mission-side"><div class="muted">MISSION STATUS</div><div id="missionPct" class="side-progress">0%</div><div class="xpbar"><span id="missionBar"></span></div><div class="notice" style="margin-top:13px"><b>CURRENT OBJECTIVE:</b><div id="currentTask" class="muted">รับภารกิจ</div></div><div id="missionChecklist" class="side-list"></div></aside></div>
+</div>
+</section>
+<section id="passport" class="page"><div class="card" id="passportContent"></div></section>
+<section id="teacher" class="page"><div class="card" id="teacherContent"></div></section>
+</main>
+</div>
+<div id="toast" class="toast hidden"></div>
+<script src="script.js" defer></script>
+<script src="../../classroom-config.js"></script>
+<script src="../../shared/rda-classroom-backend.js"></script>
+<script src="../../shared/rda-master.js"></script>
+<script src="../../shared/rda-unlock-bridge.js"></script>
+<script src="../../shared/rda-story.js"></script>
+
+<!-- RDA CASE ARCHITECTURE V3 -->
+<div id="r03CaseLayer" class="rda-case-layer" aria-hidden="true"><div class="rda-case-shell">
+<header class="rda-case-head"><div><small>Radiation Detective Agency</small><h2>R-03 — AIRPORT SECURITY PROTOCOL</h2><p>MISSION QUESTION • จะใช้ Detector + Evidence เพื่อตัดสินใจ CLEAR • HOLD • DENY ได้อย่างไร?</p></div><button id="r03CaseClose">×</button></header>
+<div class="rda-case-progress"><span data-step="1">1 PREDICTION</span><span data-step="2">2 SIMULATION</span><span data-step="3">3 EVIDENCE</span><span data-step="4">4 REASONING</span><span data-step="5">5 RISK</span><span data-step="6">6 DECISION</span><span data-step="7">7 FEEDBACK</span><span data-step="8">8 REVISION</span></div>
+<section data-rda-case="r03" data-case-step="1"><small>MISCONCEPTION TRAP</small><h3>Prediction ก่อนเห็นหลักฐาน</h3><p class="rda-prompt">“ถ้าอยู่ห่างจากแหล่งกำเนิดมากพอ เวลาที่อยู่ในพื้นที่จะไม่สำคัญ”</p><div class="rda-row"><button data-predict="agree">เห็นด้วย</button><button data-predict="disagree">ไม่เห็นด้วย</button><button data-predict="unsure">ไม่แน่ใจ</button></div><label>เหตุผลเบื้องต้น<textarea id="r03PredictionReason"></textarea></label><div class="rda-confidence"><b>CONFIDENCE BEFORE</b><input id="r03ConfidenceBefore" type="range" min="1" max="5" value="3"><output id="r03ConfidenceBeforeOut">3/5</output></div><button class="rda-primary" id="r03SavePrediction">LOCK PREDICTION → INVESTIGATE</button></section>
+<section data-rda-case="r03" data-case-step="2" hidden><small>INVESTIGATION</small><h3>Simulation = Evidence Generator</h3><p>ทดลองเปลี่ยนระยะทางและเวลาสัมผัส แล้ว Capture ค่าที่สัมพันธ์กับ exposure</p><div class="rda-row"><button id="r03BackToMission">↗ OPEN LIVE SIMULATION</button><button id="r03CaptureEvidence">＋ CAPTURE EVIDENCE</button></div><div id="r03CaptureForm" class="rda-capture" hidden><label>สิ่งที่ทดลอง/แหล่งข้อมูล<input id="r03EvidenceTest" placeholder="เช่น Distance 1 m → 2 m / Time 2 → 10 min"></label><label>ผลที่สังเกต<input id="r03EvidenceObservation" placeholder="เช่น เมื่อระยะเพิ่ม อัตราการตรวจวัดลดลง"></label><label>ค่าหรือข้อมูลสำคัญ<input id="r03EvidenceValue" placeholder="เช่น 400 → 100 units"></label><button class="rda-primary" id="r03SaveEvidence">SAVE TO EVIDENCE BOARD</button></div><div id="r03MiniEvidence"></div><button class="rda-primary" id="r03ToEvidence">EVIDENCE BOARD →</button></section>
+<section data-rda-case="r03" data-case-step="3" hidden><small>EVIDENCE BOARD</small><h3>เลือกหลักฐานที่จะใช้สนับสนุนการตัดสินใจ</h3><p>เลือกอย่างน้อย 2 รายการ เลือกหลักฐานที่จะใช้สร้าง Claim และอธิบายด้วยหลักฟิสิกส์ในขั้น Reasoning</p><div id="r03EvidenceBoard" class="rda-evidence-board"></div><button class="rda-primary" id="r03ToDecision">CONTINUE → REASONING</button></section>
+
+<section data-rda-case="r03" data-case-step="4" hidden>
+  <small>PHYSICS REASONING</small>
+  <h3>สร้าง Claim แล้วเชื่อม Evidence ด้วยหลักฟิสิกส์</h3>
+  <p>ขั้นนี้ยังไม่ตัดสินใจ ให้ตอบก่อนว่า “หลักฐานบอกอะไร” และ “หลักฟิสิกส์อธิบายหลักฐานนั้นอย่างไร”</p>
+  <label>CLAIM<textarea id="r03Claim"></textarea></label>
+  <label>SELECTED EVIDENCE<textarea id="r03EvidenceText" readonly></textarea></label>
+  <label>PHYSICS REASONING<textarea id="r03Reasoning" placeholder="เชื่อมหลัก distance–intensity และเวลาที่ได้รับรังสีกับ Evidence..."></textarea></label>
+  <button class="rda-primary" id="r03ToRisk">REASONING COMPLETE → ASSESS RISK</button>
+</section>
+
+<section data-rda-case="r03" data-case-step="5" hidden>
+  <small>RISK ASSESSMENT</small>
+  <h3>หลักฐานชุดนี้บอกถึงความเสี่ยงระดับใด?</h3>
+  <p>เลือกระดับ Risk หลังจากพิจารณา Evidence และ Physics Reasoning แล้ว</p>
+  <div class="rda-row">
+    <button data-risk="LOW">🟢 LOW</button>
+    <button data-risk="MODERATE">🟡 MODERATE</button>
+    <button data-risk="HIGH">🟠 HIGH</button>
+    <button data-risk="CRITICAL">🔴 CRITICAL</button>
+  </div>
+  <button class="rda-primary" id="r03ToDecisionFinal">RISK ASSESSED → MAKE DECISION</button>
+</section>
+
+<section data-rda-case="r03" data-case-step="6" hidden>
+  <small>FINAL DECISION</small>
+  <h3>ตัดสินใจจาก Evidence + Physics Reasoning + Risk</h3>
+  <label>DECISION<textarea id="r03Decision" placeholder="กำหนดระยะปลอดภัย/เวลาปฏิบัติงาน/มาตรการลด exposure..."></textarea></label>
+  <div class="rda-confidence">
+    <b>CONFIDENCE AFTER</b>
+    <input id="r03ConfidenceAfter" type="range" min="1" max="5" value="3">
+    <output id="r03ConfidenceAfterOut">3/5</output>
+  </div>
+  <button class="rda-primary" id="r03SubmitInitial">SUBMIT INITIAL DECISION</button>
+</section>
+
+<section data-rda-case="r03" data-case-step="7" hidden>
+  <small>DIAGNOSTIC FEEDBACK</small>
+  <h3>ตรวจคุณภาพการให้เหตุผลก่อนแก้ไข</h3>
+  <div id="r03FeedbackBox" class="rda-feedback"></div>
+  <button class="rda-primary" id="r03ToRevision">REVIEW FEEDBACK → REVISION</button>
+</section>
+
+<section data-rda-case="r03" data-case-step="8" hidden>
+  <small>REVISION 01</small>
+  <h3>ปรับเหตุผลและการตัดสินใจจาก Feedback</h3>
+  <p>ระบบเก็บ Initial → Revision เพื่อแสดงพัฒนาการของการให้เหตุผลเชิงหลักฐาน</p>
+  <label>REVISED PHYSICS REASONING<textarea id="r03RevisedReasoning"></textarea></label>
+  <label>REVISED DECISION<textarea id="r03RevisedDecision"></textarea></label>
+  <button class="rda-primary" id="r03SubmitRevision">SUBMIT REVISION & CLOSE CASE</button>
+  <div id="r03RubricResult" class="rda-rubric-result"></div>
+</section>
+</div></div><button id="r03CaseButton" class="rda-case-button">☢ START CASE</button>
+
+<style id="rdaCaseArchitectureStyles">
+.rda-case-button{position:fixed;left:14px;bottom:58px;z-index:99998;border:1px solid #f4c430;border-radius:999px;padding:9px 14px;background:#061722;color:#ffe17d;font:800 11px system-ui;cursor:pointer;box-shadow:0 0 20px rgba(244,196,48,.18)}.rda-case-layer{position:fixed;inset:0;z-index:100100;display:none;align-items:center;justify-content:center;padding:14px;background:rgba(0,7,12,.91);backdrop-filter:blur(10px)}.rda-case-layer.open{display:flex}.rda-case-shell{width:min(1000px,97vw);max-height:94vh;overflow:auto;border:1px solid rgba(45,226,230,.4);border-radius:20px;background:#061722;padding:18px;color:#dcecf2;font-family:system-ui;box-shadow:0 0 60px rgba(45,226,230,.12)}.rda-case-head{display:flex;justify-content:space-between;gap:10px}.rda-case-head small,[data-rda-case]>small{color:#2de2e6;font-weight:900;letter-spacing:1.4px}.rda-case-head h2{margin:3px 0;color:#fff}.rda-case-head p{margin:0;color:#9bb1ba}.rda-case-head button{border:0;background:none;color:white;font-size:26px;cursor:pointer}.rda-case-progress{display:grid;grid-template-columns:repeat(8,1fr);gap:5px;margin:15px 0}.rda-case-progress span{padding:8px;text-align:center;border-radius:8px;background:#0a2633;color:#78929d;font-size:8px;font-weight:800}.rda-case-progress span.active{color:#fff;border:1px solid #2de2e6}[data-rda-case]{padding:13px;border:1px solid rgba(255,255,255,.08);border-radius:14px;background:rgba(255,255,255,.02)}[data-rda-case] h3{color:#fff}.rda-prompt{padding:12px;border-left:3px solid #f4c430;background:rgba(244,196,48,.05)}.rda-row{display:flex;gap:7px;flex-wrap:wrap;margin:9px 0}.rda-row button{border:1px solid rgba(45,226,230,.2);border-radius:9px;padding:8px 11px;background:#08222e;color:#dff;cursor:pointer}.rda-row button.selected{border-color:#f4c430;color:#ffe17d}[data-rda-case] label{display:grid;gap:5px;margin:9px 0;font-size:10px;font-weight:800}[data-rda-case] textarea,[data-rda-case] input{box-sizing:border-box;width:100%;border:1px solid rgba(45,226,230,.18);border-radius:9px;background:#03111a;color:#eefcff;padding:9px}[data-rda-case] textarea{min-height:75px}.rda-primary{border:1px solid #2de2e6;border-radius:9px;padding:10px 14px;background:#0b3543;color:#dfffff;font-weight:900;cursor:pointer}.rda-confidence{display:flex;gap:10px;align-items:center;margin:10px 0}.rda-confidence input{flex:1}.rda-evidence-board{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}.rda-evidence-card{display:grid;gap:3px;padding:11px;border:1px solid rgba(45,226,230,.16);border-radius:11px;background:#061b25;cursor:pointer}.rda-evidence-card.selected{border-color:#f4c430;background:rgba(244,196,48,.05)}.rda-evidence-card small{color:#2de2e6}.rda-evidence-card em{color:#ffe17d}.rda-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.rda-feedback div{padding:9px;margin:5px 0;border-left:3px solid #f4c430;background:rgba(244,196,48,.05)}.rda-rubric-result{display:flex;gap:12px;align-items:center;margin-top:12px;padding:12px;border:1px solid rgba(45,226,230,.2);border-radius:12px}.rda-rubric-result b{font-size:25px;color:#2de2e6}@media(max-width:700px){.rda-case-progress,.rda-evidence-board,.rda-grid{grid-template-columns:1fr}.rda-case-shell{max-height:96vh;padding:12px}}
+</style>
+<script id="r03CaseArchitectureScript">
+(()=>{const MID='r03',KEY='RDA_R03_CASE_V3',DK='RDA_DECISION_R03',NK='rdkR03Standalone',$=id=>document.getElementById(id),I=s=>MID+s,read=k=>{try{return JSON.parse(localStorage.getItem(k)||'{}')}catch(e){return{}}},save=(k,v)=>localStorage.setItem(k,JSON.stringify(v));const st=Object.assign({step:1,prediction:'',predictionReason:'',confidenceBefore:3,evidence:[],selected:[],claim:'',reasoning:'',risk:'',decision:'',confidenceAfter:3,initialScore:0,revisedReasoning:'',revisedDecision:'',revisedScore:0,feedback:[]},read(KEY));
+// Migrate legacy Decision Quality scores from /20 to the unified /100 scale without touching Google Sheets.
+if(st.rubricMaxScore!==100){if(Number(st.initialScore)>0&&Number(st.initialScore)<=20)st.initialScore=Number(st.initialScore)*5;if(Number(st.revisedScore)>0&&Number(st.revisedScore)<=20)st.revisedScore=Number(st.revisedScore)*5;st.rubricMaxScore=100;}
+const persist=()=>save(KEY,st),esc=s=>String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));function show(n){st.step=n;persist();try{window.RDAMaster&&window.RDAMaster.pulse('r03',n,8)}catch(e){}document.querySelectorAll(`[data-rda-case="${MID}"][data-case-step]`).forEach(x=>x.hidden=+x.dataset.caseStep!==n);$(MID+'CaseLayer').querySelectorAll('.rda-case-progress span').forEach(x=>x.classList.toggle('active',+x.dataset.step===n));const b=$(MID+'CaseButton');if(b)b.textContent=n===1?'☢ START CASE':'☢ CONTINUE CASE • '+['','PREDICTION','SIMULATION','EVIDENCE','REASONING','RISK','DECISION','FEEDBACK','REVISION'][n]}function open(){$(MID+'CaseLayer').classList.add('open');render();show(st.step||1)}function close(){$(MID+'CaseLayer').classList.remove('open')}function et(){return st.evidence.filter(e=>st.selected.includes(e.id)).map((e,i)=>`E${i+1}: ${e.test} — ${e.observation}${e.value?' ('+e.value+')':''}`).join('\n')}function re(){let b=$(MID+'EvidenceBoard');b.innerHTML=st.evidence.map((e,i)=>`<label class="rda-evidence-card ${st.selected.includes(e.id)?'selected':''}"><input type="checkbox" data-eid="${e.id}" ${st.selected.includes(e.id)?'checked':''}><small>EVIDENCE #R03-${String(i+1).padStart(2,'0')}</small><b>${esc(e.test)}</b><span>${esc(e.observation)}</span><em>${esc(e.value)}</em></label>`).join('')||'<p>ยังไม่มี Evidence — กลับไปทดลองและ Capture ก่อน</p>';b.querySelectorAll('[data-eid]').forEach(c=>c.onchange=()=>{c.checked?(!st.selected.includes(c.dataset.eid)&&st.selected.push(c.dataset.eid)):st.selected=st.selected.filter(x=>x!==c.dataset.eid);persist();re()})}function score(r,d){return window.RDARubricV2.evaluate({caseId:'r03',claim:st.claim,evidenceText:et(),selectedEvidence:st.selected,reasoning:r,risk:st.risk,decision:d})}function fb(sc){return sc.feedback||[]}function sync(r,d){save(DK,{claim:st.claim,evidence:et(),reasoning:r,risk:st.risk,decision:d,confidence:st.confidenceAfter,evidenceIds:st.selected,initialScore:st.initialScore,revisedScore:st.revisedScore,rubricEngine:'RDA_RULE_BASED_V2_100',rubricMaxScore:100,updatedAt:new Date().toISOString()})}function render(){document.querySelectorAll(`#${MID}CaseLayer [data-predict]`).forEach(b=>b.classList.toggle('selected',b.dataset.predict===st.prediction));document.querySelectorAll(`#${MID}CaseLayer [data-risk]`).forEach(b=>b.classList.toggle('selected',b.dataset.risk===st.risk));$(I('PredictionReason')).value=st.predictionReason;$(I('ConfidenceBefore')).value=st.confidenceBefore;$(I('ConfidenceBeforeOut')).value=st.confidenceBefore+'/5';$(I('ConfidenceAfter')).value=st.confidenceAfter;$(I('ConfidenceAfterOut')).value=st.confidenceAfter+'/5';$(I('Claim')).value=st.claim;$(I('Reasoning')).value=st.reasoning;$(I('Decision')).value=st.decision;$(I('RevisedReasoning')).value=st.revisedReasoning||st.reasoning;$(I('RevisedDecision')).value=st.revisedDecision||st.decision;$(I('EvidenceText')).value=et();$(I('FeedbackBox')).innerHTML=st.feedback.map(x=>`<div>${esc(x)}</div>`).join('');if(st.revisedScore)$(I('RubricResult')).innerHTML=`<small>DECISION QUALITY</small><b>${st.revisedScore}/100</b><span>Initial ${st.initialScore}/100 → Revision ${st.revisedScore}/100</span>`;re()}document.addEventListener('DOMContentLoaded',()=>{$(MID+'CaseButton').onclick=open;$(MID+'CaseClose').onclick=close;document.querySelectorAll(`#${MID}CaseLayer [data-predict]`).forEach(b=>b.onclick=()=>{st.prediction=b.dataset.predict;persist();render()});document.querySelectorAll(`#${MID}CaseLayer [data-risk]`).forEach(b=>b.onclick=()=>{st.risk=b.dataset.risk;persist();render()});$(I('ConfidenceBefore')).oninput=e=>{st.confidenceBefore=+e.target.value;$(I('ConfidenceBeforeOut')).value=st.confidenceBefore+'/5';persist()};$(I('ConfidenceAfter')).oninput=e=>{st.confidenceAfter=+e.target.value;$(I('ConfidenceAfterOut')).value=st.confidenceAfter+'/5';persist()};$(I('SavePrediction')).onclick=()=>{st.predictionReason=$(I('PredictionReason')).value.trim();if(!st.prediction||st.predictionReason.length<10)return alert('เลือก Prediction และอธิบายเหตุผลก่อน');persist();show(2)};$(I('BackToMission')).onclick=()=>{close();state.step=3;save();showPage('mission');renderMission();setTimeout(()=>{const el=document.getElementById('stage');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},80)};$(I('CaptureEvidence')).onclick=()=>$(I('CaptureForm')).hidden=!$(I('CaptureForm')).hidden;$(I('SaveEvidence')).onclick=()=>{let t=$(I('EvidenceTest')).value.trim(),o=$(I('EvidenceObservation')).value.trim(),v=$(I('EvidenceValue')).value.trim();if(t.length<2||o.length<5)return alert('กรอกสิ่งที่ทดลอง/แหล่งข้อมูล และผลที่สังเกต');st.evidence.push({id:'e'+Date.now(),test:t,observation:o,value:v});persist();$(I('CaptureForm')).hidden=true;re()};$(I('ToEvidence')).onclick=()=>{if(st.evidence.length<2)return alert('Capture Evidence อย่างน้อย 2 รายการ');show(3)};$(I('ToDecision')).onclick=()=>{if(st.selected.length<2)return alert('เลือก Evidence อย่างน้อย 2 รายการ');$(I('EvidenceText')).value=et();show(4)};$(I('ToRisk')).onclick=()=>{
+ st.claim=$(I('Claim')).value.trim();st.reasoning=$(I('Reasoning')).value.trim();
+ if(st.claim.length<8||st.reasoning.length<15)return alert('กรอก Claim และ Physics Reasoning ให้ครบก่อนประเมิน Risk');
+ persist();show(5)
+};
+$(I('ToDecisionFinal')).onclick=()=>{
+ if(!st.risk)return alert('เลือกระดับ Risk จากหลักฐานก่อนตัดสินใจ');
+ persist();show(6)
+};
+$(I('ToRevision')).onclick=()=>show(8);
+$(I('SubmitInitial')).onclick=()=>{st.claim=$(I('Claim')).value.trim();st.reasoning=$(I('Reasoning')).value.trim();st.decision=$(I('Decision')).value.trim();if(st.claim.length<8||st.reasoning.length<15||st.decision.length<10||!st.risk)return alert('กรอก Claim, Reasoning, Risk, Decision ให้ครบ');let sc=score(st.reasoning,st.decision);st.initialScore=sc.total;st.feedback=fb(sc);st.revisedReasoning=st.reasoning;st.revisedDecision=st.decision;persist();sync(st.reasoning,st.decision);render();show(7)};$(I('SubmitRevision')).onclick=()=>{st.revisedReasoning=$(I('RevisedReasoning')).value.trim();st.revisedDecision=$(I('RevisedDecision')).value.trim();let sc=score(st.revisedReasoning,st.revisedDecision);st.revisedScore=sc.total;persist();sync(st.revisedReasoning,st.revisedDecision);
+     try{
+      const __decision=read(DK);
+      __decision.revisionSubmitted=true;
+      __decision.revisedScore=st.revisedScore;
+      __decision.updatedAt=new Date().toISOString();
+      save(DK,__decision);
+     }catch(e){}
+     render();
+     try{
+      const __native=read(NK);
+      __native.completed=true;
+      __native.evaluated=true;
+      __native.caseWorkflowCompleted=true;
+      __native.caseWorkflowScore=st.revisedScore;
+      __native.updatedAt=new Date().toISOString();
+      save(NK,__native);
+     }catch(e){}
+     if(window.RDAMaster?.completeCaseAndReturn){
+      alert('CASE CLOSED ✓ — R-03\\nNEXT CASE UNLOCK SIGNAL SENT\\nกำลังกลับ Headquarters...');
+      setTimeout(()=>(()=>{
+       try{
+        localStorage.setItem('RDA_CASE_COMPLETE_R03','1');
+        localStorage.setItem('RDA_LAST_COMPLETED_CASE','r03');
+       }catch(e){}
+       window.RDAMaster.completeCaseAndReturn('r03',st.revisedScore);
+      })(),500);
+      return;
+     }
+     let native=read(NK),done=!!(native.completed||native.evaluated);if(sc.total>=60&&done)alert(`R-03 DECISION VERIFIED ✓\nกลับ Headquarters เพื่อดำเนินคดีถัดไป`);else if(sc.total>=60)alert(`Decision Record ผ่านแล้ว ✓\nแต่ต้องทำภารกิจหลัก R-03 ให้สำเร็จก่อน`);else alert('Decision Quality ยังต่ำกว่า 60/100 — ปรับ Revision อีกครั้ง');window.RDAMaster?.patch?.()};render()});window['RDA_R03_CASE']={open,read:()=>read(KEY)}})();
+</script>
+
+<style id="r03UnifiedWorkflowStyles">
+#r03CaseButton{
+  left:50%!important;right:auto!important;bottom:14px!important;
+  transform:translateX(-50%)!important;
+  min-width:190px!important;
+  border-color:#2de2e6!important;color:#dfffff!important;
+  box-shadow:0 0 22px rgba(45,226,230,.20)!important;
+}
+#r03CaseLayer .rda-case-progress{
+  grid-template-columns:repeat(8,minmax(0,1fr))!important;
+}
+#r03CaseLayer [data-case-step]{animation:rdaUnifiedStepIn .25s ease}
+@keyframes rdaUnifiedStepIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+@media(max-width:760px){
+  #r03CaseLayer .rda-case-progress{
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  }
+  #r03CaseButton{width:auto!important;min-width:170px!important;left:50%!important;right:auto!important}
+}
+</style>
+</body>
+</html>
+<style>#r03CaseLayer,#r03CaseButton{display:none!important;visibility:hidden!important;pointer-events:none!important}</style>
+
+<style>#r03CaseLayer,#r03CaseButton{display:none!important;visibility:hidden!important;pointer-events:none!important}</style>

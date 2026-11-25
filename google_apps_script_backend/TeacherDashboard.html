@@ -1,0 +1,448 @@
+<!doctype html>
+<html><head><meta charset="UTF-8"><base target="_top"><meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+:root{--bg:#02080d;--panel:#071b25;--cyan:#2de2e6;--gold:#ffd23f;--green:#39df8f;--muted:#98acb5}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#0c2835,#02080d 55%);color:#edfaff;font-family:Arial,sans-serif;padding:18px}
+.wrap{max-width:1300px;margin:auto}.head{display:flex;justify-content:space-between;gap:12px;align-items:center}.head h1{margin:2px 0}.head small{color:var(--cyan);letter-spacing:.14em}
+.login,.panel,.stat{background:rgba(7,27,37,.95);border:1px solid #174c5b;border-radius:16px;padding:15px}
+.login{max-width:430px;margin:12vh auto;text-align:center}.login input{width:100%;padding:12px;margin:10px 0;border-radius:10px;border:1px solid #28536a;background:#03131b;color:white}
+button{border:1px solid var(--cyan);background:#0a3341;color:#dfffff;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}.stat{text-align:center}.stat b{display:block;font-size:28px}.stat small{color:var(--muted)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.panel h2{font-size:15px;margin-top:0}
+.caseRow{display:grid;grid-template-columns:55px 1fr 60px;gap:8px;align-items:center;margin:9px 0}.bar{height:8px;background:#122f39;border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--cyan),var(--gold))}
+table{width:100%;border-collapse:collapse;font-size:12px}th,td{padding:8px;border-bottom:1px solid #163944;text-align:left}th{color:#b6edf0}.scroll{overflow:auto}
+.hidden{display:none!important}.error{color:#ff7d87;min-height:20px}@media(max-width:800px){.stats{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}.head{align-items:flex-start;flex-direction:column}}
+.badge{display:inline-block;padding:3px 9px;border-radius:99px;font-size:10px;font-weight:800;letter-spacing:.03em}
+.badge.ok{background:rgba(57,223,143,.15);color:var(--green);border:1px solid rgba(57,223,143,.4)}
+.badge.over{background:rgba(255,125,135,.15);color:#ff7d87;border:1px solid rgba(255,125,135,.4)}
+.badge.under{background:rgba(255,210,63,.15);color:var(--gold);border:1px solid rgba(255,210,63,.4)}
+.eff{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+.eff .box{padding:12px;border-radius:12px;background:rgba(255,255,255,.03);border:1px solid #174c5b;text-align:center}
+.eff .box b{display:block;font-size:26px}.eff .box small{color:var(--muted)}
+.calibar{display:flex;gap:2px;height:10px;border-radius:99px;overflow:hidden;background:#122f39;width:120px}
+.calibar i{display:block;height:100%}
+.exportBtn{margin-top:10px}
+</style></head><body>
+<div id="login" class="login"><div style="font-size:44px">🔒</div><small>RDA TEACHER SYSTEM</small><h2>Teacher Command Center</h2><p>ใส่ Teacher PIN เพื่อดูข้อมูลนักเรียนทั้งห้อง</p><input id="pin" type="password" placeholder="Teacher PIN"><button onclick="load()">UNLOCK DASHBOARD</button><div id="err" class="error"></div></div>
+<div id="app" class="wrap hidden">
+ <div class="head"><div><small>RDA CLASSROOM ANALYTICS</small><h1>TEACHER COMMAND CENTER</h1></div><button onclick="load()">↻ REFRESH</button></div>
+ <div class="stats"><div class="stat"><small>STUDENTS</small><b id="students">0</b></div><div class="stat"><small>PRE AVG</small><b id="pre">0</b></div><div class="stat"><small>POST AVG</small><b id="post">0</b></div><div class="stat"><small>GAIN</small><b id="gain">0</b></div></div>
+ <div class="grid"><section class="panel"><h2>EVIDENCE-BASED DECISION DEVELOPMENT • R-01 → R-06</h2><div id="cases"></div></section><section class="panel"><h2>CLASS STATUS</h2><div id="status"></div></section></div>
+ <section class="panel" style="margin-top:12px">
+  <h2>ประสิทธิภาพ 80/80 (E1/E2 EFFICIENCY)</h2>
+  <div class="eff">
+   <div class="box"><small>E1 • ค่าเฉลี่ยระหว่างเรียน (Process, R01–R06)</small><b id="e1">0%</b></div>
+   <div class="box"><small>E2 • ค่าเฉลี่ยหลังเรียน (Post-test)</small><b id="e2">0%</b></div>
+  </div>
+  <p id="effVerdict" style="color:var(--muted);font-size:12px;margin:0"></p>
+ </section>
+ <section class="panel" style="margin-top:12px">
+  <h2>พัฒนาการความสามารถในการตัดสินใจเชิงหลักฐาน • R-01 → R-06</h2>
+  <p style="color:var(--muted);font-size:11px;margin-top:0">ใช้ InitialScore ของแต่ละภารกิจ ซึ่งเกิดก่อน feedback/revision เป็นตัวชี้วัดหลัก และแปลงเป็นสเกล 0–100 เดียวกัน ข้อมูลนี้ใช้ศึกษาพัฒนาการตามลำดับภารกิจ ไม่ตีความ R01/R06 เป็น Pre-test/Post-test</p>
+  <div class="scroll"><table><thead><tr>
+   <th>Case</th><th>N</th><th>Mean %</th><th>SD</th><th></th>
+  </tr></thead><tbody id="trendRows"></tbody></table></div>
+  <div class="eff" style="grid-template-columns:1fr 1fr 1fr;margin-top:14px">
+   <div class="box"><small>ภาพรวมทุกภารกิจ (Mean % all)</small><b id="trendOverall">-</b></div>
+   <div class="box"><small>ช่วงต้น R01–R03 (Mean %)</small><b id="trendEarly">-</b></div>
+   <div class="box"><small>ช่วงปลาย R04–R06 (Mean %)</small><b id="trendLate">-</b></div>
+  </div>
+  <p id="trendVerdict" style="color:var(--muted);font-size:12px;margin:10px 0 0"></p>
+  <button class="exportBtn" onclick="exportTrendCSV()">⬇ EXPORT TREND SUMMARY CSV (บทที่ 4)</button>
+ </section>
+ <section class="panel" style="margin-top:12px">
+  <h2>RESPONSE TO FEEDBACK • REVISION GAIN</h2>
+  <p style="color:var(--muted);font-size:11px;margin-top:0">แยกผลของ feedback ออกจากความสามารถหลัก: Revision Gain = RevisedScore − InitialScore แสดงการปรับปรุงหลังได้รับ feedback/revision และไม่ถูกนำไปแทน InitialScore ใน Objective 3</p>
+  <div class="scroll"><table><thead><tr>
+   <th>Case</th><th>N paired</th><th>Initial Mean</th><th>Revised Mean</th><th>Revision Gain</th>
+  </tr></thead><tbody id="revisionRows"></tbody></table></div>
+  <button class="exportBtn" onclick="exportRevisionCSV()">⬇ EXPORT REVISION GAIN CSV</button>
+ </section>
+ <section class="panel" style="margin-top:12px">
+  <h2>CONFIDENCE–ACCURACY CALIBRATION • R-01 → R-06</h2>
+  <p style="color:var(--muted);font-size:11px;margin-top:0">เทียบความมั่นใจของนักเรียนกับ Initial Decision Quality (ก่อน feedback/revision) เพื่อไม่ให้คะแนนหลัง scaffolding ปะปนกับความสามารถอิสระ ส่วนนี้เป็น Learning Analytics ไม่ใช่คะแนนวัตถุประสงค์หลัก</p>
+  <div class="scroll"><table><thead><tr>
+   <th>Case</th><th>N</th><th>Conf. Before</th><th>Conf. After</th><th>Accuracy</th><th>Gap</th><th>ระดับ</th>
+  </tr></thead><tbody id="calibRows"></tbody></table></div>
+  <button class="exportBtn" onclick="exportCalibrationCSV()">⬇ EXPORT CALIBRATION CSV (บทที่ 4)</button>
+ </section>
+ <section class="panel" style="margin-top:12px">
+  <h2>ความพึงพอใจของนักเรียน (SATISFACTION SURVEY)</h2>
+  <p style="color:var(--muted);font-size:11px;margin-top:0">มาตรวัด Likert 5 ระดับ (1=ไม่เห็นด้วยอย่างยิ่ง, 5=เห็นด้วยอย่างยิ่ง) เก็บหลังนักเรียนทำ Post-test เสร็จ</p>
+  <div class="eff" style="grid-template-columns:1fr 1fr">
+   <div class="box"><small>จำนวนที่ตอบแบบสอบถาม</small><b id="satN">0</b></div>
+   <div class="box"><small>ค่าเฉลี่ยรวมทุกข้อ (จาก 5)</small><b id="satOverallMean">-</b></div>
+  </div>
+  <div class="scroll" style="margin-top:12px"><table><thead><tr>
+   <th>ข้อ</th><th>N</th><th>Mean</th><th>SD</th><th></th>
+  </tr></thead><tbody id="satRows"></tbody></table></div>
+  <button class="exportBtn" onclick="exportSatisfactionCSV()">⬇ EXPORT SATISFACTION CSV (บทที่ 4)</button>
+ </section>
+ <section class="panel" style="margin-top:12px">
+  <h2>พัฒนาการจากภารกิจต้นสู่ภารกิจปลาย • R-01 vs R-06 — ข้อมูลเชิงพรรณนา</h2>
+  <p style="color:var(--muted);font-size:11px;margin-top:0">ใช้ InitialScore เท่านั้น และนับเฉพาะนักเรียนที่มีข้อมูลทั้ง R01 และ R06 เพื่ออธิบายแนวโน้มต้น–ปลายภารกิจ ข้อมูลนี้ไม่ใช่การวัดก่อน–หลัง intervention และไม่ควรเรียก Pre-test/Post-test</p>
+  <div class="eff" style="grid-template-columns:1fr 1fr 1fr">
+   <div class="box"><small>R01 Initial — Mean % (SD)</small><b id="r01r06MeanBefore">-</b></div>
+   <div class="box"><small>R06 Initial — Mean % (SD)</small><b id="r01r06MeanAfter">-</b></div>
+   <div class="box"><small>ส่วนต่างเฉลี่ย (Mean Diff)</small><b id="r01r06MeanDiff">-</b></div>
+  </div>
+  <p id="r01r06N" style="color:var(--muted);font-size:12px;margin:4px 0 10px"></p>
+  <div class="scroll"><table><thead><tr>
+   <th>Research ID</th><th>Name</th><th>R01 (raw/100)</th><th>R01 %</th><th>R06 (raw/100)</th><th>R06 %</th><th>ส่วนต่าง (pts)</th>
+  </tr></thead><tbody id="r01r06Rows"></tbody></table></div>
+  <button class="exportBtn" onclick="exportR01R06CSV()">⬇ EXPORT R01 vs R06 DEVELOPMENT CSV</button>
+ </section>
+ <section class="panel" style="margin-top:12px">
+  <h2>🔍 DEBUG INFO <button onclick="loadDebug()" style="float:right;font-size:11px">ตรวจสอบการเชื่อมต่อ</button></h2>
+  <div id="debugBox" style="font-size:12px;color:var(--muted);white-space:pre-wrap"></div>
+ </section>
+ <section class="panel" style="margin-top:12px"><h2>STUDENT RECORDS</h2><div class="scroll"><table><thead><tr><th>Research ID</th><th>Name</th><th>Class</th><th>Pre</th><th>Post</th><th>R01 Initial</th><th>R02 Initial</th><th>R03 Initial</th><th>R04 Initial</th><th>R05 Initial</th><th>R06 Initial</th></tr></thead><tbody id="rows"></tbody></table></div></section>
+</div>
+<script>
+let teacherPin='';
+let lastData=null;
+const CASE_MAX={R01:100,R02:100,R03:100,R04:100,R05:100,R06:100};
+function load(){
+ teacherPin=document.getElementById('pin').value||teacherPin;
+ document.getElementById('err').textContent='Loading...';
+ google.script.run.withSuccessHandler(raw=>{
+   try{
+     const d = (typeof raw === 'string') ? JSON.parse(raw) : raw;
+     if(!d||!d.ok){
+       document.getElementById('err').textContent=(d&&d.error)||'เกิดข้อผิดพลาด: ไม่ได้รับข้อมูล Dashboard';
+       return;
+     }
+     document.getElementById('err').textContent='';
+     render(d);
+   }catch(err){
+     document.getElementById('err').textContent='อ่านข้อมูล Dashboard ไม่สำเร็จ: '+err.message;
+   }
+ }).withFailureHandler(e=>{
+   document.getElementById('err').textContent='เชื่อมต่อไม่สำเร็จ: '+(e&&e.message||e);
+ }).getClassDashboardJson(teacherPin);
+}
+function n(v){return Number(v||0).toFixed(1)}
+function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]))}
+function loadDebug(){
+ document.getElementById('debugBox').textContent='กำลังตรวจสอบ...';
+ google.script.run.withSuccessHandler(info=>{
+  document.getElementById('debugBox').textContent=`เชื่อมกับสเปรดชีต: ${info.boundSpreadsheetName}
+Spreadsheet ID: ${info.boundSpreadsheetId}
+URL: ${info.boundSpreadsheetUrl}
+
+จำนวนแถวข้อมูล:
+  STUDENTS = ${info.studentsRowCount}
+  CASES = ${info.casesRowCount}
+  ASSESSMENTS = ${info.assessmentsRowCount}
+
+หัวตาราง STUDENTS: ${JSON.stringify(info.studentsHeader)}
+จำนวน ResearchID = ${info.byIdCount}
+ตัวอย่าง ResearchID: ${JSON.stringify(info.sampleKeys)}`;
+ }).withFailureHandler(e=>{document.getElementById('debugBox').textContent='ERROR: '+(e&&e.message||e)}).getDebugInfo(teacherPin);
+}
+function avgArr(arr){return arr.length?arr.reduce((a,b)=>a+b,0)/arr.length:0}
+function sdArr(arr){ if(arr.length<2) return 0; const m=avgArr(arr); return Math.sqrt(arr.reduce((s,v)=>s+(v-m)*(v-m),0)/(arr.length-1)); }
+function computeTrend(students){
+ const perCase=['R01','R02','R03','R04','R05','R06'].map(id=>{
+  const max=CASE_MAX[id];
+  const pcts=students.map(s=>s.cases[id]).filter(c=>c && Number(c.initial)>0).map(c=>(Number(c.initial)/max)*100);
+  return {id, n:pcts.length, mean:avgArr(pcts), sd:sdArr(pcts)};
+ });
+ // per-student: average % across whatever missions they've completed, split early (R01-R03) vs late (R04-R06)
+ const earlyIds=['R01','R02','R03'], lateIds=['R04','R05','R06'];
+ const pctFor=(s,ids)=>{
+  const vals=ids.map(id=>{const c=s.cases[id]; return c && Number(c.initial)>0 ? Number(c.initial)/CASE_MAX[id]*100 : null}).filter(v=>v!==null);
+  return vals.length?avgArr(vals):null;
+ };
+ const overallVals=[], earlyVals=[], lateVals=[];
+ students.forEach(s=>{
+  const ov=pctFor(s,['R01','R02','R03','R04','R05','R06']); if(ov!==null) overallVals.push(ov);
+  const ev=pctFor(s,earlyIds); if(ev!==null) earlyVals.push(ev);
+  const lv=pctFor(s,lateIds); if(lv!==null) lateVals.push(lv);
+ });
+ return {
+  perCase,
+  overall:avgArr(overallVals), overallN:overallVals.length,
+  early:avgArr(earlyVals), earlyN:earlyVals.length,
+  late:avgArr(lateVals), lateN:lateVals.length
+ };
+}
+function renderTrend(students){
+ const t=computeTrend(students);
+ document.getElementById('trendRows').innerHTML=t.perCase.map(c=>`<tr>
+   <td><b>${c.id}</b></td><td>${c.n}</td><td>${n(c.mean)}%</td><td>${n(c.sd)}</td>
+   <td><div class="calibar"><i style="width:${Math.min(100,c.mean)}%;background:var(--gold)"></i></div></td>
+  </tr>`).join('');
+ document.getElementById('trendOverall').textContent=t.overallN?`${n(t.overall)}%`:'-';
+ document.getElementById('trendEarly').textContent=t.earlyN?`${n(t.early)}%`:'-';
+ document.getElementById('trendLate').textContent=t.lateN?`${n(t.late)}%`:'-';
+ const diff=t.late-t.early;
+ document.getElementById('trendVerdict').textContent=(t.earlyN&&t.lateN)
+  ? `ช่วงปลายเทียบช่วงต้น: ${diff>=0?'+':''}${n(diff)} จุด (${diff>0?'มีแนวโน้มดีขึ้น':diff<0?'มีแนวโน้มลดลง':'ทรงตัว'}) — อิงจากนักเรียนที่มีข้อมูลอย่างน้อย 1 ภารกิจในแต่ละช่วง`
+  : 'ยังไม่มีข้อมูลเพียงพอในช่วงต้นหรือปลายเพื่อเทียบแนวโน้ม';
+}
+function exportTrendCSV(){
+ if(!lastData){alert('กรุณาโหลดข้อมูลก่อน (UNLOCK DASHBOARD)');return}
+ const t=computeTrend(lastData.students);
+ const lines=[];
+ lines.push('RDA — Evidence-Based Decision Development Summary (InitialScore, R01–R06)');
+ lines.push('Generated At,'+new Date().toISOString());
+ lines.push('');
+ lines.push('Per-Case Summary');
+ lines.push('Case,N,Mean %,SD');
+ t.perCase.forEach(c=>lines.push([c.id,c.n,c.mean.toFixed(2),c.sd.toFixed(2)].join(',')));
+ lines.push('');
+ lines.push('Overall Summary');
+ lines.push('Overall Mean % (N),'+t.overall.toFixed(2)+' ('+t.overallN+')');
+ lines.push('Early R01-R03 Mean % (N),'+t.early.toFixed(2)+' ('+t.earlyN+')');
+ lines.push('Late R04-R06 Mean % (N),'+t.late.toFixed(2)+' ('+t.lateN+')');
+ lines.push('Late - Early Diff (pts),'+(t.late-t.early).toFixed(2));
+ const csv=lines.join('\n');
+ const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'});
+ const a=document.createElement('a');
+ a.href=URL.createObjectURL(blob);
+ a.download='RDA_Trend_Summary_'+new Date().toISOString().slice(0,10)+'.csv';
+ a.click();
+ URL.revokeObjectURL(a.href);
+}
+function calibLevel(gapPts){
+ if(gapPts>10)return{label:'มั่นใจเกินจริง (Overconfident)',cls:'over'};
+ if(gapPts<-10)return{label:'มั่นใจต่ำกว่าจริง (Underconfident)',cls:'under'};
+ return{label:'สอดคล้องดี (Well-calibrated)',cls:'ok'};
+}
+
+function computeRevision(students){
+ return ['R01','R02','R03','R04','R05','R06'].map(id=>{
+  const pairs=students.map(s=>s.cases[id]).filter(c=>c && Number(c.initial)>0 && Number(c.revision)>0);
+  const initials=pairs.map(c=>Number(c.initial));
+  const revised=pairs.map(c=>Number(c.revision));
+  const gains=pairs.map(c=>Number(c.revision)-Number(c.initial));
+  return {id,n:pairs.length,initial:avg(initials),revised:avg(revised),gain:avg(gains)};
+ });
+}
+function renderRevision(students){
+ const rows=computeRevision(students);
+ document.getElementById('revisionRows').innerHTML=rows.map(c=>`<tr>
+  <td><b>${c.id}</b></td><td>${c.n}</td>
+  <td>${c.n?n(c.initial):'-'}</td><td>${c.n?n(c.revised):'-'}</td>
+  <td>${c.n?((c.gain>=0?'+':'')+n(c.gain)):'-'}</td>
+ </tr>`).join('');
+}
+function exportRevisionCSV(){
+ if(!lastData)return;
+ const rows=computeRevision(lastData.students);
+ const lines=['RDA — Revision Gain Summary','Case,N_paired,InitialMean,RevisedMean,RevisionGain'];
+ rows.forEach(c=>lines.push([c.id,c.n,c.initial.toFixed(2),c.revised.toFixed(2),c.gain.toFixed(2)].join(',')));
+ const blob=new Blob(['\ufeff'+lines.join('\n')],{type:'text/csv;charset=utf-8'});
+ const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+ a.download='RDA_Revision_Gain_'+new Date().toISOString().slice(0,10)+'.csv';a.click();
+ setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+
+function computeCalibration(students){
+ return ['R01','R02','R03','R04','R05','R06'].map(id=>{
+  const max=CASE_MAX[id];
+  const rows=students.map(s=>s.cases[id]).filter(c=>c && (Number(c.initial)>0 || c.confidenceAfter));
+  const nStu=rows.length;
+  const avg=arr=>arr.length?arr.reduce((a,b)=>a+b,0)/arr.length:0;
+  const confBefore=avg(rows.map(c=>c.confidenceBefore||0));
+  const confAfter=avg(rows.map(c=>c.confidenceAfter||0));
+  const accuracyPct=avg(rows.filter(c=>Number(c.initial)>0).map(c=>(Number(c.initial)/max)*100));
+  const gapPts=(confAfter/5*100)-accuracyPct;
+  return{id,n:nStu,confBefore,confAfter,accuracyPct,gapPts,level:calibLevel(gapPts)};
+ });
+}
+function computeEfficiency(students){
+ const process=students.map(s=>{
+  const fracs=['R01','R02','R03','R04','R05','R06'].map(id=>{
+   const c=s.cases[id];if(!c)return null;
+   const sc=c.revision||c.initial||0;
+   return sc/CASE_MAX[id];
+  }).filter(v=>v!==null);
+  return fracs.length?fracs.reduce((a,b)=>a+b,0)/fracs.length:null;
+ }).filter(v=>v!==null);
+ const e1=process.length?(process.reduce((a,b)=>a+b,0)/process.length)*100:0;
+ const postScores=students.filter(s=>s.post).map(s=>s.post.score);
+ const e2=postScores.length?(postScores.reduce((a,b)=>a+b,0)/postScores.length)/20*100:0;
+ return{e1,e2};
+}
+function render(d){
+ lastData=d;
+ document.getElementById('login').classList.add('hidden');document.getElementById('app').classList.remove('hidden');
+ document.getElementById('students').textContent=d.summary.students;
+ document.getElementById('pre').textContent=n(d.summary.preAverage)+'/20';
+ document.getElementById('post').textContent=n(d.summary.postAverage)+'/20';
+ document.getElementById('gain').textContent=(d.summary.conceptualGain>=0?'+':'')+n(d.summary.conceptualGain);
+ document.getElementById('cases').innerHTML=['R01','R02','R03','R04','R05','R06'].map(id=>{const v=d.summary.caseAverages[id]||0;const max=CASE_MAX[id];return `<div class="caseRow"><b>${id}</b><div class="bar"><i style="width:${v/max*100}%"></i></div><span>${n(v)}/${max}</span></div>`}).join('');
+ document.getElementById('status').innerHTML=`<p>Post-test completed: <b>${d.summary.postCompleted}/${d.summary.students}</b></p><p>Updated: ${new Date(d.generatedAt).toLocaleString()}</p>`;
+ document.getElementById('rows').innerHTML=d.students.map(s=>`<tr><td>${esc(s.researchId)}</td><td>${esc(s.name||s.username)}</td><td>${esc(s.classroomId||'')}</td><td>${s.pre?s.pre.score:'-'}</td><td>${s.post?s.post.score:'-'}</td>${['R01','R02','R03','R04','R05','R06'].map(id=>`<td>${s.cases[id]?(s.cases[id].initial||'-'):'-'}</td>`).join('')}</tr>`).join('');
+
+ const eff=computeEfficiency(d.students);
+ document.getElementById('e1').textContent=n(eff.e1)+'%';
+ document.getElementById('e2').textContent=n(eff.e2)+'%';
+ const pass=eff.e1>=80&&eff.e2>=80;
+ document.getElementById('effVerdict').innerHTML=pass
+  ?`✅ ผ่านเกณฑ์ 80/80 (E1=${n(eff.e1)}, E2=${n(eff.e2)})`
+  :`⚠️ ยังไม่ถึงเกณฑ์ 80/80 (E1=${n(eff.e1)}, E2=${n(eff.e2)}) — เกณฑ์ที่ต้องผ่านคือ E1≥80 และ E2≥80`;
+
+ renderTrend(d.students);
+ renderRevision(d.students);
+ renderSatisfaction(d.students);
+ const calib=computeCalibration(d.students);
+ document.getElementById('calibRows').innerHTML=calib.map(c=>`<tr>
+   <td><b>${c.id}</b></td>
+   <td>${c.n}</td>
+   <td>${n(c.confBefore)}/5</td>
+   <td>${n(c.confAfter)}/5</td>
+   <td>${n(c.accuracyPct)}%</td>
+   <td>${c.gapPts>=0?'+':''}${n(c.gapPts)} pts</td>
+   <td><span class="badge ${c.level.cls}">${c.level.label}</span></td>
+  </tr>`).join('');
+
+ renderR01R06(d.students);
+}
+const SATISFACTION_LABELS=[
+ 'ช่วยเข้าใจเนื้อหามากขึ้น','กิจกรรมท้าทายน่าสนใจ','Feedback ช่วยปรับปรุงการตัดสินใจ',
+ 'ใช้งานง่าย','มั่นใจตัดสินใจเชิงหลักฐานมากขึ้น','อยากแนะนำให้คนอื่นลองใช้','พึงพอใจโดยรวม'
+];
+function computeSatisfaction(students){
+ const rows=students.map(s=>s.satisfaction).filter(Boolean);
+ const perQ=[0,1,2,3,4,5,6].map(qi=>{
+  const vals=rows.map(r=>r.q[qi]).filter(v=>v>0);
+  return {label:SATISFACTION_LABELS[qi], n:vals.length, mean:avgArr(vals), sd:sdArr(vals)};
+ });
+ const overallVals=rows.map(r=>r.mean).filter(v=>v>0);
+ return {n:rows.length, perQ, overallMean:avgArr(overallVals), rows};
+}
+function renderSatisfaction(students){
+ const s=computeSatisfaction(students);
+ document.getElementById('satN').textContent=s.n;
+ document.getElementById('satOverallMean').textContent=s.n?`${n(s.overallMean)}/5`:'-';
+ document.getElementById('satRows').innerHTML=s.perQ.map((q,i)=>`<tr>
+   <td>${i+1}. ${q.label}</td><td>${q.n}</td><td>${n(q.mean)}</td><td>${n(q.sd)}</td>
+   <td><div class="calibar"><i style="width:${q.mean/5*100}%;background:var(--cyan)"></i></div></td>
+  </tr>`).join('') || '<tr><td colspan="5" style="color:var(--muted)">— ยังไม่มีใครตอบแบบสอบถาม —</td></tr>';
+}
+function exportSatisfactionCSV(){
+ if(!lastData){alert('กรุณาโหลดข้อมูลก่อน (UNLOCK DASHBOARD)');return}
+ const s=computeSatisfaction(lastData.students);
+ const lines=[];
+ lines.push('RDA — Satisfaction Survey Summary');
+ lines.push('Generated At,'+new Date().toISOString());
+ lines.push('N (respondents),'+s.n);
+ lines.push('Overall Mean (of 5),'+s.overallMean.toFixed(2));
+ lines.push('');
+ lines.push('Per-Item Summary');
+ lines.push('Item,Label,N,Mean,SD');
+ s.perQ.forEach((q,i)=>lines.push([i+1,'"'+q.label+'"',q.n,q.mean.toFixed(2),q.sd.toFixed(2)].join(',')));
+ lines.push('');
+ lines.push('Per-Student Responses');
+ lines.push('ResearchID,'+SATISFACTION_LABELS.map((l,i)=>'Q'+(i+1)).join(',')+',Mean,Comment');
+ lastData.students.forEach(st=>{
+  if(!st.satisfaction) return;
+  const c=(st.satisfaction.comment||'').replace(/"/g,'""');
+  lines.push([st.researchId, ...st.satisfaction.q, st.satisfaction.mean, '"'+c+'"'].join(','));
+ });
+ const csv=lines.join('\n');
+ const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'});
+ const a=document.createElement('a');
+ a.href=URL.createObjectURL(blob);
+ a.download='RDA_Satisfaction_Summary_'+new Date().toISOString().slice(0,10)+'.csv';
+ a.click();
+ URL.revokeObjectURL(a.href);
+}
+function computeR01R06(students){
+ const pairs=[];
+ students.forEach(s=>{
+  const r01=s.cases && s.cases.R01;
+  const r06=s.cases && s.cases.R06;
+  if(!r01 || !r06) return; // only paired students (completed both)
+  const r01raw=Number(r01.initial)||0;
+  const r06raw=Number(r06.initial)||0;
+  const r01pct=(r01raw/CASE_MAX.R01)*100;
+  const r06pct=(r06raw/CASE_MAX.R06)*100;
+  pairs.push({
+   researchId:s.researchId, name:s.name||s.username,
+   r01raw, r01pct, r06raw, r06pct, diff:r06pct-r01pct
+  });
+ });
+ const avg=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:0;
+ const sd=a=>{ if(a.length<2) return 0; const m=avg(a); return Math.sqrt(a.reduce((s,v)=>s+(v-m)*(v-m),0)/(a.length-1)); };
+ const r01pcts=pairs.map(p=>p.r01pct), r06pcts=pairs.map(p=>p.r06pct), diffs=pairs.map(p=>p.diff);
+ return {
+  pairs, n:pairs.length,
+  meanR01:avg(r01pcts), sdR01:sd(r01pcts),
+  meanR06:avg(r06pcts), sdR06:sd(r06pcts),
+  meanDiff:avg(diffs), sdDiff:sd(diffs)
+ };
+}
+function renderR01R06(students){
+ const c=computeR01R06(students);
+ document.getElementById('r01r06MeanBefore').textContent=c.n?`${n(c.meanR01)}% (${n(c.sdR01)})`:'-';
+ document.getElementById('r01r06MeanAfter').textContent=c.n?`${n(c.meanR06)}% (${n(c.sdR06)})`:'-';
+ document.getElementById('r01r06MeanDiff').textContent=c.n?`${c.meanDiff>=0?'+':''}${n(c.meanDiff)} pts`:'-';
+ document.getElementById('r01r06N').textContent=c.n
+  ? `N = ${c.n} คน (นักเรียนที่ทำครบทั้ง R01 และ R06) จากทั้งหมด ${students.length} คน`
+  : `ยังไม่มีนักเรียนที่ทำครบทั้ง R01 และ R06 เลย (ต้องรอให้ทำ R06 เสร็จก่อนถึงจะเปรียบเทียบได้)`;
+ document.getElementById('r01r06Rows').innerHTML=c.pairs.map(p=>`<tr>
+   <td>${esc(p.researchId)}</td><td>${esc(p.name)}</td>
+   <td>${p.r01raw}/100</td><td>${n(p.r01pct)}%</td>
+   <td>${p.r06raw}/100</td><td>${n(p.r06pct)}%</td>
+   <td>${p.diff>=0?'+':''}${n(p.diff)}</td>
+  </tr>`).join('') || '<tr><td colspan="7" style="color:var(--muted)">— ไม่มีข้อมูล —</td></tr>';
+}
+function exportR01R06CSV(){
+ if(!lastData){alert('กรุณาโหลดข้อมูลก่อน (UNLOCK DASHBOARD)');return}
+ const c=computeR01R06(lastData.students);
+ const lines=[];
+ lines.push('RDA — R01 vs R06 Evidence-Based Decision Development (InitialScore; descriptive)');
+ lines.push('Generated At,'+new Date().toISOString());
+ lines.push('');
+ lines.push('Summary Statistics');
+ lines.push('N (paired),'+c.n);
+ lines.push('Mean R01 %,'+c.meanR01.toFixed(2));
+ lines.push('SD R01 %,'+c.sdR01.toFixed(2));
+ lines.push('Mean R06 %,'+c.meanR06.toFixed(2));
+ lines.push('SD R06 %,'+c.sdR06.toFixed(2));
+ lines.push('Mean Difference (pts),'+c.meanDiff.toFixed(2));
+ lines.push('SD Difference,'+c.sdDiff.toFixed(2));
+ lines.push('');
+ lines.push('Per-Student Paired Data (use for paired-samples t-test)');
+ lines.push('ResearchID,Name,R01_initial_of100,R01_pct,R06_initial_of100,R06_pct,DevelopmentDiff_pts');
+ c.pairs.forEach(p=>{
+  lines.push([p.researchId,p.name,p.r01raw,p.r01pct.toFixed(2),p.r06raw,p.r06pct.toFixed(2),p.diff.toFixed(2)].join(','));
+ });
+ const csv=lines.join('\n');
+ const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'});
+ const a=document.createElement('a');
+ a.href=URL.createObjectURL(blob);
+ a.download='RDA_R01_vs_R06_Development_'+new Date().toISOString().slice(0,10)+'.csv';
+ a.click();
+ URL.revokeObjectURL(a.href);
+}
+function exportCalibrationCSV(){
+ if(!lastData){alert('กรุณาโหลดข้อมูลก่อน (UNLOCK DASHBOARD)');return}
+ const calib=computeCalibration(lastData.students);
+ const eff=computeEfficiency(lastData.students);
+ const lines=[];
+ lines.push('RDA — Confidence-Accuracy Calibration Report');
+ lines.push('Generated At,'+new Date().toISOString());
+ lines.push('');
+ lines.push('Metric,Value');
+ lines.push('E1 (Process Efficiency %),'+eff.e1.toFixed(2));
+ lines.push('E2 (Post-test Efficiency %),'+eff.e2.toFixed(2));
+ lines.push('80/80 Criterion,'+((eff.e1>=80&&eff.e2>=80)?'PASS':'NOT MET'));
+ lines.push('');
+ lines.push('Case,N,ConfidenceBefore(1-5),ConfidenceAfter(1-5),Accuracy(%),Gap(pts),Level');
+ calib.forEach(c=>{
+  lines.push([c.id,c.n,c.confBefore.toFixed(2),c.confAfter.toFixed(2),c.accuracyPct.toFixed(2),c.gapPts.toFixed(2),c.level.label].join(','));
+ });
+ const csv=lines.join('\n');
+ const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'});
+ const a=document.createElement('a');
+ a.href=URL.createObjectURL(blob);
+ a.download='RDA_Calibration_Report_'+new Date().toISOString().slice(0,10)+'.csv';
+ a.click();
+ URL.revokeObjectURL(a.href);
+}
+</script></body></html>

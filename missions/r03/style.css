@@ -1,0 +1,310 @@
+
+:root{--bg:#030810;--panel:#0a1b28;--line:#235370;--cyan:#43c8ff;--yellow:#f4c430;--red:#f25555;--green:#43d889;--purple:#c69cff;--white:#f5fbff;--muted:#9bb4c4;--shadow:0 25px 80px rgba(0,0,0,.55)}
+*{box-sizing:border-box}html{scroll-behavior:smooth;background:var(--bg)}body{margin:0;font-family:'Kanit',system-ui,sans-serif;color:var(--white);min-height:100vh;background:#02070c;overflow-x:hidden}
+button,input,textarea,select{font:inherit}button{cursor:pointer}.hidden{display:none!important}
+.btn{border:0;border-radius:12px;padding:11px 16px;font-weight:800}.btn-primary{background:linear-gradient(90deg,var(--yellow),#ffe06d);color:#111;box-shadow:0 0 24px rgba(244,196,48,.18)}.btn-secondary{background:#12364b;color:#fff;border:1px solid #2b5b75}.btn-ghost{background:transparent;color:#d7e7f0;border:1px solid var(--line)}.btn:disabled{opacity:.42;cursor:not-allowed}
+.card{background:linear-gradient(160deg,rgba(15,47,67,.82),rgba(5,20,32,.92));border:1px solid var(--line);border-radius:20px;padding:19px;box-shadow:var(--shadow);backdrop-filter:blur(16px) saturate(125%)}.pill{display:inline-flex;padding:7px 11px;border-radius:999px;background:#112c3d;border:1px solid var(--line);font-size:12px}.muted{color:var(--muted)}.notice{padding:13px 15px;border-radius:13px;background:rgba(244,196,48,.09);border-left:4px solid var(--yellow)}.success{border-left-color:var(--green);background:rgba(69,212,131,.09)}.danger{border-left-color:var(--red);background:rgba(233,76,76,.09)}
+.world{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}.world-photo{position:absolute;inset:-5%;background:linear-gradient(180deg,rgba(1,7,13,.18),rgba(1,7,13,.6) 52%,rgba(1,7,13,.9)),url('assets/airport-security-ai.jpg') center/cover no-repeat;transform:scale(1.08);transition:transform .25s}.grid{position:absolute;inset:0;opacity:.12;background:linear-gradient(rgba(79,195,247,.2) 1px,transparent 1px),linear-gradient(90deg,rgba(79,195,247,.2) 1px,transparent 1px);background-size:48px 48px;animation:gridMove 18s linear infinite}@keyframes gridMove{to{background-position:48px 48px,48px 48px}}.scan{position:absolute;left:0;right:0;top:-22%;height:22%;background:linear-gradient(180deg,transparent,rgba(79,195,247,.17),transparent);animation:roomScan 7s linear infinite}@keyframes roomScan{to{top:110%}}.radar{position:absolute;right:10%;top:14%;width:230px;height:230px;border:2px solid rgba(67,200,255,.45);border-radius:50%;box-shadow:0 0 30px rgba(67,200,255,.14);animation:radarSpin 7s linear infinite}.radar::before{content:"";position:absolute;left:50%;top:50%;width:45%;height:2px;background:linear-gradient(90deg,var(--cyan),transparent);transform-origin:left}.radar::after{content:"";position:absolute;inset:20px;border:1px solid rgba(244,196,48,.28);border-radius:50%}@keyframes radarSpin{to{rotate:360deg}}.particle{position:absolute;width:3px;height:3px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px var(--cyan);animation:rise linear infinite}.p1{left:10%;bottom:-5%;animation-duration:11s}.p2{left:30%;bottom:-7%;animation-duration:15s;animation-delay:-4s}.p3{left:55%;bottom:-6%;animation-duration:13s;animation-delay:-8s}.p4{left:82%;bottom:-5%;animation-duration:12s;animation-delay:-10s}@keyframes rise{to{transform:translateY(-115vh) scale(2);opacity:0}}.vignette{position:absolute;inset:0;background:radial-gradient(circle at 55% 36%,transparent 28%,rgba(0,0,0,.46) 72%,rgba(0,0,0,.84) 100%)}
+.hud{position:fixed;right:20px;bottom:20px;z-index:6;width:250px;padding:13px;border-radius:16px;background:rgba(3,16,26,.78);border:1px solid rgba(79,195,247,.35);backdrop-filter:blur(12px);pointer-events:none}.hud::before{content:"AIRPORT RADIATION MONITOR";display:block;color:#9fdcf6;font-size:10px;letter-spacing:.13em;margin-bottom:8px}.hud-row{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(79,195,247,.12);font-size:12px}.hud-row b{color:var(--green)}
+.app{display:grid;grid-template-columns:250px 1fr;min-height:100vh;position:relative;z-index:4}.sidebar{position:sticky;top:0;height:100vh;padding:18px 14px;background:linear-gradient(180deg,rgba(2,14,23,.96),rgba(3,18,29,.92));border-right:1px solid rgba(79,195,247,.12);box-shadow:12px 0 35px rgba(0,0,0,.25)}.brand{display:flex;gap:12px;align-items:center;padding:2px 4px 20px;margin-bottom:6px;border-bottom:1px solid rgba(79,195,247,.12)}.brand img{width:54px;height:54px;object-fit:contain}.brand h1{font-size:17px;line-height:1.08;margin:0}.brand small{display:block;margin-top:7px;color:var(--yellow);font-weight:700}.nav{display:grid;gap:7px}.nav button{width:100%;min-height:48px;border:0;border-radius:12px;background:transparent;color:#a9c0cf;display:flex;align-items:center;gap:10px;text-align:left;padding:11px 13px;transition:.22s}.nav button:hover,.nav button.active{color:#fff;background:linear-gradient(90deg,rgba(24,71,96,.95),rgba(20,42,44,.82));transform:translateX(3px)}.section-title{padding:12px 13px 5px;color:#a9c0cf;font-weight:600}.current-mission{padding-left:24px!important}.current-mission small{margin-left:auto;color:var(--yellow);font-size:10px;padding:3px 7px;border-radius:999px;background:rgba(244,196,48,.09);border:1px solid rgba(244,196,48,.25)}.side-card{margin-top:22px;padding:14px;border-radius:16px;background:rgba(255,255,255,.025);border:1px solid rgba(79,195,247,.14)}.xpbar{height:9px;background:#123043;border-radius:999px;overflow:hidden;margin:8px 0}.xpbar span{display:block;height:100%;background:linear-gradient(90deg,var(--cyan),var(--yellow));transition:.4s}
+.main{padding:18px 22px 48px;max-width:1700px;width:100%;margin:auto}.topbar{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:12px 15px;margin-bottom:14px;border-radius:16px;background:rgba(5,20,32,.72);border:1px solid rgba(79,195,247,.17);backdrop-filter:blur(13px)}.topbar h2{margin:0;font-size:24px}.status{display:flex;gap:8px;flex-wrap:wrap}
+.page{display:none}.page.active{display:block;animation:pageIn .4s ease}@keyframes pageIn{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+.dashboard-hero{min-height:460px;display:grid;grid-template-columns:minmax(0,1.15fr) .85fr;align-items:center;gap:24px;border:1px solid rgba(79,195,247,.32);border-radius:28px;padding:42px;background:linear-gradient(90deg,rgba(2,12,20,.97),rgba(2,12,20,.62),rgba(2,12,20,.18)),url('assets/airport-security-ai.jpg') center/cover no-repeat;box-shadow:0 30px 90px rgba(0,0,0,.5);position:relative;overflow:hidden}.dashboard-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 25%,rgba(79,195,247,.08) 48%,transparent 70%);transform:translateX(-130%);animation:dashSweep 5s linear infinite;pointer-events:none}@keyframes dashSweep{to{transform:translateX(130%)}}.dashboard-copy{position:relative;z-index:2}.dashboard-copy h1{font-size:clamp(48px,7vw,92px);line-height:.92;margin:18px 0}.dashboard-copy h1 span{font-size:.55em;color:var(--yellow)}.dashboard-copy p{max-width:720px;font-size:18px;line-height:1.7;color:#d5e7ef}.dashboard-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}.quick-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:28px}.quick-steps>div{display:flex;gap:12px;align-items:center;padding:13px 14px;border-radius:14px;background:rgba(5,20,32,.74);border:1px solid rgba(79,195,247,.2)}.quick-steps b{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--yellow);color:#111;font-size:20px}.quick-steps small{color:var(--muted)}.case-file{width:min(390px,90%);aspect-ratio:1.3;justify-self:center;border-radius:24px;border:1px solid rgba(244,196,48,.55);background:linear-gradient(155deg,#3e5565,#15212b 70%);box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 35px rgba(244,196,48,.18);padding:24px;transform:rotate(3deg);position:relative;display:grid;place-items:center;text-align:center;animation:fileFloat 3s ease-in-out infinite}@keyframes fileFloat{50%{transform:rotate(1deg) translateY(-10px)}}.file-tag{position:absolute;right:18px;top:14px;color:#ffe17d;font-weight:800}.file-icon{font-size:86px}.file-title{font-size:26px;font-weight:800;line-height:1.15}.file-status{position:absolute;left:18px;bottom:16px;padding:6px 10px;border-radius:999px;background:rgba(244,196,48,.13);border:1px solid rgba(244,196,48,.4);color:#ffe17d;font-size:11px}
+.mission-shell{display:grid;gap:14px}.mission-header{position:relative;overflow:hidden}.phase-roadmap{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:16px}.phase-node{padding:12px 10px;border-radius:14px;border:1px solid var(--line);background:#0a2333;color:var(--muted);text-align:center}.phase-node.active{border-color:var(--yellow);color:#fff;background:linear-gradient(145deg,rgba(244,196,48,.18),rgba(13,43,61,.9));box-shadow:0 0 26px rgba(244,196,48,.14)}.phase-node.done{border-color:rgba(69,212,131,.5);color:#caffdf;background:rgba(69,212,131,.09)}.phase-icon{width:34px;height:34px;margin:0 auto 7px;border-radius:50%;display:grid;place-items:center;background:#15384d;border:1px solid #2f657f}.phase-node.active .phase-icon{background:var(--yellow);color:#111}.phase-node.done .phase-icon{background:var(--green);color:#07120c}
+.mission-layout{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:16px;align-items:start}.stage{min-height:570px;position:relative;overflow:hidden}.stage-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;border-bottom:1px solid rgba(79,195,247,.16);padding-bottom:14px;margin-bottom:17px}.stage-head h3{margin:0;font-size:25px}.stage-footer{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:19px;padding-top:15px;border-top:1px solid rgba(79,195,247,.16)}.mission-side{position:sticky;top:18px}.side-progress{font-size:36px;font-weight:800;color:var(--yellow)}.side-list{display:grid;gap:8px;margin-top:13px}.side-list div{display:flex;justify-content:space-between;gap:10px;padding:9px 10px;border-radius:10px;background:#0a2231}
+.field{display:grid;gap:7px;margin-top:13px}.field label{font-size:13px;color:#c4d5df}.field textarea,.field input,.field select{width:100%;padding:11px;border-radius:11px;border:1px solid #2a526a;background:#071a28;color:#fff}
+.evidence-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.evidence{padding:16px;border-radius:15px;background:#08202f;border:1px solid var(--line);cursor:pointer;transition:.25s;min-height:170px}.evidence:hover{transform:translateY(-5px);border-color:var(--yellow)}.evidence.open{border-color:var(--green);box-shadow:0 0 24px rgba(69,212,131,.14)}.evidence.locked{opacity:.45;filter:grayscale(.7);cursor:not-allowed}.evidence .icon{font-size:42px}.evidence b{display:block;color:var(--yellow);margin-top:8px}
+.animation-stage{min-height:440px;border-radius:20px;overflow:hidden;position:relative;border:1px solid rgba(79,195,247,.35);background:linear-gradient(rgba(2,12,20,.36),rgba(2,12,20,.74)),url('assets/airport-security-ai.jpg') center/cover no-repeat;display:grid;place-items:center;text-align:center;padding:30px}.anim-icon{font-size:110px;filter:drop-shadow(0 0 36px rgba(79,195,247,.45));animation:float 3s ease-in-out infinite}@keyframes float{50%{transform:translateY(-10px)}}.portal{width:270px;height:260px;border:14px solid #507185;border-bottom-width:34px;border-radius:120px 120px 24px 24px;position:relative;margin:auto;box-shadow:0 0 40px rgba(79,195,247,.3)}.portal::after{content:"";position:absolute;left:50%;top:10%;width:4px;height:190px;background:linear-gradient(var(--cyan),transparent);box-shadow:0 0 18px var(--cyan);animation:portalScan 2s linear infinite}@keyframes portalScan{from{transform:translateX(-50%) rotate(-45deg)}to{transform:translateX(-50%) rotate(45deg)}}.training-controls{display:flex;gap:8px;justify-content:center;margin-top:14px}
+.scanner-game{display:grid;grid-template-columns:250px 1fr;gap:16px}.toolbox{display:grid;gap:10px}.detector{padding:11px 12px;border-radius:12px;background:#12364b;border:1px solid #2b5b75}.detector.active{border-color:var(--yellow);box-shadow:0 0 18px rgba(244,196,48,.2)}.distance-control{padding:14px;border-radius:15px;background:#08202f;border:1px solid var(--line)}.conveyor{min-height:500px;position:relative;overflow:hidden;border-radius:22px;border:1px solid rgba(79,195,247,.35);background:linear-gradient(rgba(2,12,20,.45),rgba(2,12,20,.86)),url('assets/airport-security-ai.jpg') center/cover no-repeat}.belt{position:absolute;left:5%;right:5%;bottom:110px;height:95px;border-radius:20px;background:#183848;border:2px solid #356d86}.bags{position:absolute;left:7%;right:7%;bottom:165px;display:grid;grid-template-columns:repeat(5,1fr);gap:16px}.bag{height:105px;border-radius:18px 18px 12px 12px;background:linear-gradient(#a47b49,#5b3e20);border:2px solid #d1a86b;display:grid;place-items:center;font-size:38px;position:relative;cursor:pointer;transition:.2s}.bag:hover{transform:translateY(-8px)}.bag.selected{outline:3px solid var(--yellow);box-shadow:0 0 28px rgba(244,196,48,.4)}.bag span{position:absolute;bottom:-24px;font-size:14px}.scanner-probe{position:absolute;left:10%;top:70px;width:90px;height:90px;border-radius:50%;display:grid;place-items:center;font-size:48px;background:#12364b;border:2px solid var(--cyan);box-shadow:0 0 25px rgba(67,200,255,.35);transition:.4s}.scanner-probe.hot{border-color:var(--red);box-shadow:0 0 40px rgba(242,85,85,.55);animation:probeHot .45s ease-in-out infinite alternate}@keyframes probeHot{to{transform:scale(1.08)}}.meter{position:absolute;right:22px;top:22px;width:240px;padding:13px;border-radius:15px;background:rgba(3,16,26,.88);border:1px solid var(--line)}.meter-row{display:flex;justify-content:space-between;margin:7px 0}.meter-row b{color:var(--yellow)}.meter-track{height:10px;background:#0c2838;border-radius:999px;overflow:hidden}.meter-fill{height:100%;width:5%;background:linear-gradient(90deg,var(--green),var(--yellow),var(--red));transition:.4s}.beep{font-family:ui-monospace,Consolas,monospace;color:#ffd86a;margin-top:8px;min-height:24px}
+.polya-card{max-width:900px;margin:auto}.quest-progress{display:flex;gap:8px;margin:15px 0}.quest-progress i{flex:1;height:8px;border-radius:999px;background:#15384d}.quest-progress i.done{background:var(--green)}.quest-progress i.active{background:var(--yellow)}.ai-chat{display:grid;grid-template-columns:100px 1fr;gap:14px;margin-top:16px}.ai-avatar{width:90px;height:100px;border-radius:24px;display:grid;place-items:center;font-size:50px;background:#143b51;border:1px solid #32728e}
+.final-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.choice-grid{display:grid;gap:9px}.choice{padding:13px;border-radius:12px;background:#0b2638;color:#fff;border:1px solid var(--line);text-align:left}.choice.active{border-color:var(--yellow);box-shadow:0 0 18px rgba(244,196,48,.2)}.score-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.score{padding:15px;border-radius:14px;background:#071d2b;border:1px solid var(--line);text-align:center}.score strong{display:block;font-size:30px;color:var(--yellow)}.complete{text-align:center}.badge{font-size:110px;animation:badgeSpin 2.2s ease-in-out infinite}.final-score{font-size:72px;color:var(--yellow);font-weight:800}.feedback{display:grid;gap:8px;text-align:left;margin:16px 0}.feedback div{padding:10px 12px;border-radius:10px;background:#0a2434;border-left:4px solid var(--cyan)}.feedback .ok{border-left-color:var(--green)}.feedback .no{border-left-color:var(--red)}@keyframes badgeSpin{50%{transform:rotateY(180deg) scale(1.08)}}.toast{position:fixed;right:20px;bottom:20px;z-index:7000;padding:12px 15px;border-radius:12px;background:#102c3d;border:1px solid var(--cyan);box-shadow:var(--shadow)}
+@media(max-width:1150px){.dashboard-hero,.mission-layout,.scanner-game,.final-grid{grid-template-columns:1fr}.case-file{display:none}.mission-side{position:static}.evidence-grid{grid-template-columns:1fr 1fr}.phase-roadmap{grid-template-columns:1fr}.hud{display:none}}
+@media(max-width:820px){.app{grid-template-columns:1fr}.sidebar{display:none}.main{padding:12px}.topbar{flex-direction:column;align-items:flex-start}.quick-steps,.score-grid{grid-template-columns:1fr}.bags{grid-template-columns:repeat(2,1fr);position:static;padding:120px 20px}.conveyor{min-height:auto}.belt{display:none}.scanner-probe{top:20px}.evidence-grid{grid-template-columns:1fr}}
+
+/* ===== R-03 V2 WOW + CLEAR MISSION FLOW ===== */
+.airport-plane{
+  position:fixed;z-index:1;left:-260px;top:12%;font-size:90px;opacity:.18;
+  filter:drop-shadow(0 0 18px rgba(79,195,247,.35));
+  animation:planeTaxi 28s linear infinite;pointer-events:none
+}
+@keyframes planeTaxi{
+  0%{transform:translateX(0) translateY(0) scale(.72)}
+  45%{transform:translateX(52vw) translateY(-18px) scale(.9)}
+  100%{transform:translateX(125vw) translateY(6px) scale(.72)}
+}
+.alarm-light{
+  position:fixed;z-index:2;left:270px;top:18px;width:24px;height:24px;border-radius:50%;
+  background:#ff4545;box-shadow:0 0 22px #ff4545,0 0 55px rgba(255,69,69,.55);
+  animation:alarmPulse 1.15s ease-in-out infinite;pointer-events:none
+}
+@keyframes alarmPulse{50%{opacity:.25;transform:scale(.78)}}
+.runway-lights{position:fixed;left:255px;right:0;bottom:18px;height:12px;z-index:1;pointer-events:none;
+  background:repeating-linear-gradient(90deg,transparent 0 44px,rgba(79,195,247,.65) 44px 50px);
+  filter:drop-shadow(0 0 7px rgba(79,195,247,.65));animation:runway 2.4s linear infinite}
+@keyframes runway{to{background-position:50px 0}}
+.mission-callout{
+  display:grid;grid-template-columns:60px 1fr auto;gap:14px;align-items:center;
+  padding:14px 16px;margin-bottom:16px;border-radius:16px;
+  background:linear-gradient(120deg,rgba(79,195,247,.12),rgba(244,196,48,.06));
+  border:1px solid rgba(79,195,247,.28)
+}
+.mission-callout .call-icon{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;font-size:29px;background:#123a51;border:1px solid #32708e}
+.mission-callout h4{margin:0 0 3px;font-size:19px}.mission-callout p{margin:0;color:var(--muted);font-size:13px}
+.mission-callout .call-step{color:var(--yellow);font-weight:700;font-size:12px}
+.objective-path{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:13px}
+.objective-tile{padding:11px;border-radius:12px;background:#092536;border:1px solid var(--line);text-align:center;color:var(--muted)}
+.objective-tile.active{border-color:var(--yellow);color:#fff;box-shadow:0 0 18px rgba(244,196,48,.14)}
+.objective-tile.done{border-color:var(--green);color:#caffe0;background:rgba(69,212,131,.08)}
+.xray-panel{
+  min-height:280px;border-radius:18px;border:1px solid rgba(79,195,247,.35);
+  background:radial-gradient(circle at center,rgba(79,195,247,.16),rgba(3,14,23,.98));
+  display:grid;place-items:center;position:relative;overflow:hidden;margin-top:14px
+}
+.xray-panel::after{content:"X-RAY SECURITY VIEW";position:absolute;left:14px;top:12px;color:#9fdcf6;font-size:10px;letter-spacing:.14em}
+.xray-cylinder{width:115px;height:185px;border-radius:45px 45px 22px 22px;background:linear-gradient(90deg,rgba(255,160,61,.22),rgba(255,196,74,.75),rgba(255,160,61,.2));border:2px solid #ffd767;box-shadow:0 0 36px rgba(255,196,74,.38);animation:xrayFloat 2.7s ease-in-out infinite}
+@keyframes xrayFloat{50%{transform:translateY(-8px) rotate(2deg)}}
+.scanner-game{align-items:start}
+.conveyor{box-shadow:inset 0 0 60px rgba(79,195,247,.08)}
+.belt::after{content:"";position:absolute;left:0;right:0;top:12px;height:6px;background:repeating-linear-gradient(90deg,#386a81 0 34px,#19384a 34px 64px);animation:beltMove 1.2s linear infinite}
+@keyframes beltMove{to{background-position:64px 0}}
+.bag{animation:bagIdle 2.5s ease-in-out infinite}.bag:nth-child(2){animation-delay:.25s}.bag:nth-child(3){animation-delay:.5s}.bag:nth-child(4){animation-delay:.75s}.bag:nth-child(5){animation-delay:1s}
+@keyframes bagIdle{50%{transform:translateY(-4px)}}
+.bag.selected{animation:none}
+.scanner-probe{cursor:grab;user-select:none;touch-action:none}
+.scanner-probe.dragging{cursor:grabbing;transform:scale(1.08)}
+.scan-target-line{position:absolute;left:50%;top:155px;height:230px;width:2px;background:linear-gradient(transparent,var(--cyan),transparent);opacity:.35}
+.live-alert{
+  position:absolute;left:50%;top:22px;translate:-50% 0;
+  padding:9px 14px;border-radius:999px;background:rgba(242,85,85,.14);
+  border:1px solid rgba(242,85,85,.55);color:#ff8b8b;font-size:12px;
+  opacity:0;transition:.25s
+}
+.live-alert.show{opacity:1;animation:alertFlash .65s ease-in-out infinite alternate}
+@keyframes alertFlash{to{box-shadow:0 0 28px rgba(242,85,85,.45)}}
+.polya-one{max-width:900px;margin:auto}
+.polya-step-header{display:flex;align-items:center;gap:14px}
+.polya-num{width:60px;height:60px;border-radius:18px;background:var(--yellow);color:#111;display:grid;place-items:center;font-size:28px;font-weight:800}
+.polya-track{display:flex;gap:8px;margin:16px 0}.polya-track i{flex:1;height:9px;border-radius:999px;background:#15384d}.polya-track i.done{background:var(--green)}.polya-track i.active{background:var(--yellow)}
+.final-summary{display:grid;gap:9px;margin-bottom:14px}.final-summary div{display:flex;justify-content:space-between;padding:11px 12px;border-radius:12px;background:#08202f}
+.score-grade{display:inline-flex;padding:7px 14px;border-radius:999px;background:#12364b;border:1px solid var(--line)}
+.reward-stage{position:relative;overflow:hidden}
+.reward-stage::before{content:"MISSION CLEAR";position:absolute;left:50%;top:50%;translate:-50% -50%;font-size:clamp(58px,10vw,150px);font-weight:800;color:rgba(244,196,48,.035);white-space:nowrap}
+.xp-pop{font-size:36px;color:var(--green);font-weight:800;animation:xpPop 1.3s ease-out}
+@keyframes xpPop{from{opacity:0;transform:translateY(25px) scale(.7)}to{opacity:1;transform:none}}
+.stamp-hit{display:inline-grid;place-items:center;width:160px;height:160px;border-radius:50%;border:7px double var(--yellow);color:var(--yellow);font-weight:800;font-size:19px;transform:rotate(-11deg);animation:stampHit .6s cubic-bezier(.2,.9,.2,1)}
+@keyframes stampHit{from{opacity:0;transform:rotate(-11deg) scale(2.6)}to{opacity:1;transform:rotate(-11deg) scale(1)}}
+.score-grid .score:nth-child(1) strong{color:var(--cyan)}
+.score-grid .score:nth-child(2) strong{color:var(--purple)}
+.score-grid .score:nth-child(3) strong{color:var(--green)}
+.score-grid .score:nth-child(4) strong{color:var(--yellow)}
+@media(max-width:900px){.objective-path{grid-template-columns:1fr}.mission-callout{grid-template-columns:48px 1fr}.mission-callout .call-step{grid-column:2}.airport-plane,.alarm-light,.runway-lights{display:none}}
+
+
+/* ===== R-03 V3 LIVING AIRPORT ENVIRONMENT ===== */
+.airport-sky{
+  position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+  background:
+    linear-gradient(180deg,rgba(4,15,26,.08),rgba(2,9,16,.78)),
+    radial-gradient(circle at 68% 13%,rgba(137,211,255,.16),transparent 23%)
+}
+.cloud{position:absolute;width:340px;height:90px;border-radius:999px;filter:blur(12px);opacity:.10;background:rgba(217,243,255,.82);animation:cloudMove linear infinite}
+.cloud.c1{top:7%;left:-380px;animation-duration:38s}
+.cloud.c2{top:18%;left:-440px;animation-duration:52s;animation-delay:-23s;transform:scale(.7)}
+@keyframes cloudMove{to{translate:calc(100vw + 760px) 0}}
+.terminal-glass{
+  position:fixed;left:250px;right:0;top:0;height:47vh;z-index:1;pointer-events:none;
+  background:
+    linear-gradient(115deg,transparent 0 37%,rgba(255,255,255,.055) 39%,transparent 42%),
+    repeating-linear-gradient(90deg,transparent 0 178px,rgba(134,215,255,.12) 180px 183px);
+  border-bottom:1px solid rgba(79,195,247,.12);
+  mask-image:linear-gradient(to bottom,#000 0 70%,transparent)
+}
+.lens-flare{position:fixed;z-index:1;pointer-events:none;width:480px;height:480px;border-radius:50%;right:5%;top:-220px;background:radial-gradient(circle,rgba(191,234,255,.18),rgba(79,195,247,.04) 28%,transparent 68%);animation:flarePulse 5s ease-in-out infinite}
+@keyframes flarePulse{50%{opacity:.45;transform:scale(1.08)}}
+.aircraft-large{
+  position:fixed;z-index:1;left:-520px;top:13%;font-size:170px;opacity:.21;
+  filter:drop-shadow(0 0 24px rgba(154,222,255,.35));pointer-events:none;
+  animation:aircraftTaxi 34s linear infinite
+}
+@keyframes aircraftTaxi{
+  0%{transform:translateX(0) translateY(12px) scale(.72)}
+  45%{transform:translateX(68vw) translateY(-10px) scale(.9)}
+  100%{transform:translateX(150vw) translateY(8px) scale(.72)}
+}
+.baggage-cart{
+  position:fixed;z-index:2;left:-260px;bottom:44px;font-size:74px;opacity:.28;
+  filter:drop-shadow(0 0 13px rgba(79,195,247,.3));pointer-events:none;
+  animation:cartDrive 19s linear infinite
+}
+@keyframes cartDrive{to{transform:translateX(calc(100vw + 520px))}}
+.security-car{
+  position:fixed;z-index:2;right:-230px;bottom:84px;font-size:62px;opacity:.20;
+  animation:securityDrive 27s linear infinite 5s;pointer-events:none
+}
+@keyframes securityDrive{to{transform:translateX(calc(-100vw - 480px))}}
+.walker{
+  position:fixed;z-index:2;bottom:105px;font-size:38px;opacity:.12;pointer-events:none;
+  animation:walkAcross linear infinite
+}
+.walker.w1{left:-90px;animation-duration:25s}
+.walker.w2{left:-130px;animation-duration:33s;animation-delay:-12s}
+.walker.w3{left:-110px;animation-duration:29s;animation-delay:-20s}
+@keyframes walkAcross{to{transform:translateX(calc(100vw + 220px))}}
+.portal-world{
+  position:fixed;z-index:2;left:58%;top:19%;width:190px;height:260px;
+  translate:-50% 0;border:9px solid rgba(79,195,247,.34);border-bottom-width:26px;
+  border-radius:88px 88px 18px 18px;box-shadow:0 0 42px rgba(79,195,247,.2),inset 0 0 26px rgba(79,195,247,.11);
+  pointer-events:none;opacity:.45
+}
+.portal-world::before{
+  content:"";position:absolute;left:50%;top:8%;width:4px;height:205px;
+  background:linear-gradient(var(--cyan),rgba(79,195,247,.05));
+  box-shadow:0 0 18px var(--cyan);transform-origin:bottom;
+  animation:portalWorldScan 2.2s ease-in-out infinite alternate
+}
+.portal-world::after{
+  content:"PORTAL ONLINE";position:absolute;bottom:-48px;left:50%;translate:-50% 0;
+  white-space:nowrap;color:#9fdcf6;font-size:10px;letter-spacing:.16em
+}
+@keyframes portalWorldScan{from{transform:translateX(-50%) rotate(-38deg)}to{transform:translateX(-50%) rotate(38deg)}}
+.cctv{
+  position:fixed;z-index:7;right:20px;top:86px;width:255px;padding:12px;border-radius:16px;
+  background:rgba(3,16,26,.78);border:1px solid rgba(79,195,247,.35);
+  backdrop-filter:blur(12px);box-shadow:0 18px 50px rgba(0,0,0,.35);pointer-events:none
+}
+.cctv-head{display:flex;justify-content:space-between;font-size:10px;letter-spacing:.12em;color:#a9dcf3}
+.cctv-head b{color:#ff6d6d;animation:cctvLive 1s ease-in-out infinite}
+@keyframes cctvLive{50%{opacity:.35}}
+.cctv-view{
+  height:112px;margin-top:9px;border-radius:11px;overflow:hidden;position:relative;
+  background:linear-gradient(rgba(3,13,22,.2),rgba(3,13,22,.55)),url('assets/airport-security-ai.jpg') center/cover no-repeat;
+  border:1px solid rgba(79,195,247,.2)
+}
+.cctv-view::after{content:"";position:absolute;left:0;right:0;top:-30%;height:32%;background:linear-gradient(transparent,rgba(79,195,247,.14),transparent);animation:cctvScan 2.5s linear infinite}
+@keyframes cctvScan{to{top:110%}}
+.flight-board{
+  position:fixed;z-index:7;left:270px;bottom:20px;width:270px;padding:12px;border-radius:16px;
+  background:rgba(3,16,26,.82);border:1px solid rgba(79,195,247,.32);
+  backdrop-filter:blur(12px);box-shadow:0 18px 50px rgba(0,0,0,.35);pointer-events:none
+}
+.flight-board::before{content:"FLIGHT INFORMATION";display:block;color:#9fdcf6;font-size:10px;letter-spacing:.14em;margin-bottom:7px}
+.flight-row{display:grid;grid-template-columns:56px 1fr auto;gap:8px;font-size:11px;padding:5px 0;border-bottom:1px solid rgba(79,195,247,.12)}
+.flight-row b{color:var(--yellow)}.flight-row .ok{color:var(--green)}.flight-row .hold{color:#ff7b7b}
+.ambient-toggle{
+  position:fixed;z-index:90;left:270px;top:84px;border-radius:999px;padding:8px 12px;
+  background:rgba(3,16,26,.78);border:1px solid rgba(79,195,247,.35);color:#d9edf7;
+  backdrop-filter:blur(10px)
+}
+body.airport-alert .world-photo{filter:saturate(1.08) contrast(1.07) hue-rotate(-8deg)}
+body.airport-alert .scan{background:linear-gradient(180deg,transparent,rgba(242,85,85,.22),transparent)}
+body.airport-clear .portal-world{border-color:rgba(69,212,131,.55);box-shadow:0 0 55px rgba(69,212,131,.35),inset 0 0 30px rgba(69,212,131,.12)}
+body.airport-clear .portal-world::before{background:linear-gradient(var(--green),rgba(69,212,131,.04));box-shadow:0 0 18px var(--green)}
+body.airport-clear .portal-world::after{content:"PORTAL CLEAR";color:#87f5b4}
+.dashboard-hero,.animation-stage,.conveyor{
+  background-image:
+    linear-gradient(90deg,rgba(2,12,20,.95),rgba(2,12,20,.62),rgba(2,12,20,.12)),
+    url('assets/airport-security-ai.jpg')!important
+}
+.dashboard-hero{background-position:center;background-size:cover}
+.conveyor::before{
+  content:"SECURITY ZONE • GATE B3";position:absolute;left:18px;top:17px;z-index:4;
+  padding:7px 10px;border-radius:999px;background:rgba(3,16,26,.72);border:1px solid rgba(79,195,247,.35);
+  color:#bfeaff;font-size:10px;letter-spacing:.12em
+}
+@media(max-width:1100px){
+  .cctv,.flight-board,.ambient-toggle,.portal-world,.terminal-glass,.aircraft-large,.baggage-cart,.security-car,.walker,.lens-flare{display:none}
+}
+
+
+body{background-image:linear-gradient(rgba(0,7,13,.18),rgba(0,7,13,.78)),url("assets/airport-security-ai.jpg");background-size:cover;background-position:center;background-attachment:fixed}.world-photo{background:linear-gradient(180deg,rgba(0,7,13,.08),rgba(0,7,13,.78)),url("assets/airport-security-ai.jpg") center/cover no-repeat}.dashboard-hero,.animation-stage,.conveyor,.cctv-view{background-image:linear-gradient(rgba(2,12,20,.45),rgba(2,12,20,.82)),url("assets/airport-security-ai.jpg")!important;background-size:cover!important;background-position:center!important}.r03-operations{margin-top:16px}.r03-operations-head{display:flex;justify-content:space-between;align-items:flex-end;gap:18px}.r03-stats{display:flex;gap:10px;flex-wrap:wrap}.r03-stats>div{padding:10px 14px;border-radius:13px;background:#08202f;border:1px solid var(--line)}.r03-stats small{display:block;color:var(--muted);font-size:10px}.r03-operation-grid{display:grid;grid-template-columns:repeat(6,minmax(150px,1fr));gap:12px;margin-top:18px}.r03-operation-card{min-height:285px;padding:16px;border-radius:20px;position:relative;text-align:center;border:1px solid var(--line);background:linear-gradient(165deg,rgba(14,47,66,.9),rgba(3,18,29,.96));transition:.25s}.r03-operation-card:hover{transform:translateY(-6px)}.r03-operation-card.completed{border-color:var(--green)}.r03-operation-card.current{border-color:var(--yellow);cursor:pointer}.r03-operation-card.locked{opacity:.52;filter:grayscale(.75)}.r03-status{position:absolute;left:11px;top:11px;padding:5px 9px;border-radius:999px;font-size:9px;font-weight:800}.r03-status.completed{color:#78ffb3;border:1px solid var(--green)}.r03-status.current{color:#ffe276;border:1px solid var(--yellow)}.r03-status.locked{color:#9cb1bf;border:1px solid #607888}.r03-code{margin-top:28px;font-size:30px;font-weight:800}.r03-icon{font-size:58px;margin:14px 0 8px}.r03-operation-card h3{min-height:48px}.r03-operation-card p{min-height:36px;color:var(--muted);font-size:12px}.r03-card-progress{height:8px;border-radius:999px;background:#123043;overflow:hidden}.r03-card-progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--yellow));transition:.5s}.r03-dashboard-bottom{display:grid;grid-template-columns:1.1fr .9fr 1fr;gap:14px;margin-top:16px}.r03-feed{display:grid;gap:9px}.r03-feed>div{display:grid;grid-template-columns:36px 1fr auto;gap:10px;align-items:center;padding:11px;border-radius:12px;background:#08202f}.r03-feed p{margin:0}.r03-feed small{color:var(--yellow)}.r03-progress-layout{display:grid;grid-template-columns:155px 1fr;gap:18px;align-items:center;margin-top:16px}.r03-radial{width:150px;height:150px;border-radius:50%;display:grid;place-items:center;position:relative;background:conic-gradient(var(--green) 0 0%,#123043 0 100%)}.r03-radial:before{content:"";position:absolute;width:110px;height:110px;border-radius:50%;background:#061621}.r03-radial>div{position:relative;z-index:1;text-align:center}.r03-radial b{display:block;font-size:31px}.r03-progress-legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px}.r03-progress-legend i.done{background:var(--green)}.r03-progress-legend i.current{background:var(--yellow)}.r03-progress-legend i.locked{background:#607888}.r03-tip{background:linear-gradient(155deg,rgba(12,45,64,.86),rgba(69,48,8,.42)),url("assets/airport-security-ai.jpg") center/cover no-repeat}.r03-tip-tags{display:flex;flex-wrap:wrap;gap:7px}.r03-tip-tags span{padding:6px 9px;border-radius:999px;border:1px solid rgba(244,196,48,.34);color:#ffe278;font-size:10px}@media(max-width:1400px){.r03-operation-grid{grid-template-columns:repeat(3,1fr)}}@media(max-width:1000px){.r03-dashboard-bottom{grid-template-columns:1fr}.r03-operations-head{flex-direction:column;align-items:flex-start}}@media(max-width:700px){.r03-operation-grid{grid-template-columns:1fr 1fr}.r03-progress-layout{grid-template-columns:1fr}}
+
+/* R-03 Operations: six cards in one row */
+.r03-operation-grid{
+  display:grid !important;
+  grid-template-columns:repeat(6,minmax(155px,1fr)) !important;
+  gap:12px !important;
+  overflow-x:auto;
+  overflow-y:hidden;
+  padding:2px 2px 12px;
+  scrollbar-width:thin;
+  scrollbar-color:rgba(67,200,255,.55) rgba(7,29,43,.65);
+}
+.r03-operation-grid::-webkit-scrollbar{height:9px}
+.r03-operation-grid::-webkit-scrollbar-track{
+  background:rgba(7,29,43,.65);
+  border-radius:999px;
+}
+.r03-operation-grid::-webkit-scrollbar-thumb{
+  background:linear-gradient(90deg,var(--cyan),var(--yellow));
+  border-radius:999px;
+}
+.r03-operation-card{
+  min-width:155px;
+  min-height:285px;
+}
+@media(max-width:1400px){
+  .r03-operation-grid{
+    grid-template-columns:repeat(6,minmax(155px,1fr)) !important;
+  }
+}
+@media(max-width:1000px){
+  .r03-operation-grid{
+    grid-template-columns:repeat(6,170px) !important;
+  }
+}
+@media(max-width:720px){
+  .r03-operation-grid{
+    grid-template-columns:repeat(6,165px) !important;
+  }
+}
+@media(max-width:480px){
+  .r03-operation-grid{
+    grid-template-columns:repeat(6,160px) !important;
+  }
+}
+
+
+/* ==========================================================
+   RDA V6.3.5 — SYSTEM-WIDE BRAND IDENTITY SYNC
+   Entry Portal → Headquarters → R01–R06
+   ========================================================== */
+.sidebar .brand,
+.sidebar .brand-block,
+.sidebar .side-brand,
+.sidebar .logo-wrap,
+.sidebar header:first-child{
+  align-items:center!important;
+}
+.sidebar .brand img,
+.sidebar .brand-block img,
+.sidebar .side-brand img,
+.sidebar .logo-wrap img,
+.sidebar > img:first-child{
+  width:54px!important;
+  height:auto!important;
+  flex:0 0 54px!important;
+  object-fit:contain!important;
+  filter:drop-shadow(0 0 10px rgba(65,222,230,.10));
+}
+.sidebar .brand h1,
+.sidebar .brand h2,
+.sidebar .brand-block h1,
+.sidebar .brand-block h2,
+.sidebar .side-brand h1,
+.sidebar .side-brand h2{
+  font-size:13px!important;
+  line-height:1.08!important;
+  letter-spacing:.005em!important;
+  margin:0!important;
+}
+.sidebar .brand small,
+.sidebar .brand p,
+.sidebar .brand-block small,
+.sidebar .brand-block p,
+.sidebar .side-brand small,
+.sidebar .side-brand p{
+  margin-top:4px!important;
+  font-size:8px!important;
+  line-height:1.15!important;
+  letter-spacing:.04em!important;
+}
