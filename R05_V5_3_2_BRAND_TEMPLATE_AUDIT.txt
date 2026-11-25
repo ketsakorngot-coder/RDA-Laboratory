@@ -1,0 +1,7 @@
+R05 V5.3.2 — BRAND FROM EVIDENCEVAULT TEMPLATE
+- Template source: R05_EvidenceVault_Organized_Edition(4).zip
+- Brand structure changed to horizontal lockup: logo left, title right, RDA Headquarters below title.
+- Mission logic/flow unchanged.
+- Google Sheets, Teacher Dashboard, Backend/shared master unchanged.
+- R01-R04/R06 unchanged.
+- JavaScript syntax PASS.

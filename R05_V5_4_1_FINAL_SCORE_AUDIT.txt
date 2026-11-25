@@ -1,0 +1,8 @@
+R05 V5.4.1 — FINAL SCORE VISUAL MATCH
+- Kept 100-point scoring logic unchanged.
+- Rebuilt only final result presentation to match R01-R04 RDA result language.
+- Added CASE CLOSED header, FINAL SCORE card, performance breakdown, badge, strength/improve/confidence cards.
+- R06 unlock logic unchanged.
+- Google Sheets / Teacher Dashboard / Backend / shared master unchanged.
+- R01-R04/R06 unchanged.
+- JavaScript syntax PASS.

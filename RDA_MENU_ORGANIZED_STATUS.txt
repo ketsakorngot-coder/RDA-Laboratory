@@ -1,0 +1,11 @@
+RDA MENU ORGANIZED EDITION
+==========================
+Changes:
+- Operations R-01..R-06 compacted into a 2-column grid in mission sidebars.
+- Mission subtitles removed from the sidebar; full names remain available as tooltips.
+- Research Passport / Teacher Center / Headquarters grouped into one compact Quick Tools row.
+- Current-case identity compressed to a slim EVIDENCE → RISK → DECISION strip.
+- CASE WORKFLOW and FINAL DECISION moved away from the sidebar into a bottom-right action dock.
+- RDA Home moved to the top-right to prevent button overlap.
+- Root Headquarters mission cards organized into a 3-column desktop grid / 2-column tablet / 1-column mobile.
+- No mission logic, strict unlock, Pre/Post, Rubric Engine, Research Mode, or Cross-file unlock logic was removed.

@@ -1,0 +1,22 @@
+RDA MASTER — ALL-R UNLOCK STABILIZATION
+
+Root cause found:
+R-02's finishR02() was physically outside </html> and not inside a <script> element.
+The visible UNLOCK R-03 button therefore called a function that was not reliably defined.
+
+Fixes:
+1. Moved finishR02() into a valid script block.
+2. Standardized RDAMaster.completeCaseAndReturn() for R01-R06:
+   - normalize mission ID
+   - save RDA_COMPLETION_HANDOFF
+   - save RDA_LAST_COMPLETED_CASE
+   - mark the mission's native record complete/evaluated
+   - save receipt
+   - snapshot state
+   - return to Headquarters with the full rda_chain
+3. Added rda-unlock-bridge.js as a safety fallback ONLY when a mission's own finish function is missing.
+4. Loaded the bridge in mission HTML pages.
+5. Did NOT modify scoring/rubric, Google Sheets sync, Code.gs, or Teacher Dashboard.
+
+Unlock sequence remains the known-good Golden handoff model:
+R01 → R02 → R03 → R04 → R05 → R06

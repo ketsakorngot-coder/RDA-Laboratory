@@ -1,0 +1,26 @@
+RDA V6.2.0 — CLEAN MASTER RECOVERY
+
+RECOVERY STRATEGY
+- Rebuilt from the known-good V5.5.0 master ZIP.
+- Did NOT use V6.1.2 as the base.
+- Copied only missions/r06/ from V6.1.0 Final Command + Learning Animation.
+
+BYTE-IDENTICAL TO V5.5.0 MASTER
+- index.html (Landing / Login)
+- script.js (main app)
+- style.css
+- classroom-config.js
+- shared/rda-master.js
+- shared/rda-classroom-backend.js
+- Google Apps Script Code.gs
+- TeacherDashboard.html
+- R01-R05
+
+R06
+- Final Command module retained.
+- Learning animations retained.
+- R06 JavaScript syntax PASS.
+
+IMPORTANT
+This recovery intentionally removes the V6.1.2 landing fallback modification.
+The Entry Portal / Login now uses the exact V5.5.0 master implementation.

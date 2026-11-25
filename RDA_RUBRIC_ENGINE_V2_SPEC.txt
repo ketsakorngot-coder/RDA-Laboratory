@@ -1,0 +1,7 @@
+RDA RULE-BASED RUBRIC ENGINE V2
+
+Claim 4 + Evidence 4 + Physics Reasoning 4 + Risk 4 + Decision 4 = 20
+
+The engine no longer awards higher scores merely because a response is longer. It checks traceable captured evidence, case relevance, multiple/quantitative evidence, case-specific physics concepts, explicit Evidence-to-Reasoning links, Risk justification, and actionable Decision coherence. Diagnostic feedback is emitted as CLAIM / EVIDENCE / REASONING / RISK / DECISION ALERT.
+
+Important research note: automated rule-based scores should be validated against expert human rubric ratings before claiming automated scoring validity.

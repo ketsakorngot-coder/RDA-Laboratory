@@ -1,0 +1,49 @@
+RDA V6.4.8 — TRUE AGENT PASSPORT / LEARNING RECORD
+
+ROOT CAUSE FIXED
+- Student name and selected Agent previously shared state.name.
+- Selecting Agent overwrote the student's real name.
+
+REAL DATA SOURCES
+Student:
+1. RDA_AUTH_V1 verified login profile
+2. state.studentName / state.username fallback
+3. RDA_RESEARCH_ID
+4. RDAClassroomConfig.classroomId for classroom
+
+Agent:
+1. RDAMaster.snapshot().agent
+2. selected state.avatar / state.name / state.specialty fallback
+
+Mission learning record:
+- Uses getMasterProgress()
+- getMasterProgress() already uses RDAMaster.snapshot() FIRST
+- Existing strict local completion/Decision Record fallback SECOND
+- No simulated mission scores
+
+Passport displays:
+- actual selected Agent: image / name / specialty
+- actual student identity: name / username-ID / grade-class / school
+- R01-R06 stamps
+- actual score for each completed R
+- Total Score /600
+- Average
+- XP = actual total mission score x10
+- Rank
+- Progress 0/6 -> 6/6
+- Strongest Mission
+- Master RDA Seal only when completed=6
+- Back to Headquarters button
+
+Portal:
+- AGENT PASSPORT button added to Headquarters tools.
+
+PROTECTED
+- R01-R06 mission files unchanged
+- Google Sheets unchanged
+- Teacher Dashboard unchanged
+- Backend/shared master unchanged
+- classroom config unchanged
+- Mission progression unchanged
+
+Main JavaScript syntax PASS.

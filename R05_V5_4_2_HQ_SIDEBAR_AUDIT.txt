@@ -1,0 +1,8 @@
+R05 V5.4.2 — HEADQUARTERS SIDEBAR FIX
+- Fixed Headquarters control in R05 sidebar to match R01-R04 dark active navigation style.
+- Removed browser-default white button appearance.
+- Added cyan active left accent, dark teal fill, rounded corners, consistent typography.
+- Changed only missions/r05/style.css.
+- Mission logic, scoring, unlock logic unchanged.
+- Google Sheets / Teacher Dashboard / Backend / shared master unchanged.
+- R01-R04/R06 unchanged.

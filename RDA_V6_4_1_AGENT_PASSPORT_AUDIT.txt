@@ -1,0 +1,22 @@
+RDA V6.4.1 — AGENT PASSPORT OVERHAUL
+
+Passport changes:
+- Rebuilt Passport as RDA Agent Passport.
+- Brand: RDA / Radiation Detective Agency.
+- Agent identity, Agent ID, class, rank.
+- Agent Progress across R01-R06.
+- Six mission stamps in 3x2 grid.
+- Stamp animation on completed missions.
+- Master RDA Seal unlocks when all 6 missions are complete.
+- Agent Record: missions, total score, average, XP, rank, status.
+- Removed R01-only Live Lab Feed concept from Passport.
+- Passport reads existing local mission progress only; no backend/data model changes.
+
+Protected:
+- Google Sheets unchanged.
+- Teacher Dashboard unchanged.
+- Backend unchanged.
+- shared master unchanged.
+- R01-R06 mission files unchanged.
+
+JavaScript syntax PASS.

@@ -1,0 +1,15 @@
+RDA Unlock Fix V2.1
+===================
+Fixed R-02 not unlocking after R-01.
+Root cause: strict Decision Record validator required every field to contain >=15 characters, including Risk. Risk values are categorical (LOW/MODERATE/HIGH/CRITICAL), so the validator could never become ready.
+
+New completion rule:
+- Native mission completed
+- Claim >= 8 chars
+- Evidence captured/selected
+- Physics Reasoning >= 15 chars
+- Risk selected (categorical; non-empty)
+- Decision >= 10 chars
+- Rule-based Rubric score >= 12/20
+
+The same fix is applied to the master bridge and Headquarters fallback logic, preserving strict sequential unlocking R-01 -> R-06.

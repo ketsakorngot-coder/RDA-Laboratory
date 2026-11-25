@@ -1,0 +1,7 @@
+R05 V5.3.4 — CSS ONLY
+- Fixed 5-step card text wrapping/containment.
+- Restored primary รับภารกิจ button to yellow gradient.
+- Restored secondary ดูรายละเอียดภารกิจ button to dark teal.
+- HTML and mission logic unchanged.
+- Google Sheets / Teacher Dashboard / Backend / shared master unchanged.
+- R01-R04/R06 unchanged.

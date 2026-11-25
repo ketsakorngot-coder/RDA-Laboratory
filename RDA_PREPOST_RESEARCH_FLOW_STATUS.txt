@@ -1,0 +1,27 @@
+RDA RESEARCH FLOW — PRE/POST INTEGRATION
+========================================
+REAL FLOW
+Login
+→ Agent Selection
+→ PRE-INVESTIGATION TEST (20-item RPCUT)
+→ Headquarters
+→ R-01 → R-02 → R-03 → R-04 → R-05 → R-06
+→ POST-INVESTIGATION TEST (20-item RPCUT)
+→ AGENT DEVELOPMENT PROFILE
+
+PRE/POST
+- Same 20 conceptual items, 5 content areas × 4 items.
+- Pre-test stores results but does not reveal answers.
+- Post-test produces Result Profile after submission.
+- Scores are stored separately from XP / Mission Score.
+
+RESULT PROFILE
+- Pre → Post conceptual score
+- 5-area conceptual profile
+- R-01 → R-06 Initial → Revision Decision Quality progression
+- CSV research export
+
+GATING
+- Pre-test is required before Headquarters / missions.
+- R-01–R-06 strict sequential unlock remains active.
+- Post-test is triggered after all 6 cases are effectively completed.

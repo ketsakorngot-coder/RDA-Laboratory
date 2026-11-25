@@ -1,0 +1,8 @@
+R05 V5.5.0 FINAL POLISH
+- Risk Collision now uses a 4-beat visual sequence: Dose Rate -> Exposure -> Population/Context -> Priority Reveal.
+- City Response Preview has four visually distinct modes: Evacuate, Shelter, Restrict Zone, Monitor.
+- Added full-screen CASE CLOSED transition before Final Score.
+- Added responsive spacing rules for 1366x768-class and 1920x1080-class screens.
+- Changed only missions/r05/mission.html and missions/r05/style.css.
+- Scoring, R06 unlock, shared Master, Google Sheets, Teacher Dashboard, Backend unchanged.
+- JavaScript syntax PASS.

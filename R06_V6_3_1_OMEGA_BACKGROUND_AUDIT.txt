@@ -1,0 +1,15 @@
+R06 V6.3.1 — OMEGA COMMAND CENTER LIVE BACKGROUND
+
+Implemented directly in the R06 system:
+- New cinematic National Radiation Command Center background.
+- 3D Thailand hologram command-center art used as the actual R06 background asset.
+- CSS live layers: hologram pulse, national scan beam, data-grid drift,
+  incident beacons, hotspot rings, ambient light, final-contained glow.
+- Added dark readability overlays behind Thai interface content.
+- R06 logic unchanged.
+- R06 index.html unchanged.
+- R06 script.js unchanged.
+- Only missions/r06/style.css changed plus one new background image asset.
+- Google Sheets / Teacher Dashboard / Backend / shared master unchanged.
+- R01-R05 unchanged.
+- JavaScript syntax PASS.

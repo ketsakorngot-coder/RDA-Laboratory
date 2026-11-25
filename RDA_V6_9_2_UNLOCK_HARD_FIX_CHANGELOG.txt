@@ -1,0 +1,3 @@
+RDA V6.9.2 UNLOCK HARD FIX
+
+Unlock now accepts the authoritative completion handoff emitted by completeCaseAndReturn, while preserving strict sequential progression. completeCaseAndReturn also persists native completion state. No Google Sheets or Teacher Dashboard changes.

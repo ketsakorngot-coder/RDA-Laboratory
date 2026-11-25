@@ -1,0 +1,22 @@
+RDA V6.4.9 — AGENT PASSPORT SCROLL / RESPONSIVE FIX
+
+Problem:
+Agent Passport content extended below the viewport but could not be scrolled.
+
+Fix:
+- #passport now owns its own vertical scroll area.
+- Passport shell/content is no longer height-clipped.
+- Added bottom safe space so R05/R06, Learning Record Summary and Master RDA Seal can be reached.
+- Desktop Agent identity panel remains sticky when viewport height allows it.
+- Sticky behavior is disabled on <=1000px width and <=800px height to prevent clipping.
+- Mobile uses 100dvh.
+
+Only style.css changed.
+No changes to:
+- Agent/Student data
+- R01-R06 scores/stamps
+- RDAMaster
+- Mission flow
+- Google Sheets
+- Teacher Dashboard
+- Backend/shared master

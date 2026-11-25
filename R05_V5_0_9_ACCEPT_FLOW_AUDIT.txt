@@ -1,0 +1,1 @@
+Fixed R05 accept flow conflict. Native HQ and operation entry now call unique startR05Phase2(). A late shim redirects any legacy acceptMission references to Phase2. After acceptance, legacy main children are hidden and RADIATION RISK COMMAND renders immediately at MONITOR. Protected R01-R04/R06/Google Sheets/Teacher Dashboard/Backend/shared master unchanged.

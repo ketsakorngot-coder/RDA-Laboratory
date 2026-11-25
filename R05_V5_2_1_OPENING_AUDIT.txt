@@ -1,0 +1,1 @@
+Added R01-R04-style Opening Mission Brief before R05 mission experience. Opening: R05 DECIDE, mission description, รับภารกิจ, details, THE CITY RADIATION EVENT card, quick steps. After acceptance the existing 5-step flow opens unchanged. Protected R01-R04/R06/Google Sheets/Teacher Dashboard/Backend/shared master unchanged.

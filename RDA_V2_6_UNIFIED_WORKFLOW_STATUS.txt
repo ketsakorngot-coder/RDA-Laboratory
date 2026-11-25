@@ -1,0 +1,28 @@
+RDA FINAL V2.6 — UNIFIED CASE WORKFLOW
+======================================
+
+The duplicated CASE WORKFLOW + FINAL DECISION interaction has been removed.
+
+ONE FLOW PER CASE:
+Prediction
+→ Simulation
+→ Evidence
+→ Reasoning
+→ Risk
+→ Decision
+→ Feedback
+→ Revision
+→ Case Closed / Next Case Unlock
+
+Changes:
+- Removed the separate floating FINAL DECISION button.
+- One START CASE / CONTINUE CASE button is used for each mission.
+- Final Decision is Step 6 inside the same workflow, not a second form.
+- Existing Simulation remains the investigation environment.
+- Evidence selected in Step 3 is carried into Reasoning.
+- Claim + Physics Reasoning are completed before Risk.
+- Risk must be selected before Decision.
+- Initial Decision is scored, then Diagnostic Feedback is shown.
+- Revision closes the case and triggers the existing cross-file unlock handoff.
+- Strict sequential unlock, Pre/Post, Dashboard, Research Mode, Rubric Engine V2,
+  and the organized V2.4 menu remain in the system.

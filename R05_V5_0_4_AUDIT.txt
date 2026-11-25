@@ -1,0 +1,1 @@
+Reverted V5.0.3 root layout experiment. Did not touch .app/.main/sidebar. Changed only R05 Mission Brief markup/CSS to R01-like proportions inside the native R05 content column. Post-accept R05 flow and protected systems unchanged.

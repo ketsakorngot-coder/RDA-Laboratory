@@ -1,0 +1,16 @@
+RDA V6.3.6 — BRAND ZERO CHECK
+
+Deprecated student-facing brand:
+Radiation Detective Kit
+
+Replacement:
+Radiation Investigation & Decision Laboratory
+
+Verification:
+- Runtime student-facing HTML/CSS/JS remaining occurrences: 0
+- Google Sheets unchanged
+- Teacher Dashboard unchanged
+- Backend unchanged
+- shared master unchanged
+- classroom config unchanged
+- JavaScript syntax PASS

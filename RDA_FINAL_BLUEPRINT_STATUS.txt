@@ -1,0 +1,27 @@
+RDA FINAL BLUEPRINT — R-01 REFERENCE ARCHITECTURE
+
+Implemented in R-01:
+Prediction / Misconception Trap
+→ existing Simulation
+→ Capture Evidence
+→ Evidence Board
+→ select 2+ evidence items
+→ Claim
+→ Physics Reasoning
+→ Risk LOW/MODERATE/HIGH/CRITICAL
+→ Decision
+→ Confidence before/after
+→ Initial Decision
+→ Diagnostic Feedback
+→ Revision 01
+→ Decision Quality /20
+
+The existing R-01 simulation/UI is preserved.
+
+Case names aligned:
+R-01 UNKNOWN SOURCE
+R-02 SHIELDING PROTOCOL
+R-03 EXPOSURE ZONE
+R-04 DECAY FILE
+R-05 SECURITY RISK
+R-06 RADIATION INCIDENT

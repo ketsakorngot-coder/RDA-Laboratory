@@ -1,0 +1,1 @@
+R05 only: Headquarters Mission Brief + รับภารกิจ; duplicate legacy START CASE hidden; compact Command Status; fixed sidebar; Live Map remains hero; selected Sensor pulse; Sensor Detail/Capture Evidence retained; HAZARD != RISK retained; Risk Command Table/Public Alert/Decision retained; R06 handoff retained. R01-R04, R06, Google Sheets, Teacher Dashboard, Backend unchanged.

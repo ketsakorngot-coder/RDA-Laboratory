@@ -1,0 +1,8 @@
+RDA V2.10 MISSION LAB UX
+- Student-facing mission flow fixed to one 5-step bar: PREDICT > SIMULATE > EVIDENCE > DECIDE > EXPLAIN.
+- Internal 8-step state remains untouched for rubric/research/backend compatibility.
+- Added per-mission learning question and "what you are learning" panel for R-01 to R-06.
+- Redesigned case overlay as a full-screen futuristic radiation laboratory with animated radar/scan background.
+- Removed duplicate/floating workflow appearance and strengthened visual hierarchy.
+- Simplified student wording around simulation/evidence actions.
+- No changes to classroom-config.js, Google Apps Script backend, Google Sheets schema, Teacher Dashboard, rubric engine, or storage keys.

@@ -1,0 +1,41 @@
+RDA V6.9.0 — UNIFIED 100-POINT MISSION / RUBRIC SCORE SCALE
+===============================================================
+
+Purpose
+-------
+Fix the score-scale mismatch where Teacher Dashboard used /100 for missions while the Decision Quality Rubric engine and R01-R04 decision records were still /20.
+
+Changes
+-------
+1. shared/rda-rubric-v2.js
+   - Decision Quality Rubric is now 5 sections x 20 = 100 points.
+   - Returns maxScore: 100 and engine RDA_RULE_BASED_V2_100.
+
+2. R01-R04
+   - Decision Quality displays use /100.
+   - Verification threshold is 60/100 (equivalent to the previous 12/20).
+   - Legacy localStorage decision scores are migrated from /20 to /100 in-browser only.
+   - Google Sheets data is not rewritten.
+
+3. RDA Master / Achievements / Student Analytics
+   - Unified rubric max = 100.
+   - Analytics bars and labels now use /100.
+
+4. Google Sheets sync / Teacher Dashboard
+   - New case rows are marked as 100-point rubric via metadata inside the existing FeedbackJSON field; no new sheet column is added.
+   - Legacy R01-R04 CASES rows without the marker are normalized from /20 to /100 in the dashboard response only.
+   - R05-R06 remain /100.
+   - Pre-test / Post-test remain /20.
+   - No Google Sheet data is modified by this patch.
+
+Validation examples
+--------------------
+- PRE/POST 16/20 => 80%
+- Mission/Rubric 80/100 => 80%
+- Legacy Mission/Rubric 16/20 => dashboard-normalized 80/100 => 80%
+- Legacy Mission/Rubric 12/20 => dashboard-normalized 60/100 => 60%
+
+
+5. Legacy compatibility
+   - RDA Master and local Research/Teacher views normalize legacy R01-R04 Decision Quality scores from /20 to /100 when the record lacks the new 100-point metadata.
+

@@ -1,0 +1,19 @@
+RDA FINAL V2.7 — FINAL QA BUILD
+
+Core flow:
+Login → Agent → Pre-test → Headquarters → R-01…R-06 → Post-test → Result Profile
+
+Each case:
+Prediction → Simulation → Evidence → Reasoning → Risk → Decision → Feedback → Revision → CASE CLOSED
+
+V2.7 additions:
+- Persistent CASE CLOSED receipt.
+- Headquarters visibly confirms CASE CLOSED and NEXT CASE UNLOCKED.
+- Completion handoff remains independent of rubric threshold.
+- QA_STATUS.html lets the teacher inspect handoff, receipts, and mission unlock state.
+- Existing unified workflow, organized menu, Rubric Engine V2, Dashboard, Research Mode retained.
+
+Automated structural/logic QA:
+- JavaScript syntax: PASS
+- R-01 completion handoff -> R-02 unlocked: PASS
+- R-03 remains locked until R-02 completes: PASS

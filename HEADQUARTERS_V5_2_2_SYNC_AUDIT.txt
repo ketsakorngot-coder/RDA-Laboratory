@@ -1,0 +1,6 @@
+HEADQUARTERS ONLY UPDATE
+R04 card = THE DECAYING CARGO; Half-life Model → Activity → PROCESS/ADJUST/HOLD.
+R05 card = THE CITY RADIATION EVENT; Dose Rate + Exposure Time + Population + Context → Public Safety.
+R01-R06 mission files unchanged.
+Google Sheets / Teacher Dashboard / Backend / shared master unchanged.
+JavaScript syntax: PASS.

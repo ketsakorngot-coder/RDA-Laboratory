@@ -1,0 +1,1 @@
+VISUAL INTEGRATION ONLY. R05 logic remains MONITOR -> EVIDENCE -> ASSESS RISK -> PUBLIC ALERT -> DECIDE. Restored Kanit font, fixed RDA sidebar shell, Command Center-like dark sci-fi background, compact mission status, RDA-styled panels/map/cards. No JS logic changed. Protected R01-R04/R06/Google Sheets/Teacher Dashboard/Backend/shared master unchanged.

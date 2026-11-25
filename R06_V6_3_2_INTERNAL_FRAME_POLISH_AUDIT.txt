@@ -1,0 +1,14 @@
+R06 V6.3.2 — INTERNAL FRAME VISUAL POLISH
+
+Visual-only refinement:
+- Unified premium glass-panel language.
+- Thin luminous edges and corner accents.
+- Cleaner section headers and score boxes.
+- Better evidence, resource, forecast, risk, collision, and final-result cards.
+- Improved spacing, typography rhythm, hover states, selected states.
+- Final verdict panels now visually distinct and premium.
+- R06 logic / HTML / JS unchanged.
+- Google Sheets / Teacher Dashboard / Backend / shared master unchanged.
+- R01-R05 unchanged.
+- Only missions/r06/style.css changed.
+- JavaScript syntax PASS.

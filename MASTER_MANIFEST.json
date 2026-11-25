@@ -1,0 +1,498 @@
+{
+  "package_name": "RDA MASTER — V6.9.3 Golden Frontend + V6.9.4 Dashboard Fix Backend",
+  "frontend_source": "RDA_V6_9_3_UNLOCK_FIX_PLUS_RELIABLE_PULSE(2).zip",
+  "backend_source": "RDA_V6_9_4_COMPLETE_DASHBOARD_FIX_PIN_25692569.zip",
+  "frontend_files_verified_unchanged": true,
+  "backend_markers": {
+    "setupV694": true,
+    "fixed_pin_25692569": true,
+    "dashboard_json_transport": true,
+    "teacher_dashboard_calls_json_transport": true
+  },
+  "frontend_hashes": {
+    "FINAL_INTEGRATION_TEST.txt": {
+      "sha256": "7af761a5e8c076f507e1eb96c48f635f8bf442eba8a3cb49d53a8ab5bf6120bb",
+      "unchanged_from_golden": true
+    },
+    "R05_V5_5_0_FINAL_POLISH_AUDIT.txt": {
+      "sha256": "3970004185c84542951f6343149c6876214219af62aeeac0122ac7971efe72b9",
+      "unchanged_from_golden": true
+    },
+    "RDA_V6_8_6_DATA_INTEGRITY_SECURITY_FIX_CHANGELOG.txt": {
+      "sha256": "b58d1b2fc1aad876f26b777f4a3a35189796c51c0b881bf3ea146f40b9c8a1e6",
+      "unchanged_from_golden": true
+    },
+    "RDA_CASE_ARCHITECTURE_V3_STATUS.txt": {
+      "sha256": "b0d332c3d56d1aa433c7546fa7492aa283cc3e33273e0e3fc1a33ccbb83cad9c",
+      "unchanged_from_golden": true
+    },
+    "R05_V5_0_5_NATIVE_HQ_AUDIT.txt": {
+      "sha256": "130cd91bb0ecca09030ef412e434d8d252a8fcab45d00c3b38bfc3aee279e8e3",
+      "unchanged_from_golden": true
+    },
+    "R06_V6_3_1_OMEGA_BACKGROUND_AUDIT.txt": {
+      "sha256": "7b6dbbb95f662676ffe797b66012d3dfa2d48d6c859cd58149df0f925982026e",
+      "unchanged_from_golden": true
+    },
+    "R05_V5_3_5_ACCEPT_MISSION_AUDIT.txt": {
+      "sha256": "e77813c6fc2ff80bb928fd513aeb1a7270c5fee0795df0c7351dc6a56add7ba7",
+      "unchanged_from_golden": true
+    },
+    "RDA_V6_4_8_AGENT_PASSPORT_REAL_DATA_AUDIT.txt": {
+      "sha256": "e1910d1c49e1d94a08b55ea3e3d37bdb2edede8a369eeaea18ca7f97444636d5",
+      "unchanged_from_golden": true
+    },
+    "R05_V5_0_7_GLOBAL_TOP_GAP_AUDIT.txt": {
+      "sha256": "3a3ec03a1a9ad25eb6d7e74bb357d3379671b528f57d7d9d7706204110e0c0e7",
+      "unchanged_from_golden": true
+    },
+    "RDA_V6_3_8_R06_OPERATIONS_CLICK_FIX_AUDIT.txt": {
+      "sha256": "728997a57581b3fb9d4a52c9a97d69f66aafa101f22b07cd479b47d442b42608",
+      "unchanged_from_golden": true
+    },
+    "RDA_V2_9_CLASSROOM_STATUS.txt": {
+      "sha256": "855e9ca8550d317c5318fba0c8f09d109b7d1c9984b13c4504e3706215b3a616",
+      "unchanged_from_golden": true
+    },
+    "R05_V5_3_6_SPLIT_PAGES_AUDIT.txt": {
+      "sha256": "2a1a5896a4c2932ca5d52939bec4e55b030e18fc0bf9f7ee438a04de36943f3b",
+      "unchanged_from_golden": true
+    },
+    "FINAL_QA_REPORT.txt": {
+      "sha256": "146cd2a47b92235707f7aa221b404f666e65e1950ef7b80df11e2fe54a8620ee",
+      "unchanged_from_golden": true
+    },
+    "classroom-config.js": {
+      "sha256": "8cb59dbceee28b5049719aaec7feeff7507a1b7b7172a5071adc49103988dc91",
+      "unchanged_from_golden": true
+    },
+    "R06_V6_3_0_THAI_FIRST_VISUAL_AUDIT.txt": {
+      "sha256": "663b3af8b8473fc86632cecae0d79b7e3f3c9148ca3d02654c62741f611256e8",
+      "unchanged_from_golden": true
+    },
+    "RDA_V2_HYBRID_CHANGELOG.txt": {
+      "sha256": "2395934fced29399af383606def967cce6ae2d3a676cab81e8dfdd583d2ca5d5",
+      "unchanged_from_golden": true
+    },
+    "index.html": {
+      "sha256": "f54e5dcbda217bbbfbd60a22b9a63fa3c12d44f6f1f26e93d1d629de86abc633",
+      "unchanged_from_golden": true
+    },
+    "RDA_V6_5_2_MISSION_PORTAL_GRAND_ENTRY_AUDIT.txt": {
+      "sha256": "e01080152538eec2f7393b7b93b38c5234a8c23f9b4025ed57c03a7624677ef9",
+      "unchanged_from_golden": true
+    },
+    "R05_V5_0_9_ACCEPT_FLOW_AUDIT.txt": {
+      "sha256": "b0fec20594951c4413885e53a53c93ece8e4f5b27b90c5de241afc80654077dc",
+      "unchanged_from_golden": true
+    },
+    "R05_V5_0_2_HEADQUARTERS_AUDIT.txt": {
+      "sha256": "ad65c9a5ce128f09a9fc340e936f035f4df03b098a44252e4c73bfb4d10b45e3",
+      "unchanged_from_golden": true
+    },
+    "RDA_V6_5_0_PASSPORT_VISUAL_POLISH_AUDIT.txt": {
+      "sha256": "7b5e5beb446cf120aabf5916ebd0e13d1cf787fa1f893d4a2f51d66c150e3798",
+      "unchanged_from_golden": true
+    },
+    "RDA_V6_4_0_SIDEBAR_EXACT_MATCH_AUDIT.txt": {
+      "sha256": "ba6f056e6447efa7b70bf80f7a7843966aa5d2c3bb5b036890198e062e23b65e",
+      "unchanged_from_golden": true
+    },
+    "R05_V5_4_0_WOW_SCORE_AUDIT.txt": {
+      "sha256": "16715682278fdc41b2792ea2fc5c61808f52f4c09146c699c354aa30d64620bc",
+      "unchanged_from_golden": true
+    },
+    "RDA_V6_4_9_PASSPORT_SCROLL_AUDIT.txt": {
+      "sha256": "8531767c975b9725b4db7100dd1100f5b1d561174cfdccbe7ba464d36938bedd",
+      "unchanged_from_golden": true
+    },
+    "R05_V5_3_2_BRAND_TEMPLATE_AUDIT.txt": {
+      "sha256": "7b46f563803afb1bd84324e81298296cbc747caaeb07724f5d06f53602d60f67",
+      "unchanged_from_golden": true
+    },
+    "R05_V5_1_1_VISUAL_INTEGRATION_AUDIT.txt": {
+      "sha256": "8c76175234f7cabaf0ab39a7655f952f8a9047774d4c8912b6589a8db35561ca",
+      "unchanged_from_golden": true
+    },
+    "HEADQUARTERS_V5_2_2_SYNC_AUDIT.txt": {
+      "sha256": "238153ac8579ef684c485c4f6c186ed72b60b6504e85eee38274ad01f6c4dc7c",
+      "unchanged_from_golden": true
+    },
+    "R06_V6_3_3_FINAL_UI_REFINEMENT_AUDIT.txt": {
+      "sha256": "bf8912997db4857fd98f4ae4eef9998d620b647eb12b7ace3de7e1a756506449",
+      "unchanged_from_golden": true
+    },
+    "RDA_PREPOST_RESEARCH_FLOW_STATUS.txt": {
+      "sha256": "03c2b309d8d544956b0ae97194622d4f4b152e26c4f37938b2d635febe4fff6c",
+      "unchanged_from_golden": true
+    },
+    "style.css": {
+      "sha256": "bfcb60d311415bcf8369eec86a90d7c67305f5f0f2237acd2848cb567d9fe6cc",
+      "unchanged_from_golden": true
+    },
+    "R05_PHASE2_AUDIT.txt": {
+      "sha256": "0594c0c97dd398fbe918054dbf95bbe5750b09da9865894d392d5dfca76c827b",
+      "unchanged_from_golden": true
+    },
+    "R05_V5_0_6_LAYOUT_POLISH_AUDIT.txt": {
+      "sha256": "ff3dce754a76f749b3c49d964eda5aaf79dcbc2365af71a50ae09ece56fb03bc",
+      "unchanged_from_golden": true
+    },
+    "RDA_RUBRIC_ENGINE_V2_SPEC.txt": {
+      "sha256": "dd37e771e3837b5e6c5b95d5487afeac79c523a8d4d5a0dfded7d73f9cfa478c",
+      "unchanged_from_golden": true
+    },
+    "R05_V5_0_8_TRUE_TOPGAP_AUDIT.txt": {
+      "sha256": "4b60ec711360ef6b4761f7d055cdeeaf5a6eb3ea1ea35d701162ce9c1c0c8f6d",
+      "unchanged_from_golden": true
+    },
+    "R05_V5_3_4_STEP_TEXT_BUTTONS_AUDIT.txt": {
+      "sha256": "eed81e519a5e7fa1fa9a85ff05d52acdd68ce1ffbc7bed290ecf95ce9fd5d0e9",
+      "unchanged_from_golden": true
+    },
+    "RDA_V6_3_6_BRAND_ZERO_AUDIT.txt": {
+      "sha256": "2879f63ef6513ed65ac603c7d73bb77f3a80a9c1fd1755a3a4e244c333d172de",
+      "unchanged_from_golden": true
+    },
+    "RDA_V3_LIVE_SCIENTIFIC_LAB_CHANGELOG.txt": {
+      "sha256": "750131515200645d1f1b48c5d586794cbf835ea66ab0ea79c27147a8647cc721",
+      "unchanged_from_golden": true
+    },
+    "OPEN_RDA_MASTER.bat": {
+      "sha256": "0c384b454e3143c0b6233e7ecad5ee2429017203ca83d352d8913e848cc322a0",
+      "unchanged_from_golden": true
+    },
+    "R05_V5_2_1_OPENING_AUDIT.txt": {
+      "sha256": "1b04944fb213c437a099aab1b89a48cf3a4b6a84afc81381f1db3255c66c87c0",
+      "unchanged_from_golden": true
+    },
+    "UNLOCK_FIX_V2_2.txt": {
+      "sha256": "cdbdcd46abdccf8a94149c09a1ce56083425d64cba83409c839b34e366b44d14",
+      "unchanged_from_golden": true
+    },
+    "script.js": {
+      "sha256": "fbb93832684a76fafecadbc6a90c3e4081ab0ce294581fbc606ce53a76fb83ff",
+      "unchanged_from_golden": true
+    },
+    "QA_STATUS.html": {
+      "sha256": "1b34b1e0fb398a7a8c05acf7c9f60ab438591042969e0f87d1ad3e42403adc79",
+      "unchanged_from_golden": true
+    },
+    "RDA_V6_5_1_AGENT_PASSPORT_DASHBOARD_LAYOUT_AUDIT.txt": {
+      "sha256": "0640f005a91d0eeb7d29fe790bdaee3a5beac07321a1572a2777b9547bd81453",
+      "unchanged_from_golden": true
+    },
+    "R05_V5_3_3_STEP_CARD_AUDIT.txt": {
+      "sha256": "162f8d4a5c3258f9e0dba3b9e9f3be163b9b5ebf2b2d55e86ad995c0059208a2",
+      "unchanged_from_golden": true
+    },
+    "R05_V5_1_0_CITY_EVENT_AUDIT.txt": {
+      "sha256": "e660b5df71b60276a0deb37c428c8e5960c7df5182a97b11fa24ab12a3748ec8",
+      "unchanged_from_golden": true
+    },
+    "R05_V5_3_0_VISUAL_POLISH_AUDIT.txt": {
+      "sha256": "b27bcd9a2a572369255cfa9d5ebdd26a3244ad8471e1eb22cf315f66a0f6ade7",
+      "unchanged_from_golden": true
+    },
+    "RDA_V6_3_9_R06_SIDEBAR_MATCH_AUDIT.txt": {
+      "sha256": "642d45421bcc5e9664a42c8b977a0803eea8081f3e6a69103814fcb749b68391",
+      "unchanged_from_golden": true
+    },
+    "R05_V5_2_3_OPENING_FLOW_AUDIT.txt": {
+      "sha256": "116fda1e835df4d7884368a60b4ac45bab8e9d4f210e21c481d3a3f195a8eda0",
+      "unchanged_from_golden": true
+    },
+    "R05_V5_2_9_FULL_HQ_SHELL_AUDIT.txt": {
+      "sha256": "a923d85db6ef2a793369f078375436123678e3553d8aa5a10d9b9a24d1d68c97",
+      "unchanged_from_golden": true
+    },
+    "RDA_V2_10_MISSION_LAB_UX.txt": {
+      "sha256": "2402c72f9e3d5c12cae4ad547732a5f766dfbaf9cce1aed6ff04396bf208b840",
+      "unchanged_from_golden": true
+    },
+    "R05_V5_4_1_FINAL_SCORE_AUDIT.txt": {
+      "sha256": "e08fae43684bcd4653875c08964e136767df0c163ca1d57382e38676e0c4b359",
+      "unchanged_from_golden": true
+    },
+    "RDA_MENU_ORGANIZED_STATUS.txt": {
+      "sha256": "db360ece587510ccc1682aae774c9b89de1bec582b5025e25e6024863b00bcfc",
+      "unchanged_from_golden": true
+    },
+    "RDA_V6_9_0_UNIFIED_100_SCORE_SCALE_CHANGELOG.txt": {
+      "sha256": "8bac689a02af63d3f2b0072768052f89d2b4768664b731abc93d2df615599b61",
+      "unchanged_from_golden": true
+    },
+    "R05_V5_0_4_AUDIT.txt": {
+      "sha256": "5b379e947a26b0854a891ee0761673d1d3a53528e39ce9bb57811d4f6505c9da",
+      "unchanged_from_golden": true
+    },
+    "RDA_DECISION_LAB_ARCHITECTURE.txt": {
+      "sha256": "86b21b4a12de861506c7876377d851d5905a432a34bdf48ff6393f5aef5ed8cf",
+      "unchanged_from_golden": true
+    },
+    "R05_V5_0_1_FINAL_AUDIT.txt": {
+      "sha256": "20f22ce69346dd51659f820a1838aa9350685c8c0a7a9455b605903ab2fedd32",
+      "unchanged_from_golden": true
+    },
+    "RDA_V6_4_5_RESTORE_PORTAL_AUDIT.txt": {
+      "sha256": "2b1551a29cbecaa1f8288d2f1a53e32aba9b14ec60904625982f125a1826e568",
+      "unchanged_from_golden": true
+    },
+    "RDA_COMPLETE_LEARNING_ARCHITECTURE.txt": {
+      "sha256": "767126dfa6fba0b723f6d75e5a09e7f2261fd33731d75c43565aa98d8dd58032",
+      "unchanged_from_golden": true
+    },
+    "R05_V5_3_8_UNLOCK_AUDIT.txt": {
+      "sha256": "71eb24f8646949860c7be19cfcca80a54b37c0bcea9cf9ecefa8d5be21e598fc",
+      "unchanged_from_golden": true
+    },
+    "R06_V6_3_2_INTERNAL_FRAME_POLISH_AUDIT.txt": {
+      "sha256": "4ed38b80b8b06b3f6ce55603c756e75a034b036a3bc791a8994e7ccdd8cd324d",
+      "unchanged_from_golden": true
+    },
+    "README.txt": {
+      "sha256": "5959d9f865fe7683016520ca80c3503dca5ee123bea048ab1ecee5a39dd0ccc7",
+      "unchanged_from_golden": true
+    },
+    "RDA_V6_5_3_CINEMATIC_WOW_AUDIT.txt": {
+      "sha256": "fe36f389f65acbf8362254cfd83edd07ddd70f61a907f9d4b532ce323669f7b2",
+      "unchanged_from_golden": true
+    },
+    "RDA_V6_9_2_UNLOCK_HARD_FIX_CHANGELOG.txt": {
+      "sha256": "03b24924812b07ecd1a112fb03060e3cfd415f317cb3003b4346b16bc5227fa7",
+      "unchanged_from_golden": true
+    },
+    "RDA_V6_3_7_AGENCY_BRAND_AUDIT.txt": {
+      "sha256": "348b8047341aa90fa4ea52a80f538e897939bea10456722cd9a3e11e05a19baf",
+      "unchanged_from_golden": true
+    },
+    "R05_V5_4_2_HQ_SIDEBAR_AUDIT.txt": {
+      "sha256": "564d8dbb86657ba30d00cb5087e3f6b66162cbdbc358b604c6b8fe3d8d84a837",
+      "unchanged_from_golden": true
+    },
+    "RDA_V6_2_0_CLEAN_RECOVERY_AUDIT.txt": {
+      "sha256": "fe4c626925a549868ee0c3c47c6239e3934fc2305cb71cd07a81f935231b5b25",
+      "unchanged_from_golden": true
+    },
+    "RDA_V2_8_STUDENT_TEACHER_ACCESS_STATUS.txt": {
+      "sha256": "9ced63a92c54383ad25a3483d8ae4256c725aa72296d6ee17bd3fed2f264e8c9",
+      "unchanged_from_golden": true
+    },
+    "R06_V6_3_4_SIDEBAR_GRID_AUDIT.txt": {
+      "sha256": "1a5c48cb14ab3289f7911a7d5ccf10e137c5a0c77237bb0f4d3b010c02718eb3",
+      "unchanged_from_golden": true
+    },
+    "RDA_V6_4_1_AGENT_PASSPORT_AUDIT.txt": {
+      "sha256": "00efaefe1f85eb90efb6d70da294d0764fbc11db978fc331aae01abd35ab3b64",
+      "unchanged_from_golden": true
+    },
+    "UNLOCK_FIX_V2_3_CROSS_FILE.txt": {
+      "sha256": "b6448dfe6eb87475a47e6e48ef69a6a3a0a601a3f82892e85315b1aa2a1bc625",
+      "unchanged_from_golden": true
+    },
+    "RDA_FINAL_BLUEPRINT_STATUS.txt": {
+      "sha256": "7781fb1ec39090d8d8fb908f273fd1ca27d2e78024ff3cad16a9b47029723b9d",
+      "unchanged_from_golden": true
+    },
+    "RDA_V2_7_FINAL_QA_STATUS.txt": {
+      "sha256": "ede6ad132c0ec45dfedc7d5c83e370fbcd236c52b14cae87e3fbb864710b03a0",
+      "unchanged_from_golden": true
+    },
+    "RDA_UNLOCK_FIX_V2_1.txt": {
+      "sha256": "be603347d7762b7506d116e0f812f4f1b7d7be71f765eb44925aa1c3a81cfd0a",
+      "unchanged_from_golden": true
+    },
+    "RDA_V2_8_1_RESET_UI_FIX.txt": {
+      "sha256": "9f1c2ac07a938d1b21de92d40a230a10ad9c19c596cdd9fca9ed4960e69de548",
+      "unchanged_from_golden": true
+    },
+    "RDA_DASHBOARD_RESEARCH_MODE_STATUS.txt": {
+      "sha256": "5851b5858d5da0a9a3e7b4b9b614f3b4cae1bb21826de57bded16aa33a18e659",
+      "unchanged_from_golden": true
+    },
+    "R05_V5_2_0_EVIDENCE_VAULT_AUDIT.txt": {
+      "sha256": "5afc575810878a55cf6742ca34c000c24c0df09cf55560a3e4db941ebb658cae",
+      "unchanged_from_golden": true
+    },
+    "RDA_V2_5_UNLOCK_FIX.txt": {
+      "sha256": "e7cbb66d88d68e69666cf1d2975215af818d9b8e45e187e758b91825165cbe26",
+      "unchanged_from_golden": true
+    },
+    "RDA_V2_6_UNIFIED_WORKFLOW_STATUS.txt": {
+      "sha256": "402c2f6933b7421ab1b19429b25b945970ea345623682949c90d50b32f6be78c",
+      "unchanged_from_golden": true
+    },
+    "shared/rda-achievements.js": {
+      "sha256": "9d92c3a0ed6880dcebea221e83f9dcbb25ae166db0fc3848f8401a6ee05d3a97",
+      "unchanged_from_golden": true
+    },
+    "shared/rda-rubric-v2.js": {
+      "sha256": "77d1ab9febc5972310846e70064571ee5563977c54354b2bdd998648308908c3",
+      "unchanged_from_golden": true
+    },
+    "shared/rda-live-lab-v3.css": {
+      "sha256": "edf8dd0468721604d92a3187d37c14b9aba6dac1c9a21f716c577565282ae274",
+      "unchanged_from_golden": true
+    },
+    "shared/rda-story.js": {
+      "sha256": "68437fa756a87405208f0502c08e56cc11ef90b3f76c77badb303df546fe0088",
+      "unchanged_from_golden": true
+    },
+    "shared/rda-v2-ux.css": {
+      "sha256": "84142b60befa816f499669941e56893e449bce9199fbf0d0f56a4e307d52e899",
+      "unchanged_from_golden": true
+    },
+    "shared/rda-v2-ux.js": {
+      "sha256": "6e927fc56df6045808e782ac99b00a74f568f4d98ce845c29f0b0a19be16c61f",
+      "unchanged_from_golden": true
+    },
+    "shared/rda-master.js": {
+      "sha256": "43d7cfc1a37d770cec6c1fd252c568c9efc6f2a4732d9f07826700516b0b598f",
+      "unchanged_from_golden": true
+    },
+    "shared/rda-live-lab-v3.js": {
+      "sha256": "d26745df80f2e9a93b65314d229aebaef7cdf007434150d9b891e5310aa013e6",
+      "unchanged_from_golden": true
+    },
+    "shared/rda-classroom-backend.js": {
+      "sha256": "027cc255638b88f4c45d535b8b71ca1ca67ae762d7fafd24fb4d53ae0792603a",
+      "unchanged_from_golden": true
+    },
+    "assets/candidate_ava.jpg": {
+      "sha256": "bce99eea2721aabbf098cb013f258ed4ccad733497b46b2c30abba597cd44ed0",
+      "unchanged_from_golden": true
+    },
+    "assets/avatar_agent_1.jpg": {
+      "sha256": "194275b054915cfbc49a41e8fa12bc60061b7fbf43d3cad96792fe42a21d6824",
+      "unchanged_from_golden": true
+    },
+    "assets/candidate_ethan.jpg": {
+      "sha256": "9c824027761c9f2800d878920412309918ddcfe485a2b360f2e1d00e2f192d5f",
+      "unchanged_from_golden": true
+    },
+    "assets/background.jpg": {
+      "sha256": "5252ba1cadb4640634717af62db564a2b8eac975d3dbc4e3f050258e3b900c3c",
+      "unchanged_from_golden": true
+    },
+    "assets/logo.png": {
+      "sha256": "99de9b065dffa6a35a4704a2fc58a674e26ff5763e0c5f0ab98212adadf4c620",
+      "unchanged_from_golden": true
+    },
+    "assets/candidate_luna.jpg": {
+      "sha256": "ae6065c6ccebdce96300d20ecaa79549596b5bea190c22222868dae077791296",
+      "unchanged_from_golden": true
+    },
+    "assets/inspector_atom_command.jpg": {
+      "sha256": "19cee66c738ceec1c8a4d4c262c29fc32271396a4e5e1d9189e910e45ca1d3d2",
+      "unchanged_from_golden": true
+    },
+    "assets/avatar_agent_3.jpg": {
+      "sha256": "70eea171b20ae1c71bc6a1bda3c5c4b01720cbcaeee32909e721c558401a2666",
+      "unchanged_from_golden": true
+    },
+    "assets/candidate_lucas.jpg": {
+      "sha256": "bf298d3922991f6ae32684fcf20f9740aea5771e637fab3deace6a33dda73a48",
+      "unchanged_from_golden": true
+    },
+    "assets/avatar_agent_4.jpg": {
+      "sha256": "122d269e4e5f02beb6d30a8ab146372eb7af5afb87f7c7d56bf77129dd8305f5",
+      "unchanged_from_golden": true
+    },
+    "assets/avatar_agent_2.jpg": {
+      "sha256": "8ca4d5d036beebfc0eed6bc7727e0aaa9de05c1f67591b02046df0c5e2b5de69",
+      "unchanged_from_golden": true
+    },
+    "missions/r03/index.html": {
+      "sha256": "26519140af5e04547bf22f895345c2fe8c0e20275a802797093deb5db61f6007",
+      "unchanged_from_golden": true
+    },
+    "missions/r03/style.css": {
+      "sha256": "11e92ef776a23cd62d962840693b77847592ae73bfc1cbf6defeab66d7644985",
+      "unchanged_from_golden": true
+    },
+    "missions/r03/script.js": {
+      "sha256": "87fb26b3fabf8c01ec0eff2e120dafabd0e9138ab398b1e3c99b7105d783ad13",
+      "unchanged_from_golden": true
+    },
+    "missions/r05/index.html": {
+      "sha256": "21f044418b233455e4c0738acb30052fd765d19e2458d2932abfb110b4b21fa5",
+      "unchanged_from_golden": true
+    },
+    "missions/r05/mission.html": {
+      "sha256": "4894328568f472dd88c8e0b9f25ea8ad75bf06b2dea2d99f82577e5857dddc11",
+      "unchanged_from_golden": true
+    },
+    "missions/r05/style.css": {
+      "sha256": "617c40e34f33c3cd18f99431b1d7a72af9ab0ee997482f7c70a6938aeb3d43b0",
+      "unchanged_from_golden": true
+    },
+    "missions/r05/script.js": {
+      "sha256": "90407bc1a26ac6cd3b4f33e52929c322eb4512ce9b58d87ed1f93eadc2377c59",
+      "unchanged_from_golden": true
+    },
+    "missions/r01/index.html": {
+      "sha256": "896e4639bf8fabced23910689ee710d5aff981437b907bf8951cf0ceed7b6102",
+      "unchanged_from_golden": true
+    },
+    "missions/r04/index.html": {
+      "sha256": "54764c791d36b2f7d0a9dd51100d8bedca8ad35e6b57855a5a65bd93bf938e87",
+      "unchanged_from_golden": true
+    },
+    "missions/r06/index.html": {
+      "sha256": "1fa2dbc93fe612357c9a9e1b809c762d95ed62ac8633d6d041ff6946db8292ff",
+      "unchanged_from_golden": true
+    },
+    "missions/r06/style.css": {
+      "sha256": "8b0edb0a6817bf7b03fb6a9eb7842f70667d9f0fd9ae1f7b86c3997b73cd66d6",
+      "unchanged_from_golden": true
+    },
+    "missions/r06/script.js": {
+      "sha256": "7043172b4592c60979db3f9456cfdbfe59d48d2400caa94671c0619d44f73187",
+      "unchanged_from_golden": true
+    },
+    "missions/r02/index.html": {
+      "sha256": "57c985d2f93f2d5e434256dfc6b3fde008752ea27e424ca80f006d32bb964893",
+      "unchanged_from_golden": true
+    },
+    "missions/r02/assets/hospital-room.jpg": {
+      "sha256": "6b4e3d003d15d591e92babbcc16d8169551f6fb6b8f49c53034ed4037a32ffab",
+      "unchanged_from_golden": true
+    },
+    "missions/r06/assets/war-room.svg": {
+      "sha256": "80098f4ba7773854090e4f1f89eccd5431ffa5c013281c42c5eadab2d3ecf1df",
+      "unchanged_from_golden": true
+    },
+    "missions/r06/assets/background-r06-omega.jpg": {
+      "sha256": "aecb12272f25dc97d3ef297d2f2c8ab7fc20edf94177c904d6c567634610d804",
+      "unchanged_from_golden": true
+    },
+    "missions/r04/assets/r04-food-factory-bg.jpg": {
+      "sha256": "977cae3ee107608e79757cd14bc5c167adb2056cc81d8c511f2c579fbde8189b",
+      "unchanged_from_golden": true
+    },
+    "missions/r01/assets/headquarters-bg.jpg": {
+      "sha256": "2fa0b7d0415daee4b081af99877f2a52629fe462fe7f3fa005d035035b0e73f2",
+      "unchanged_from_golden": true
+    },
+    "missions/r05/assets/logo.svg": {
+      "sha256": "6a3a6d975e2421fb3133bd5cc79cb5627c2dddbcfabb4cf45a7b730b7fe0e806",
+      "unchanged_from_golden": true
+    },
+    "missions/r05/assets/emergency-command-center.jpg": {
+      "sha256": "ebbf620e6f31395a572a1b6110c630f53c05b126e01a75bf0321354482c4a3fe",
+      "unchanged_from_golden": true
+    },
+    "missions/r05/assets/evidence-operation-room.jpg": {
+      "sha256": "561b78a187ca7faa76ad785831577960056044422cba8ae8f521d391b7e1d2b9",
+      "unchanged_from_golden": true
+    },
+    "missions/r05/assets/emergency-command-center.svg": {
+      "sha256": "e3a0d10a2815cad89aa258b1b30576d271d0efc1a7e85bc9ac4ff3f408bce32e",
+      "unchanged_from_golden": true
+    },
+    "missions/r03/assets/airport-security-ai.jpg": {
+      "sha256": "9a7da7dc93a5dab7eb636e25cc782492666af5f63ab9262ba991c8e2e6f8737d",
+      "unchanged_from_golden": true
+    }
+  }
+}

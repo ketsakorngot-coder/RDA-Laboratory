@@ -1,0 +1,1 @@
+Root cause fixed in R05 external style.css: legacy body grid-template-rows:270px 1fr removed and body restored to normal block layout. Native learning spine before .app removed so no element reserves the 270px top row. Sidebar remains 100vh/no-scroll. Only R05 index.html and style.css changed; protected systems unchanged.

@@ -1,0 +1,9 @@
+RDA V6.3.8 — R06 OPERATIONS CLICK FIX
+- R06 sidebar Operations mission tiles are now real navigation links.
+- R01–R05 navigate to their respective mission index pages.
+- R06 current/NOW tile reloads/opens R06.
+- Added pointer-events/z-index protection so OMEGA/background layers cannot intercept sidebar clicks.
+- No mission logic changed.
+- R06 script.js unchanged.
+- Google Sheets / Teacher Dashboard / Backend / shared master unchanged.
+- R01–R05 unchanged.

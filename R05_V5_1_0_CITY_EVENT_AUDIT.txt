@@ -1,0 +1,9 @@
+R-05 rebuilt as one Student Experience:
+MONITOR -> EVIDENCE -> ASSESS RISK -> PUBLIC ALERT -> DECIDE.
+KEEP: command-center visual context, live sensor map, sensor evidence, public-safety decision.
+REMOVED from R05 student page: legacy emergency mission, case layer, command simulation, mission timer,
+team management, radiation leak narrative, duplicate flows.
+Physics: Dose ~= Dose Rate x Exposure Time; Risk framework uses Hazard + Exposure + Population + Context.
+Key contrast: S03 1.20 uSv/h, population 0 vs S04 0.40 uSv/h, population 240 / longer exposure.
+Only missions/r05/index.html and missions/r05/style.css changed.
+R01-R04, R06, Google Sheets, Teacher Dashboard, Backend, shared master unchanged.

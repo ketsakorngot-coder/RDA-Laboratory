@@ -1,0 +1,17 @@
+RDA V3 LIVE SCIENTIFIC LAB — Student UX upgrade
+
+Changed only student-facing files:
+- index.html: front-page display name/subtitle only
+- missions/r01..r06/index.html: includes shared Live Lab CSS/JS
+- shared/rda-live-lab-v3.css: new student lab visuals/background
+- shared/rda-live-lab-v3.js: new interactive auto-evidence laboratories
+
+Mission interaction:
+R-01: Shield penetration → detector CPM auto evidence
+R-02: Radiation/depth/shield treatment model → tumor/healthy outcome auto evidence
+R-03: Distance × time exposure model → rate/dose auto evidence
+R-04: Half-life decay model → nuclei + live decay curve auto evidence
+R-05: Multi-source evidence console → compare detector/CCTV/shield/distance evidence
+R-06: Final crisis toolkit → detector/shield/distance/decay transfer challenge
+
+Protected backend/research files were intentionally NOT edited.

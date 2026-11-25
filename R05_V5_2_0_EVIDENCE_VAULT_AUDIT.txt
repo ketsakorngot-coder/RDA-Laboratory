@@ -1,0 +1,6 @@
+Base: R05 V5.1.1 current logic.
+Integrated from old EvidenceVault: Evidence Vault layout concept, Central Analysis Monitor visual, evidence linking chain, selected command-center/evidence-room assets.
+Kept current flow: MONITOR -> EVIDENCE -> ASSESS RISK -> PUBLIC ALERT -> DECIDE.
+Did NOT restore legacy emergency timer/team management/command simulation/AI commander/radiation leak narrative.
+Protected R01-R04, R06, Google Sheets, Teacher Dashboard, Backend, shared master unchanged.
+Copied assets: evidence-operation-room.png, emergency-command-center.png, emergency-command-center.svg

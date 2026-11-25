@@ -1,0 +1,11 @@
+R06 V6.3.0 — THAI-FIRST VISUAL OVERHAUL
+- Thai is now the primary interface language.
+- English retained only for short technical labels where useful.
+- Stronger national-command visual hierarchy.
+- Larger map hero, cleaner cards, clearer spacing and typography.
+- Final mission / collision / verdict screens visually upgraded.
+- Existing learning animations retained.
+- R06 logic preserved.
+- No files outside missions/r06 changed.
+- Google Sheets / Teacher Dashboard / Backend / shared master unchanged.
+- JS syntax PASS.

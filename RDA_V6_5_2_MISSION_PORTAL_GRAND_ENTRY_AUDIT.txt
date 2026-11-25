@@ -1,0 +1,22 @@
+RDA V6.5.2 — MISSION PORTAL GRAND ENTRY
+
+Portal redesign:
+- Cinematic Mission Command Center opening.
+- Explains what students must do.
+- Explains what students will learn.
+- Shows the R01 -> R06 learning pathway.
+- Shows final goal: integrate all skills in R06.
+- Shows current missions completed, total score, sequence.
+- Keeps the existing dynamic masterMissionGrid for mission cards.
+- Adds learning targets after the mission grid.
+- Adds quick access to Agent Passport and Teacher Center.
+
+No logic changes:
+- renderMasterPortal() unchanged.
+- Mission completion / unlocking unchanged.
+- Scores unchanged.
+- RDAMaster unchanged.
+- R01-R06 files unchanged.
+- Google Sheets / Teacher Dashboard / Backend unchanged.
+
+Only index.html and style.css changed.

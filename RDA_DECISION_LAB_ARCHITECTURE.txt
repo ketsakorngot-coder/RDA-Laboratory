@@ -1,0 +1,22 @@
+RDA — RADIATION INVESTIGATION & DECISION LABORATORY
+==================================================
+Core learning architecture:
+EVIDENCE → RISK → DECISION
+
+Every case closes with:
+CLAIM → EVIDENCE → PHYSICS REASONING → RISK → DECISION
+
+Case architecture (preserves the simulations already built):
+R-01 UNKNOWN SOURCE — identify radiation from penetration/detector evidence.
+R-02 MEDICAL SHIELD PROTOCOL — choose protection/treatment using evidence.
+R-03 SECURITY RISK DECISION — interpret screening evidence and decide Allow/Deny.
+R-04 FOOD RADIATION CLAIM — evaluate evidence, public risk, and scientific communication.
+R-05 RADIATION INCIDENT — integrate evidence for emergency response.
+R-06 NATIONAL DECISION COMMAND — final integrated performance mission.
+
+Implementation:
+- Existing simulations, Evidence Vaults, mission progress, XP and unlock logic preserved.
+- Shared Decision Lab identity added to every mission.
+- FINAL DECISION button added to every R-01..R-06.
+- Each mission stores its own 5-part Decision Record in localStorage.
+- A record is READY TO DEFEND after all five sections contain substantive responses.

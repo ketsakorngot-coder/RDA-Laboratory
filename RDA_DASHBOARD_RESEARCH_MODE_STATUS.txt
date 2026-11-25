@@ -1,0 +1,23 @@
+RDA TEACHER DASHBOARD + RESEARCH MODE
+=====================================
+DASHBOARD SHOWS
+- PRE → POST conceptual understanding
+- 5 conceptual domains
+- R-01 → R-06 Decision Quality
+- Initial → Revision improvement
+- 5 reasoning dimensions:
+  Claim / Evidence Use / Physics Reasoning / Risk Assessment / Decision Quality
+- Research data completeness
+
+RESEARCH MODE
+- Student identity
+- Pre/Post scores
+- Domain scores
+- R-01–R-06 Initial/Revision
+- Claim/Evidence/Reasoning/Risk/Decision dimensions
+- Confidence
+- CSV export
+
+NOTE
+This build uses browser localStorage, so it currently represents one active student/browser profile.
+For class-level multi-student aggregation, the next step would be a backend or shared data store.

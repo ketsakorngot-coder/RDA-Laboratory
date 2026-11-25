@@ -1,0 +1,45 @@
+RDA — RADIATION INVESTIGATION & DECISION LABORATORY
+COMPLETE LEARNING & ASSESSMENT ARCHITECTURE
+============================================================
+
+CORE: EVIDENCE → RISK → DECISION
+EVERY CASE: CLAIM → EVIDENCE → PHYSICS REASONING → RISK → DECISION
+
+R-01 UNKNOWN SOURCE
+Physics: Alpha/Beta/Gamma, penetration, attenuation
+Decision: identify source + assess risk + immediate handling.
+
+R-02 MEDICAL SHIELD PROTOCOL
+Physics: medical radiation, shielding, exposure reduction, safety
+Decision: select protection/response measures from evidence.
+
+R-03 SECURITY RISK DECISION
+Physics: detection, measurement, penetration, false-positive risk
+Decision: allow / isolate / investigate further.
+
+R-04 FOOD RADIATION CLAIM
+Physics: radiation applications, dose context, evidence evaluation, risk communication
+Decision: judge the claim + communicate public risk.
+
+R-05 RADIATION INCIDENT
+Physics: time, distance, shielding, exposure, emergency response
+Decision: rescue / evacuation / containment / limited resources.
+
+R-06 NATIONAL DECISION COMMAND
+Physics: integrated prior concepts + multi-source evidence
+Decision: build and defend a national response plan.
+
+COMPLETION RULE
+A case is COMPLETED only when BOTH are true:
+1) Native case mission is completed.
+2) Final Decision Record is complete (5/5 substantive sections).
+
+DECISION QUALITY RUBRIC — 20 POINTS
+Claim 4 | Evidence 4 | Physics Reasoning 4 | Risk 4 | Decision 4
+
+SYSTEM ROLES
+Simulation = Evidence Generator
+Evidence Vault = Data Source
+Notebook / AI = Reasoning Support
+Final Decision Record = Transfer & Decision Evidence
+Sequential Unlocking = Learning Progression

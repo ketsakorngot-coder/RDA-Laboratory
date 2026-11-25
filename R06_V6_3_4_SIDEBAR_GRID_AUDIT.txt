@@ -1,0 +1,9 @@
+R06 V6.3.4 — SIDEBAR OPERATIONS 2-COLUMN GRID
+- R06 Operations changed from 1-column list to 2-column / 3-row layout.
+- R01–R05 completed status preserved.
+- R06 current/NOW gold state preserved.
+- Commander card remains below operation tiles.
+- Visual-only CSS change.
+- R06 HTML/JS unchanged.
+- Google Sheets / Dashboard / Backend / shared master unchanged.
+- R01–R05 unchanged.

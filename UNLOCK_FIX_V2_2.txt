@@ -1,0 +1,21 @@
+RDA UNLOCK FIX V2.2
+
+Root cause fixed:
+1) R-02 was previously dependent on Decision Quality >= 12/20.
+   This could keep R-02 locked even though R-01 had been fully completed.
+2) Unlock now depends on:
+   - Native mission completed
+   - Claim complete
+   - Evidence complete
+   - Physics Reasoning complete
+   - Risk selected
+   - Decision complete
+   - Revision submitted
+   Rubric score is recorded for diagnostics/research but does NOT block progression.
+3) Existing completed records are migrated automatically when revisedScore > 0.
+4) OPEN_RDA_MASTER.bat now prefers a localhost server so all mission pages
+   share the same localStorage origin reliably.
+
+Expected:
+R-01 complete + Revision submitted -> R-02 CURRENT MISSION / OPEN
+R-02 incomplete -> R-03 LOCKED

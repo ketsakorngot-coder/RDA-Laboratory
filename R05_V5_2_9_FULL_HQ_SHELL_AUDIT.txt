@@ -1,0 +1,8 @@
+R05 V5.2.9 FULL HEADQUARTERS SHELL
+- Base: V5.2.3
+- Used R01 sidebar/brand and topbar architecture.
+- Added R01/R04-style Hero, Mission Card, 5 Quick Steps, Operations 6-card grid, News Feed, Mission Progress, RDA Tip.
+- R05 mission experience after acceptance retained.
+- R01-R04/R06 unchanged.
+- Google Sheets, Teacher Dashboard, Backend/shared master unchanged.
+- JS syntax PASS.

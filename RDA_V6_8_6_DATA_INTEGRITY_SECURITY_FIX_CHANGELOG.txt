@@ -1,0 +1,12 @@
+RDA V6.8.6 — DATA INTEGRITY + SECURITY FIX
+
+Applied fixes:
+1. Standardized Teacher Command Center Mission scale to R-01..R-06 = /100.
+2. Teacher Dashboard percentages/bars now use the same /100 Mission scale.
+3. Teacher backend now normalizes R01 and R-01 identifiers and keeps the latest PRE/POST and Mission record per student.
+4. Mission completion in RDAMaster now requires both native Mission completion and a ready Decision Record; handoff no longer bypasses completion.
+5. Removed plaintext password persistence from localStorage. Offline fallback uses SHA-256 hash when available.
+6. Removed hard-coded Teacher PIN from student-side JavaScript; Teacher access is delegated to the Apps Script Teacher system.
+7. Google Sheets remains unchanged; all dashboard data continues to come from the existing sheets.
+
+No Google Sheet data was modified by this package build.

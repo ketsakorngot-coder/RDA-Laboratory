@@ -1,0 +1,11 @@
+RDA V6.3.7 — OFFICIAL BRAND RESTORED
+Official: RDA = Radiation Detective Agency
+
+Visible Student UI:
+- Entry / Headquarters / R01–R06 normalized to Radiation Detective Agency.
+- Removed visible Radiation Investigation & Decision Laboratory.
+- Removed visible Radiation Detective Kit.
+
+No mission logic changed.
+Google Sheets, Teacher Dashboard, backend, shared master and classroom config unchanged.
+JavaScript syntax PASS.

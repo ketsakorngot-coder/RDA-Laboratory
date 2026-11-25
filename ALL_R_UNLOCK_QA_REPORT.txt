@@ -1,0 +1,32 @@
+Protected files unchanged:
+shared/rda-rubric-v2.js: PASS
+shared/rda-classroom-backend.js: PASS
+classroom-config.js: PASS
+google_apps_script_backend/Code.gs: PASS
+google_apps_script_backend/TeacherDashboard.html: PASS
+
+JavaScript syntax:
+shared/rda-master.js: PASS 
+shared/rda-unlock-bridge.js: PASS 
+script.js: PASS 
+missions/r03/script.js: PASS 
+missions/r06/script.js: PASS 
+
+Final action checks:
+R01 final button: PASS
+R02 valid finishR02 script: PASS
+R03 finish handler: PASS
+R04 finish handler: PASS
+R05 unlockNext uses master: PASS
+R06 completion uses master: PASS
+Master writes last completed: PASS
+Master saves handoff: PASS
+
+Mission HTML pages with safety bridge:
+missions/r01/index.html
+missions/r02/index.html
+missions/r03/index.html
+missions/r04/index.html
+missions/r05/index.html
+missions/r05/mission.html
+missions/r06/index.html

@@ -1,0 +1,15 @@
+RDA V6.5.3 — Mission Portal Cinematic WOW
+
+Visual-only portal enhancement:
+- Significantly enlarged Thai and English typography.
+- Enlarged mission briefing and learning explanations.
+- Stronger cinematic hierarchy and contrast.
+- Animated command scan, ambient HUD, data sweep, alert status and CTA pulse.
+- Larger mission cards and learning target cards.
+- Hover feedback for briefing, missions and learning goals.
+- Responsive typography retained.
+- Reduced-motion accessibility supported.
+
+Only style.css changed.
+No changes to mission logic, scores, RDAMaster, R01-R06, Google Sheets,
+Teacher Dashboard, Backend, Agent Passport data, or classroom configuration.

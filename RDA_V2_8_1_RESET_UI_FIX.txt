@@ -1,0 +1,9 @@
+RDA FINAL V2.8.1 — RESET UI FIX
+
+Fixed:
+- Reset button no longer floats or overlaps other controls.
+- Reset text shortened consistently to “↻ รีเซ็ต”.
+- Topbar status area wraps cleanly on narrow screens.
+- iPad/mobile responsive behavior improved.
+- Existing reset functions and all learning/unlock/research logic are unchanged.
+- Applied consistently to R-01 through R-06.

@@ -1,0 +1,7 @@
+R05 V5.3.8 — R06 unlock master sync
+- Changed only R05 mission completion bridge.
+- Writes rdkR05Standalone, RDA_DECISION_R05, RDA_LAST_COMPLETED_CASE, RDA_COMPLETION_HANDOFF.
+- Uses RDAMaster.completeCaseAndReturn('r05',0) when available.
+- Master/Backend/Google Sheets/Teacher Dashboard unchanged.
+- R01-R04/R06 unchanged.
+- JS syntax PASS.

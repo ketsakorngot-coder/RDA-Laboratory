@@ -1,0 +1,24 @@
+RDA FINAL V2.9 — STUDENT CLASSROOM VERSION
+
+Architecture:
+Student System → Google Apps Script API → Google Sheets ← Teacher System
+
+Student side:
+- Existing V2.8.1 system preserved
+- localStorage remains Offline Backup
+- Research ID generated automatically
+- Profile / Pre / Post / Case Closed data queued for sync
+- Offline Sync Queue retries on reconnection
+- Cloud Sync status badge
+- Teacher Center opens server-side Teacher System when backend URL is configured
+
+Teacher side:
+- Apps Script Teacher Dashboard
+- Teacher PIN checked on backend
+- Class student count
+- Pre/Post class averages and gain
+- R-01→R-06 Decision Progression
+- Student-level records
+
+Google Sheets:
+STUDENTS / ASSESSMENTS / CASES / EVENTS

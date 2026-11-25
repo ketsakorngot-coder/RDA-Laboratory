@@ -1,0 +1,32 @@
+RDA V6.5.1 — AGENT PASSPORT DASHBOARD LAYOUT
+
+Rebuilt Agent Passport page layout inside the real system:
+- Left navigation sidebar
+- Selected Agent card
+- Student Profile card
+- Rank / XP card
+- Large Learning Progress bar
+- 6 mission stamps arranged in one row on desktop
+- Real score display per R01-R06
+- Learning Record Summary
+- Strongest Mission
+- Master RDA Seal
+- Back to Headquarters buttons
+- Responsive layouts for 1450px / 1120px / 760px
+
+Data/logic preserved:
+- Agent / student real data
+- getMasterProgress()
+- RDAMaster.snapshot() first
+- Existing mission fallback second
+- No simulated mission scores
+
+Protected:
+- R01-R06 mission files unchanged
+- Google Sheets unchanged
+- Teacher Dashboard unchanged
+- Backend/shared master unchanged
+- classroom config unchanged
+- Mission progression unchanged
+
+Main JS syntax PASS.

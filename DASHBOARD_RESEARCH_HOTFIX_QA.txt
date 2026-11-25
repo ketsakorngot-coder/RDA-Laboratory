@@ -1,0 +1,10 @@
+Objective3 trend uses InitialScore: PASS
+Student table uses InitialScore: PASS
+R01/R06 uses InitialScore: PASS
+No Before/After R01/R06 title: PASS
+No paired t-test instruction: PASS
+Revision Gain panel added: PASS
+Code exposes revisionGain: PASS
+Backend research score is initial: PASS
+Dashboard JS syntax: PASS
+Frontend/non-backend untouched: PASS

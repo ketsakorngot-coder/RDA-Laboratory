@@ -1,0 +1,20 @@
+RDA V2 HYBRID — STUDENT UX REFACTOR
+====================================
+
+Goal: reduce perceived complexity without breaking the existing research/backend logic.
+
+Implemented
+- Preserved R-01 to R-06 and all existing simulation/storage/backend files.
+- Added shared/rda-v2-ux.css and shared/rda-v2-ux.js as a non-destructive UX layer.
+- Replaced the visible internal 8-step workflow with a 5-step student macro flow:
+  PREDICT -> SIMULATE -> EVIDENCE -> DECIDE -> EXPLAIN.
+  Internal Reasoning/Risk/Feedback/Revision logic remains intact for research quality.
+- Added concise mission identity/objective blocks to reduce reading load.
+- Reframed R-06 as FINAL RADIATION CRISIS (transfer challenge), avoiding a redundant seventh mission.
+- Renamed final student result to RDA EVIDENCE REPORT.
+- Removed student-facing 'research dataset' wording from registration.
+- Kept Teacher Dashboard / Research Mode / Google Sheets backend / CSV flow intact.
+
+Important
+The 20-question Pre/Post instrument was intentionally preserved.
+No mission physics calculations were replaced or randomized.

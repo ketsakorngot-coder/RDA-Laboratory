@@ -1,0 +1,6 @@
+R-05 PHASE 2 AUDIT
+KEEP: existing RDA shell/sidebar, shared master navigation, backend/dashboard integrations, existing mission assets.
+MODIFY: R-05 learner-facing mission workspace becomes DECIDE / Radiation Risk Command.
+REMOVE FROM EXPERIENCE: repetitive linear lab presentation and duplicate generic mission interactions are visually suppressed, not deleted.
+ADD: Live 8-node radiation map, evidence capture, Risk Command Table, HAZARD != RISK concept, Public Alert Request, evidence-based public safety decision, R-06 completion handoff.
+PROTECTED: R-01–R-04, R-06, Google Sheets, Teacher Dashboard, Backend/shared master unchanged.

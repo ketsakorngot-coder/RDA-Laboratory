@@ -1,0 +1,21 @@
+R06 V6.3.3 — FINAL UI REFINEMENT
+
+CHANGES
+- Compact top command header.
+- Slimmer 01–07 step navigation.
+- Reduced panel opacity so OMEGA background remains visible.
+- Step 05 redesigned as Risk Intelligence + four visual Decision Cards.
+- Decision Cards show visual impact hints.
+- Final verdict redesigned as 5-card Achievement Grid.
+- Remaining mixed Thai/English labels cleaned.
+- 1366×768 spacing optimized.
+- Responsive fallbacks included.
+
+PROTECTION
+- R06 mission logic unchanged.
+- Only R06 HTML/CSS/text strings changed.
+- Google Sheets unchanged.
+- Teacher Dashboard unchanged.
+- Backend/shared master unchanged.
+- R01-R05 unchanged.
+- JavaScript syntax PASS.

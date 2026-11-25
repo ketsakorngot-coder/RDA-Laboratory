@@ -1,0 +1,8 @@
+RDA V6.3.9 — R06 SIDEBAR MATCH OTHER MISSIONS
+- R06 tile now uses the same completed-card appearance as R01–R05.
+- Removed yellow NOW visual state.
+- R06 right-side status is now ✓.
+- Card size / border / background / status color aligned with other Operations cards.
+- Navigation link remains clickable.
+- No mission logic changed.
+- Google Sheets / Dashboard / Backend / shared master unchanged.

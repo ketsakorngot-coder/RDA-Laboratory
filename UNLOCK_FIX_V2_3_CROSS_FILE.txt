@@ -1,0 +1,19 @@
+RDA UNLOCK FIX V2.3 — CROSS-FILE RELIABLE
+
+Root cause:
+When the system is opened directly as file://, some browsers can isolate
+localStorage between index.html and mission files. R-01 could complete inside
+missions/r01/index.html but Headquarters would never see that completion.
+
+Fix:
+1. Every case now marks its native mission record complete on SUBMIT REVISION.
+2. Every case sends a completion handoff in the return URL:
+   ?rda_case_complete=r01#portal
+3. Headquarters records that handoff in its own storage and immediately unlocks
+   the next case.
+4. Mission links carry the completed case chain to the next mission, so strict
+   sequential unlock also works across file:// pages.
+5. After Revision submit, the case returns to Headquarters automatically.
+
+Expected:
+Finish R-01 Revision -> automatic return -> R-01 COMPLETED, R-02 CURRENT/OPEN.

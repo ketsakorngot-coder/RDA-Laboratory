@@ -1,0 +1,1 @@
+R05 only: removed root/body/app top gap so sidebar and main start at top edge together. Sidebar remains non-scrollable. Main/topbar aligned to same vertical origin. Mission logic and protected files unchanged.

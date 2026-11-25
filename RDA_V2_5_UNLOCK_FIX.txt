@@ -1,0 +1,12 @@
+RDA FINAL V2.5 — STRICT SEQUENTIAL UNLOCK FIX
+
+แก้เฉพาะระบบปลดล็อก โดยคงหน้าเมนู V2.4:
+- SUBMIT REVISION ของ R-01 ส่ง completion กลับ Headquarters แบบ URL handoff
+- handoff ส่ง rda_chain ไปด้วย เพื่อไม่พึ่ง localStorage ข้ามไฟล์เพียงอย่างเดียว
+- ถ้า R-01 completed => R-02 unlocked โดยอิง effective completion ของภารกิจก่อนหน้า
+- completion ของภารกิจ N จะถือว่าภารกิจก่อนหน้าครบตามลำดับ
+- เพิ่ม redundant completion marker ป้องกัน browser/file:// behavior
+- ไม่ใช้คะแนนขั้นต่ำในการปลดล็อก
+
+Expected:
+R-01 Submit Revision -> Headquarters -> R-01 DONE -> R-02 OPEN -> R-03 LOCKED

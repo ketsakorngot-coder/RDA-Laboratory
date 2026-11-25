@@ -1,0 +1,9 @@
+R05 V5.3.6 — SPLIT INTO TWO REAL PAGES
+- missions/r05/index.html = Mission Brief / รับภารกิจ only.
+- missions/r05/mission.html = Student Mission Experience only.
+- รับภารกิจ navigates to mission.html.
+- mission.html starts at MONITOR via R05.go(0).
+- 5-step flow preserved: MONITOR -> EVIDENCE -> ASSESS RISK -> PUBLIC ALERT -> DECIDE.
+- Google Sheets / Teacher Dashboard / Backend / shared master unchanged.
+- R01-R04/R06 unchanged.
+- JavaScript syntax PASS on both pages.

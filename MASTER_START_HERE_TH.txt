@@ -1,0 +1,29 @@
+RDA MASTER PACKAGE
+
+Frontend:
+- ใช้ RDA V6.9.3 Golden จากไฟล์ที่ผู้ใช้ยืนยันว่า R01 → R02 ปลดล็อกได้จริง
+- ไม่รวม hotfix stack V6.9.5.x / V6.10.0
+- ระบบ unlock / completion handoff / scoring / frontend sync ของ Golden ไม่ถูกแก้ในขั้นตอนรวมแพ็กนี้
+
+Backend / Teacher Dashboard:
+- ใช้ V6.9.4 COMPLETE Dashboard Fix ที่เคยเปิด Teacher Dashboard ได้จริง
+- Code.gs มี setupV694()
+- Teacher PIN ตามแพ็ก backend นี้: 25692569
+- มี getClassDashboardJson() สำหรับ dashboard transport ที่เสถียรกว่า
+
+วิธีใช้:
+1) ฝั่งเว็บไซต์ ให้อัปโหลด/ใช้ไฟล์ทั้งชุด RDA_MASTER นี้
+2) ฝั่ง Apps Script ใช้เฉพาะ:
+   google_apps_script_backend/Code.gs
+   google_apps_script_backend/TeacherDashboard.html
+3) ถ้า Apps Script ปัจจุบันของคุณเป็นชุด Dashboard Fix นี้อยู่แล้ว ไม่จำเป็นต้อง Deploy ใหม่
+4) ถ้าจะติดตั้ง backend ใหม่:
+   - แทน Code.gs และ TeacherDashboard.html
+   - Save
+   - Run setupV694 1 ครั้ง
+   - Deploy > Manage deployments > Edit > New version > Deploy
+5) Teacher PIN: 25692569
+
+สำคัญ:
+โฟลเดอร์ _REFERENCE_GOLDEN_V6_9_3_BACKEND_DO_NOT_DEPLOY เก็บ backend เดิมของ V6.9.3 ไว้อ้างอิงเท่านั้น
+อย่านำโฟลเดอร์นั้นไป Deploy

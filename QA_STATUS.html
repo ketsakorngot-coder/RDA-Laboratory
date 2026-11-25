@@ -1,0 +1,18 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RDA V2.7 QA Status</title><style>
+body{margin:0;background:#031018;color:#d9f7f8;font-family:system-ui;padding:24px}h1{color:#54f4ed}
+.card{background:#071c27;border:1px solid #164a58;border-radius:16px;padding:16px;margin:12px 0}
+pre{white-space:pre-wrap;word-break:break-word;background:#020b10;padding:14px;border-radius:10px;color:#b9e8ea}
+button{padding:10px 14px;border:1px solid #2de2e6;background:#08232d;color:#dfffff;border-radius:10px;margin-right:8px}
+</style></head><body><h1>RDA V2.7 — QA STATUS</h1>
+<div class="card"><b>Purpose</b><p>ตรวจสถานะ Mission / Unlock / Completion Receipt ที่ browser นี้เก็บไว้</p></div>
+<div class="card"><button onclick="show()">REFRESH STATUS</button><button onclick="location.href='index.html#portal'">HEADQUARTERS</button></div>
+<div class="card"><pre id="out"></pre></div>
+<script src="shared/rda-master.js"></script><script>
+function show(){
+ const snap=window.RDAMaster?.snapshot?.()||{};
+ const receipts=window.RDAMaster?.receipts?.()||{};
+ const handoff=window.RDAMaster?.handoffState?.()||[];
+ document.getElementById('out').textContent=JSON.stringify({handoff,receipts,missions:snap.missions},null,2)
+}show()
+</script></body></html>

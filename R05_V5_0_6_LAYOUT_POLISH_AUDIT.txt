@@ -1,0 +1,1 @@
+R05 only: locked sidebar to 100vh with hidden internal overflow; compacted sidebar spacing; reduced topbar/main/dashboard top spacing so hero begins higher. No mission logic or protected files changed.

@@ -1,0 +1,1 @@
+R05 Mission Brief overlays removed. Native R05 dashboard-hero is now the Headquarters entry, matching R01 architecture. Phase2 Radiation Risk Command does not render until รับภารกิจ is clicked. Only R05 index changed; protected systems unchanged.

@@ -1,0 +1,48 @@
+RDA FINAL QA — COMPETITION READINESS TEST
+========================================
+PASS: 20
+FAIL: 0
+
+PASS  JavaScript syntax — all .js files
+PASS  Inline JavaScript syntax — R01/R02/R04
+PASS  HTML local asset/file references
+PASS  R-01..R-06 load shared master bridge
+PASS  Main index loads shared master bridge
+PASS  Native mission progress keys detected
+PASS  R-01..R-06 native completion hooks
+PASS  Core EVIDENCE → RISK → DECISION present
+PASS  Final Decision Record has 5 required fields
+PASS  Completion requires Decision Record readiness
+PASS  20-point Decision Quality Rubric present
+PASS  Strict sequential unlock logic — actual bridge simulation
+PASS  Main portal uses RDAMaster.snapshot()
+PASS  Main portal strict fallback requires Decision Record
+PASS  Fullscreen/viewport CSS rules present
+PASS  Four selected Agent portraits exist
+PASS  Selected avatar propagates to Welcome
+PASS  Selected avatar propagates to Investigation Room
+PASS  Portal displays 6 master case cards
+PASS  Locked mission click is blocked
+
+IMPORTANT QA NOTE
+Browser automation itself is blocked by the execution environment's administrator policy.
+Therefore this QA run validates actual JavaScript syntax, HTML/file integrity,
+storage/completion hooks, shared bridge execution in Node VM, strict unlock states,
+Decision Record gating, avatar wiring, and responsive/fullscreen CSS rules.
+
+FINAL SYSTEM RULE
+A case is COMPLETED only when:
+1) the native mission is completed/evaluated, AND
+2) Final Decision Record is complete across all five sections.
+
+Expected fresh state:
+R-01 CURRENT MISSION
+R-02 LOCKED
+R-03 LOCKED
+R-04 LOCKED
+R-05 LOCKED
+R-06 LOCKED
+
+FINAL FIX
+PASS  R-06 broken logo.svg references replaced with existing assets/logo.png.
+PASS  Final HTML local-reference audit: 0 missing files.

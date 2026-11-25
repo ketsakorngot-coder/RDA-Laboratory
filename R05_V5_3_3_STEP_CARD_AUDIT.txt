@@ -1,0 +1,7 @@
+R05 V5.3.3 — STEP CARDS VISUAL POLISH ONLY
+- Base: R05 V5.3.2.
+- Added framed 5-step cards inspired by R04 visual language.
+- MONITOR / EVIDENCE / ASSESS RISK / PUBLIC ALERT / DECIDE logic unchanged.
+- Changed only missions/r05/style.css.
+- Google Sheets / Teacher Dashboard / Backend / shared master unchanged.
+- R01-R04/R06 unchanged.

@@ -1,0 +1,1 @@
+Only R05 entrance updated to R01-style Headquarters composition. Post-accept R05 flow unchanged. Legacy START CASE button removed. R01-R04/R06/Google Sheets/Teacher Dashboard/Backend/shared master unchanged.

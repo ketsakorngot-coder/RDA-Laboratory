@@ -1,0 +1,7 @@
+RDA V6.4.0 — R06 SIDEBAR EXACT MATCH
+- R06 Operations now uses icon + mission number + check only.
+- Removed IDENTIFY / PROTECT / VERIFY / PREDICT / COMMAND text inside tiles.
+- 2-column / 3-row structure preserved.
+- All six tiles remain clickable.
+- No mission logic changed.
+- Google Sheets / Dashboard / Backend / shared master unchanged.

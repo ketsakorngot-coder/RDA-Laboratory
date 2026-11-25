@@ -1,0 +1,32 @@
+RDA MASTER SYSTEM — FINAL INTEGRATION TEST
+===========================================
+PASS  Entry Portal → Agent Selection → Welcome → Investigation Room
+PASS  Investigation Room shows R-01 through R-06
+PASS  R-01 is unlocked from the beginning
+PASS  R-02 unlocks only after R-01 completion
+PASS  R-03 unlocks only after R-02 completion
+PASS  R-04 unlocks only after R-03 completion
+PASS  R-05 unlocks only after R-04 completion
+PASS  R-06 unlocks only after R-05 completion
+PASS  Direct URL access to a locked mission is blocked
+PASS  Operations sidebar shows R-01 through R-06 in every mission
+PASS  Legacy Operations cards synchronize COMPLETED / CURRENT MISSION / LOCKED
+PASS  Cross-mission navigation obeys sequential unlock state
+PASS  Selected Agent identity synchronizes where legacy profile UI is available
+PASS  RDA Home button returns to Investigation Room
+PASS  JavaScript syntax check: 5 files
+
+Mission page audit:
+R01: index=PASS | master bridge=PASS | Operations=PASS
+R02: index=PASS | master bridge=PASS | Operations=PASS
+R03: index=PASS | master bridge=PASS | Operations=PASS
+R04: index=PASS | master bridge=PASS | Operations=PASS
+R05: index=PASS | master bridge=PASS | Operations=PASS
+R06: index=PASS | master bridge=PASS | Operations=PASS
+
+LOCK-SEQUENCE FIX
+=================
+PASS  Locked status has priority over stale standalone completion data.
+PASS  R-03/R-04/R-05/R-06 cannot appear OPEN/DONE while R-02 is still locked/incomplete.
+PASS  Each mission unlocks only when the immediately preceding mission is effectively completed.
+PASS  Old localStorage test data from standalone mission builds cannot skip the sequence.

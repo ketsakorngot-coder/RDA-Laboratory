@@ -1,0 +1,16 @@
+RDA V6.4.5 — RESTORE MISSION PORTAL
+
+Root cause:
+- V6.4.1 Passport overhaul accidentally removed the entire <section id="portal"> Mission Portal/Headquarters from index.html.
+- selectGameAgent() was already correctly calling go('portal'), but there was no portal DOM element to activate.
+
+Fix:
+- Restored the original complete portal section from V6.4.0.
+- Kept the new V6.4.1 Agent Passport unchanged.
+- Native flow is restored:
+  Login -> Agent Selection -> Identity Scan -> Pre-test if needed -> Mission Portal.
+- renderMasterPortal IDs restored: masterMissionGrid, masterDone, masterScore.
+
+Only top-level index.html changed.
+Google Sheets / Teacher Dashboard / Backend / shared master / R01-R06 unchanged.
+Main JavaScript syntax PASS.

@@ -1,0 +1,11 @@
+R05 V5.4.0 — WOW + SCORE + ANIMATION
+- Added Risk Collision interactive model and animation.
+- Added Confidence Before/After.
+- Added Live City Response Preview.
+- Added +5 minute Sensor Update with population 240→420 animation.
+- Added 100-point Decision Performance scoring.
+- Added score breakdown, strength, improvement, confidence shift.
+- Master completion now carries R05 score.
+- Google Sheets / Teacher Dashboard / Backend / shared master unchanged.
+- R01-R04/R06 unchanged.
+- JavaScript syntax PASS.

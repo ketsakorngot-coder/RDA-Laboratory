@@ -1,0 +1,30 @@
+RDA CASE ARCHITECTURE V3 — R-01 THROUGH R-06
+================================================
+All six cases now share the same learning language:
+
+Prediction / Misconception Trap
+→ Investigation / existing Simulation
+→ Capture Evidence
+→ Evidence Board
+→ Claim
+→ Physics Reasoning
+→ Risk Assessment
+→ Decision
+→ Confidence
+→ Initial Decision
+→ Diagnostic Feedback
+→ Revision 01
+→ Decision Quality /20
+
+CASE PROGRESSION
+R-01 UNKNOWN SOURCE — identify radiation from evidence
+R-02 SHIELDING PROTOCOL — choose shielding from attenuation evidence
+R-03 EXPOSURE ZONE — reason with distance/time/exposure
+R-04 DECAY FILE — reason with half-life and decay over time
+R-05 SECURITY RISK — evaluate multiple evidence sources
+R-06 RADIATION INCIDENT — integrate R-01 to R-05 for a final incident decision
+
+IMPORTANT
+Existing mission simulations and visual interfaces are preserved.
+The new architecture is layered over them and writes the five-part Final Decision
+Record into the shared RDA decision storage used by strict sequential unlocking.

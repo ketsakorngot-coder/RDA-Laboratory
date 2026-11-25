@@ -1,0 +1,643 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Radiation Detective Agency — Entry Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="shared/rda-v2-ux.css">
+</head>
+<body>
+<div class="bg"></div><div class="grid"></div><div class="scan"></div>
+<div id="app">
+
+<section id="intro" class="screen active rda-clean-landing">
+  <div class="rda-particles" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span>
+  </div>
+  <div class="rda-corner rda-corner-tl" aria-hidden="true"></div>
+  <div class="rda-corner rda-corner-tr" aria-hidden="true"></div>
+  <div class="rda-corner rda-corner-bl" aria-hidden="true"></div>
+  <div class="rda-corner rda-corner-br" aria-hidden="true"></div>
+  <div class="rda-alert-badge" aria-hidden="true"><i></i>LIVE THREAT MONITOR</div>
+  <div class="intro-wrap">
+    <img src="assets/logo.png" class="rda-master-logo rda-fx-1" alt="RDA — Radiation Investigation & Decision Lab">
+    <div class="eyebrow rda-fx-2">Radiation Detective Agency</div>
+    <h1 class="rda-fx-3">RADIATION<br>INVESTIGATION</h1>
+    <h2 class="rda-fx-4">&amp; DECISION LABORATORY</h2>
+    <p class="rda-fx-5">Investigate • Measure • Evidence • Decide</p>
+    <button class="btn primary pulse rda-fx-6" onclick="go('login')">BEGIN MISSION <span>→</span></button>
+    <small class="rda-fx-7">Press Enter to continue</small>
+  </div>
+</section>
+<section id="login" class="screen">
+  <div class="terminal-card" style="max-width: 500px;">
+    <div class="terminal-body" style="grid-template-columns: 1fr; text-align: center;">
+      <div class="login-visual">
+        <h2 style="color:var(--cyan); margin-bottom: 5px;">RDA LOGIN</h2>
+        <p>IDENTIFICATION REQUIRED</p>
+      </div>
+      <form onsubmit="login(event)" class="auth-form">
+        <input id="loginUser" required placeholder="Username" autocomplete="username">
+        <input id="loginPass" type="password" required placeholder="Password" autocomplete="current-password">
+        <div id="loginError" class="auth-error" role="alert"></div>
+        <button class="btn primary" type="submit" id="loginBtn">ENTER LAB</button>
+        <button class="btn ghost" style="margin-top:10px; font-size:11px;" type="button" onclick="go('register')">NEW AGENT? REGISTER HERE</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section id="register" class="screen">
+  <div class="terminal-card" style="max-width: 500px;">
+    <div class="terminal-body" style="grid-template-columns: 1fr; text-align: center;">
+      <div class="login-visual">
+        <h2 style="color:var(--gold); margin-bottom: 5px;">NEW AGENT REGISTRATION</h2>
+        <p>กรอกข้อมูลที่จำเป็นเพื่อเริ่มใช้งาน</p>
+      </div>
+      <form onsubmit="register(event)" class="auth-form">
+        <input id="regName" required placeholder="Name (ชื่อ-สกุล)">
+        <input id="regSchool" required placeholder="School (โรงเรียน)">
+        <select id="regGrade"><option>ม.4</option><option>ม.5</option><option>ม.6</option></select>
+        <input id="regUser" required placeholder="Username" autocomplete="username">
+        <input id="regPass" type="password" required placeholder="Password (อย่างน้อย 4 ตัว)" autocomplete="new-password">
+        <div id="registerError" class="auth-error" role="alert"></div>
+        <button class="btn primary" type="submit" id="registerBtn">REGISTER</button>
+        <button class="btn ghost" style="margin-top:10px; font-size:11px;" type="button" onclick="go('login')">CANCEL</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section id="character" class="screen">
+  <div class="agent-select-shell">
+    <header class="agent-select-header">
+      <div class="agency-brand">
+        <img src="assets/logo.png" alt="RDA Logo" onerror="this.style.display='none'">
+        <div>
+          <b>Radiation Detective Agency</b>
+          <small>NATIONAL SECURITY DIVISION</small>
+        </div>
+      </div>
+      <div class="select-heading">
+        <h1>AGENT SELECTION</h1>
+        <p>CHOOSE YOUR AGENT. THE MISSION AWAITS.</p>
+      </div>
+      <div class="database-status">
+        <span>AGENT DATABASE</span>
+        <b>● ONLINE</b>
+      </div>
+    </header>
+
+    <div class="agent-card-grid">
+      <article class="game-agent-card" data-avatar="assets/candidate_luna.jpg" tabindex="0" role="button" onclick="selectGameAgent('assets/candidate_luna.jpg','Agent Luna','Field Investigation','radiation',this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click()}">
+        <div class="cyan-runner"></div>
+        <div class="agent-division"><span>☢</span><b>RADIATION INVESTIGATION</b></div>
+        <div class="agent-card-photo"><img src="assets/candidate_luna.jpg" alt="Agent Luna"></div>
+        <div class="agent-card-name"><h2>AGENT LUNA</h2><p>FIELD EXPERT</p></div>
+        <div class="agent-stats">
+          <div><small>RANK</small><b>CADET</b></div>
+          <div><small>SPECIALIZATION</small><b>FIELD INVESTIGATION</b></div>
+        </div>
+        <div class="difficulty"><small>DIFFICULTY</small><span>★★★☆☆</span></div>
+        <button class="select-agent-button" type="button" onclick="event.stopPropagation();this.closest('.game-agent-card').click()">SELECT AGENT</button>
+      </article>
+
+      <article class="game-agent-card" data-avatar="assets/candidate_ethan.jpg" tabindex="0" role="button" onclick="selectGameAgent('assets/candidate_ethan.jpg','Agent Ethan','Evidence Analysis','science',this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click()}">
+        <div class="cyan-runner"></div>
+        <div class="agent-division"><span>🔬</span><b>EVIDENCE ANALYSIS</b></div>
+        <div class="agent-card-photo"><img src="assets/candidate_ethan.jpg" alt="Agent Ethan"></div>
+        <div class="agent-card-name"><h2>AGENT ETHAN</h2><p>EVIDENCE ANALYST</p></div>
+        <div class="agent-stats">
+          <div><small>RANK</small><b>CADET</b></div>
+          <div><small>SPECIALIZATION</small><b>EVIDENCE ANALYSIS</b></div>
+        </div>
+        <div class="difficulty"><small>DIFFICULTY</small><span>★★★★☆</span></div>
+        <button class="select-agent-button" type="button" onclick="event.stopPropagation();this.closest('.game-agent-card').click()">SELECT AGENT</button>
+      </article>
+
+      <article class="game-agent-card" data-avatar="assets/candidate_lucas.jpg" tabindex="0" role="button" onclick="selectGameAgent('assets/candidate_lucas.jpg','Agent Lucas','Nuclear Safety','security',this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click()}">
+        <div class="cyan-runner"></div>
+        <div class="agent-division"><span>🛡</span><b>NUCLEAR SAFETY</b></div>
+        <div class="agent-card-photo"><img src="assets/candidate_lucas.jpg" alt="Agent Lucas"></div>
+        <div class="agent-card-name"><h2>AGENT LUCAS</h2><p>NUCLEAR SAFETY SPECIALIST</p></div>
+        <div class="agent-stats">
+          <div><small>RANK</small><b>CADET</b></div>
+          <div><small>SPECIALIZATION</small><b>NUCLEAR SAFETY</b></div>
+        </div>
+        <div class="difficulty"><small>DIFFICULTY</small><span>★★★★☆</span></div>
+        <button class="select-agent-button" type="button" onclick="event.stopPropagation();this.closest('.game-agent-card').click()">SELECT AGENT</button>
+      </article>
+
+      <article class="game-agent-card emergency-card" data-avatar="assets/candidate_ava.jpg" tabindex="0" role="button" onclick="selectGameAgent('assets/candidate_ava.jpg','Agent Ava','Emergency Response','emergency',this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click()}">
+        <div class="cyan-runner"></div>
+        <div class="agent-division"><span>🚨</span><b>EMERGENCY RESPONSE</b></div>
+        <div class="agent-card-photo"><img src="assets/candidate_ava.jpg" alt="Agent Ava"></div>
+        <div class="agent-card-name"><h2>AGENT AVA</h2><p>EMERGENCY RESPONSE SPECIALIST</p></div>
+        <div class="agent-stats">
+          <div><small>RANK</small><b>CADET</b></div>
+          <div><small>SPECIALIZATION</small><b>EMERGENCY RESPONSE</b></div>
+        </div>
+        <div class="difficulty"><small>DIFFICULTY</small><span>★★★★★</span></div>
+        <button class="select-agent-button" type="button" onclick="event.stopPropagation();this.closest('.game-agent-card').click()">SELECT AGENT</button>
+      </article>
+    </div>
+
+    <footer class="agent-select-footer">
+      <button class="back-login-button" onclick="go('login')">← BACK TO LOGIN</button>
+      <div class="agency-briefing">
+        <b>AGENCY BRIEFING</b>
+        <p>เลือกเจ้าหน้าที่ของคุณเพื่อเริ่มภารกิจสืบสวน ตรวจสอบ และป้องกันอันตรายจากรังสี</p>
+      </div>
+      <div class="secure-status"><span>AGENCY STATUS</span><b>SECURE</b></div>
+    </footer>
+  </div>
+</section>
+
+<div id="agentScanOverlay" class="agent-scan-overlay hidden">
+  <div class="hologram-agent"><div id="holoParticles" class="holo-particles"></div>
+    <div class="holo-rings"></div>
+    <img id="hologramAgentImage" src="assets/candidate_luna.jpg" alt="Selected Agent">
+    <div class="holo-scan-line"></div>
+  </div>
+  <h2 id="agentScanName">AGENT LUNA</h2>
+  <p id="agentScanStatus">SCANNING IDENTITY...</p>
+  <div class="agent-scan-progress"><i id="agentScanProgress"></i></div><div id="identityVerifiedText" class="identity-verified-text">IDENTITY VERIFIED</div>
+</div>
+<section id="transmission" class="screen">
+  <div style="display:none;"></div>
+</section>
+
+
+
+
+
+<section id="passport" class="screen">
+  <div class="apx-shell">
+
+    <aside class="apx-sidebar">
+      <div class="apx-brand">
+        <img src="assets/logo.png" alt="RDA">
+        <div>
+          <b>RDA</b>
+          <small>Radiation Detective Agency</small>
+        </div>
+      </div>
+
+      <nav class="apx-nav">
+        <button type="button" onclick="go('portal')"><span>🏠</span><b>HEADQUARTERS</b></button>
+        <button type="button" onclick="go('portal')"><span>◎</span><b>MISSIONS</b></button>
+        <button type="button" onclick="go('pretest')"><span>🧾</span><b>ASSESSMENT</b></button>
+        <button type="button" class="active"><span>📒</span><b>AGENT PASSPORT</b><small>LEARNING RECORD</small></button>
+        <button type="button" onclick="go('result')"><span>📖</span><b>DECISION RECORD</b></button>
+        <button type="button" onclick="go('login')"><span>↪</span><b>LOG OUT</b></button>
+      </nav>
+    </aside>
+
+    <main class="apx-main">
+      <header class="apx-head">
+        <div>
+          <small>RDA • RADIATION DETECTIVE AGENCY</small>
+          <h1>AGENT PASSPORT <span>/ LEARNING RECORD</span></h1>
+          <p>หลักฐานความก้าวหน้าของผู้เรียนจากภารกิจ R-01 → R-06</p>
+        </div>
+        <button class="btn secondary" type="button" onclick="go('portal')">← กลับ Headquarters</button>
+      </header>
+
+      <div class="apx-topgrid">
+
+        <aside class="apx-profile-column">
+          <section class="apx-agent-card">
+            <div class="apx-agent-label">SELECTED AGENT</div>
+            <div class="apx-agent-photo">
+              <img id="lr2AgentAvatar" src="assets/candidate_lucas.jpg" alt="Selected Agent">
+              <i></i>
+            </div>
+            <h2 id="lr2AgentName">Agent Lucas</h2>
+            <p id="lr2AgentSpecialty">Nuclear Safety</p>
+          </section>
+
+          <section class="apx-student-card">
+            <div class="apx-card-kicker">STUDENT PROFILE</div>
+            <div class="apx-student-row"><span>ชื่อ-สกุล</span><b id="lr2StudentName">—</b></div>
+            <div class="apx-student-row"><span>Username / ID</span><b id="lr2StudentId">—</b></div>
+            <div class="apx-student-row"><span>ชั้น / ห้อง</span><b id="lr2StudentClass">—</b></div>
+            <div class="apx-student-row"><span>โรงเรียน</span><b id="lr2StudentSchool">—</b></div>
+          </section>
+
+          <section class="apx-rank-card">
+            <small>AGENT RANK</small>
+            <b id="lr2Rank">Junior Detective</b>
+            <span id="lr2XP">0 XP</span>
+          </section>
+        </aside>
+
+        <section class="apx-record-column">
+
+          <section class="apx-progress-card">
+            <div class="apx-progress-left">
+              <small>LEARNING PROGRESS</small>
+              <strong id="lr2ProgressPercent">0%</strong>
+            </div>
+            <div class="apx-progress-center">
+              <h2 id="lr2ProgressTitle">0 / 6 ภารกิจสำเร็จ</h2>
+              <div class="apx-progress-track"><i id="lr2ProgressFill"></i></div>
+            </div>
+            <div class="apx-progress-status" id="apxAllMissionsStatus">
+              <span>✓</span><b>ALL MISSIONS<br>COMPLETED</b>
+            </div>
+          </section>
+
+          <div class="apx-mission-title">
+            <div>
+              <small>MISSION STAMPS • REAL SCORE</small>
+              <h2>หลักฐานภารกิจ R-01 → R-06</h2>
+            </div>
+            <b id="lr2StampCount">0 / 6 STAMPED</b>
+          </div>
+
+          <section class="apx-missions">
+            <article class="apx-mission" data-passport-case="r01">
+              <small>R-01</small><div class="apx-icon">☢️</div><h3>IDENTIFY</h3>
+              <div class="lr2-mission-score"><b>—</b><span>LOCKED</span></div>
+            </article>
+            <article class="apx-mission" data-passport-case="r02">
+              <small>R-02</small><div class="apx-icon">🛡️</div><h3>PROTECT</h3>
+              <div class="lr2-mission-score"><b>—</b><span>LOCKED</span></div>
+            </article>
+            <article class="apx-mission" data-passport-case="r03">
+              <small>R-03</small><div class="apx-icon">📍</div><h3>VERIFY</h3>
+              <div class="lr2-mission-score"><b>—</b><span>LOCKED</span></div>
+            </article>
+            <article class="apx-mission" data-passport-case="r04">
+              <small>R-04</small><div class="apx-icon">⏳</div><h3>PREDICT</h3>
+              <div class="lr2-mission-score"><b>—</b><span>LOCKED</span></div>
+            </article>
+            <article class="apx-mission" data-passport-case="r05">
+              <small>R-05</small><div class="apx-icon">⚖️</div><h3>DECIDE</h3>
+              <div class="lr2-mission-score"><b>—</b><span>LOCKED</span></div>
+            </article>
+            <article class="apx-mission" data-passport-case="r06">
+              <small>R-06</small><div class="apx-icon">⚠️</div><h3>COMMAND</h3>
+              <div class="lr2-mission-score"><b>—</b><span>LOCKED</span></div>
+            </article>
+          </section>
+
+          <section class="apx-summary">
+            <div class="apx-summary-title">
+              <small>LEARNING RECORD SUMMARY</small>
+              <h2>สรุปผลการเรียนรู้</h2>
+            </div>
+
+            <div class="apx-summary-metrics">
+              <article><small>TOTAL SCORE</small><b id="lr2TotalScore">0 / 600</b></article>
+              <article><small>AVERAGE SCORE</small><b id="lr2Average">0%</b></article>
+              <article><small>XP</small><b id="lr2TotalXP">0 XP</b></article>
+              <article><small>RANK</small><b id="lr2SummaryRank">—</b></article>
+              <article><small>PROGRESS</small><b id="lr2MissionCount">0 / 6</b></article>
+            </div>
+
+            <div class="apx-summary-bottom">
+              <article class="apx-strongest">
+                <div class="apx-crown">♛</div>
+                <div><small>STRONGEST MISSION</small><b id="lr2Strongest">—</b></div>
+              </article>
+
+              <article id="lr2Seal" class="apx-master-seal locked">
+                <div>
+                  <small>MASTER RDA SEAL</small>
+                  <b id="lr2SealText">LOCKED</b>
+                  <span id="lr2Status">NOT STARTED</span>
+                </div>
+                <div class="apx-seal-mark">★</div>
+              </article>
+            </div>
+
+            <div class="apx-hidden-runtime">
+              <span id="lr2SummaryAgent"></span>
+              <span id="lr2SummaryProgress"></span>
+              <span id="lr2SummaryAverage"></span>
+            </div>
+          </section>
+
+          <footer class="apx-footer">
+            <div>
+              <b>ข้อมูลจาก RDAMaster.snapshot() เป็นหลัก</b>
+              <span>หากไม่มีข้อมูล ระบบจะอ่านความสำเร็จจากข้อมูลภารกิจเดิม</span>
+            </div>
+            <button class="btn secondary" type="button" onclick="go('portal')">← กลับ Headquarters</button>
+          </footer>
+
+        </section>
+      </div>
+    </main>
+  </div>
+</section>
+
+
+
+
+<section id="portal" class="screen">
+  <div class="mpx-shell">
+
+    <header class="mpx-topbar">
+      <div>
+        <small>RDA • RADIATION DETECTIVE AGENCY</small>
+        <h1>MISSION COMMAND CENTER</h1>
+        <p>ศูนย์บัญชาการภารกิจเพื่อเรียนรู้ ฟิสิกส์รังสี ผ่านสถานการณ์จริงจำลอง</p>
+      </div>
+      <div class="mpx-top-actions">
+        <button class="btn secondary" type="button" onclick="go('passport')">📘 AGENT PASSPORT</button>
+        <button class="btn secondary" type="button" onclick="openTeacherCenter()">🔒 TEACHER CENTER</button>
+      </div>
+    </header>
+
+    <section class="mpx-hero">
+      <div class="mpx-hero-overlay"></div>
+      <div class="mpx-hero-content">
+        <div class="mpx-eyebrow">NATIONAL RADIATION RESPONSE PROGRAM</div>
+        <h2>ยินดีต้อนรับเข้าสู่ภารกิจ RDA</h2>
+        <p class="mpx-lead">
+          คุณคือเจ้าหน้าที่ฝึกหัดของ Radiation Detective Agency
+          ภารกิจของคุณคือใช้หลักฐานทางฟิสิกส์ วิเคราะห์สถานการณ์รังสี
+          ประเมินความเสี่ยง และตัดสินใจเพื่อปกป้องประชาชน
+        </p>
+
+        <div class="mpx-brief-grid">
+          <article>
+            <span>01</span>
+            <div><small>WHAT YOU WILL DO</small><b>สิ่งที่คุณต้องทำ</b>
+            <p>ตรวจหลักฐาน → ทดลอง → วิเคราะห์ → ตัดสินใจ → อธิบายด้วยเหตุผลเชิงฟิสิกส์</p></div>
+          </article>
+          <article>
+            <span>02</span>
+            <div><small>WHAT YOU WILL LEARN</small><b>สิ่งที่คุณจะได้เรียนรู้</b>
+            <p>ชนิดรังสี • การกำบัง • ระยะและเวลา • ครึ่งชีวิต • ความเสี่ยง • การตัดสินใจจากหลักฐาน</p></div>
+          </article>
+          <article>
+            <span>03</span>
+            <div><small>YOUR FINAL GOAL</small><b>เป้าหมายสุดท้าย</b>
+            <p>นำทักษะจาก R-01 → R-05 มารวมใช้ใน R-06 เพื่อควบคุมวิกฤตรังสีระดับประเทศ</p></div>
+          </article>
+        </div>
+
+        <div class="mpx-flow">
+          <span>R-01<br><b>IDENTIFY</b></span><i>→</i>
+          <span>R-02<br><b>PROTECT</b></span><i>→</i>
+          <span>R-03<br><b>VERIFY</b></span><i>→</i>
+          <span>R-04<br><b>PREDICT</b></span><i>→</i>
+          <span>R-05<br><b>DECIDE</b></span><i>→</i>
+          <span>R-06<br><b>COMMAND</b></span>
+        </div>
+
+        <button class="mpx-begin" type="button" onclick="document.getElementById('missionOperations').scrollIntoView({behavior:'smooth'})">
+          เริ่มเลือกภารกิจ <span>↓</span>
+        </button>
+      </div>
+
+      <aside class="mpx-status-panel">
+        <small>AGENT STATUS</small>
+        <h3 id="portalName">RDA Agent</h3>
+        <div class="mpx-stat"><span>MISSIONS COMPLETED</span><b id="masterDone">0 / 6</b></div>
+        <div class="mpx-stat"><span>TOTAL SCORE</span><b id="masterScore">0 pts</b></div>
+        <div class="mpx-stat"><span>SEQUENCE</span><b>R-01 → R-06</b></div>
+        <div class="mpx-status-line">ภารกิจจะปลดล็อกตามลำดับ</div>
+      </aside>
+    </section>
+
+    <section id="missionOperations" class="mpx-operations">
+      <div class="mpx-operations-head">
+        <div>
+          <small>OPERATIONS</small>
+          <h2>เลือกภารกิจของคุณ</h2>
+          <p>ทำภารกิจตามลำดับเพื่อสะสมหลักฐานการเรียนรู้และปลดล็อกวิกฤตสุดท้าย</p>
+        </div>
+        <div class="mpx-legend">
+          <span class="done">✓ COMPLETED</span>
+          <span class="current">● CURRENT</span>
+          <span class="locked">🔒 LOCKED</span>
+        </div>
+      </div>
+
+      <div id="masterMissionGrid" class="mpx-mission-grid"></div>
+    </section>
+
+    <section class="mpx-learning-goals">
+      <div class="mpx-goal-title">
+        <small>LEARNING TARGETS</small>
+        <h2>เมื่อจบ RDA คุณควรทำได้</h2>
+      </div>
+      <div class="mpx-goal-grid">
+        <article><span>☢️</span><b>อธิบายรังสีได้</b><p>แยกชนิดรังสีและอธิบายสมบัติจากหลักฐาน</p></article>
+        <article><span>🛡️</span><b>ป้องกันได้</b><p>เลือกกำบังและลดการรับรังสีด้วยหลักเวลา-ระยะทาง-กำบัง</p></article>
+        <article><span>⏳</span><b>พยากรณ์ได้</b><p>ใช้ครึ่งชีวิตคาดการณ์การเปลี่ยนแปลงของกัมมันตภาพ</p></article>
+        <article><span>⚖️</span><b>ตัดสินใจได้</b><p>เชื่อม Evidence → Risk → Decision อย่างมีเหตุผล</p></article>
+      </div>
+    </section>
+
+  </div>
+</section>
+
+
+
+
+
+
+<section id="pretest" class="screen assessment-screen">
+  <div class="assessment-shell">
+    <header class="assessment-head">
+      <div>
+        <small>RESEARCH MODE • BASELINE ASSESSMENT</small>
+        <h1>PRE-INVESTIGATION TEST</h1>
+        <p>แบบวัดความเข้าใจมโนทัศน์ทางฟิสิกส์เกี่ยวกับรังสี • 20 ข้อ • 20 คะแนน</p>
+      </div>
+      <div class="assessment-badge">PRE</div>
+    </header>
+    <div class="assessment-notice">
+      แบบทดสอบนี้ใช้วัดความเข้าใจก่อนเริ่มภารกิจ ระบบจะไม่เฉลยคำตอบในขั้นนี้
+    </div>
+    <div id="preQuestionProgress" class="question-progress"></div>
+    <div id="preQuestionHost" class="question-host"></div>
+    <footer class="assessment-actions">
+      <button id="prePrev" class="btn secondary" type="button">← PREVIOUS</button>
+      <div><b id="preCount">1 / 20</b><small id="preAnswered">ตอบแล้ว 0/20</small></div>
+      <button id="preNext" class="btn primary" type="button">NEXT →</button>
+    </footer>
+  </div>
+</section>
+
+<section id="posttest" class="screen assessment-screen">
+  <div class="assessment-shell">
+    <header class="assessment-head">
+      <div>
+        <small>RESEARCH MODE • OUTCOME ASSESSMENT</small>
+        <h1>POST-INVESTIGATION TEST</h1>
+        <p>ประเมินความเข้าใจหลังจบ R-01 ถึง R-06 • 20 ข้อ • 20 คะแนน</p>
+      </div>
+      <div class="assessment-badge post">POST</div>
+    </header>
+    <div class="assessment-notice post-notice">
+      ใช้ความรู้จากทุกคดีวิเคราะห์สถานการณ์ให้ดีที่สุด เมื่อส่งแล้วระบบจะแสดง Result Profile
+    </div>
+    <div id="postQuestionProgress" class="question-progress"></div>
+    <div id="postQuestionHost" class="question-host"></div>
+    <footer class="assessment-actions">
+      <button id="postPrev" class="btn secondary" type="button">← PREVIOUS</button>
+      <div><b id="postCount">1 / 20</b><small id="postAnswered">ตอบแล้ว 0/20</small></div>
+      <button id="postNext" class="btn primary" type="button">NEXT →</button>
+    </footer>
+  </div>
+</section>
+
+<section id="satisfaction" class="screen assessment-screen">
+  <div class="assessment-shell">
+    <header class="assessment-head">
+      <div>
+        <small>RESEARCH MODE • STUDENT FEEDBACK</small>
+        <h1>SATISFACTION SURVEY</h1>
+        <p>ความคิดเห็นของคุณที่มีต่อการเรียนรู้ด้วย RDA • ใช้เวลาไม่ถึง 2 นาที</p>
+      </div>
+      <div class="assessment-badge post">✓</div>
+    </header>
+    <div class="assessment-notice post-notice">
+      กรุณาให้คะแนนความคิดเห็นตามความรู้สึกจริง คำตอบนี้ไม่มีผลต่อคะแนนของคุณ
+    </div>
+    <div id="satisfactionHost" class="satisfaction-host"></div>
+    <footer class="assessment-actions" style="grid-template-columns:1fr">
+      <button id="satisfactionSubmit" class="btn primary" type="button">SUBMIT & VIEW RESULT →</button>
+    </footer>
+  </div>
+</section>
+
+
+<section id="dashboard" class="screen dashboard-screen">
+  <div class="dashboard-shell">
+    <header class="dashboard-head">
+      <div>
+        <small>RDA TEACHER ANALYTICS • RESEARCH MODE</small>
+        <h1>TEACHER DASHBOARD</h1>
+        <p>ติดตาม Conceptual Growth + Evidence-Based Reasoning + Decision Revision</p>
+      </div>
+      <div class="dashboard-head-actions">
+        <button class="btn secondary" onclick="go('portal')">HEADQUARTERS</button>
+        <button class="btn secondary" onclick="lockTeacherCenter()">LOCK TEACHER CENTER</button>
+        <button class="btn primary" onclick="exportResearchDataset()">EXPORT RESEARCH DATA</button>
+      </div>
+    </header>
+
+    <div class="dashboard-summary-grid">
+      <article><small>PRE-TEST</small><b id="dashPre">0/20</b><span>Conceptual Baseline</span></article>
+      <article><small>POST-TEST</small><b id="dashPost">0/20</b><span>Conceptual Outcome</span></article>
+      <article><small>GAIN</small><b id="dashGain">+0</b><span>Pre → Post</span></article>
+      <article><small>CASE COMPLETION</small><b id="dashCases">0/6</b><span>R-01 → R-06</span></article>
+    </div>
+
+    <div class="dashboard-main-grid">
+      <section class="dash-panel">
+        <div class="dash-panel-head"><div><small>CONCEPTUAL UNDERSTANDING</small><h2>PRE → POST BY DOMAIN</h2></div></div>
+        <div id="dashConceptDomains"></div>
+      </section>
+
+      <section class="dash-panel">
+        <div class="dash-panel-head"><div><small>DECISION QUALITY</small><h2>R-01 → R-06</h2></div></div>
+        <div id="dashDecisionCases"></div>
+      </section>
+
+      <section class="dash-panel full">
+        <div class="dash-panel-head"><div><small>INITIAL → REVISION</small><h2>DECISION IMPROVEMENT</h2></div><b id="dashRevisionGain">+0 pts</b></div>
+        <div id="dashRevisionChart" class="revision-chart"></div>
+      </section>
+
+      <section class="dash-panel">
+        <div class="dash-panel-head"><div><small>REASONING PROFILE</small><h2>5 DIMENSIONS</h2></div></div>
+        <div id="dashReasoningProfile"></div>
+      </section>
+
+      <section class="dash-panel">
+        <div class="dash-panel-head"><div><small>RESEARCH RECORD</small><h2>DATA COMPLETENESS</h2></div></div>
+        <div id="dashResearchCompleteness"></div>
+      </section>
+    </div>
+
+    <section class="research-mode-panel">
+      <div class="research-mode-head">
+        <div><small>RESEARCH MODE</small><h2>STUDENT RESEARCH RECORD</h2></div>
+        <button class="btn primary" onclick="exportResearchDataset()">DOWNLOAD CSV</button>
+      </div>
+      <div class="research-flow-mini">
+        <span>PRE</span><i>→</i><span>R-01</span><i>→</i><span>R-02</span><i>→</i><span>R-03</span><i>→</i><span>R-04</span><i>→</i><span>R-05</span><i>→</i><span>R-06</span><i>→</i><span>POST</span>
+      </div>
+      <div class="research-table-wrap">
+        <table class="research-table">
+          <thead><tr>
+            <th>Case</th><th>Initial</th><th>Revision</th><th>Evidence</th><th>Reasoning</th><th>Risk</th><th>Decision</th><th>Status</th>
+          </tr></thead>
+          <tbody id="researchTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</section>
+
+<section id="result" class="screen result-screen">
+  <div class="result-shell">
+    <header class="result-head">
+      <div><small>LEARNING EVIDENCE • RDA</small><h1>RDA EVIDENCE REPORT</h1><p id="resultAgentName">RDA Agent</p></div>
+      <div class="result-status">INVESTIGATION COMPLETE</div>
+    </header>
+    <div class="concept-growth">
+      <article><small>PRE-TEST</small><b id="resultPre">0/20</b><span>Conceptual Understanding</span></article>
+      <div class="growth-arrow">→</div>
+      <article><small>POST-TEST</small><b id="resultPost">0/20</b><span>Conceptual Understanding</span></article>
+      <article class="growth-card"><small>CONCEPTUAL GROWTH</small><b id="resultDelta">+0</b><span>คะแนน</span></article>
+    </div>
+    <div class="result-columns">
+      <section class="result-panel">
+        <h2>CONCEPT PROFILE</h2>
+        <div id="conceptProfile"></div>
+      </section>
+      <section class="result-panel">
+        <h2>DECISION PROGRESSION</h2>
+        <div id="decisionProgression"></div>
+      </section>
+    </div>
+    <div class="result-summary" id="resultSummary"></div>
+    <div class="result-actions">
+      <button class="btn secondary" onclick="go('portal')">VIEW HEADQUARTERS</button>
+      <button class="btn primary" onclick="exportResearchData()">EXPORT RESEARCH DATA (.CSV)</button>
+    </div>
+  </div>
+</section>
+
+</div>
+<button id="teacherDashboardButton" class="teacher-dashboard-button" onclick="openTeacherCenter()">🔒 TEACHER CENTER</button>
+
+<div id="teacherPinModal" class="teacher-pin-modal hidden" aria-hidden="true">
+  <div class="teacher-pin-card">
+    <div class="teacher-pin-icon">🔒</div>
+    <small>RESTRICTED ACCESS</small>
+    <h2>TEACHER CENTER</h2>
+    <p>กรุณาใส่ Teacher PIN เพื่อเข้าสู่ Dashboard, Research Mode และ Export Data</p>
+    <input id="teacherPinInput" type="password" inputmode="numeric" maxlength="8" placeholder="Teacher PIN">
+    <div class="teacher-pin-actions">
+      <button class="btn secondary" type="button" onclick="closeTeacherPin()">CANCEL</button>
+      <button class="btn primary" type="button" onclick="verifyTeacherPin()">UNLOCK</button>
+    </div>
+    <div id="teacherPinMessage" class="teacher-pin-message"></div>
+  </div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+<script src="classroom-config.js"></script>
+<script src="shared/rda-classroom-backend.js"></script>
+<script src="shared/rda-master.js?v=all-r-unlock-1"></script>
+<script src="shared/rda-achievements.js"></script>
+<script src="script.js"></script>
+<script src="shared/rda-v2-ux.js"></script>
+</body>
+</html>

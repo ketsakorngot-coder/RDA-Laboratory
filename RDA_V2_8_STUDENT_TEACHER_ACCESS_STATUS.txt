@@ -1,0 +1,17 @@
+RDA FINAL V2.8 — STUDENT / TEACHER ACCESS CONTROL
+
+STUDENT
+- Headquarters
+- R-01 through R-06
+- Research Passport / own Result Profile
+- Teacher Dashboard blocked
+
+TEACHER
+- Teacher Center requires PIN
+- Default PIN in this build: 2569
+- Dashboard + Research Mode + Export CSV
+- LOCK TEACHER CENTER button
+
+NOTE
+Dashboard still reads the current browser/localStorage profile only.
+Google Sheets backend can later upgrade this Teacher Center to class-level data.

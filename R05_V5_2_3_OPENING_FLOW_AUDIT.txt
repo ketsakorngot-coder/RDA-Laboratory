@@ -1,0 +1,6 @@
+R05 opening flow fix only.
+- Every fresh page load of R05 now shows Opening Mission Brief first.
+- Removed persistent localStorage acceptance key that caused R05 to skip directly to MONITOR.
+- After clicking รับภารกิจ, the existing mission experience opens at MONITOR.
+- Internal 5-step flow remains MONITOR -> EVIDENCE -> ASSESS RISK -> PUBLIC ALERT -> DECIDE.
+- R01-R04/R06, Google Sheets, Teacher Dashboard, Backend/shared master unchanged.

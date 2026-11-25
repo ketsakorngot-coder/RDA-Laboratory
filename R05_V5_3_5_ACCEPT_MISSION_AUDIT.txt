@@ -1,0 +1,8 @@
+R05 V5.3.5 — ACCEPT MISSION FIX
+- Fixed acceptMission() to hide opening and show r05MissionExperience.
+- Forces mission start at MONITOR via go(0).
+- Button explicitly calls R05.acceptMission().
+- Preserved 5-step R05 flow.
+- Google Sheets / Teacher Dashboard / Backend / shared master unchanged.
+- R01-R04/R06 unchanged.
+- JavaScript syntax PASS.

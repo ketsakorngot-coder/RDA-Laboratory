@@ -1,0 +1,22 @@
+RDA V6.5.0 — AGENT PASSPORT VISUAL / LAYOUT POLISH
+
+Visual-only changes:
+- Compact header and left Agent/Student profile panel.
+- Reduced vertical density for 1366x768.
+- Improved Mission Stamp readability.
+- Mission descriptions no longer clip.
+- Learning Record Summary no longer clips.
+- Added bottom clearance for floating Teacher Center button.
+- Full Passport remains independently scrollable.
+- Responsive layout improved at 1450px, 980px, and 650px breakpoints.
+
+Only style.css changed.
+No changes to:
+- Agent data
+- Student identity
+- R01-R06 scores / stamps
+- RDAMaster
+- Mission flow
+- Google Sheets
+- Teacher Dashboard logic
+- Backend/shared master
